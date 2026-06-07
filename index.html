@@ -102,19 +102,10 @@ section{padding:100px 24px;max-width:1100px;margin:0 auto}
 
 footer{background:#0a1628;color:rgba(255,255,255,.4);text-align:center;padding:32px 24px;font-size:13px}
 
-@page{size:landscape;margin:0}
+
 @media print{
-  body{-webkit-print-color-adjust:exact;print-color-adjust:exact;margin:0;padding:0}
-  .hero,section,.bg-gray>section,.bg-dark>section{page-break-before:always;break-before:page;min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column}
-  .hero:first-child{page-break-before:avoid}
-  .svc-card,.tf-step,.source-card,.eco-item,.data-item,.proc-col{break-inside:avoid;page-break-inside:avoid}
-  .svc-grid,.tf-steps,.flow-wrapper,.process,.about-g,.ct-wrap,.data-grid{break-inside:avoid;page-break-inside:avoid}
-  .bg-dark{background:#0f2940!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .bg-gray{background:#f7f9fc!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .hero{background:linear-gradient(160deg,#0a1628,#0f2940 40%,#0d3b4c)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  section{min-height:100vh!important;padding:60px 60px!important}
-  .hero{min-height:100vh!important;padding:80px 80px!important}
-  footer{page-break-before:always}
+  .bg-dark,.bg-gray,.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .svc-card,.tf-step{break-inside:avoid}
 }
 @media(max-width:900px){
   .tf-steps{grid-template-columns:1fr}
@@ -140,7 +131,6 @@ footer{background:#0a1628;color:rgba(255,255,255,.4);text-align:center;padding:3
 </div>
 
 <!-- ═══ About ═══ -->
-<div style="page-break-before:always"></div>
 <section>
   <div class="s-badge">About</div>
   <div class="s-head">关于<em>以鲜国际</em></div>
@@ -164,7 +154,6 @@ footer{background:#0a1628;color:rgba(255,255,255,.4);text-align:center;padding:3
 </section>
 
 
-<div style="page-break-before:always"></div>
 <!-- ═══ Culture 1: Mission & Values ═══ -->
 <section>
   <div class="s-badge">Culture</div>
@@ -229,7 +218,6 @@ footer{background:#0a1628;color:rgba(255,255,255,.4);text-align:center;padding:3
 </div>
 
 
-<div style="page-break-before:always"></div>
 <!-- ═══ Services ═══ -->
 <div class="bg-gray">
 <section>
@@ -246,7 +234,6 @@ footer{background:#0a1628;color:rgba(255,255,255,.4);text-align:center;padding:3
 </div>
 
 
-<div style="page-break-before:always"></div>
 <!-- ═══ Certification & Systems ═══ -->
 <div class="bg-dark">
 <section style="padding-top:80px;padding-bottom:80px">
@@ -320,7 +307,6 @@ footer{background:#0a1628;color:rgba(255,255,255,.4);text-align:center;padding:3
 </div>
 
 
-<div style="page-break-before:always"></div>
 <!-- ═══ Process 1: 代采代理 ═══ -->
 <section>
   <div class="s-badge">Process 01</div>
@@ -365,7 +351,6 @@ footer{background:#0a1628;color:rgba(255,255,255,.4);text-align:center;padding:3
 </section>
 
 
-<div style="page-break-before:always"></div>
 <!-- ═══ Process 2: 贸易融资 ═══ -->
 <div class="bg-dark">
 <section style="padding-top:80px;padding-bottom:80px">
@@ -405,7 +390,6 @@ footer{background:#0a1628;color:rgba(255,255,255,.4);text-align:center;padding:3
 </div>
 
 
-<div style="page-break-before:always"></div>
 <!-- ═══ Process 3: 报关报检 ═══ -->
 <section>
   <div class="s-badge">Process 03</div>
@@ -456,7 +440,6 @@ footer{background:#0a1628;color:rgba(255,255,255,.4);text-align:center;padding:3
 </section>
 
 
-<div style="page-break-before:always"></div>
 <!-- ═══ Process 4: 冷链仓储物流 ═══ -->
 <div class="bg-dark">
 <section style="padding-top:80px;padding-bottom:80px">
@@ -524,7 +507,6 @@ footer{background:#0a1628;color:rgba(255,255,255,.4);text-align:center;padding:3
 </div>
 
 
-<div style="page-break-before:always"></div>
 <!-- ═══ Process 5: 清真食品出海 ═══ -->
 <section>
   <div class="s-badge">Process 05</div>
@@ -575,7 +557,6 @@ footer{background:#0a1628;color:rgba(255,255,255,.4);text-align:center;padding:3
 </section>
 
 
-<div style="page-break-before:always"></div>
 <!-- ═══ Contact ═══ -->
 <div class="bg-gray">
 <section>
