@@ -105,7 +105,12 @@ footer{background:#0a1628;color:rgba(255,255,255,.4);text-align:center;padding:3
 
 @media print{
   .bg-dark,.bg-gray,.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .svc-card,.tf-step{break-inside:avoid}
+  .svc-card,.tf-step,.source-card,.eco-item{break-inside:avoid}
+  .hero{min-height:auto!important;padding:60px 24px!important}
+  section{min-height:auto!important;padding:40px 24px!important}
+  .hero h1{font-size:32px!important}
+  .hero .sub{font-size:14px!important}
+  .hero-tags span{font-size:11px!important;padding:6px 14px!important}
 }
 @media(max-width:900px){
   .tf-steps{grid-template-columns:1fr}
