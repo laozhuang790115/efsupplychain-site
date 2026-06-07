@@ -103,11 +103,16 @@ section{padding:100px 24px;max-width:1100px;margin:0 auto}
 footer{background:#0a1628;color:rgba(255,255,255,.4);text-align:center;padding:32px 24px;font-size:13px}
 
 @media print{
-  section,.hero{page-break-before:always;min-height:auto;padding:50px 24px}
+  .hero,section,.bg-gray>section,.bg-dark>section,.process{page-break-before:always;break-before:page}
   .hero:first-child{page-break-before:avoid}
-  .svc-card,.tf-step,.source-card,.eco-item,.data-item,.proc-col{break-inside:avoid}
+  .svc-card,.tf-step,.source-card,.eco-item,.data-item,.proc-col{break-inside:avoid;page-break-inside:avoid}
+  .svc-grid,.tf-steps,.flow-wrapper,.process,.about-g,.ct-wrap{break-inside:avoid;page-break-inside:avoid}
+  .data-grid{break-inside:avoid}
   .bg-dark{background:#0f2940!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .hero{background:linear-gradient(160deg,#0a1628,#0f2940 40%,#0d3b4c)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .bg-gray{background:#f7f9fc!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  section{min-height:auto!important;padding:50px 24px!important}
+  .hero{min-height:auto!important;padding:80px 40px!important}
 }
 @media(max-width:900px){
   .tf-steps{grid-template-columns:1fr}
