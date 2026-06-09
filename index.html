@@ -5,207 +5,503 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>以鲜国际 — EverFresh Supply Chain</title>
 <style>
+/* ===== Reset & Base ===== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",-apple-system,sans-serif;
+  color:#1a1a2e;line-height:1.75;background:#fff;overflow-x:hidden
+}
+a{text-decoration:none;color:inherit}
 
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",sans-serif;color:#1a1a2e;line-height:1.7}
+/* ===== Nav ===== */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:rgba(10,22,40,.92);backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  padding:0 32px;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .3s
+}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-logo{
+  width:36px;height:36px;border-radius:10px;
+  background:linear-gradient(135deg,#00d4aa,#00a8e8);
+  display:flex;align-items:center;justify-content:center;font-size:18px
+}
+.nav-name{color:#fff;font-size:15px;font-weight:600;letter-spacing:1px}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{
+  color:rgba(255,255,255,.65);font-size:13px;
+  transition:color .25s;letter-spacing:.5px
+}
+.nav-links a:hover{color:#00d4aa}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-toggle span{width:22px;height:2px;background:#fff;border-radius:2px;transition:.3s}
 
-/* Hero */
-.hero{min-height:100vh;background:linear-gradient(160deg,#0a1628,#0f2940 40%,#0d3b4c);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10 Q40 20 30 30 Q20 20 30 10 M30 30 Q40 40 30 50 Q20 40 30 30' stroke='%23ffffff08' fill='none'/%3E%3C/svg%3E");opacity:.5}
-.hero-inner{text-align:center;position:relative;z-index:1;padding:40px}
-.hero .logo{width:60px;height:60px;background:linear-gradient(135deg,#00d4aa,#00a8e8);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 32px}
-.hero .brand{font-size:14px;letter-spacing:6px;color:rgba(255,255,255,.5);text-transform:uppercase}
-.hero h1{font-size:clamp(28px,5vw,48px);color:#fff;font-weight:600;margin:16px 0;letter-spacing:2px}
-.hero .sub{font-size:18px;color:rgba(255,255,255,.7);margin-bottom:36px}
-.hero-tags{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
-.hero-tags span{padding:8px 24px;border:1px solid rgba(255,255,255,.2);border-radius:99px;color:rgba(255,255,255,.8);font-size:14px;transition:.3s}
-.hero-tags span:hover{border-color:#00d4aa;color:#00d4aa}
-
-section{padding:100px 24px;max-width:1100px;margin:0 auto}
-.s-badge{font-size:12px;letter-spacing:4px;color:#00a8e8;text-transform:uppercase;margin-bottom:12px}
-.s-head{font-size:clamp(24px,3vw,36px);font-weight:600;margin-bottom:48px;color:#0a1628}
-.s-head em{color:#00a8e8;font-style:normal}
+/* ===== Section Common ===== */
+section{padding:100px 24px;max-width:1140px;margin:0 auto}
+section.full{max-width:100%;padding:100px 24px}
+.s-label{
+  font-size:11px;letter-spacing:4px;color:#00a8e8;text-transform:uppercase;
+  margin-bottom:10px;font-weight:600
+}
+.s-title{
+  font-size:clamp(22px,3.5vw,34px);font-weight:700;
+  margin-bottom:48px;color:#0a1628;letter-spacing:1px
+}
+.s-title em{color:#00a8e8;font-style:normal;position:relative}
+.s-title em::after{
+  content:"";position:absolute;left:0;bottom:2px;width:100%;height:8px;
+  background:rgba(0,168,232,.12);z-index:-1;border-radius:2px
+}
 .bg-gray{background:#f7f9fc}
-.bg-dark{background:#0f2940}
+.bg-dark{background:#0a1628;color:#fff}
 
-/* ── Proc Flow ── */
-.flow-wrapper{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
-.flow-col{flex:1;min-width:220px;display:flex;flex-direction:column;gap:0}
-.flow-col-title{text-align:center;font-size:12px;letter-spacing:2px;color:#aaa;margin-bottom:16px;text-transform:uppercase}
-.source-card{background:#fff;border-radius:12px;padding:20px 16px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.04);margin-bottom:10px;border:1px solid #eee;font-size:14px}
-.source-card .ic{font-size:24px;margin-bottom:6px}
-.source-card h4{font-size:14px;color:#0a1628;margin-bottom:2px}
+/* ===== Hero ===== */
+.hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  background:linear-gradient(160deg,#060f1e 0%,#0a1f38 30%,#0b2a44 60%,#0e3348 100%)
+}
+.hero-grid{
+  position:absolute;inset:0;opacity:.06;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:60px 60px
+}
+.hero .glow-1,.hero .glow-2{
+  position:absolute;border-radius:50%;filter:blur(120px);opacity:.15;pointer-events:none
+}
+.hero .glow-1{width:500px;height:500px;background:#00d4aa;top:-100px;right:-100px}
+.hero .glow-2{width:400px;height:400px;background:#00a8e8;bottom:-80px;left:-80px}
+.hero-inner{text-align:center;position:relative;z-index:2;padding:40px 24px}
+.hero .logo-mark{
+  width:72px;height:72px;border-radius:18px;
+  background:linear-gradient(135deg,#00d4aa 0%,#0098d4 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-size:34px;margin:0 auto 28px;
+  box-shadow:0 12px 40px rgba(0,212,170,.25)
+}
+.hero .eyebrow{
+  font-size:13px;letter-spacing:7px;color:rgba(255,255,255,.45);
+  text-transform:uppercase;margin-bottom:14px
+}
+.hero h1{
+  font-size:clamp(30px,5.5vw,52px);color:#fff;font-weight:700;
+  letter-spacing:3px;margin-bottom:14px;line-height:1.2
+}
+.hero h1 .accent{background:linear-gradient(135deg,#00d4aa,#00a8e8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero .subtitle{font-size:17px;color:rgba(255,255,255,.6);margin-bottom:36px;line-height:1.8}
+.hero-tags{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.hero-tags span{
+  padding:9px 26px;border:1px solid rgba(255,255,255,.18);
+  border-radius:99px;color:rgba(255,255,255,.78);font-size:13px;
+  transition:all .3s;cursor:default
+}
+.hero-tags span:hover{border-color:#00d4aa;color:#00d4aa;background:rgba(0,212,170,.08);transform:translateY(-2px)}
+.hero-scroll{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:rgba(255,255,255,.3);font-size:11px;animation:bounce 2s infinite
+}
+.hero-scroll .arr{font-size:18px}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* ===== About Grid ===== */
+.about-grid{
+  display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:start
+}
+.about-text p{color:#555;font-size:15px;margin-bottom:16px;line-height:1.9}
+.about-text .highlight{color:#0a1628;font-weight:600}
+.info-card{
+  background:#fff;border-radius:16px;padding:28px;
+  box-shadow:0 2px 20px rgba(0,0,0,.04);border:1px solid #eee
+}
+.info-row{
+  display:grid;grid-template-columns:100px 1fr;gap:6px 16px;
+  padding:13px 0;border-bottom:1px solid #f0f0f0;font-size:13px
+}
+.info-row:last-child{border-bottom:none}
+.info-row .lbl{color:#999;font-size:12px}
+.info-row .val{color:#333;font-weight:500}
+
+/* ===== Cards ===== */
+.card-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px
+}
+.card{
+  background:#fff;border-radius:16px;padding:36px 28px;
+  box-shadow:0 2px 20px rgba(0,0,0,.04);
+  transition:transform .3s,box-shadow .3s;border-top:4px solid transparent
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.08)}
+.card.c-green{border-top-color:#00d4aa}
+.card.c-blue{border-top-color:#00a8e8}
+.card.c-navy{border-top-color:#0a1628}
+.card.c-gold{border-top-color:#f0c040}
+.card .c-icon{font-size:34px;margin-bottom:14px}
+.card h4{font-size:17px;color:#0a1628;margin-bottom:8px;font-weight:700}
+.card p{font-size:13px;color:#777;line-height:1.7}
+
+/* ===== Service Cards ===== */
+.svc-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:20px
+}
+.svc-card{
+  background:#fff;border-radius:16px;padding:36px 24px;text-align:center;
+  box-shadow:0 2px 20px rgba(0,0,0,.04);
+  transition:transform .3s,box-shadow .3s;
+  border:1px solid transparent
+}
+.svc-card:hover{
+  transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.08);
+  border-color:rgba(0,168,232,.15)
+}
+.svc-card .sc-icon{font-size:38px;margin-bottom:16px}
+.svc-card h4{font-size:17px;color:#0a1628;margin-bottom:10px;font-weight:700}
+.svc-card p{font-size:13px;color:#777;line-height:1.7}
+
+/* ===== Strategy Banner ===== */
+.strategy-banner{
+  background:linear-gradient(135deg,#0a1628,#0f2940);
+  border-radius:20px;padding:48px 36px;text-align:center;color:#fff
+}
+.strategy-banner .big-line{font-size:20px;color:#00d4aa;font-weight:700;margin-bottom:16px}
+.strategy-banner p{font-size:15px;color:rgba(255,255,255,.55);line-height:2.2;max-width:640px;margin:0 auto}
+
+/* ===== Flow (Process 1, 3, 5) ===== */
+.flow-wrapper{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+.flow-col{flex:1;min-width:200px;max-width:340px;display:flex;flex-direction:column;gap:0}
+.flow-col-title{
+  text-align:center;font-size:11px;letter-spacing:3px;color:#bbb;
+  margin-bottom:14px;text-transform:uppercase;font-weight:600
+}
+.source-card{
+  background:#fff;border-radius:12px;padding:20px 16px;text-align:center;
+  box-shadow:0 1px 8px rgba(0,0,0,.03);margin-bottom:8px;
+  border:1px solid #eee;transition:transform .2s,box-shadow .2s
+}
+.source-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.source-card .ic{font-size:26px;margin-bottom:6px}
+.source-card h4{font-size:14px;color:#0a1628;margin-bottom:3px;font-weight:600}
 .source-card p{font-size:11px;color:#999}
-.arrow-v{text-align:center;font-size:18px;color:#00a8e8;padding:4px 0}
-.plat{background:linear-gradient(145deg,#0f2940,#1a3a56);border-radius:16px;padding:28px 20px;text-align:center;color:#fff;box-shadow:0 8px 28px rgba(0,0,0,.12)}
-.plat h3{font-size:22px;margin-bottom:4px}
-.plat h3 span{color:#00d4aa}
-.plat .psub{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:20px}
-.plat .pills{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
-.plat .pills span{padding:5px 14px;border:1px solid rgba(0,212,170,.3);border-radius:99px;font-size:12px;color:rgba(255,255,255,.75)}
-.eco-box{background:#fff;border:2px dashed #c8d8e8;border-radius:16px;padding:20px 14px;box-shadow:0 2px 12px rgba(0,0,0,.02)}
-.eco-box .etit{text-align:center;font-size:13px;font-weight:600;color:#1a3a56;margin-bottom:14px}
+.source-card.highlight{background:#e8faf5;border-color:rgba(0,212,170,.25)}
+.source-card.highlight h4,.source-card.highlight p{color:#007a5c}
+.arrow-v{text-align:center;font-size:16px;color:#00a8e8;padding:3px 0}
+.platform-card{
+  background:linear-gradient(145deg,#0a1628,#123350);
+  border-radius:18px;padding:32px 20px;text-align:center;color:#fff;
+  box-shadow:0 10px 36px rgba(0,0,0,.15)
+}
+.platform-card h3{font-size:21px;margin-bottom:6px;font-weight:700}
+.platform-card h3 span{color:#00d4aa}
+.platform-card .p-sub{font-size:13px;color:rgba(255,255,255,.45);margin-bottom:22px}
+.platform-card .p-icons{
+  display:flex;justify-content:center;gap:28px;margin-bottom:20px
+}
+.platform-card .p-icons .pi{text-align:center}
+.platform-card .p-icons .pi .ii{font-size:20px;margin-bottom:4px}
+.platform-card .p-icons .pi .it{font-size:10px;color:rgba(255,255,255,.4)}
+.platform-card .pills{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.platform-card .pills span{
+  padding:5px 16px;border:1px solid rgba(0,212,170,.25);
+  border-radius:99px;font-size:12px;color:rgba(255,255,255,.7)
+}
+.eco-box{
+  background:#fff;border:2px dashed #d0dce8;border-radius:16px;
+  padding:22px 16px;box-shadow:0 2px 12px rgba(0,0,0,.02)
+}
+.eco-box .e-title{text-align:center;font-size:12px;font-weight:700;color:#123350;margin-bottom:14px;letter-spacing:1px}
 .eco-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.eco-grid .ei{padding:9px 10px;background:#f5f7fa;border-radius:8px;font-size:12px;color:#555;display:flex;align-items:center;gap:6px}
-.eco-grid .ei .ei-ic{font-size:16px}
+.eco-grid .ei{
+  padding:10px;background:#f5f7fa;border-radius:8px;font-size:12px;
+  color:#555;display:flex;align-items:center;gap:6px;transition:background .2s
+}
+.eco-grid .ei:hover{background:#eef2f7}
+.eco-grid .ei .ei-ic{font-size:16px;flex-shrink:0}
 
-/* ── Trade Finance Flow (horizontal step) ── */
-.tf-flow{padding:0;max-width:1200px}
-.tf-top{display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:24px;flex-wrap:wrap}
-.tf-tag{background:#1a3a56;color:rgba(255,255,255,.7);padding:6px 18px;border-radius:99px;font-size:12px}
-.tf-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px}
-.tf-step{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:14px 10px;text-align:center;color:#fff;position:relative}
-.tf-step .ts-num{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#00d4aa,#00a8e8);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin:0 auto 8px}
-.tf-step .ts-title{font-size:12px;font-weight:600;color:#00d4aa;margin-bottom:6px}
-.tf-step .ts-detail{font-size:10px;color:rgba(255,255,255,.6);line-height:1.5}
-.tf-step .ts-detail .hl{color:#f0c040}
-.tf-step.active{border-color:#00d4aa;background:rgba(0,212,170,.08)}
+/* ===== Step Flow (Process 2, 4) ===== */
+.step-flow{margin-bottom:24px}
+.step-top{
+  display:flex;align-items:center;justify-content:center;gap:16px;
+  margin-bottom:28px;flex-wrap:wrap
+}
+.step-top .st-tag{
+  padding:7px 20px;border-radius:99px;font-size:12px;
+  background:rgba(255,255,255,.1);color:rgba(255,255,255,.65);
+  border:1px solid rgba(255,255,255,.12)
+}
+.step-top .st-tag.primary{background:#00d4aa;color:#000;border-color:#00d4aa;font-weight:600}
+.step-top .st-tag.gold{border-color:rgba(240,192,64,.4);color:#f0c040}
+.step-top .st-arrow{color:rgba(255,255,255,.3)}
+.steps{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:28px
+}
+.step{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;padding:18px 10px;text-align:center;color:#fff;
+  transition:all .3s;position:relative
+}
+.step:hover{background:rgba(0,212,170,.06);border-color:rgba(0,212,170,.3)}
+.step.active{background:rgba(0,212,170,.08);border-color:#00d4aa}
+.step .s-num{
+  width:28px;height:28px;border-radius:50%;
+  background:linear-gradient(135deg,#00d4aa,#00a8e8);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;margin:0 auto 10px
+}
+.step .s-title{font-size:12px;font-weight:700;color:#00d4aa;margin-bottom:8px}
+.step .s-detail{font-size:10px;color:rgba(255,255,255,.5);line-height:1.6}
+.step .s-detail .hl{color:#f0c040}
 
-/* Cash flow arrows between steps */
-.tf-arrows{display:none}
-
-/* Data platform */
-.data-platform{margin-top:32px;background:rgba(255,255,255,.05);border-radius:16px;padding:28px 24px;border:1px solid rgba(255,255,255,.08)}
-.data-platform h4{color:#00d4aa;font-size:16px;margin-bottom:16px;text-align:center}
-.data-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-.data-item{background:rgba(0,0,0,.2);border-radius:10px;padding:14px}
-.data-item .di-title{font-size:11px;color:rgba(255,255,255,.5);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px}
-.data-item .di-list{font-size:10px;color:rgba(255,255,255,.4);display:flex;flex-wrap:wrap;gap:4px 8px}
-.data-item .di-list span{background:rgba(255,255,255,.06);padding:3px 8px;border-radius:4px}
-.legend-bar{display:flex;justify-content:center;gap:24px;margin-top:20px;font-size:11px;color:rgba(255,255,255,.35);flex-wrap:wrap}
-.legend-bar span{display:flex;align-items:center;gap:6px}
+/* ===== Data Platform Box ===== */
+.data-plat{
+  background:rgba(255,255,255,.04);border-radius:18px;
+  padding:32px 24px;border:1px solid rgba(255,255,255,.06)
+}
+.data-plat h4{color:#00d4aa;font-size:15px;margin-bottom:20px;text-align:center;font-weight:600}
+.data-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px
+}
+.data-item{
+  background:rgba(0,0,0,.18);border-radius:12px;padding:16px;
+  transition:background .2s
+}
+.data-item:hover{background:rgba(0,0,0,.28)}
+.data-item .di-title{font-size:11px;color:rgba(255,255,255,.45);margin-bottom:8px;letter-spacing:.5px}
+.data-item .di-list{font-size:10px;color:rgba(255,255,255,.35);display:flex;flex-wrap:wrap;gap:4px 8px}
+.data-item .di-list span{background:rgba(255,255,255,.04);padding:3px 9px;border-radius:4px}
+.legend-bar{display:flex;justify-content:center;gap:28px;margin-top:22px;font-size:11px;color:rgba(255,255,255,.3);flex-wrap:wrap}
+.legend-bar span{display:flex;align-items:center;gap:7px}
 .legend-dot{width:10px;height:10px;border-radius:2px;display:inline-block}
 .legend-dot.logi{background:#00a8e8}
 .legend-dot.cash{background:#f0c040}
-.legend-dot.doc{background:#888}
+.legend-dot.doc{background:#777}
 
-/* ── Services ── */
-.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
-.svc-card{background:#fff;border-radius:14px;padding:32px 24px;box-shadow:0 2px 16px rgba(0,0,0,.04);transition:.3s}
-.svc-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.08)}
-.svc-card .sc-icon{font-size:30px;margin-bottom:14px}
-.svc-card h4{font-size:17px;margin-bottom:8px;color:#0a1628}
-.svc-card p{font-size:13px;color:#777}
+/* ===== Cert Badges ===== */
+.cert-grid{display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
+.cert-badge{
+  width:130px;text-align:center;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;overflow:hidden;transition:transform .3s,box-shadow .3s
+}
+.cert-badge:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.2)}
+.cert-badge .cb-img{
+  height:160px;background:rgba(255,255,255,.95);
+  display:flex;align-items:center;justify-content:center;
+  font-size:36px;color:#0a1628;font-weight:800
+}
+.cert-badge .cb-label{padding:10px;font-size:12px;color:rgba(255,255,255,.6);font-weight:600;letter-spacing:1px}
 
-/* ── About ── */
-.about-g{display:grid;grid-template-columns:1fr 1.2fr;gap:60px;align-items:start}
-.about-g p{color:#555;font-size:15px;margin-bottom:14px}
-.info-row{display:grid;grid-template-columns:110px 1fr;gap:8px 16px;padding:12px 0;border-bottom:1px solid #eee;font-size:14px}
-.info-row .l{color:#888}.info-row .v{color:#333}
+/* ===== System Screenshots ===== */
+.sys-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px
+}
+.sys-card{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);
+  border-radius:14px;overflow:hidden;transition:transform .3s,box-shadow .3s
+}
+.sys-card:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(0,0,0,.15)}
+.sys-card .sc-placeholder{
+  height:200px;background:rgba(255,255,255,.92);
+  display:flex;align-items:center;justify-content:center;
+  font-size:40px;color:#ccc
+}
+.sys-card .sc-name{padding:14px;text-align:center;font-size:13px;color:rgba(255,255,255,.65)}
 
-/* ── Contact ── */
-.ct-wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+/* ===== Metrics Bar ===== */
+.metrics-bar{
+  display:flex;justify-content:center;gap:40px 60px;
+  flex-wrap:wrap;margin-top:28px
+}
+.metric{text-align:center}
+.metric .m-value{font-size:22px;font-weight:700;color:#00a8e8}
+.metric .m-label{font-size:11px;color:#999;margin-top:4px;letter-spacing:.5px}
+
+/* ===== Culture ===== */
+.culture-quote{
+  text-align:center;max-width:760px;margin:0 auto 48px
+}
+.culture-quote p{font-size:16px;color:#555;line-height:2.1}
+
+/* ===== Contact ===== */
+.ct-wrap{display:grid;grid-template-columns:auto 1fr;gap:52px;align-items:center}
 .ct-qr{text-align:center}
-.ct-qr .qr{width:160px;height:160px;border:2px solid #eee;border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;background:#f7f9fc;color:#aaa;font-size:13px}
-.ct-info h3{font-size:20px;margin-bottom:18px}
-.ct-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:14px;font-size:14px}
-.ct-row .ct-ic{font-size:17px;flex-shrink:0}.ct-row .ct-tx{color:#555}
+.ct-qr .qr-box{
+  width:170px;height:170px;border:2px solid #e8e8e8;border-radius:18px;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 12px;background:#f9fafb;overflow:hidden
+}
+.ct-qr .qr-box img{width:100%;height:100%;object-fit:contain}
+.ct-qr .qr-label{color:#999;font-size:12px}
+.ct-info h3{font-size:22px;margin-bottom:4px;color:#0a1628;font-weight:700}
+.ct-info .ct-role{color:#00a8e8;font-size:14px;margin-bottom:22px;font-weight:500}
+.ct-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;font-size:14px}
+.ct-row .ct-ic{font-size:17px;flex-shrink:0;width:22px;text-align:center}
+.ct-row .ct-tx{color:#555}
 
-footer{background:#0a1628;color:rgba(255,255,255,.4);text-align:center;padding:32px 24px;font-size:13px}
+/* ===== Footer ===== */
+footer{
+  background:#060f1e;color:rgba(255,255,255,.35);
+  text-align:center;padding:40px 24px;font-size:13px
+}
+footer .ft-brand{margin-bottom:8px;color:rgba(255,255,255,.5);font-weight:600}
+footer .ft-info{font-size:12px;color:rgba(255,255,255,.25)}
 
-
+/* ===== Responsive ===== */
 @media(max-width:900px){
-  .tf-steps{grid-template-columns:1fr}
-  .about-g,.ct-wrap{grid-template-columns:1fr}
-  .flow-wrapper{flex-direction:column}
+  .nav-links{display:none}
+  .nav-toggle{display:flex}
+  .about-grid{grid-template-columns:1fr;gap:40px}
+  .ct-wrap{grid-template-columns:1fr;text-align:center}
+  .ct-qr{margin-bottom:24px}
+  .ct-row{justify-content:center}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .flow-wrapper{flex-direction:column;align-items:center}
+  .flow-col{max-width:100%}
+  .metrics-bar{gap:28px}
+  section{padding:64px 20px}
+  .hero h1{font-size:28px}
+}
+@media(max-width:480px){
+  .steps{grid-template-columns:1fr}
+  .card-grid,.svc-grid{grid-template-columns:1fr}
+  .cert-grid{gap:12px}
+  .cert-badge{width:110px}
+  .cert-badge .cb-img{height:130px}
 }
 </style>
 </head>
 <body>
 
-<!-- ═══ Hero ═══ -->
-<div class="hero">
+<!-- ════════════ Nav ════════════ -->
+<nav class="nav">
+  <div class="nav-brand">
+    <div class="nav-logo">🐟</div>
+    <span class="nav-name">以鲜国际</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">关于我们</a></li>
+    <li><a href="#culture">企业文化</a></li>
+    <li><a href="#services">核心业务</a></li>
+    <li><a href="#process">业务流程</a></li>
+    <li><a href="#capabilities">资质能力</a></li>
+    <li><a href="#contact">联系我们</a></li>
+  </ul>
+  <div class="nav-toggle" onclick="this.classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ════════════ Hero ════════════ -->
+<section class="hero full">
+  <div class="hero-grid"></div>
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
   <div class="hero-inner">
-    <div class="logo">🐟</div>
-    <div class="brand">EverFresh Supply Chain</div>
-    <h1>以鲜国际供应链</h1>
-    <p class="sub">全球进出口冻品集成服务平台 · 引进来 + 走出去</p>
+    <div class="logo-mark">🐟</div>
+    <div class="eyebrow">EverFresh Supply Chain</div>
+    <h1><span class="accent">以鲜国际</span>供应链</h1>
+    <p class="subtitle">
+      全球进出口冻品集成服务平台<br>
+      引进来 · 走出去 — 让全球优质食品高效流通
+    </p>
     <div class="hero-tags">
       <span>代理代采</span><span>清关报关</span><span>贸易融资</span>
       <span>冷链服务</span><span>清真食品出海</span>
     </div>
   </div>
-</div>
+  <div class="hero-scroll">
+    <span>向下了解</span><span class="arr">↓</span>
+  </div>
+</section>
 
-<!-- ═══ About ═══ -->
-<section>
-  <div class="s-badge">About</div>
-  <div class="s-head">关于<em>以鲜国际</em></div>
-  <div class="about-g">
-    <div>
-      <p>以鲜国际供应链（广东）有限公司（EverFresh International Supply Chain Co., Ltd.），专注国际食品进出口领域，打造全球进出口冻品集成服务平台，提供「引进来 + 走出去」双向供应链服务解决方案。</p>
+<!-- ════════════ About ════════════ -->
+<section id="about">
+  <div class="s-label">About</div>
+  <div class="s-title">关于<em>以鲜国际</em></div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p><span class="highlight">以鲜国际供应链（广东）有限公司</span>（EverFresh International Supply Chain Co., Ltd.），专注国际食品进出口领域，打造全球进出口冻品集成服务平台，提供「引进来 + 走出去」双向供应链服务解决方案。</p>
       <p>进口端深耕南美白虾、印尼阿曼带鱼鱿鱼等核心品类，提供代采、物流、通关等基础服务，配套贸易融资降低客户资金门槛；出口端配合「好品中国」，助力中国食品品牌出海，重点推进清真食品出海。</p>
+      <div class="metrics-bar">
+        <div class="metric"><div class="m-value">10</div><div class="m-label">国内覆盖城市</div></div>
+        <div class="metric"><div class="m-value">9</div><div class="m-label">海外产地直连</div></div>
+        <div class="metric"><div class="m-value">5</div><div class="m-label">国际认证</div></div>
+        <div class="metric"><div class="m-value">7</div><div class="m-label">战略合作伙伴</div></div>
+      </div>
     </div>
-    <div>
-      <div class="info-row"><span class="l">公司全称</span><span class="v">以鲜国际供应链（广东）有限公司</span></div>
-      <div class="info-row"><span class="l">所在城市</span><span class="v">深圳</span></div>
-      <div class="info-row"><span class="l">办公地址</span><span class="v">深圳市南山区深湾二路神州数码国际东塔9楼</span></div>
-      <div class="info-row"><span class="l">主营品类</span><span class="v">水产（鱼虾蟹贝）· 肉类（牛羊肉）· 预制菜（出海）</span></div>
-      <div class="info-row"><span class="l">核心市场</span><span class="v">厄瓜多尔、印尼、阿曼、智利、东南亚、中东</span></div>
-      <div class="info-row"><span class="l">服务方向</span><span class="v">代理代采 + 清关报关 + 贸易融资 + 冷链服务 + 清真食品出海</span></div>
-      <div class="info-row"><span class="l">战略伙伴</span><span class="v">全联集采 · 泰乾数科 · 恒兴食品 · 温氏食品 · 中国水产 · 好品中国 · 万维冷链</span></div>
-      <div class="info-row"><span class="l">国内网络</span><span class="v">深圳 · 广州 · 湛江 · 上海 · 宁波 · 天津 · 青岛 · 济南 · 郑州 · 成都</span></div>
-      <div class="info-row"><span class="l">国外网络</span><span class="v">巴西 · 厄瓜多尔 · 智利 · 泰国 · 马来西亚 · 印尼 · 越南 · 阿曼 · 俄罗斯</span></div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══ Culture 1: Mission & Values ═══ -->
-<section>
-  <div class="s-badge">Culture</div>
-  <div class="s-head">企业文化</div>
-
-  <div style="text-align:center;max-width:800px;margin:0 auto 48px">
-    <p style="font-size:17px;color:#555;line-height:2">我们相信，<strong style="color:#0a1628">数据驱动的供应链</strong>正在重塑全球食品贸易格局。以鲜国际致力于打破信息壁垒，让每一笔冻品交易更透明、更高效、更可信。</p>
-  </div>
-
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px">
-    <div style="background:#fff;border-radius:14px;padding:32px 24px;text-align:center;box-shadow:0 2px 16px rgba(0,0,0,.04);border-top:3px solid #00d4aa">
-      <div style="font-size:32px;margin-bottom:12px">🎯</div>
-      <h4 style="font-size:17px;color:#0a1628;margin-bottom:8px">使命</h4>
-      <p style="font-size:13px;color:#777">让全球优质食品高效流通，连接产地与餐桌，打造值得信赖的国际食品供应链基础设施。</p>
-    </div>
-    <div style="background:#fff;border-radius:14px;padding:32px 24px;text-align:center;box-shadow:0 2px 16px rgba(0,0,0,.04);border-top:3px solid #00a8e8">
-      <div style="font-size:32px;margin-bottom:12px">🔭</div>
-      <h4 style="font-size:17px;color:#0a1628;margin-bottom:8px">愿景</h4>
-      <p style="font-size:13px;color:#777">成为国际食品供应链服务的标杆企业，让中国食品品牌走向世界，让全球优质食材触达中国。</p>
-    </div>
-    <div style="background:#fff;border-radius:14px;padding:32px 24px;text-align:center;box-shadow:0 2px 16px rgba(0,0,0,.04);border-top:3px solid #1a3a56">
-      <div style="font-size:32px;margin-bottom:12px">💎</div>
-      <h4 style="font-size:17px;color:#0a1628;margin-bottom:8px">价值观</h4>
-      <p style="font-size:13px;color:#777">诚信为本 · 效率为先 · 数据驱动 · 合作共赢 · 持续创新</p>
+    <div class="info-card">
+      <div class="info-row"><span class="lbl">公司全称</span><span class="val">以鲜国际供应链（广东）有限公司</span></div>
+      <div class="info-row"><span class="lbl">所在城市</span><span class="val">深圳</span></div>
+      <div class="info-row"><span class="lbl">办公地址</span><span class="val">深圳市南山区深湾二路神州数码国际东塔9楼</span></div>
+      <div class="info-row"><span class="lbl">主营品类</span><span class="val">水产（鱼虾蟹贝）· 肉类（牛羊肉）· 预制菜（出海）</span></div>
+      <div class="info-row"><span class="lbl">核心市场</span><span class="val">厄瓜多尔、印尼、阿曼、智利、东南亚、中东</span></div>
+      <div class="info-row"><span class="lbl">战略伙伴</span><span class="val">全联集采 · 泰乾数科 · 恒兴食品 · 温氏食品 · 中国水产 · 好品中国 · 万维冷链</span></div>
+      <div class="info-row"><span class="lbl">国内网络</span><span class="val">深圳 · 广州 · 湛江 · 上海 · 宁波 · 天津 · 青岛 · 济南 · 郑州 · 成都</span></div>
+      <div class="info-row"><span class="lbl">国外网络</span><span class="val">巴西 · 厄瓜多尔 · 智利 · 泰国 · 马来西亚 · 印尼 · 越南 · 阿曼 · 俄罗斯</span></div>
     </div>
   </div>
 </section>
 
-<!-- ═══ Culture 2: Strategy ═══ -->
+<!-- ════════════ Culture ════════════ -->
+<section id="culture">
+  <div class="s-label">Culture</div>
+  <div class="s-title">企业文化</div>
+
+  <div class="culture-quote">
+    <p>我们相信，<strong style="color:#0a1628">数据驱动的供应链</strong>正在重塑全球食品贸易格局。以鲜国际致力于打破信息壁垒，让每一笔冻品交易更透明、更高效、更可信。</p>
+  </div>
+
+  <div class="card-grid">
+    <div class="card c-green">
+      <div class="c-icon">🎯</div>
+      <h4>使命</h4>
+      <p>让全球优质食品高效流通，连接产地与餐桌，打造值得信赖的国际食品供应链基础设施。</p>
+    </div>
+    <div class="card c-blue">
+      <div class="c-icon">🔭</div>
+      <h4>愿景</h4>
+      <p>成为国际食品供应链服务的标杆企业，让中国食品品牌走向世界，让全球优质食材触达中国。</p>
+    </div>
+    <div class="card c-navy">
+      <div class="c-icon">💎</div>
+      <h4>价值观</h4>
+      <p>诚信为本 · 效率为先 · 数据驱动 · 合作共赢 · 持续创新</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ Strategy ════════════ -->
 <div class="bg-gray">
 <section>
-  <div class="s-badge">Strategy</div>
-  <div class="s-head">战略<em>目标</em></div>
+  <div class="s-label">Strategy</div>
+  <div class="s-title">战略<em>目标</em></div>
 
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;margin-bottom:40px">
-    <div style="background:#fff;border-radius:14px;padding:32px 24px;text-align:center;box-shadow:0 2px 16px rgba(0,0,0,.04);border-top:3px solid #f0c040">
-      <div style="font-size:32px;margin-bottom:12px">📦</div>
-      <h4 style="font-size:17px;color:#0a1628;margin-bottom:8px">三年目标</h4>
-      <p style="font-size:13px;color:#777">建立覆盖全球主要产区的冻品集采网络，年进口额突破百亿。</p>
+  <div class="card-grid">
+    <div class="card c-gold">
+      <div class="c-icon">📦</div>
+      <h4>三年目标</h4>
+      <p>建立覆盖全球主要产区的冻品集采网络，年进口额突破百亿。</p>
     </div>
-    <div style="background:#fff;border-radius:14px;padding:32px 24px;text-align:center;box-shadow:0 2px 16px rgba(0,0,0,.04);border-top:3px solid #00d4aa">
-      <div style="font-size:32px;margin-bottom:12px">🌐</div>
-      <h4 style="font-size:17px;color:#0a1628;margin-bottom:8px">五年愿景</h4>
-      <p style="font-size:13px;color:#777">成为中国食品出海的首选服务平台，赋能中国食品品牌走向世界。</p>
+    <div class="card c-green">
+      <div class="c-icon">🌐</div>
+      <h4>五年愿景</h4>
+      <p>成为中国食品出海的首选服务平台，赋能中国食品品牌走向世界。</p>
     </div>
-    <div style="background:#fff;border-radius:14px;padding:32px 24px;text-align:center;box-shadow:0 2px 16px rgba(0,0,0,.04);border-top:3px solid #1a3a56">
-      <div style="font-size:32px;margin-bottom:12px">🤝</div>
-      <h4 style="font-size:17px;color:#0a1628;margin-bottom:8px">生态建设</h4>
-      <p style="font-size:13px;color:#777">与战略伙伴共建数字化冻品生态圈，数据互通、资源共享、协同发展。</p>
+    <div class="card c-navy">
+      <div class="c-icon">🤝</div>
+      <h4>生态建设</h4>
+      <p>与战略伙伴共建数字化冻品生态圈，数据互通、资源共享、协同发展。</p>
     </div>
   </div>
 
-  <div style="text-align:center;padding:32px;background:#0a1628;border-radius:16px;color:#fff">
-    <p style="font-size:18px;color:#00d4aa;font-weight:600;margin-bottom:12px">「引进来 · 走出去」</p>
-    <p style="font-size:14px;color:rgba(255,255,255,.6);line-height:2">
+  <div class="strategy-banner" style="margin-top:40px">
+    <div class="big-line">「引进来 · 走出去」</div>
+    <p>
       引进全球优质冻品，服务中国消费升级<br>
       输出中国食品品牌，参与全球市场竞争<br>
       以数据为引擎，以服务为基石，以信任为纽带
@@ -214,118 +510,63 @@ footer{background:#0a1628;color:rgba(255,255,255,.4);text-align:center;padding:3
 </section>
 </div>
 
-
-<!-- ═══ Services ═══ -->
+<!-- ════════════ Services ════════════ -->
 <div class="bg-gray">
-<section>
-  <div class="s-badge">Services</div>
-  <div class="s-head">核心<em>业务</em></div>
+<section id="services">
+  <div class="s-label">Services</div>
+  <div class="s-title">核心<em>业务</em></div>
   <div class="svc-grid">
-    <div class="svc-card"><div class="sc-icon">🌐</div><h4>代理代采</h4><p>南美白虾、印尼阿曼带鱼鱿鱼等核心品类，海外产地直采，一手货源价格透明。</p></div>
-    <div class="svc-card"><div class="sc-icon">📋</div><h4>清关报关</h4><p>专业报关团队，冻品进口全流程，单一窗口电子申报，高效通关合规无忧。</p></div>
-    <div class="svc-card"><div class="sc-icon">💰</div><h4>贸易融资</h4><p>经销商只需20%订金，剩余80%由平台融资垫付，货到入库还款提货。</p></div>
-    <div class="svc-card"><div class="sc-icon">🚢</div><h4>冷链服务</h4><p>全国9城冷链仓储网络，WMS数字化管理，温控IoT实时监控，门到门配送。</p></div>
-    <div class="svc-card"><div class="sc-icon">☪️</div><h4>清真食品出海</h4><p>配合「好品中国」，助力中国食品品牌出海，HALAL认证+海外渠道一站式服务。</p></div>
-  </div>
-</section>
-</div>
-
-
-<!-- ═══ Certification & Systems ═══ -->
-<div class="bg-dark">
-<section style="padding-top:80px;padding-bottom:80px">
-  <div class="s-badge" style="color:#00d4aa">Capabilities</div>
-  <div class="s-head" style="color:#fff">资质<em style="color:#00d4aa">与能力</em></div>
-
-  <!-- Digital Systems -->
-  <div style="margin-bottom:60px">
-    <div style="text-align:center;margin-bottom:32px">
-      <div style="font-size:12px;letter-spacing:3px;color:rgba(255,255,255,.4);text-transform:uppercase;margin-bottom:8px">Digital Systems</div>
-      <div style="font-size:20px;color:#fff;font-weight:600">数字化管理系统</div>
+    <div class="svc-card">
+      <div class="sc-icon">🌐</div>
+      <h4>代理代采</h4>
+      <p>南美白虾、印尼阿曼带鱼鱿鱼等核心品类，海外产地直采，一手货源价格透明。</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden">
-        <img src="certs/01-order.jpg" alt="订单服务管理系统" style="width:100%;height:220px;object-fit:contain;background:#fff;display:block" loading="lazy">
-        <div style="padding:12px 16px;text-align:center;font-size:13px;color:rgba(255,255,255,.7)">订单服务管理系统</div>
-      </div>
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden">
-        <img src="certs/02-track.jpg" alt="可视化跟踪管理系统" style="width:100%;height:220px;object-fit:contain;background:#fff;display:block" loading="lazy">
-        <div style="padding:12px 16px;text-align:center;font-size:13px;color:rgba(255,255,255,.7)">可视化跟踪管理系统</div>
-      </div>
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden">
-        <img src="certs/03-cold-temp.jpg" alt="冷库温度监控系统" style="width:100%;height:220px;object-fit:contain;background:#fff;display:block" loading="lazy">
-        <div style="padding:12px 16px;text-align:center;font-size:13px;color:rgba(255,255,255,.7)">冷库温度监控系统</div>
-      </div>
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden">
-        <img src="certs/04-cold-trans.jpg" alt="冷链运输监控系统" style="width:100%;height:220px;object-fit:contain;background:#fff;display:block" loading="lazy">
-        <div style="padding:12px 16px;text-align:center;font-size:13px;color:rgba(255,255,255,.7)">冷链运输监控系统</div>
-      </div>
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden">
-        <img src="certs/05-trace.jpg" alt="农产品追溯系统" style="width:100%;height:220px;object-fit:contain;background:#fff;display:block" loading="lazy">
-        <div style="padding:12px 16px;text-align:center;font-size:13px;color:rgba(255,255,255,.7)">农产品追溯系统</div>
-      </div>
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden">
-        <img src="certs/06-quality.jpg" alt="质量安全监管系统" style="width:100%;height:220px;object-fit:contain;background:#fff;display:block" loading="lazy">
-        <div style="padding:12px 16px;text-align:center;font-size:13px;color:rgba(255,255,255,.7)">质量安全监管系统</div>
-      </div>
+    <div class="svc-card">
+      <div class="sc-icon">📋</div>
+      <h4>清关报关</h4>
+      <p>专业报关团队，冻品进口全流程，单一窗口电子申报，高效通关合规无忧。</p>
     </div>
-  </div>
-
-  <!-- Certifications -->
-  <div>
-    <div style="text-align:center;margin-bottom:32px">
-      <div style="font-size:12px;letter-spacing:3px;color:rgba(255,255,255,.4);text-transform:uppercase;margin-bottom:8px">Certifications</div>
-      <div style="font-size:20px;color:#fff;font-weight:600">国际认证资质</div>
+    <div class="svc-card">
+      <div class="sc-icon">💰</div>
+      <h4>贸易融资</h4>
+      <p>经销商只需20%订金，剩余80%由平台融资垫付，货到入库还款提货。</p>
     </div>
-    <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap">
-      <div style="width:120px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;overflow:hidden;text-align:center;display:flex;flex-direction:column">
-        <img src="certs/07-haccp.jpg" alt="HACCP" style="width:100%;height:180px;object-fit:contain;background:rgba(255,255,255,.95);display:block" loading="lazy">
-        <div style="padding:8px;font-size:12px;color:rgba(255,255,255,.7)">HACCP</div>
-      </div>
-      <div style="width:120px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;overflow:hidden;text-align:center;display:flex;flex-direction:column">
-        <img src="certs/08-iso9001.jpg" alt="ISO9001" style="width:100%;height:180px;object-fit:contain;background:rgba(255,255,255,.95);display:block" loading="lazy">
-        <div style="padding:8px;font-size:12px;color:rgba(255,255,255,.7)">ISO 9001</div>
-      </div>
-      <div style="width:120px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;overflow:hidden;text-align:center;display:flex;flex-direction:column">
-        <img src="certs/09-iso14001.jpg" alt="ISO14001" style="width:100%;height:180px;object-fit:contain;background:rgba(255,255,255,.95);display:block" loading="lazy">
-        <div style="padding:8px;font-size:12px;color:rgba(255,255,255,.7)">ISO 14001</div>
-      </div>
-      <div style="width:120px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;overflow:hidden;text-align:center;display:flex;flex-direction:column">
-        <img src="certs/10-iso22000.jpg" alt="ISO22000" style="width:100%;height:180px;object-fit:contain;background:rgba(255,255,255,.95);display:block" loading="lazy">
-        <div style="padding:8px;font-size:12px;color:rgba(255,255,255,.7)">ISO 22000</div>
-      </div>
-      <div style="width:120px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;overflow:hidden;text-align:center;display:flex;flex-direction:column">
-        <img src="certs/11-iso45001.jpg" alt="ISO45001" style="width:100%;height:180px;object-fit:contain;background:rgba(255,255,255,.95);display:block" loading="lazy">
-        <div style="padding:8px;font-size:12px;color:rgba(255,255,255,.7)">ISO 45001</div>
-      </div>
+    <div class="svc-card">
+      <div class="sc-icon">🚢</div>
+      <h4>冷链服务</h4>
+      <p>全国9城冷链仓储网络，WMS数字化管理，温控IoT实时监控，门到门配送。</p>
+    </div>
+    <div class="svc-card">
+      <div class="sc-icon">☪️</div>
+      <h4>清真食品出海</h4>
+      <p>配合「好品中国」，助力中国食品品牌出海，HALAL认证+海外渠道一站式服务。</p>
     </div>
   </div>
 </section>
 </div>
 
-
-<!-- ═══ Process 1: 代采代理 ═══ -->
-<section>
-  <div class="s-badge">Process 01</div>
-  <div class="s-head">代采代理<em>业务流程</em></div>
+<!-- ════════════ Process 1: 代采代理 ════════════ -->
+<section id="process">
+  <div class="s-label">Process 01</div>
+  <div class="s-title">代采代理<em>业务流程</em></div>
   <div class="flow-wrapper">
     <div class="flow-col">
       <div class="flow-col-title">货源端</div>
       <div class="source-card"><div class="ic">🏭</div><h4>原料工厂</h4><p>海外产地直连</p></div>
       <div class="source-card"><div class="ic">🏷️</div><h4>品牌供应方</h4><p>Santa Priscila · Mowi</p></div>
       <div class="arrow-v">▼</div>
-      <div class="source-card" style="background:#e8f8f5;border-color:#00d4aa33">
-        <h4 style="color:#008060">以鲜集采</h4><p style="color:#008060">源头集采 · 一手货源</p>
+      <div class="source-card highlight">
+        <h4>以鲜集采</h4><p>源头集采 · 一手货源</p>
       </div>
     </div>
     <div class="flow-col">
       <div class="flow-col-title">核心平台</div>
-      <div class="plat">
+      <div class="platform-card">
         <h3><span>以鲜集采</span> · 乾联鲜行</h3>
-        <div class="psub">全球进出口冻品集成服务平台</div>
-        <div style="display:flex;justify-content:center;gap:20px;margin-bottom:18px">
-          <div style="text-align:center"><div style="font-size:18px">👤</div><div style="font-size:10px;color:rgba(255,255,255,.5)">供应方</div></div>
-          <div style="text-align:center"><div style="font-size:18px">🌐</div><div style="font-size:10px;color:rgba(255,255,255,.5)">社群生态</div></div>
+        <div class="p-sub">全球进出口冻品集成服务平台</div>
+        <div class="p-icons">
+          <div class="pi"><div class="ii">👤</div><div class="it">供应方</div></div>
+          <div class="pi"><div class="ii">🌐</div><div class="it">社群生态</div></div>
         </div>
         <div class="pills"><span>供应链服务</span><span>共享服务</span><span>大数据服务</span><span>可视服务</span></div>
       </div>
@@ -333,7 +574,7 @@ footer{background:#0a1628;color:rgba(255,255,255,.4);text-align:center;padding:3
     <div class="flow-col">
       <div class="flow-col-title">第三方服务生态</div>
       <div class="eco-box">
-        <div class="etit">✦ 服务生态圈</div>
+        <div class="e-title">✦ 服务生态圈</div>
         <div class="eco-grid">
           <div class="ei"><span class="ei-ic">📋</span>清关服务</div>
           <div class="ei"><span class="ei-ic">⚙️</span>产品加工</div>
@@ -347,28 +588,29 @@ footer{background:#0a1628;color:rgba(255,255,255,.4);text-align:center;padding:3
   </div>
 </section>
 
-
-<!-- ═══ Process 2: 贸易融资 ═══ -->
+<!-- ════════════ Process 2: 贸易融资 ════════════ -->
 <div class="bg-dark">
-<section style="padding-top:80px;padding-bottom:80px">
-  <div class="s-badge" style="color:#00d4aa">Process 02</div>
-  <div class="s-head" style="color:#fff">贸易融资<em style="color:#00d4aa">进口供应链全流程</em></div>
-  <div class="tf-top">
-    <span class="tf-tag" style="background:#00d4aa;color:#000">经销商</span>
-    <span style="color:rgba(255,255,255,.4)">→</span>
-    <span class="tf-tag">大贸易商</span>
-    <span style="color:rgba(255,255,255,.4)">→</span>
-    <span class="tf-tag" style="border-color:#f0c040;color:#f0c040">资金方</span>
+<section class="full" style="padding:100px 24px;max-width:1200px;margin:0 auto">
+  <div class="s-label" style="color:#00d4aa">Process 02</div>
+  <div class="s-title" style="color:#fff">贸易融资<em style="color:#00d4aa">进口供应链全流程</em></div>
+  <div class="step-flow">
+    <div class="step-top">
+      <span class="st-tag primary">经销商</span>
+      <span class="st-arrow">→</span>
+      <span class="st-tag">大贸易商</span>
+      <span class="st-arrow">→</span>
+      <span class="st-tag gold">资金方</span>
+    </div>
+    <div class="steps">
+      <div class="step active"><div class="s-num">1</div><div class="s-title">下单融资</div><div class="s-detail">经销商→大贸易商<br><span class="hl">支付20%订金</span><br>申请融资覆盖<span class="hl">剩余80%</span></div></div>
+      <div class="step"><div class="s-num">2</div><div class="s-title">海外采购</div><div class="s-detail">大贸易商→海外产地<br>TT支付20%订金<br><span class="hl">CIF方式</span></div></div>
+      <div class="step"><div class="s-num">3</div><div class="s-title">国际物流</div><div class="s-detail">厂家租船订舱<br>发货·海运周期<br><span class="hl">25-60天</span><br>到港前7天付尾款换提单</div></div>
+      <div class="step"><div class="s-num">4</div><div class="s-title">通关入仓</div><div class="s-detail">报关·报检·清关<br>卸货→检验检疫<br>合作车队→入库</div></div>
+      <div class="step active"><div class="s-num">5</div><div class="s-title">还款提货</div><div class="s-detail"><span class="hl">资金方放货指令</span><br>经销商还清尾款<br>仓库出库·可分批提货</div></div>
+    </div>
   </div>
-  <div class="tf-steps">
-    <div class="tf-step active"><div class="ts-num">1</div><div class="ts-title">下单融资</div><div class="ts-detail">经销商→大贸易商<br><span class="hl">支付20%订金</span><br>申请融资覆盖<span class="hl">剩余80%</span></div></div>
-    <div class="tf-step"><div class="ts-num">2</div><div class="ts-title">海外采购</div><div class="ts-detail">大贸易商→海外产地<br>TT支付20%订金<br><span class="hl">CIF方式</span></div></div>
-    <div class="tf-step"><div class="ts-num">3</div><div class="ts-title">国际物流</div><div class="ts-detail">厂家租船订舱<br>发货·海运周期<br><span class="hl">25-60天</span><br>到港前7天付尾款换提单</div></div>
-    <div class="tf-step"><div class="ts-num">4</div><div class="ts-title">通关入仓</div><div class="ts-detail">报关·报检·清关<br>卸货→检验检疫<br>合作车队→入库</div></div>
-    <div class="tf-step active"><div class="ts-num">5</div><div class="ts-title">还款提货</div><div class="ts-detail"><span class="hl">资金方放货指令</span><br>经销商还清尾款<br>仓库出库·可分批提货</div></div>
-  </div>
-  <div class="data-platform">
-    <h4>▎产业链数字化SaaS平台 · 四流合一</h4>
+  <div class="data-plat">
+    <h4>▎产业链数字化 SaaS 平台 · 四流合一</h4>
     <div class="data-grid">
       <div class="data-item"><div class="di-title">📄 合同与付款</div><div class="di-list"><span>采购合同</span><span>付款申请书</span><span>发票</span><span>装箱单</span></div></div>
       <div class="data-item"><div class="di-title">🚢 航运物流</div><div class="di-list"><span>ETA查询</span><span>船号/船次号</span><span>离港数据</span></div></div>
@@ -386,30 +628,29 @@ footer{background:#0a1628;color:rgba(255,255,255,.4);text-align:center;padding:3
 </section>
 </div>
 
-
-<!-- ═══ Process 3: 报关报检 ═══ -->
+<!-- ════════════ Process 3: 报关报检 ════════════ -->
 <section>
-  <div class="s-badge">Process 03</div>
-  <div class="s-head">报关报检<em>业务流程</em></div>
+  <div class="s-label">Process 03</div>
+  <div class="s-title">报关报检<em>业务流程</em></div>
   <div class="flow-wrapper">
     <div class="flow-col">
       <div class="flow-col-title">到港准备</div>
       <div class="source-card"><div class="ic">🚢</div><h4>货物到港</h4><p>船公司发到货通知书<br>换单 · 提货单(D/O)</p></div>
       <div class="source-card"><div class="ic">📄</div><h4>单证准备</h4><p>装箱单 · 发票 · 合同<br>提单 · 产地证 · 卫生证</p></div>
       <div class="arrow-v">▼</div>
-      <div class="source-card" style="background:#e8f8f5;border-color:#00d4aa33">
-        <h4 style="color:#008060">以鲜报关团队</h4><p style="color:#008060">预审单证 · 归类编码</p>
+      <div class="source-card highlight">
+        <h4>以鲜报关团队</h4><p>预审单证 · 归类编码</p>
       </div>
     </div>
     <div class="flow-col">
       <div class="flow-col-title">通关流程</div>
-      <div class="plat">
+      <div class="platform-card">
         <h3><span>电子申报</span> · 一键通关</h3>
-        <div class="psub">单一窗口 · 无纸化报关</div>
-        <div style="display:flex;justify-content:center;gap:20px;margin-bottom:18px">
-          <div style="text-align:center"><div style="font-size:18px">📋</div><div style="font-size:10px;color:rgba(255,255,255,.5)">海关审核</div></div>
-          <div style="text-align:center"><div style="font-size:18px">🔍</div><div style="font-size:10px;color:rgba(255,255,255,.5)">查验放行</div></div>
-          <div style="text-align:center"><div style="font-size:18px">💰</div><div style="font-size:10px;color:rgba(255,255,255,.5)">缴税</div></div>
+        <div class="p-sub">单一窗口 · 无纸化报关</div>
+        <div class="p-icons">
+          <div class="pi"><div class="ii">📋</div><div class="it">海关审核</div></div>
+          <div class="pi"><div class="ii">🔍</div><div class="it">查验放行</div></div>
+          <div class="pi"><div class="ii">💰</div><div class="it">缴税</div></div>
         </div>
         <div class="pills"><span>HS编码归类</span><span>关税核算</span><span>口岸协调</span><span>加急通关</span></div>
       </div>
@@ -417,7 +658,7 @@ footer{background:#0a1628;color:rgba(255,255,255,.4);text-align:center;padding:3
     <div class="flow-col">
       <div class="flow-col-title">检验与放行</div>
       <div class="eco-box">
-        <div class="etit">✦ 检验检疫 + 合规保障</div>
+        <div class="e-title">✦ 检验检疫 + 合规保障</div>
         <div class="eco-grid">
           <div class="ei"><span class="ei-ic">🦐</span>动物疫病检测</div>
           <div class="ei"><span class="ei-ic">🧪</span>兽药残留检测</div>
@@ -429,104 +670,64 @@ footer{background:#0a1628;color:rgba(255,255,255,.4);text-align:center;padding:3
       </div>
     </div>
   </div>
-  <div style="text-align:center;margin-top:28px;display:flex;justify-content:center;gap:40px;flex-wrap:wrap">
-    <div style="font-size:13px;color:#888"><strong style="color:#00a8e8">时效承诺</strong> 普通单证1-2工作日放行</div>
-    <div style="font-size:13px;color:#888"><strong style="color:#00a8e8">覆盖口岸</strong> 深圳 · 广州 · 湛江 · 上海 · 宁波 · 天津 · 青岛</div>
-    <div style="font-size:13px;color:#888"><strong style="color:#00a8e8">合规率</strong> 零退运 · 零处罚记录</div>
+  <div class="metrics-bar" style="margin-top:32px">
+    <div class="metric"><div class="m-value">1-2 天</div><div class="m-label">普通单证放行时效</div></div>
+    <div class="metric"><div class="m-value">7 口岸</div><div class="m-label">覆盖主要港口</div></div>
+    <div class="metric"><div class="m-value">零</div><div class="m-label">退运 · 处罚记录</div></div>
   </div>
 </section>
 
-
-<!-- ═══ Process 4: 冷链仓储物流 ═══ -->
+<!-- ════════════ Process 4: 冷链仓储物流 ════════════ -->
 <div class="bg-dark">
-<section style="padding-top:80px;padding-bottom:80px">
-  <div class="s-badge" style="color:#00d4aa">Process 04</div>
-  <div class="s-head" style="color:#fff">冷链仓储物流<em style="color:#00d4aa">全流程</em></div>
+<section class="full" style="padding:100px 24px;max-width:1200px;margin:0 auto">
+  <div class="s-label" style="color:#00d4aa">Process 04</div>
+  <div class="s-title" style="color:#fff">冷链仓储物流<em style="color:#00d4aa">全流程</em></div>
 
-  <div class="tf-steps" style="margin-bottom:28px">
-    <div class="tf-step active">
-      <div class="ts-num">1</div>
-      <div class="ts-title">入库验收</div>
-      <div class="ts-detail">到货测温<br>数量/规格核对<br><span class="hl">质检报告上传</span></div>
-    </div>
-    <div class="tf-step">
-      <div class="ts-num">2</div>
-      <div class="ts-title">温控存储</div>
-      <div class="ts-detail">-18°C以下冷冻<br>0-4°C冷藏<br><span class="hl">24h温湿度监控</span></div>
-    </div>
-    <div class="tf-step">
-      <div class="ts-num">3</div>
-      <div class="ts-title">库存管理</div>
-      <div class="ts-detail">批次/效期管理<br>WMS系统实时库存<br><span class="hl">库龄预警</span></div>
-    </div>
-    <div class="tf-step">
-      <div class="ts-num">4</div>
-      <div class="ts-title">订单履约</div>
-      <div class="ts-detail">接单→拣货→复核<br>支持<span class="hl">分批出货</span><br>一件代发能力</div>
-    </div>
-    <div class="tf-step active">
-      <div class="ts-num">5</div>
-      <div class="ts-title">冷链配送</div>
-      <div class="ts-detail">冷藏车城市配送<br>干线冷链运输<br><span class="hl">全程温度可追溯</span></div>
+  <div class="step-flow">
+    <div class="steps">
+      <div class="step active"><div class="s-num">1</div><div class="s-title">入库验收</div><div class="s-detail">到货测温<br>数量/规格核对<br><span class="hl">质检报告上传</span></div></div>
+      <div class="step"><div class="s-num">2</div><div class="s-title">温控存储</div><div class="s-detail">-18°C以下冷冻<br>0-4°C冷藏<br><span class="hl">24h温湿度监控</span></div></div>
+      <div class="step"><div class="s-num">3</div><div class="s-title">库存管理</div><div class="s-detail">批次/效期管理<br>WMS系统实时库存<br><span class="hl">库龄预警</span></div></div>
+      <div class="step"><div class="s-num">4</div><div class="s-title">订单履约</div><div class="s-detail">接单→拣货→复核<br>支持<span class="hl">分批出货</span><br>一件代发能力</div></div>
+      <div class="step active"><div class="s-num">5</div><div class="s-title">冷链配送</div><div class="s-detail">冷藏车城市配送<br>干线冷链运输<br><span class="hl">全程温度可追溯</span></div></div>
     </div>
   </div>
 
-  <div class="data-platform">
+  <div class="data-plat">
     <h4>▎全国冷链仓储网络 · 数字化温控体系</h4>
     <div class="data-grid">
-      <div class="data-item">
-        <div class="di-title">🏠 仓储节点</div>
-        <div class="di-list"><span>深圳</span><span>广州</span><span>湛江</span><span>上海</span><span>宁波</span><span>天津</span><span>青岛</span><span>郑州</span><span>成都</span></div>
-      </div>
-      <div class="data-item">
-        <div class="di-title">❄️ 温区覆盖</div>
-        <div class="di-list"><span>冷冻库 -18~-25°C</span><span>冷藏库 0-4°C</span><span>恒温库 15-18°C</span></div>
-      </div>
-      <div class="data-item">
-        <div class="di-title">📦 增值服务</div>
-        <div class="di-list"><span>换标贴标</span><span>分装打包</span><span>质检抽检</span><span>库存质押</span></div>
-      </div>
-      <div class="data-item">
-        <div class="di-title">🚛 配送能力</div>
-        <div class="di-list"><span>城市配送当日达</span><span>干线冷链次日达</span><span>全国门到门</span></div>
-      </div>
-      <div class="data-item">
-        <div class="di-title">📊 数字系统</div>
-        <div class="di-list"><span>WMS仓储管理</span><span>TMS运输管理</span><span>温控IoT监控</span><span>货主自助查询</span></div>
-      </div>
-      <div class="data-item">
-        <div class="di-title">🏷️ 战略伙伴</div>
-        <div class="di-list"><span>万维冷链</span><span>合作冷库网络</span><span>第三方配送车队</span></div>
-      </div>
+      <div class="data-item"><div class="di-title">🏠 仓储节点</div><div class="di-list"><span>深圳</span><span>广州</span><span>湛江</span><span>上海</span><span>宁波</span><span>天津</span><span>青岛</span><span>郑州</span><span>成都</span></div></div>
+      <div class="data-item"><div class="di-title">❄️ 温区覆盖</div><div class="di-list"><span>冷冻库 -18~-25°C</span><span>冷藏库 0-4°C</span><span>恒温库 15-18°C</span></div></div>
+      <div class="data-item"><div class="di-title">📦 增值服务</div><div class="di-list"><span>换标贴标</span><span>分装打包</span><span>质检抽检</span><span>库存质押</span></div></div>
+      <div class="data-item"><div class="di-title">🚛 配送能力</div><div class="di-list"><span>城市配送当日达</span><span>干线冷链次日达</span><span>全国门到门</span></div></div>
+      <div class="data-item"><div class="di-title">📊 数字系统</div><div class="di-list"><span>WMS仓储管理</span><span>TMS运输管理</span><span>温控IoT监控</span><span>货主自助查询</span></div></div>
+      <div class="data-item"><div class="di-title">🏷️ 战略伙伴</div><div class="di-list"><span>万维冷链</span><span>合作冷库网络</span><span>第三方配送车队</span></div></div>
     </div>
   </div>
 </section>
 </div>
 
-
-<!-- ═══ Process 5: 清真食品出海 ═══ -->
+<!-- ════════════ Process 5: 清真食品出海 ════════════ -->
 <section>
-  <div class="s-badge">Process 05</div>
-  <div class="s-head">清真食品出海<em>全流程服务</em></div>
+  <div class="s-label">Process 05</div>
+  <div class="s-title">清真食品出海<em>全流程服务</em></div>
   <div class="flow-wrapper">
     <div class="flow-col">
       <div class="flow-col-title">认证准入</div>
       <div class="source-card"><div class="ic">🔍</div><h4>产品评估</h4><p>原料溯源 · 配方审核<br>生产线合规检查</p></div>
-      <div class="source-card"><div class="ic">📜</div><h4>HALAL认证</h4><p>印尼MUI · 马来西亚JAKIM<br>新加坡MUIS · 中东GAC</p></div>
+      <div class="source-card"><div class="ic">📜</div><h4>HALAL 认证</h4><p>印尼MUI · 马来西亚JAKIM<br>新加坡MUIS · 中东GAC</p></div>
       <div class="arrow-v">▼</div>
-      <div class="source-card" style="background:#e8f8f5;border-color:#00d4aa33">
-        <h4 style="color:#008060">合规就绪</h4><p style="color:#008060">目标市场准入完成</p>
-      </div>
+      <div class="source-card highlight"><h4>合规就绪</h4><p>目标市场准入完成</p></div>
     </div>
     <div class="flow-col">
       <div class="flow-col-title">渠道对接</div>
-      <div class="plat">
+      <div class="platform-card">
         <h3><span>好品中国</span> · 出海平台</h3>
-        <div class="psub">中国食品品牌国际化</div>
-        <div style="display:flex;justify-content:center;gap:20px;margin-bottom:18px">
-          <div style="text-align:center"><div style="font-size:18px">🎪</div><div style="font-size:10px;color:rgba(255,255,255,.5)">海外展会</div></div>
-          <div style="text-align:center"><div style="font-size:18px">🏛️</div><div style="font-size:10px;color:rgba(255,255,255,.5)">国家食品馆</div></div>
-          <div style="text-align:center"><div style="font-size:18px">🤝</div><div style="font-size:10px;color:rgba(255,255,255,.5)">渠道撮合</div></div>
+        <div class="p-sub">中国食品品牌国际化</div>
+        <div class="p-icons">
+          <div class="pi"><div class="ii">🎪</div><div class="it">海外展会</div></div>
+          <div class="pi"><div class="ii">🏛️</div><div class="it">国家食品馆</div></div>
+          <div class="pi"><div class="ii">🤝</div><div class="it">渠道撮合</div></div>
         </div>
         <div class="pills"><span>MIFB马来西亚</span><span>Gulfood迪拜</span><span>Thaifex泰国</span><span>SIAL法国</span></div>
       </div>
@@ -534,7 +735,7 @@ footer{background:#0a1628;color:rgba(255,255,255,.4);text-align:center;padding:3
     <div class="flow-col">
       <div class="flow-col-title">海外落地</div>
       <div class="eco-box">
-        <div class="etit">✦ 一站式出海服务</div>
+        <div class="e-title">✦ 一站式出海服务</div>
         <div class="eco-grid">
           <div class="ei"><span class="ei-ic">📋</span>出口报关报检</div>
           <div class="ei"><span class="ei-ic">🚢</span>国际冷链物流</div>
@@ -546,24 +747,83 @@ footer{background:#0a1628;color:rgba(255,255,255,.4);text-align:center;padding:3
       </div>
     </div>
   </div>
-  <div style="text-align:center;margin-top:28px;display:flex;justify-content:center;gap:40px;flex-wrap:wrap">
-    <div style="font-size:13px;color:#888"><strong style="color:#00a8e8">目标市场</strong> 东南亚 · 中东 · 北非</div>
-    <div style="font-size:13px;color:#888"><strong style="color:#00a8e8">认证覆盖</strong> MUI · JAKIM · MUIS · GAC · FDA</div>
-    <div style="font-size:13px;color:#888"><strong style="color:#00a8e8">展会资源</strong> MIFB · Gulfood · Thaifex · SIAL · ANUGA</div>
+  <div class="metrics-bar" style="margin-top:32px">
+    <div class="metric"><div class="m-value">东南亚 · 中东 · 北非</div><div class="m-label">目标市场</div></div>
+    <div class="metric"><div class="m-value">MUI · JAKIM · MUIS · GAC · FDA</div><div class="m-label">认证覆盖</div></div>
+    <div class="metric"><div class="m-value">MIFB · Gulfood · Thaifex · SIAL · ANUGA</div><div class="m-label">展会资源</div></div>
   </div>
 </section>
 
+<!-- ════════════ Capabilities ════════════ -->
+<div class="bg-dark">
+<section class="full" style="padding:100px 24px;max-width:1200px;margin:0 auto" id="capabilities">
+  <div class="s-label" style="color:#00d4aa">Capabilities</div>
+  <div class="s-title" style="color:#fff">资质<em style="color:#00d4aa">与能力</em></div>
 
-<!-- ═══ Contact ═══ -->
+  <!-- Digital Systems -->
+  <div style="margin-bottom:64px">
+    <div style="text-align:center;margin-bottom:32px">
+      <div style="font-size:11px;letter-spacing:4px;color:rgba(255,255,255,.3);text-transform:uppercase;margin-bottom:8px">Digital Systems</div>
+      <div style="font-size:19px;color:#fff;font-weight:700">六大数字化管理系统</div>
+    </div>
+    <div class="sys-grid">
+      <div class="sys-card">
+        <div class="sc-placeholder">📋</div>
+        <div class="sc-name">订单服务管理系统</div>
+      </div>
+      <div class="sys-card">
+        <div class="sc-placeholder">🗺️</div>
+        <div class="sc-name">可视化跟踪管理系统</div>
+      </div>
+      <div class="sys-card">
+        <div class="sc-placeholder">🌡️</div>
+        <div class="sc-name">冷库温度监控系统</div>
+      </div>
+      <div class="sys-card">
+        <div class="sc-placeholder">🚛</div>
+        <div class="sc-name">冷链运输监控系统</div>
+      </div>
+      <div class="sys-card">
+        <div class="sc-placeholder">🔍</div>
+        <div class="sc-name">农产品追溯系统</div>
+      </div>
+      <div class="sys-card">
+        <div class="sc-placeholder">🛡️</div>
+        <div class="sc-name">质量安全监管系统</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Certifications -->
+  <div>
+    <div style="text-align:center;margin-bottom:32px">
+      <div style="font-size:11px;letter-spacing:4px;color:rgba(255,255,255,.3);text-transform:uppercase;margin-bottom:8px">Certifications</div>
+      <div style="font-size:19px;color:#fff;font-weight:700">五大国际认证资质</div>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-badge"><div class="cb-img">H</div><div class="cb-label">HACCP</div></div>
+      <div class="cert-badge"><div class="cb-img" style="font-size:24px">ISO 9001</div><div class="cb-label">质量管理</div></div>
+      <div class="cert-badge"><div class="cb-img" style="font-size:24px">ISO 14001</div><div class="cb-label">环境管理</div></div>
+      <div class="cert-badge"><div class="cb-img" style="font-size:24px">ISO 22000</div><div class="cb-label">食品安全</div></div>
+      <div class="cert-badge"><div class="cb-img" style="font-size:24px">ISO 45001</div><div class="cb-label">职业健康</div></div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ════════════ Contact ════════════ -->
 <div class="bg-gray">
-<section>
-  <div class="s-badge">Contact</div>
-  <div class="s-head"><em>联系</em>我们</div>
+<section id="contact">
+  <div class="s-label">Contact</div>
+  <div class="s-title"><em>联系</em>我们</div>
   <div class="ct-wrap">
-    <div class="ct-qr"><div class="qr" style="overflow:hidden"><img src="qr.png" alt="微信扫码联系" style="width:100%;height:100%;object-fit:contain"></div><p style="color:#888;font-size:13px">扫码添加联系人</p></div>
+    <div class="ct-qr">
+      <div class="qr-box"><img src="qr.png" alt="微信扫码联系"></div>
+      <div class="qr-label">扫码添加联系人</div>
+    </div>
     <div class="ct-info">
       <h3>庄严策</h3>
-      <p style="color:#00a8e8;font-size:14px;margin-bottom:20px">联创人 · 总经理</p>
+      <div class="ct-role">联创人 · 总经理</div>
       <div class="ct-row"><span class="ct-ic">📱</span><span class="ct-tx">135 0962 5162</span></div>
       <div class="ct-row"><span class="ct-ic">✉️</span><span class="ct-tx">Lazhuang@efsupplychain.com</span></div>
       <div class="ct-row"><span class="ct-ic">🌐</span><span class="ct-tx">www.efsupplychain.com</span></div>
@@ -573,7 +833,40 @@ footer{background:#0a1628;color:rgba(255,255,255,.4);text-align:center;padding:3
 </section>
 </div>
 
-<footer>&copy; 2026 以鲜国际供应链（广东）有限公司 · EverFresh Supply Chain</footer>
+<!-- ════════════ Footer ════════════ -->
+<footer>
+  <div class="ft-brand">以鲜国际供应链（广东）有限公司</div>
+  <div class="ft-info">EverFresh International Supply Chain Co., Ltd. &copy; 2026</div>
+</footer>
+
+<!-- ════════════ Scripts ════════════ -->
+<script>
+// Smooth scroll nav
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+
+// Mobile nav toggle (simple)
+const toggle = document.querySelector('.nav-toggle');
+const navLinks = document.querySelector('.nav-links');
+toggle.addEventListener('click', () => {
+  const isOpen = navLinks.style.display === 'flex';
+  navLinks.style.display = isOpen ? 'none' : 'flex';
+  navLinks.style.position = isOpen ? '' : 'absolute';
+  navLinks.style.top = isOpen ? '' : '60px';
+  navLinks.style.left = isOpen ? '' : '0';
+  navLinks.style.right = isOpen ? '' : '0';
+  navLinks.style.background = isOpen ? '' : 'rgba(10,22,40,.98)';
+  navLinks.style.flexDirection = isOpen ? '' : 'column';
+  navLinks.style.padding = isOpen ? '' : '20px 32px';
+  navLinks.style.gap = isOpen ? '' : '16px';
+  navLinks.style.borderBottom = isOpen ? '' : '1px solid rgba(255,255,255,.08)';
+});
+</script>
 
 </body>
 </html>
