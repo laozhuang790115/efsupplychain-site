@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>核算工具 — 以鲜国际</title>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", -apple-system, sans-serif;
+  color: #1a1a2e; line-height: 1.7; background: #f5f7fb; min-height: 100vh;
+}
+a { text-decoration: none; color: inherit; }
+
+.header {
+  background: linear-gradient(135deg, #0a1628, #0a2848);
+  color: #fff; padding: 56px 24px 48px; text-align: center;
+}
+.header .tag {
+  display: inline-block; font-size: 11px; letter-spacing: 4px;
+  color: #00d4aa; text-transform: uppercase; margin-bottom: 12px;
+}
+.header h1 { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+.header .sub { font-size: 14px; color: rgba(255,255,255,0.5); }
+.header .back-link {
+  display: inline-block; margin-top: 16px; font-size: 13px;
+  color: rgba(255,255,255,0.45); transition: color 0.2s;
+}
+.header .back-link:hover { color: #00d4aa; }
+
+.container { max-width: 1000px; margin: 0 auto; padding: 40px 24px 60px; }
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 24px;
+}
+
+.tool-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px 28px 28px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  border: 1.5px solid transparent;
+}
+.tool-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  border-color: #00a8e8;
+}
+
+.tool-card .icon-wrap {
+  width: 56px; height: 56px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; margin-bottom: 16px;
+}
+.tool-card .title {
+  font-size: 17px; font-weight: 700; color: #0a1628; margin-bottom: 8px;
+}
+.tool-card .desc {
+  font-size: 13px; color: #888; line-height: 1.7; flex: 1; margin-bottom: 18px;
+}
+.tool-card .meta {
+  font-size: 11px; color: #bbb; margin-bottom: 16px;
+}
+.tool-card .btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 6px; width: 100%;
+  padding: 10px 0; border: none; border-radius: 10px;
+  font-size: 14px; font-weight: 600; cursor: pointer;
+  font-family: inherit; transition: all 0.2s;
+}
+.tool-card.coming-soon {
+  opacity: 0.5; pointer-events: none;
+}
+.tool-card.coming-soon .badge {
+  display: inline-block; font-size: 10px; background: #e0e5ec;
+  color: #999; padding: 3px 10px; border-radius: 20px;
+  margin-left: 8px; vertical-align: middle;
+}
+
+/* Category colors */
+.icon-shalal { background: linear-gradient(135deg, #d4f5e9, #e8faf2); }
+.icon-shrimp { background: linear-gradient(135deg, #d4e8f5, #e8f2fa); }
+.icon-beef   { background: linear-gradient(135deg, #fde8d0, #fef3e4); }
+.icon-other  { background: linear-gradient(135deg, #f0f4f8, #e8ecf0); }
+
+.btn-shalal { background: linear-gradient(135deg, #00a8e8, #00d4aa); color: #fff; }
+.btn-shrimp { background: linear-gradient(135deg, #00a8e8, #0a2848); color: #fff; }
+.btn-beef   { background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; }
+.btn-other  { background: #e8ecf0; color: #999; }
+
+.btn-shalal:hover, .btn-shrimp:hover, .btn-beef:hover {
+  transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,168,232,0.25);
+}
+
+.section-title {
+  font-size: 12px; color: #aaa; text-transform: uppercase;
+  letter-spacing: 2px; margin-bottom: 20px;
+  padding-bottom: 10px; border-bottom: 1px solid #e8ecf0;
+}
+
+.footer-link {
+  text-align: center; margin-top: 40px; font-size: 13px; color: #aaa;
+}
+.footer-link a { color: #00a8e8; }
+.footer-link a:hover { text-decoration: underline; }
+
+@media (max-width: 640px) {
+  .tools-grid { grid-template-columns: 1fr; }
+  .header h1 { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="tag">Trade Tools</div>
+  <h1>&#x1F6E0; 核算工具</h1>
+  <div class="sub">进口成本测算 · 合规投入预估 · 数据驱动决策</div>
+  <a href="index.html" class="back-link">&#8592; 返回以鲜国际主页</a>
+</div>
+
+<div class="container">
+
+<div class="section-title">已上线工具</div>
+
+<div class="tools-grid">
+
+  <div class="tool-card">
+    <div class="icon-wrap icon-shrimp">&#x1F990;</div>
+    <div class="title">厄瓜多尔白虾进口核算</div>
+    <div class="desc">
+      月度录入塘头价 CNA，自动拆解 CIF → 关税3.5% → 增值税9% → 利息，双轴趋势图追踪到岸成本变化。
+    </div>
+    <div class="meta">3 规格 · 18 条示例数据 · localStorage 持久化</div>
+    <a href="shrimp-cost.html" class="btn btn-shrimp">&#x1F990; 进入工具</a>
+  </div>
+
+  <div class="tool-card">
+    <div class="icon-wrap icon-beef">&#x1F969;</div>
+    <div class="title">巴西牛肉进口核算</div>
+    <div class="desc">
+      按 9 大部位录入 FOB 报价，配额内关税 6% 自动核算，汇率月度均值，全面评估到岸成本。
+    </div>
+    <div class="meta">9 部位 · 54 条示例数据 · 汇率按月波动</div>
+    <a href="beef-cost.html" class="btn btn-beef">&#x1F969; 进入工具</a>
+  </div>
+
+  <div class="tool-card">
+    <div class="icon-wrap icon-shalal">&#x1F9EE;</div>
+    <div class="title">Halal 认证投入产出测算</div>
+    <div class="desc">
+      9 大品类 × 5 家认证机构，产线改造成本 + 认证费 + 年审费，自动核算总投资与回本周期。
+    </div>
+    <div class="meta">9 品类 · 双轴对比图表 · 盈亏平衡分析</div>
+    <a href="halal-calculator.html" class="btn btn-shalal">&#x1F9EE; 进入工具</a>
+  </div>
+
+</div>
+
+</div>
+
+<div class="footer-link">
+  <a href="index.html">&#8592; 返回以鲜国际主页</a>
+</div>
+
+</body>
+</html>
