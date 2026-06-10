@@ -47,7 +47,7 @@ body{
   color:#0a1628!important
 }
 
-/* ===== Hero / Masthead ===== */
+/* ===== Masthead ===== */
 .masthead{
   margin-top:60px;padding:80px 24px 60px;
   background:linear-gradient(175deg,#0a1628 0%,#16284a 60%,#1a3a5c 100%);
@@ -81,7 +81,7 @@ body{
 }
 .masthead .issue-meta span{color:rgba(255,255,255,.7);font-weight:600}
 
-/* ===== Main Content Area ===== */
+/* ===== Main ===== */
 main{max-width:1020px;margin:0 auto;padding:0 24px 80px}
 
 /* ===== Section ===== */
@@ -97,23 +97,25 @@ main{max-width:1020px;margin:0 auto;padding:0 24px 80px}
 .section-header h2{
   font-size:20px;font-weight:700;letter-spacing:1px;white-space:nowrap
 }
-.section-header .count{
-  font-size:12px;color:#999;font-weight:400;white-space:nowrap
-}
+.section-header .count{font-size:12px;color:#999;font-weight:400;white-space:nowrap}
 .section-divider{flex:1;height:1px;background:#e8ecf0;min-width:20px}
 
-/* accent per section */
+/* accent: news (red) */
 .accent-news .section-icon{background:#fef0f0;color:#e74c3c}
 .accent-news .section-header{border-bottom-color:#fde8e8}
 .accent-news h2{color:#c0392b}
-
+/* accent: events (orange/amber) */
+.accent-events .section-icon{background:#fff7ed;color:#ea580c}
+.accent-events .section-header{border-bottom-color:#ffedd5}
+.accent-events h2{color:#c2410c}
+/* accent: reports (blue) */
 .accent-reports .section-icon{background:#eef5fc;color:#2980b9}
 .accent-reports .section-header{border-bottom-color:#dceaf5}
 .accent-reports h2{color:#2471a3}
-
-.accent-people .section-icon{background:#edfaf2;color:#27ae60}
-.accent-people .section-header{border-bottom-color:#d5f5e3}
-.accent-people h2{color:#1e8449}
+/* accent: policies (purple) */
+.accent-policies .section-icon{background:#f5f0ff;color:#7c3aed}
+.accent-policies .section-header{border-bottom-color:#ede5fa}
+.accent-policies h2{color:#6d28d9}
 
 /* ===== Cards: News ===== */
 .news-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
@@ -123,36 +125,35 @@ main{max-width:1020px;margin:0 auto;padding:0 24px 80px}
   border:1px solid #eef0f3;transition:all .25s;
   display:flex;flex-direction:column
 }
-.news-card:hover{
-  transform:translateY(-2px);
-  box-shadow:0 8px 28px rgba(0,0,0,.08);
-  border-color:#dde0e4
-}
-.news-card .card-top{
-  padding:18px 20px 0;display:flex;align-items:flex-start;gap:8px
-}
-.news-card .tag-dot{
-  width:8px;height:8px;border-radius:50%;background:#e74c3c;margin-top:7px;flex-shrink:0
-}
-.news-card .card-title{
-  font-size:15px;font-weight:700;line-height:1.5;color:#1a1a2e;
-  flex:1
-}
-.news-card .card-body{
-  padding:10px 20px 14px;font-size:13px;color:#5a6070;line-height:1.7;
-  flex:1
-}
-.news-card .card-foot{
-  padding:12px 20px;border-top:1px solid #f5f6f8;
-  display:flex;justify-content:space-between;align-items:center;
-  font-size:11px;color:#999
-}
+.news-card:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.08);border-color:#dde0e4}
+.news-card .card-top{padding:18px 20px 0;display:flex;align-items:flex-start;gap:8px}
+.news-card .tag-dot{width:8px;height:8px;border-radius:50%;background:#e74c3c;margin-top:7px;flex-shrink:0}
+.news-card .card-title{font-size:15px;font-weight:700;line-height:1.5;color:#1a1a2e;flex:1}
+.news-card .card-body{padding:10px 20px 14px;font-size:13px;color:#5a6070;line-height:1.7;flex:1}
+.news-card .card-foot{padding:12px 20px;border-top:1px solid #f5f6f8;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#999}
 .news-card .card-source{font-weight:600;color:#7a8290}
 .news-card .card-date{color:#bbb}
 .news-card .card-tags{display:flex;gap:6px;flex-wrap:wrap}
-.news-card .card-tag{
-  padding:2px 8px;border-radius:4px;background:#fef0f0;color:#c0392b;font-size:10px
+.news-card .card-tag{padding:2px 8px;border-radius:4px;background:#fef0f0;color:#c0392b;font-size:10px}
+
+/* ===== Cards: Events (like news cards but orange) ===== */
+.events-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.event-card{
+  background:#fff;border-radius:14px;overflow:hidden;
+  box-shadow:0 1px 4px rgba(0,0,0,.04);
+  border:1px solid #eef0f3;border-left:4px solid #ea580c;
+  transition:all .25s;display:flex;flex-direction:column
 }
+.event-card:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.08);border-color:#ffedd5}
+.event-card .card-top{padding:18px 20px 0;display:flex;align-items:flex-start;gap:8px}
+.event-card .event-dot{width:8px;height:8px;border-radius:50%;background:#ea580c;margin-top:7px;flex-shrink:0}
+.event-card .card-title{font-size:15px;font-weight:700;line-height:1.5;color:#1a1a2e;flex:1}
+.event-card .card-body{padding:10px 20px 14px;font-size:13px;color:#5a6070;line-height:1.7;flex:1}
+.event-card .card-foot{padding:12px 20px;border-top:1px solid #f5f6f8;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#999}
+.event-card .card-source{font-weight:600;color:#7a8290}
+.event-card .card-date{color:#bbb}
+.event-card .card-tags{display:flex;gap:6px;flex-wrap:wrap}
+.event-card .card-tag{padding:2px 8px;border-radius:4px;background:#fff7ed;color:#c2410c;font-size:10px}
 
 /* ===== Cards: Reports ===== */
 .reports-list{display:flex;flex-direction:column;gap:16px}
@@ -162,88 +163,43 @@ main{max-width:1020px;margin:0 auto;padding:0 24px 80px}
   border:1px solid #eef0f3;border-left:4px solid #2980b9;
   transition:all .25s;display:flex;gap:20px;align-items:flex-start
 }
-.report-card:hover{
-  transform:translateX(4px);
-  box-shadow:0 8px 28px rgba(0,0,0,.08);
-  border-color:#dceaf5
-}
-.report-card .report-icon{
-  width:44px;height:44px;border-radius:10px;
-  background:#eef5fc;display:flex;align-items:center;justify-content:center;
-  font-size:20px;flex-shrink:0
-}
+.report-card:hover{transform:translateX(4px);box-shadow:0 8px 28px rgba(0,0,0,.08);border-color:#dceaf5}
+.report-card .report-icon{width:44px;height:44px;border-radius:10px;background:#eef5fc;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
 .report-card .report-content{flex:1;min-width:0}
-.report-card .report-type{
-  font-size:10px;letter-spacing:2px;color:#2980b9;font-weight:700;
-  text-transform:uppercase;margin-bottom:4px
-}
-.report-card .report-title{
-  font-size:16px;font-weight:700;line-height:1.5;color:#1a1a2e;margin-bottom:6px
-}
-.report-card .report-summary{
-  font-size:13px;color:#5a6070;line-height:1.7;margin-bottom:10px
-}
-.report-card .report-meta{
-  display:flex;gap:16px;font-size:11px;color:#999;flex-wrap:wrap
-}
+.report-card .report-type{font-size:10px;letter-spacing:2px;color:#2980b9;font-weight:700;text-transform:uppercase;margin-bottom:4px}
+.report-card .report-title{font-size:16px;font-weight:700;line-height:1.5;color:#1a1a2e;margin-bottom:6px}
+.report-card .report-summary{font-size:13px;color:#5a6070;line-height:1.7;margin-bottom:10px}
+.report-card .report-meta{display:flex;gap:16px;font-size:11px;color:#999;flex-wrap:wrap}
 .report-card .report-meta span{display:flex;align-items:center;gap:4px}
-.report-card .report-dl{
-  display:inline-flex;align-items:center;gap:4px;
-  padding:6px 14px;border-radius:8px;background:#eef5fc;
-  color:#2980b9;font-size:12px;font-weight:600;
-  transition:all .2s;flex-shrink:0;white-space:nowrap
-}
+.report-card .report-dl{display:inline-flex;align-items:center;gap:4px;padding:6px 14px;border-radius:8px;background:#eef5fc;color:#2980b9;font-size:12px;font-weight:600;transition:all .2s;flex-shrink:0;white-space:nowrap}
 .report-card .report-dl:hover{background:#dceaf5;color:#1a6dad}
 
-/* ===== Cards: People ===== */
-.people-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.person-card{
-  background:#fff;border-radius:14px;padding:24px 20px;
+/* ===== Cards: Policies (wider, purple accent) ===== */
+.policies-list{display:flex;flex-direction:column;gap:14px}
+.policy-card{
+  background:#fff;border-radius:14px;padding:20px 24px;
   box-shadow:0 1px 4px rgba(0,0,0,.04);
-  border:1px solid #eef0f3;text-align:center;
-  transition:all .25s
+  border:1px solid #eef0f3;border-left:4px solid #7c3aed;
+  transition:all .25s;display:flex;gap:18px;align-items:flex-start
 }
-.person-card:hover{
-  transform:translateY(-2px);
-  box-shadow:0 8px 28px rgba(0,0,0,.08);
-  border-color:#d5f5e3
-}
-.person-card .avatar{
-  width:64px;height:64px;border-radius:50%;
-  background:linear-gradient(135deg,#d5f5e3,#a9dfbf);
-  display:flex;align-items:center;justify-content:center;
-  font-size:26px;margin:0 auto 14px
-}
-.person-card .person-name{
-  font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:2px
-}
-.person-card .person-title{
-  font-size:12px;color:#5a6070;margin-bottom:4px
-}
-.person-card .person-org{
-  font-size:11px;color:#27ae60;font-weight:600;margin-bottom:10px
-}
-.person-card .person-bio{
-  font-size:12px;color:#7a8290;line-height:1.7;margin-bottom:12px
-}
-.person-card .person-tags{display:flex;gap:5px;justify-content:center;flex-wrap:wrap}
-.person-card .person-tag{
-  padding:2px 8px;border-radius:4px;background:#edfaf2;color:#1e8449;font-size:10px
-}
+.policy-card:hover{transform:translateX(4px);box-shadow:0 8px 28px rgba(0,0,0,.08);border-color:#ede5fa}
+.policy-card .policy-icon{width:40px;height:40px;border-radius:10px;background:#f5f0ff;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.policy-card .policy-content{flex:1;min-width:0}
+.policy-card .policy-title{font-size:16px;font-weight:700;line-height:1.5;color:#1a1a2e;margin-bottom:6px}
+.policy-card .policy-summary{font-size:13px;color:#5a6070;line-height:1.7;margin-bottom:8px}
+.policy-card .policy-meta{display:flex;gap:16px;font-size:11px;color:#999;flex-wrap:wrap;align-items:center}
+.policy-card .policy-meta span{display:flex;align-items:center;gap:4px}
+.policy-card .policy-link{display:inline-flex;align-items:center;gap:4px;padding:6px 14px;border-radius:8px;background:#f5f0ff;color:#7c3aed;font-size:12px;font-weight:600;transition:all .2s;flex-shrink:0;white-space:nowrap}
+.policy-card .policy-link:hover{background:#ede5fa;color:#6d28d9}
 
 /* ===== Add Button ===== */
 .add-btn-wrap{text-align:center;margin-top:48px}
 .add-btn{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:14px 36px;border-radius:30px;
-  border:2px dashed #c0c8d0;color:#7a8290;
-  font-size:14px;font-weight:600;letter-spacing:1px;
+  display:inline-flex;align-items:center;gap:8px;padding:14px 36px;border-radius:30px;
+  border:2px dashed #c0c8d0;color:#7a8290;font-size:14px;font-weight:600;letter-spacing:1px;
   cursor:pointer;background:transparent;transition:all .3s
 }
-.add-btn:hover{
-  border-color:#00d4aa;color:#00a8e8;
-  background:rgba(0,212,170,.04)
-}
+.add-btn:hover{border-color:#00d4aa;color:#00a8e8;background:rgba(0,212,170,.04)}
 
 /* ===== Modal ===== */
 .modal-overlay{
@@ -256,66 +212,34 @@ main{max-width:1020px;margin:0 auto;padding:0 24px 80px}
   background:#fff;border-radius:16px;width:90%;max-width:540px;max-height:85vh;
   overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)
 }
-.modal-head{
-  padding:20px 24px;border-bottom:1px solid #eef0f3;
-  display:flex;justify-content:space-between;align-items:center
-}
+.modal-head{padding:20px 24px;border-bottom:1px solid #eef0f3;display:flex;justify-content:space-between;align-items:center}
 .modal-head h3{font-size:17px;font-weight:700}
-.modal-close{
-  width:32px;height:32px;border-radius:50%;border:none;
-  background:#f5f6f8;cursor:pointer;font-size:16px;color:#7a8290;
-  display:flex;align-items:center;justify-content:center
-}
+.modal-close{width:32px;height:32px;border-radius:50%;border:none;background:#f5f6f8;cursor:pointer;font-size:16px;color:#7a8290;display:flex;align-items:center;justify-content:center}
 .modal-close:hover{background:#e8ecf0}
 .modal-body{padding:24px}
 .modal-body .field{margin-bottom:16px}
-.modal-body label{
-  display:block;font-size:12px;font-weight:600;color:#5a6070;
-  margin-bottom:6px;letter-spacing:.5px
-}
+.modal-body label{display:block;font-size:12px;font-weight:600;color:#5a6070;margin-bottom:6px;letter-spacing:.5px}
 .modal-body label .req{color:#e74c3c}
-.modal-body select,
-.modal-body input[type=text],
-.modal-body input[type=date],
-.modal-body input[type=url],
-.modal-body textarea{
+.modal-body select,.modal-body input[type=text],.modal-body input[type=date],.modal-body input[type=url],.modal-body textarea{
   width:100%;padding:10px 14px;border:1px solid #dde0e4;border-radius:8px;
-  font-size:13px;font-family:inherit;color:#1a1a2e;
-  transition:border-color .2s;background:#fafbfc
+  font-size:13px;font-family:inherit;color:#1a1a2e;transition:border-color .2s;background:#fafbfc
 }
-.modal-body select:focus,
-.modal-body input:focus,
-.modal-body textarea:focus{
-  outline:none;border-color:#00a8e8;background:#fff
-}
+.modal-body select:focus,.modal-body input:focus,.modal-body textarea:focus{outline:none;border-color:#00a8e8;background:#fff}
 .modal-body textarea{resize:vertical;min-height:80px}
-.modal-foot{
-  padding:16px 24px;border-top:1px solid #eef0f3;
-  display:flex;justify-content:flex-end;gap:10px
-}
-.modal-foot button{
-  padding:10px 24px;border-radius:8px;border:none;
-  font-size:13px;font-weight:600;cursor:pointer;transition:all .2s
-}
+.modal-foot{padding:16px 24px;border-top:1px solid #eef0f3;display:flex;justify-content:flex-end;gap:10px}
+.modal-foot button{padding:10px 24px;border-radius:8px;border:none;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
 .modal-foot .btn-cancel{background:#f5f6f8;color:#7a8290}
 .modal-foot .btn-cancel:hover{background:#e8ecf0}
-.modal-foot .btn-submit{
-  background:linear-gradient(135deg,#00d4aa,#00a8e8);color:#0a1628
-}
+.modal-foot .btn-submit{background:linear-gradient(135deg,#00d4aa,#00a8e8);color:#0a1628}
 .modal-foot .btn-submit:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,168,232,.3)}
 
 /* ===== Empty State ===== */
-.empty-state{
-  text-align:center;padding:40px 20px;color:#bbb
-}
+.empty-state{text-align:center;padding:40px 20px;color:#bbb}
 .empty-state .empty-icon{font-size:40px;margin-bottom:12px}
 .empty-state p{font-size:13px}
 
 /* ===== Footer ===== */
-footer{
-  text-align:center;padding:40px 24px;color:#bbb;font-size:12px;
-  border-top:1px solid #eef0f3
-}
+footer{text-align:center;padding:40px 24px;color:#bbb;font-size:12px;border-top:1px solid #eef0f3}
 
 /* ===== Responsive ===== */
 @media(max-width:768px){
@@ -325,21 +249,18 @@ footer{
   .masthead h1{font-size:28px}
   .masthead .issue-meta{gap:20px;flex-wrap:wrap}
   main{padding:0 16px 60px}
-  .news-grid{grid-template-columns:1fr}
-  .people-grid{grid-template-columns:repeat(2,1fr)}
-  .report-card{flex-direction:column;gap:12px}
+  .news-grid,.events-grid{grid-template-columns:1fr}
+  .report-card,.policy-card{flex-direction:column;gap:12px}
 }
 @media(max-width:480px){
-  .people-grid{grid-template-columns:1fr}
   .section-header h2{font-size:17px}
 }
 
-/* ===== Print / Toast ===== */
+/* ===== Toast ===== */
 .toast{
   position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
   background:#1a1a2e;color:#fff;padding:10px 24px;border-radius:24px;
-  font-size:13px;z-index:3000;opacity:0;transition:opacity .3s;
-  pointer-events:none
+  font-size:13px;z-index:3000;opacity:0;transition:opacity .3s;pointer-events:none
 }
 .toast.show{opacity:1}
 </style>
@@ -365,7 +286,7 @@ footer{
 <div class="masthead">
   <div class="masthead-badge">LAOZHUANG REPORT</div>
   <h1>老庄<span>报告</span></h1>
-  <p class="subtitle">冷链水产 · 肉禽进口 · 行业洞察</p>
+  <p class="subtitle">采购贸易，国际物流，金融结算，政策法规</p>
   <div class="issue-meta">
     <span id="issueDate">2026年6月</span> · <span>第 <span id="issueNum">1</span> 期</span>
     <span id="totalCount">共收录 0 条内容</span>
@@ -386,6 +307,17 @@ footer{
   <div class="news-grid" id="newsGrid"></div>
 </div>
 
+<!-- 📰 焦点事件 -->
+<div class="section accent-events" id="events-section">
+  <div class="section-header">
+    <div class="section-icon">📰</div>
+    <h2>焦点事件</h2>
+    <span class="count" id="eventsCount"></span>
+    <div class="section-divider"></div>
+  </div>
+  <div class="events-grid" id="eventsGrid"></div>
+</div>
+
 <!-- 📊 行业报告 -->
 <div class="section accent-reports" id="reports-section">
   <div class="section-header">
@@ -397,15 +329,15 @@ footer{
   <div class="reports-list" id="reportsList"></div>
 </div>
 
-<!-- 👤 行业人物 -->
-<div class="section accent-people" id="people-section">
+<!-- ⚖️ 政策法规 -->
+<div class="section accent-policies" id="policies-section">
   <div class="section-header">
-    <div class="section-icon">👤</div>
-    <h2>行业人物</h2>
-    <span class="count" id="peopleCount"></span>
+    <div class="section-icon">⚖️</div>
+    <h2>政策法规</h2>
+    <span class="count" id="policiesCount"></span>
     <div class="section-divider"></div>
   </div>
-  <div class="people-grid" id="peopleGrid"></div>
+  <div class="policies-list" id="policiesList"></div>
 </div>
 
 <!-- ➕ 新增按钮 -->
@@ -466,6 +398,26 @@ var DEMO_DATA = {
       tags: ['巴西','政策','牛肉'], url: '#'
     }
   ],
+  events: [
+    {
+      id: 'e1', date: '2026-06-06',
+      title: 'SIAL China 2026 在上海开幕，进口冷链专区规模扩大40%',
+      source: 'SIAL China 组委会', summary: '本届SIAL中食展进口冷链专区吸引来自32个国家的600+展商，巴西、阿根廷、西班牙三国展团面积均创历史新高，反映出中国市场对进口肉类的强劲需求。',
+      tags: ['展会','进口冷链','SIAL'], url: '#'
+    },
+    {
+      id: 'e2', date: '2026-05-22',
+      title: 'JBS宣布将在巴西新建3座牛肉加工厂，专供中国市场',
+      source: 'JBS 官方公告', summary: '全球最大肉类加工商JBS宣布投资2.5亿美元在巴西马托格罗索州新建3座牛肉加工厂，设计年产能合计40万吨，全部面向中国市场，预计2027年投产。',
+      tags: ['JBS','巴西牛肉','投资'], url: '#'
+    },
+    {
+      id: 'e3', date: '2026-05-15',
+      title: '中远海运开通南美东岸冷藏快线，上海港冻肉中转效率提升30%',
+      source: '中远海运集团', summary: '新开通的"中远南美冷藏快线"从巴西桑托斯港直达上海洋山港，航程缩短至28天，配备5000个冷藏箱位，大幅提升进口肉类物流效率。',
+      tags: ['国际物流','冷链','中远海运'], url: '#'
+    }
+  ],
   reports: [
     {
       id: 'r1', date: '2026-05-20',
@@ -486,24 +438,24 @@ var DEMO_DATA = {
       type: '行业报告', url: '#'
     }
   ],
-  people: [
+  policies: [
     {
-      id: 'p1', name: '陈志强',
-      title: '中国区总裁', org: 'JBS S.A.',
-      bio: '深耕中巴肉类贸易20年，主导JBS在华业务从年进口量10万吨增长至60万吨，被誉为"巴西牛肉中国推手"。',
-      tags: ['巴西牛肉','贸易'], avatar: '👔'
+      id: 'pl1', date: '2026-06-01',
+      title: '海关总署2026年第18号公告：调整部分进口肉类检验检疫要求',
+      source: '海关总署', summary: '公告对冷冻牛肉、猪肉和禽肉的进境检验检疫标准进行了修订，新增对部分兽药残留的检测项目，自2026年7月1日起实施。',
+      url: '#'
     },
     {
-      id: 'p2', name: '李雪梅',
-      title: '高级分析师', org: 'Rabobank 荷兰合作银行',
-      bio: '专注全球动物蛋白市场研究15年，长期跟踪中国肉类进口趋势，多篇行业报告被海关智库引用。',
-      tags: ['行业分析','动物蛋白'], avatar: '💼'
+      id: 'pl2', date: '2026-05-12',
+      title: '商务部：进一步扩大肉类进口来源国，推动多元化供应格局',
+      source: '商务部新闻办公室', summary: '商务部表示将继续扩大肉类进口来源，加快与爱尔兰、白俄罗斯等国的检疫准入谈判，降低对少数主产国的过度依赖。',
+      url: '#'
     },
     {
-      id: 'p3', name: '张伟',
-      title: '创始人 & CEO', org: '华冷供应链',
-      bio: '冷链物流老兵，主导建成华东最大进口肉类冷链集散中心，年吞吐量超50万吨。',
-      tags: ['冷链物流','供应链'], avatar: '🧢'
+      id: 'pl3', date: '2026-04-25',
+      title: '国务院关税税则委员会：2026年继续对部分冷冻水产品实施暂定税率',
+      source: '国务院关税税则委员会', summary: '2026年度关税调整方案明确，对冻虾、冻鱼片等9类水产品继续实施低于最惠国税率的暂定税率，有效期至2026年12月31日。',
+      url: '#'
     }
   ]
 };
@@ -512,31 +464,40 @@ var DEMO_DATA = {
 //  STATE
 // ═══════════════════════════════════════
 var currentType = 'news';
+var KEYS = ['news','events','reports','policies'];
+var KEY = 'laozhuang_reports_user';
 
 function loadAllData() {
-  var merged = { news: [], reports: [], people: [] };
+  var merged = {};
+  KEYS.forEach(function(k) { merged[k] = []; });
+
   // Load demo data
-  if (DEMO_DATA.news) merged.news = merged.news.concat(DEMO_DATA.news);
-  if (DEMO_DATA.reports) merged.reports = merged.reports.concat(DEMO_DATA.reports);
-  if (DEMO_DATA.people) merged.people = merged.people.concat(DEMO_DATA.people);
+  KEYS.forEach(function(k) {
+    if (DEMO_DATA[k]) merged[k] = merged[k].concat(DEMO_DATA[k]);
+  });
+
   // Load user data from localStorage
   try {
-    var stored = JSON.parse(localStorage.getItem('laozhuang_reports_user') || '[]');
+    var stored = JSON.parse(localStorage.getItem(KEY) || '[]');
     (stored || []).forEach(function(item) {
-      if (item.type === 'news') merged.news.push(item);
-      else if (item.type === 'report') merged.reports.push(item);
-      else if (item.type === 'person') merged.people.push(item);
+      var t = item.type;
+      if (t === 'event') t = 'events';
+      if (t === 'policy') t = 'policies';
+      if (merged[t]) merged[t].push(item);
     });
   } catch(e) {}
+
   // Sort by date desc
-  ['news','reports','people'].forEach(function(k) {
+  KEYS.forEach(function(k) {
     merged[k].sort(function(a,b) { return b.date.localeCompare(a.date); });
   });
   return merged;
 }
 
 function countTotal(data) {
-  return data.news.length + data.reports.length + data.people.length;
+  var total = 0;
+  KEYS.forEach(function(k) { total += data[k].length; });
+  return total;
 }
 
 // ═══════════════════════════════════════
@@ -545,20 +506,16 @@ function countTotal(data) {
 function renderAll() {
   var data = loadAllData();
   renderNews(data.news);
+  renderEvents(data.events);
   renderReports(data.reports);
-  renderPeople(data.people);
-  // Update masthead
+  renderPolicies(data.policies);
   document.getElementById('totalCount').textContent = '共收录 ' + countTotal(data) + ' 条内容';
 }
 
 function renderNews(items) {
   var grid = document.getElementById('newsGrid');
-  var countEl = document.getElementById('newsCount');
-  countEl.textContent = items.length + ' 条';
-  if (!items.length) {
-    grid.innerHTML = '<div class="empty-state"><div class="empty-icon">📭</div><p>暂无热点新闻</p></div>';
-    return;
-  }
+  document.getElementById('newsCount').textContent = items.length + ' 条';
+  if (!items.length) { grid.innerHTML = '<div class="empty-state"><div class="empty-icon">📭</div><p>暂无热点新闻</p></div>'; return; }
   grid.innerHTML = items.map(function(n) {
     var tagsHtml = (n.tags || []).map(function(t) { return '<span class="card-tag">' + esc(t) + '</span>'; }).join('');
     return '<div class="news-card">' +
@@ -567,53 +524,55 @@ function renderNews(items) {
       '<div class="card-foot">' +
         '<div><span class="card-source">' + esc(n.source || '') + '</span> · <span class="card-date">' + esc(n.date) + '</span></div>' +
         (tagsHtml ? '<div class="card-tags">' + tagsHtml + '</div>' : '') +
-      '</div>' +
-    '</div>';
+      '</div></div>';
+  }).join('');
+}
+
+function renderEvents(items) {
+  var grid = document.getElementById('eventsGrid');
+  document.getElementById('eventsCount').textContent = items.length + ' 条';
+  if (!items.length) { grid.innerHTML = '<div class="empty-state"><div class="empty-icon">📭</div><p>暂无焦点事件</p></div>'; return; }
+  grid.innerHTML = items.map(function(n) {
+    var tagsHtml = (n.tags || []).map(function(t) { return '<span class="event-card-tag" style="padding:2px 8px;border-radius:4px;background:#fff7ed;color:#c2410c;font-size:10px">' + esc(t) + '</span>'; }).join('');
+    return '<div class="event-card">' +
+      '<div class="card-top"><div class="event-dot"></div><div class="card-title">' + esc(n.title) + '</div></div>' +
+      '<div class="card-body">' + esc(n.summary || '') + '</div>' +
+      '<div class="card-foot">' +
+        '<div><span class="card-source">' + esc(n.source || '') + '</span> · <span class="card-date">' + esc(n.date) + '</span></div>' +
+        (tagsHtml ? '<div class="card-tags">' + tagsHtml + '</div>' : '') +
+      '</div></div>';
   }).join('');
 }
 
 function renderReports(items) {
   var list = document.getElementById('reportsList');
-  var countEl = document.getElementById('reportsCount');
-  countEl.textContent = items.length + ' 份';
-  if (!items.length) {
-    list.innerHTML = '<div class="empty-state"><div class="empty-icon">📂</div><p>暂无行业报告</p></div>';
-    return;
-  }
+  document.getElementById('reportsCount').textContent = items.length + ' 份';
+  if (!items.length) { list.innerHTML = '<div class="empty-state"><div class="empty-icon">📂</div><p>暂无行业报告</p></div>'; return; }
   list.innerHTML = items.map(function(r) {
     return '<div class="report-card">' +
-      '<div class="report-icon">📄</div>' +
-      '<div class="report-content">' +
+      '<div class="report-icon">📄</div><div class="report-content">' +
         '<div class="report-type">' + esc(r.type || '行业报告') + '</div>' +
         '<div class="report-title">' + esc(r.title) + '</div>' +
         '<div class="report-summary">' + esc(r.summary || '') + '</div>' +
-        '<div class="report-meta">' +
-          '<span>🏢 ' + esc(r.source || '') + '</span>' +
-          '<span>📅 ' + esc(r.date) + '</span>' +
-        '</div>' +
+        '<div class="report-meta"><span>🏢 ' + esc(r.source || '') + '</span><span>📅 ' + esc(r.date) + '</span></div>' +
       '</div>' +
       (r.url && r.url !== '#' ? '<a href="' + esc(r.url) + '" target="_blank" class="report-dl">📥 查看</a>' : '<span class="report-dl" style="opacity:.5">📥 待上传</span>') +
     '</div>';
   }).join('');
 }
 
-function renderPeople(items) {
-  var grid = document.getElementById('peopleGrid');
-  var countEl = document.getElementById('peopleCount');
-  countEl.textContent = items.length + ' 位';
-  if (!items.length) {
-    grid.innerHTML = '<div class="empty-state"><div class="empty-icon">👥</div><p>暂无行业人物</p></div>';
-    return;
-  }
-  grid.innerHTML = items.map(function(p) {
-    var tagsHtml = (p.tags || []).map(function(t) { return '<span class="person-tag">' + esc(t) + '</span>'; }).join('');
-    return '<div class="person-card">' +
-      '<div class="avatar">' + (p.avatar || '👤') + '</div>' +
-      '<div class="person-name">' + esc(p.name) + '</div>' +
-      '<div class="person-title">' + esc(p.title || '') + '</div>' +
-      '<div class="person-org">' + esc(p.org || '') + '</div>' +
-      '<div class="person-bio">' + esc(p.bio || '') + '</div>' +
-      (tagsHtml ? '<div class="person-tags">' + tagsHtml + '</div>' : '') +
+function renderPolicies(items) {
+  var list = document.getElementById('policiesList');
+  document.getElementById('policiesCount').textContent = items.length + ' 条';
+  if (!items.length) { list.innerHTML = '<div class="empty-state"><div class="empty-icon">📜</div><p>暂无政策法规</p></div>'; return; }
+  list.innerHTML = items.map(function(r) {
+    return '<div class="policy-card">' +
+      '<div class="policy-icon">📜</div><div class="policy-content">' +
+        '<div class="policy-title">' + esc(r.title) + '</div>' +
+        '<div class="policy-summary">' + esc(r.summary || '') + '</div>' +
+        '<div class="policy-meta"><span>🏛 ' + esc(r.source || '') + '</span><span>📅 ' + esc(r.date) + '</span></div>' +
+      '</div>' +
+      (r.url && r.url !== '#' ? '<a href="' + esc(r.url) + '" target="_blank" class="policy-link">📥 查看原文</a>' : '<span class="policy-link" style="opacity:.5">📥 待上传</span>') +
     '</div>';
   }).join('');
 }
@@ -627,99 +586,82 @@ function openModal(type) {
   renderModalForm(currentType);
 }
 
-function closeModal() {
-  document.getElementById('modalOverlay').classList.remove('active');
-}
+function closeModal() { document.getElementById('modalOverlay').classList.remove('active'); }
+function closeModalOutside(e) { if (e.target === document.getElementById('modalOverlay')) closeModal(); }
 
-function closeModalOutside(e) {
-  if (e.target === document.getElementById('modalOverlay')) closeModal();
-}
+var TITLE_MAP = { news: '新增热点新闻', event: '新增焦点事件', report: '新增行业报告', policy: '新增政策法规' };
 
 function renderModalForm(type) {
-  var titleMap = { news: '新增热点新闻', report: '新增行业报告', person: '新增行业人物' };
-  document.getElementById('modalTitle').textContent = titleMap[type] || '新增内容';
-
+  document.getElementById('modalTitle').textContent = TITLE_MAP[type] || '新增内容';
   var body = document.getElementById('modalBody');
   var html = '<div class="field"><label>类型 <span class="req">*</span></label>' +
     '<select id="formType" onchange="switchFormType(this.value)">' +
       '<option value="news"' + (type==='news'?' selected':'') + '>🔥 热点新闻</option>' +
+      '<option value="event"' + (type==='event'?' selected':'') + '>📰 焦点事件</option>' +
       '<option value="report"' + (type==='report'?' selected':'') + '>📊 行业报告</option>' +
-      '<option value="person"' + (type==='person'?' selected':'') + '>👤 行业人物</option>' +
-    '</select>' +
-  '</div>';
+      '<option value="policy"' + (type==='policy'?' selected':'') + '>⚖️ 政策法规</option>' +
+    '</select></div>';
 
-  if (type === 'news') {
-    html += '<div class="field"><label>标题 <span class="req">*</span></label><input type="text" id="fTitle" placeholder="新闻标题"></div>';
-    html += '<div class="field"><label>来源 <span class="req">*</span></label><input type="text" id="fSource" placeholder="如：海关总署、Bloomberg"></div>';
+  if (type === 'news' || type === 'event') {
+    html += '<div class="field"><label>标题 <span class="req">*</span></label><input type="text" id="fTitle" placeholder="标题"></div>';
+    html += '<div class="field"><label>来源 <span class="req">*</span></label><input type="text" id="fSource" placeholder="如：海关总署"></div>';
     html += '<div class="field"><label>日期</label><input type="date" id="fDate"></div>';
-    html += '<div class="field"><label>摘要</label><textarea id="fSummary" placeholder="简要描述新闻内容（1-3句话）"></textarea></div>';
+    html += '<div class="field"><label>摘要</label><textarea id="fSummary" placeholder="简要描述（1-3句话）"></textarea></div>';
     html += '<div class="field"><label>原文链接</label><input type="url" id="fUrl" placeholder="https://..."></div>';
-    html += '<div class="field"><label>标签（逗号分隔）</label><input type="text" id="fTags" placeholder="如：进口数据, 牛肉, 巴西"></div>';
+    html += '<div class="field"><label>标签（逗号分隔）</label><input type="text" id="fTags" placeholder="如：进口数据, 牛肉"></div>';
   } else if (type === 'report') {
     html += '<div class="field"><label>类型</label><select id="fReportType"><option value="行业研报">行业研报</option><option value="白皮书">白皮书</option><option value="政策文件">政策文件</option><option value="市场分析">市场分析</option></select></div>';
     html += '<div class="field"><label>标题 <span class="req">*</span></label><input type="text" id="fTitle" placeholder="报告标题"></div>';
-    html += '<div class="field"><label>来源/机构 <span class="req">*</span></label><input type="text" id="fSource" placeholder="如：中国肉类协会、FAO"></div>';
+    html += '<div class="field"><label>来源/机构 <span class="req">*</span></label><input type="text" id="fSource" placeholder="如：中国肉类协会"></div>';
     html += '<div class="field"><label>发布日期</label><input type="date" id="fDate"></div>';
     html += '<div class="field"><label>摘要</label><textarea id="fSummary" placeholder="报告核心结论（1-3句话）"></textarea></div>';
     html += '<div class="field"><label>报告链接</label><input type="url" id="fUrl" placeholder="https://..."></div>';
-  } else if (type === 'person') {
-    html += '<div class="field"><label>姓名 <span class="req">*</span></label><input type="text" id="fName" placeholder="人物姓名"></div>';
-    html += '<div class="field"><label>职衔</label><input type="text" id="fTitle" placeholder="如：中国区总裁"></div>';
-    html += '<div class="field"><label>所在机构</label><input type="text" id="fSource" placeholder="如：JBS S.A."></div>';
-    html += '<div class="field"><label>简介</label><textarea id="fSummary" placeholder="简要介绍（1-2句话）"></textarea></div>';
-    html += '<div class="field"><label>标签（逗号分隔）</label><input type="text" id="fTags" placeholder="如：牛肉, 进口贸易"></div>';
+  } else if (type === 'policy') {
+    html += '<div class="field"><label>标题 <span class="req">*</span></label><input type="text" id="fTitle" placeholder="政策/法规名称"></div>';
+    html += '<div class="field"><label>发布机构 <span class="req">*</span></label><input type="text" id="fSource" placeholder="如：海关总署、商务部"></div>';
+    html += '<div class="field"><label>发布日期</label><input type="date" id="fDate"></div>';
+    html += '<div class="field"><label>摘要</label><textarea id="fSummary" placeholder="政策要点（1-3句话）"></textarea></div>';
+    html += '<div class="field"><label>原文链接</label><input type="url" id="fUrl" placeholder="https://..."></div>';
   }
 
   body.innerHTML = html;
 }
 
-function switchFormType(val) {
-  currentType = val;
-  renderModalForm(val);
-}
+function switchFormType(val) { currentType = val; renderModalForm(val); }
 
 function submitForm() {
   var type = document.getElementById('formType').value;
-  if (type === 'news' || type === 'report' || type === 'person') currentType = type;
+  if (['news','event','report','policy'].indexOf(type) >= 0) currentType = type;
 
   var item = { type: currentType, id: 'u' + Date.now() };
 
-  if (currentType === 'news' || currentType === 'report') {
-    item.title = (document.getElementById('fTitle')||{}).value || '';
-    item.source = (document.getElementById('fSource')||{}).value || '';
-    item.date = (document.getElementById('fDate')||{}).value || new Date().toISOString().slice(0,10);
-    item.summary = (document.getElementById('fSummary')||{}).value || '';
-    item.url = (document.getElementById('fUrl')||{}).value || '';
-    if (currentType === 'news') {
-      var tagsStr = (document.getElementById('fTags')||{}).value || '';
-      item.tags = tagsStr.split(',').map(function(s){return s.trim();}).filter(Boolean);
-    } else {
-      item.type = (document.getElementById('fReportType')||{}).value || '行业报告';
-    }
-    if (!item.title || !item.source) { showToast('请填写标题和来源'); return; }
-  } else if (currentType === 'person') {
-    item.name = (document.getElementById('fName')||{}).value || '';
-    item.title = (document.getElementById('fTitle')||{}).value || '';
-    item.org = item.source = (document.getElementById('fSource')||{}).value || '';
-    item.date = new Date().toISOString().slice(0,10);
-    item.bio = item.summary = (document.getElementById('fSummary')||{}).value || '';
+  item.title = (document.getElementById('fTitle')||{}).value || '';
+  item.source = (document.getElementById('fSource')||{}).value || '';
+  item.date = (document.getElementById('fDate')||{}).value || new Date().toISOString().slice(0,10);
+  item.summary = (document.getElementById('fSummary')||{}).value || '';
+  item.url = (document.getElementById('fUrl')||{}).value || '';
+
+  if (currentType === 'news' || currentType === 'event') {
     var tagsStr = (document.getElementById('fTags')||{}).value || '';
     item.tags = tagsStr.split(',').map(function(s){return s.trim();}).filter(Boolean);
-    if (!item.name) { showToast('请填写姓名'); return; }
+    if (!item.title || !item.source) { showToast('请填写标题和来源'); return; }
+  } else if (currentType === 'report') {
+    item.type = (document.getElementById('fReportType')||{}).value || '行业报告';
+    if (!item.title || !item.source) { showToast('请填写标题和来源'); return; }
+  } else if (currentType === 'policy') {
+    if (!item.title || !item.source) { showToast('请填写标题和发布机构'); return; }
   }
 
-  // Save to localStorage
   var stored;
-  try { stored = JSON.parse(localStorage.getItem('laozhuang_reports_user') || '[]'); } catch(e) { stored = []; }
+  try { stored = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch(e) { stored = []; }
   stored.push(item);
-  localStorage.setItem('laozhuang_reports_user', JSON.stringify(stored));
+  localStorage.setItem(KEY, JSON.stringify(stored));
 
   closeModal();
   renderAll();
   showToast('✅ 已保存！我会定期将你的新增内容合并到正式版中。');
 
-  // Scroll to the relevant section
-  var sectionMap = { news: 'news-section', report: 'reports-section', person: 'people-section' };
+  var sectionMap = { news: 'news-section', event: 'events-section', report: 'reports-section', policy: 'policies-section' };
   var el = document.getElementById(sectionMap[currentType]);
   if (el) setTimeout(function() { el.scrollIntoView({behavior:'smooth',block:'start'}); }, 200);
 }
@@ -731,8 +673,7 @@ function esc(s) { if (!s) return ''; return String(s).replace(/&/g,'&amp;').repl
 
 function showToast(msg) {
   var t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
+  t.textContent = msg; t.classList.add('show');
   clearTimeout(t._tid);
   t._tid = setTimeout(function() { t.classList.remove('show'); }, 3000);
 }
