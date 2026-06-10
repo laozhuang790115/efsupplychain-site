@@ -192,14 +192,45 @@ main{max-width:1020px;margin:0 auto;padding:0 24px 80px}
 .policy-card .policy-link{display:inline-flex;align-items:center;gap:4px;padding:6px 14px;border-radius:8px;background:#f5f0ff;color:#7c3aed;font-size:12px;font-weight:600;transition:all .2s;flex-shrink:0;white-space:nowrap}
 .policy-card .policy-link:hover{background:#ede5fa;color:#6d28d9}
 
-/* ===== Add Button ===== */
-.add-btn-wrap{text-align:center;margin-top:48px}
-.add-btn{
-  display:inline-flex;align-items:center;gap:8px;padding:14px 36px;border-radius:30px;
-  border:2px dashed #c0c8d0;color:#7a8290;font-size:14px;font-weight:600;letter-spacing:1px;
-  cursor:pointer;background:transparent;transition:all .3s
+/* ===== Admin Trigger — hidden lock ===== */
+.admin-trigger{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:50%;
+  border:1px solid #e8ecf0;background:#fafbfc;
+  font-size:13px;cursor:pointer;color:#c0c8d0;
+  transition:all .25s;margin-left:8px;vertical-align:middle;opacity:.5
 }
-.add-btn:hover{border-color:#00d4aa;color:#00a8e8;background:rgba(0,212,170,.04)}
+.admin-trigger:hover{opacity:1;color:#7a8290;border-color:#c0c8d0}
+
+/* ===== Password Gate ===== */
+.pw-gate-overlay{
+  position:fixed;inset:0;z-index:2100;display:none;
+  align-items:center;justify-content:center;
+  background:rgba(10,22,40,.4);backdrop-filter:blur(3px);
+  -webkit-backdrop-filter:blur(3px)
+}
+.pw-gate-overlay.active{display:flex}
+.pw-gate{
+  background:#fff;border-radius:12px;padding:28px 32px;width:320px;
+  box-shadow:0 16px 48px rgba(0,0,0,.15);text-align:center
+}
+.pw-gate h4{font-size:14px;font-weight:600;color:#1a1a2e;margin-bottom:6px}
+.pw-gate .pw-hint{font-size:11px;color:#aaa;margin-bottom:18px}
+.pw-gate input{
+  width:100%;padding:10px 14px;border:1px solid #dde0e4;border-radius:8px;
+  font-size:14px;text-align:center;letter-spacing:4px;font-family:monospace;
+  transition:border-color .2s
+}
+.pw-gate input:focus{outline:none;border-color:#00a8e8}
+.pw-gate .pw-error{font-size:11px;color:#e74c3c;margin-top:8px;min-height:18px}
+.pw-gate .pw-btns{margin-top:16px;display:flex;gap:8px;justify-content:center}
+.pw-gate .pw-btns button{
+  padding:8px 20px;border-radius:8px;border:none;font-size:12px;font-weight:600;cursor:pointer
+}
+.pw-gate .btn-cancel{background:#f5f6f8;color:#7a8290}
+.pw-gate .btn-cancel:hover{background:#e8ecf0}
+.pw-gate .btn-confirm{background:linear-gradient(135deg,#00d4aa,#00a8e8);color:#0a1628}
+.pw-gate .btn-confirm:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,168,232,.25)}
 
 /* ===== Modal ===== */
 .modal-overlay{
@@ -340,14 +371,23 @@ footer{text-align:center;padding:40px 24px;color:#bbb;font-size:12px;border-top:
   <div class="policies-list" id="policiesList"></div>
 </div>
 
-<!-- ➕ 新增按钮 -->
-<div class="add-btn-wrap">
-  <button class="add-btn" onclick="openModal()">＋ 新增内容</button>
-</div>
-
 </main>
 
-<footer>&copy; 2026 以鲜国际 EverFresh Supply Chain. 老庄报告 · 行业洞察汇编</footer>
+<footer>&copy; 2026 以鲜国际 EverFresh Supply Chain. 老庄报告 · 行业洞察汇编 <span class="admin-trigger" onclick="openPwGate()" title="内容管理">🔒</span></footer>
+
+<!-- ═══ Password Gate ═══ -->
+<div class="pw-gate-overlay" id="pwGateOverlay" onclick="closePwGateOutside(event)">
+  <div class="pw-gate" onclick="event.stopPropagation()">
+    <h4>🔐 内容管理</h4>
+    <p class="pw-hint">输入管理密码以新增内容</p>
+    <input type="password" id="pwInput" placeholder="······" onkeydown="if(event.key==='Enter')checkPw()" autocomplete="off">
+    <div class="pw-error" id="pwError"></div>
+    <div class="pw-btns">
+      <button class="btn-cancel" onclick="closePwGate()">取消</button>
+      <button class="btn-confirm" onclick="checkPw()">确认</button>
+    </div>
+  </div>
+</div>
 
 <!-- ═══ Modal ═══ -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
@@ -575,6 +615,49 @@ function renderPolicies(items) {
       (r.url && r.url !== '#' ? '<a href="' + esc(r.url) + '" target="_blank" class="policy-link">📥 查看原文</a>' : '<span class="policy-link" style="opacity:.5">📥 待上传</span>') +
     '</div>';
   }).join('');
+}
+
+// ═══════════════════════════════════════
+//  PASSWORD GATE
+// ═══════════════════════════════════════
+var AUTH_KEY = 'laozhuang_reports_auth';
+// 默认密码 "laozhuang2026"，base64 存储仅作简单混淆
+var PW_HASH = 'bGFvemh1YW5nMjAyNg==';
+
+function isAuth() { return sessionStorage.getItem(AUTH_KEY) === '1'; }
+
+function openPwGate() {
+  if (isAuth()) { openModal(); return; }
+  document.getElementById('pwGateOverlay').classList.add('active');
+  document.getElementById('pwInput').value = '';
+  document.getElementById('pwError').textContent = '';
+  setTimeout(function(){ document.getElementById('pwInput').focus(); }, 100);
+}
+
+function closePwGate() {
+  document.getElementById('pwGateOverlay').classList.remove('active');
+}
+
+function closePwGateOutside(e) {
+  if (e.target === document.getElementById('pwGateOverlay')) closePwGate();
+}
+
+function checkPw() {
+  var input = document.getElementById('pwInput').value;
+  try {
+    var encoded = btoa(input);
+    if (encoded === PW_HASH) {
+      sessionStorage.setItem(AUTH_KEY, '1');
+      closePwGate();
+      openModal();
+    } else {
+      document.getElementById('pwError').textContent = '密码错误，请重试';
+      document.getElementById('pwInput').value = '';
+      document.getElementById('pwInput').focus();
+    }
+  } catch(e) {
+    document.getElementById('pwError').textContent = '密码错误，请重试';
+  }
 }
 
 // ═══════════════════════════════════════
