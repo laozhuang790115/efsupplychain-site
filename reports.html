@@ -287,6 +287,84 @@ footer{text-align:center;padding:40px 24px;color:#bbb;font-size:12px;border-top:
   .section-header h2{font-size:17px}
 }
 
+/* ===== Admin Panel ===== */
+.admin-panel{
+  display:none;max-width:1020px;margin:-20px auto 0;padding:0 24px 40px;
+  position:relative;z-index:10
+}
+.admin-panel.active{display:block}
+.admin-bar{
+  background:#fff;border:1px solid #e8ecf0;border-radius:14px;
+  padding:18px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  box-shadow:0 2px 12px rgba(0,0,0,.04)
+}
+.admin-bar .admin-label{
+  font-size:11px;letter-spacing:2px;color:#999;font-weight:600;text-transform:uppercase;
+  display:flex;align-items:center;gap:6px
+}
+.admin-bar .admin-label .dot{width:7px;height:7px;border-radius:50%;background:#00d4aa}
+.admin-bar .stat-group{display:flex;gap:18px}
+.admin-bar .stat{display:flex;align-items:center;gap:6px;font-size:12px;color:#7a8290}
+.admin-bar .stat strong{color:#1a1a2e;font-size:15px}
+.admin-bar .stat.pending strong{color:#f59e0b}
+.admin-bar .stat.approved strong{color:#10b981}
+.admin-bar .stat.rejected strong{color:#ef4444}
+.admin-bar .admin-actions{margin-left:auto;display:flex;gap:8px}
+.admin-bar .a-btn{
+  padding:7px 16px;border-radius:8px;border:none;font-size:12px;font-weight:600;cursor:pointer;
+  transition:all .2s;display:flex;align-items:center;gap:5px
+}
+.admin-bar .a-btn-add{background:#f5f6f8;color:#5a6070}
+.admin-bar .a-btn-add:hover{background:#e8ecf0;color:#1a1a2e}
+.admin-bar .a-btn-pub{background:linear-gradient(135deg,#00d4aa,#00a8e8);color:#0a1628}
+.admin-bar .a-btn-pub:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,168,232,.25)}
+.admin-bar .a-btn-pub:disabled{opacity:.4;cursor:default;transform:none;box-shadow:none}
+
+/* Review queue items */
+.review-queue{margin-top:16px}
+.review-queue .rq-title{
+  font-size:12px;font-weight:700;color:#7a8290;letter-spacing:1px;
+  text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px
+}
+.review-queue .rq-title::after{content:'';flex:1;height:1px;background:#e8ecf0}
+.review-item{
+  background:#fff;border:1px solid #eef0f3;border-radius:10px;padding:14px 18px;
+  display:flex;align-items:center;gap:14px;margin-bottom:8px;
+  transition:all .2s
+}
+.review-item:hover{border-color:#dde0e4}
+.review-item .ri-badge{
+  font-size:10px;font-weight:700;padding:3px 10px;border-radius:6px;
+  letter-spacing:1px;white-space:nowrap
+}
+.review-item .ri-badge.news{background:#fef0f0;color:#c0392b}
+.review-item .ri-badge.event{background:#fff7ed;color:#c2410c}
+.review-item .ri-badge.report{background:#eef5fc;color:#2471a3}
+.review-item .ri-badge.policy{background:#f5f0ff;color:#7c3aed}
+.review-item .ri-text{flex:1;min-width:0}
+.review-item .ri-text .ri-title{font-size:14px;font-weight:600;color:#1a1a2e;line-height:1.4}
+.review-item .ri-text .ri-meta{font-size:11px;color:#999;margin-top:3px}
+.review-item .ri-actions{display:flex;gap:6px;flex-shrink:0}
+.review-item .ri-actions button{
+  width:32px;height:32px;border-radius:8px;border:1px solid #e8ecf0;background:#fff;
+  font-size:14px;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center
+}
+.review-item .ri-actions .ri-approve:hover{background:#ecfdf5;border-color:#10b981;color:#059669}
+.review-item .ri-actions .ri-reject:hover{background:#fef2f2;border-color:#ef4444;color:#dc2626}
+
+/* Decision states */
+.review-item.decided{opacity:.55}
+.review-item.decided .ri-actions{opacity:.35;pointer-events:none}
+.review-item .ri-status{font-size:10px;font-weight:700;padding:3px 10px;border-radius:6px;white-space:nowrap}
+.review-item .ri-status.approved-status{background:#ecfdf5;color:#059669}
+.review-item .ri-status.rejected-status{background:#fef2f2;color:#dc2626}
+.review-item .ri-undo{font-size:10px;color:#999;cursor:pointer;margin-left:4px;opacity:0;transition:opacity .2s}
+.review-item.decided .ri-undo{opacity:1}
+
+/* Empty review queue */
+.review-empty{text-align:center;padding:32px 20px;color:#bbb;font-size:12px}
+.review-empty .re-icon{font-size:32px;margin-bottom:8px}
+
 /* ===== Toast ===== */
 .toast{
   position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
@@ -322,6 +400,23 @@ footer{text-align:center;padding:40px 24px;color:#bbb;font-size:12px;border-top:
     <span id="issueDate">2026年6月</span> · <span>第 <span id="issueNum">1</span> 期</span>
     <span id="totalCount">共收录 0 条内容</span>
   </div>
+</div>
+
+<!-- ═══ Admin Panel (password required) ═══ -->
+<div class="admin-panel" id="adminPanel">
+  <div class="admin-bar">
+    <div class="admin-label"><span class="dot"></span> 内容管理</div>
+    <div class="stat-group">
+      <div class="stat pending"><strong id="aqPending">0</strong> 待审</div>
+      <div class="stat approved"><strong id="aqApproved">0</strong> 已通过</div>
+      <div class="stat rejected"><strong id="aqRejected">0</strong> 已拒绝</div>
+    </div>
+    <div class="admin-actions">
+      <button class="a-btn a-btn-add" onclick="openModal()">➕ 新增内容</button>
+      <button class="a-btn a-btn-pub" id="btnPublish" onclick="publishApproved()" disabled title="将已通过的内容发布到正式版">📤 发布</button>
+    </div>
+  </div>
+  <div class="review-queue" id="reviewQueue"></div>
 </div>
 
 <!-- ═══ Main Content ═══ -->
@@ -501,11 +596,34 @@ var DEMO_DATA = {
 };
 
 // ═══════════════════════════════════════
+//  REVIEW QUEUE — WorkBuddy 搜集的待审内容
+//  ═══════════════════════════════════════
+//  我（WorkBuddy）会定期搜集行业内容加入这个队列；
+//  你登录后审核通过/拒绝，通过的自动展示在主页。
+//  下次部署时我把已通过的内容合并到 DEMO_DATA 中。
+var REVIEW_QUEUE = [
+  // {
+  //   id: 'rq1',              // 唯一ID（rq + 序号）
+  //   type: 'news',           // news | event | report | policy
+  //   title: '标题',
+  //   source: '来源/机构',
+  //   date: '2026-06-10',
+  //   summary: '摘要1-3句话',
+  //   url: '#',               // 可选
+  //   tags: ['标签1','标签2'], // 仅 news/event
+  //   reportType: '行业研报',  // 仅 report
+  //   addedDate: '2026-06-10' // WorkBuddy添加日期
+  // }
+];
+
+// ═══════════════════════════════════════
 //  STATE
 // ═══════════════════════════════════════
 var currentType = 'news';
 var KEYS = ['news','events','reports','policies'];
 var KEY = 'laozhuang_reports_user';
+var DECISIONS_KEY = 'laozhuang_review_decisions';  // 审核决定
+var PUBLISHED_KEY = 'laozhuang_review_published';   // 已通过待合并的内容
 
 function loadAllData() {
   var merged = {};
@@ -520,6 +638,17 @@ function loadAllData() {
   try {
     var stored = JSON.parse(localStorage.getItem(KEY) || '[]');
     (stored || []).forEach(function(item) {
+      var t = item.type;
+      if (t === 'event') t = 'events';
+      if (t === 'policy') t = 'policies';
+      if (merged[t]) merged[t].push(item);
+    });
+  } catch(e) {}
+
+  // Load approved review items (已通过审核的内容)
+  try {
+    var published = JSON.parse(localStorage.getItem(PUBLISHED_KEY) || '[]');
+    (published || []).forEach(function(item) {
       var t = item.type;
       if (t === 'event') t = 'events';
       if (t === 'policy') t = 'policies';
@@ -621,13 +750,12 @@ function renderPolicies(items) {
 //  PASSWORD GATE
 // ═══════════════════════════════════════
 var AUTH_KEY = 'laozhuang_reports_auth';
-// 默认密码 "laozhuang2026"，base64 存储仅作简单混淆
 var PW_HASH = 'bGFvemh1YW5nMjAyNg==';
 
 function isAuth() { return sessionStorage.getItem(AUTH_KEY) === '1'; }
 
 function openPwGate() {
-  if (isAuth()) { openModal(); return; }
+  if (isAuth()) { onAuthSuccess(); return; }
   document.getElementById('pwGateOverlay').classList.add('active');
   document.getElementById('pwInput').value = '';
   document.getElementById('pwError').textContent = '';
@@ -642,6 +770,13 @@ function closePwGateOutside(e) {
   if (e.target === document.getElementById('pwGateOverlay')) closePwGate();
 }
 
+function onAuthSuccess() {
+  showAdminPanel();
+  // Auto-scroll to admin panel
+  var panel = document.getElementById('adminPanel');
+  if (panel) setTimeout(function() { panel.scrollIntoView({behavior:'smooth',block:'start'}); }, 150);
+}
+
 function checkPw() {
   var input = document.getElementById('pwInput').value;
   try {
@@ -649,7 +784,7 @@ function checkPw() {
     if (encoded === PW_HASH) {
       sessionStorage.setItem(AUTH_KEY, '1');
       closePwGate();
-      openModal();
+      onAuthSuccess();
     } else {
       document.getElementById('pwError').textContent = '密码错误，请重试';
       document.getElementById('pwInput').value = '';
@@ -658,6 +793,176 @@ function checkPw() {
   } catch(e) {
     document.getElementById('pwError').textContent = '密码错误，请重试';
   }
+}
+
+// ═══════════════════════════════════════
+//  ADMIN PANEL — 审核队列
+// ═══════════════════════════════════════
+function loadDecisions() {
+  try { return JSON.parse(localStorage.getItem(DECISIONS_KEY) || '{}'); } catch(e) { return {}; }
+}
+
+function saveDecisions(d) {
+  localStorage.setItem(DECISIONS_KEY, JSON.stringify(d));
+}
+
+function loadPublished() {
+  try { return JSON.parse(localStorage.getItem(PUBLISHED_KEY) || '[]'); } catch(e) { return []; }
+}
+
+function savePublished(p) {
+  localStorage.setItem(PUBLISHED_KEY, JSON.stringify(p));
+}
+
+function showAdminPanel() {
+  document.getElementById('adminPanel').classList.add('active');
+  renderAdmin();
+}
+
+function getReviewStats() {
+  var decisions = loadDecisions();
+  var pending = 0, approved = 0, rejected = 0;
+  REVIEW_QUEUE.forEach(function(item) {
+    var d = decisions[item.id];
+    if (d === 'approved') approved++;
+    else if (d === 'rejected') rejected++;
+    else pending++;
+  });
+  return { pending: pending, approved: approved, rejected: rejected, total: REVIEW_QUEUE.length };
+}
+
+function renderAdmin() {
+  var stats = getReviewStats();
+  document.getElementById('aqPending').textContent = stats.pending;
+  document.getElementById('aqApproved').textContent = stats.approved;
+  document.getElementById('aqRejected').textContent = stats.rejected;
+
+  // Publish button: enabled only if there are approved items
+  var pubBtn = document.getElementById('btnPublish');
+  if (pubBtn) pubBtn.disabled = stats.approved === 0;
+
+  renderReviewQueue();
+}
+
+function renderReviewQueue() {
+  var container = document.getElementById('reviewQueue');
+  var decisions = loadDecisions();
+
+  if (!REVIEW_QUEUE.length) {
+    container.innerHTML = '<div class="review-empty"><div class="re-icon">📭</div><p>审核队列为空 — WorkBuddy 暂未提交待审内容</p></div>';
+    return;
+  }
+
+  // Show decided items first, then pending
+  var sorted = REVIEW_QUEUE.slice().sort(function(a, b) {
+    var da = decisions[a.id];
+    var db = decisions[b.id];
+    if (da === 'approved' || da === 'rejected') da = 'z' + da;
+    else da = 'a';
+    if (db === 'approved' || db === 'rejected') db = 'z' + db;
+    else db = 'a';
+    if (da !== db) return da < db ? -1 : 1;
+    return b.addedDate.localeCompare(a.addedDate);
+  });
+
+  var html = '<div class="rq-title">📝 审核队列</div>';
+  sorted.forEach(function(item) {
+    var dec = decisions[item.id];
+    var badgeClass = item.type === 'event' ? 'event' : item.type;
+    var badgeMap = { news: '热点新闻', event: '焦点事件', report: '行业报告', policy: '政策法规' };
+    var badgeText = badgeMap[item.type] || item.type;
+
+    var decidedClass = (dec === 'approved' || dec === 'rejected') ? ' decided' : '';
+    var statusHtml = '';
+
+    if (dec === 'approved') {
+      statusHtml = '<span class="ri-status approved-status">✓ 已通过</span><span class="ri-undo" onclick="undoDecision(\'' + item.id + '\')">↩ 撤销</span>';
+    } else if (dec === 'rejected') {
+      statusHtml = '<span class="ri-status rejected-status">✕ 已拒绝</span><span class="ri-undo" onclick="undoDecision(\'' + item.id + '\')">↩ 撤销</span>';
+    }
+
+    html += '<div class="review-item' + decidedClass + '">' +
+      '<span class="ri-badge ' + badgeClass + '">' + badgeText + '</span>' +
+      '<div class="ri-text">' +
+        '<div class="ri-title">' + esc(item.title) + '</div>' +
+        '<div class="ri-meta">' + esc(item.source || '') + ' · ' + esc(item.date) + ' · WorkBuddy 搜集于 ' + esc(item.addedDate || '') + '</div>' +
+      '</div>' +
+      '<div class="ri-actions">' + statusHtml +
+        '<button class="ri-approve" onclick="approveItem(\'' + item.id + '\')" title="通过">✅</button>' +
+        '<button class="ri-reject" onclick="rejectItem(\'' + item.id + '\')" title="拒绝">❌</button>' +
+      '</div>' +
+    '</div>';
+  });
+
+  container.innerHTML = html;
+}
+
+function approveItem(id) {
+  var decisions = loadDecisions();
+  decisions[id] = 'approved';
+  saveDecisions(decisions);
+
+  // Copy to published list
+  var published = loadPublished();
+  var item = REVIEW_QUEUE.find(function(x) { return x.id === id; });
+  if (item) {
+    // Remove any old version
+    published = published.filter(function(x) { return x.id !== id; });
+    published.push(item);
+    savePublished(published);
+  }
+
+  renderAdmin();
+  renderAll();
+  showToast('✅ 已通过，内容已展示在页面中');
+}
+
+function rejectItem(id) {
+  var decisions = loadDecisions();
+  decisions[id] = 'rejected';
+  saveDecisions(decisions);
+
+  // Remove from published
+  var published = loadPublished();
+  published = published.filter(function(x) { return x.id !== id; });
+  savePublished(published);
+
+  renderAdmin();
+  renderAll();
+  showToast('❌ 已拒绝');
+}
+
+function undoDecision(id) {
+  var decisions = loadDecisions();
+  delete decisions[id];
+  saveDecisions(decisions);
+
+  var published = loadPublished();
+  published = published.filter(function(x) { return x.id !== id; });
+  savePublished(published);
+
+  renderAdmin();
+  renderAll();
+  showToast('↩ 已撤销，恢复为待审状态');
+}
+
+function publishApproved() {
+  var decisions = loadDecisions();
+  var stats = getReviewStats();
+  if (stats.approved === 0) { showToast('没有待发布的内容'); return; }
+
+  showToast('✅ 已通过的内容已展示在页面中。下次告诉我「老庄报告有已发布内容」，我会将它们合并到正式版中。');
+
+  // Keep published items in localStorage (already showing in renderAll)
+  // Clear decisions for approved items, clearing the queue
+  var newDecisions = {};
+  Object.keys(decisions).forEach(function(id) {
+    if (decisions[id] === 'rejected') newDecisions[id] = 'rejected';
+  });
+  saveDecisions(newDecisions);
+
+  renderAdmin();
+  // Don't call renderAll() here - published items are already showing
 }
 
 // ═══════════════════════════════════════
@@ -767,6 +1072,8 @@ function showToast(msg) {
 document.addEventListener('DOMContentLoaded', function() {
   renderAll();
   document.getElementById('fDate') && (document.getElementById('fDate').value = new Date().toISOString().slice(0,10));
+  // If already authenticated (e.g. page refresh), show admin panel
+  if (isAuth()) showAdminPanel();
 });
 </script>
 
