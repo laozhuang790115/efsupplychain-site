@@ -466,9 +466,9 @@ function renderTable(){
       lastMonth = r.month;
       monthEven = !monthEven;
     }
-    const rowClass = monthEven ? ' class="row-even"' : '';
+    const bgStyle = monthEven ? ' style="background:#eef1f6"' : '';
     return `
-    <tr${rowClass}>
+    <tr${bgStyle}>
       <td>${r.month}</td>
       <td>${r.spec}</td>
       <td>$${r.cna}</td>
