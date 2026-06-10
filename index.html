@@ -426,7 +426,7 @@ footer .ft-info{font-size:12px;color:rgba(255,255,255,.25)}
     <li><a href="#services">核心业务</a></li>
     <li><a href="#process">业务流程</a></li>
     <li><a href="#capabilities">资质能力</a></li>
-    <li><a href="tools.html" class="nav-halal">🛠 核算工具</a></li>
+    <li><a href="tools.html" class="nav-halal" target="_self">🛠 核算工具</a></li>
     <li><a href="#contact">联系我们</a></li>
   </ul>
   <div class="nav-toggle" onclick="this.classList.toggle('open')">
@@ -909,31 +909,40 @@ footer .ft-info{font-size:12px;color:rgba(255,255,255,.25)}
 
 <!-- ════════════ Scripts ════════════ -->
 <script>
-// Smooth scroll nav
+// Smooth scroll nav — only for in-page anchors
 document.querySelectorAll('.nav-links a').forEach(link => {
   link.addEventListener('click', e => {
-    e.preventDefault();
-    const target = document.querySelector(link.getAttribute('href'));
-    if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+    var href = link.getAttribute('href');
+    if (!href) return;
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      var target = document.querySelector(href);
+      if (target) target.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+    // external page links: navigate normally
   });
 });
 
 // Mobile nav toggle (simple)
-const toggle = document.querySelector('.nav-toggle');
-const navLinks = document.querySelector('.nav-links');
-toggle.addEventListener('click', () => {
-  const isOpen = navLinks.style.display === 'flex';
-  navLinks.style.display = isOpen ? 'none' : 'flex';
-  navLinks.style.position = isOpen ? '' : 'absolute';
-  navLinks.style.top = isOpen ? '' : '60px';
-  navLinks.style.left = isOpen ? '' : '0';
-  navLinks.style.right = isOpen ? '' : '0';
-  navLinks.style.background = isOpen ? '' : 'rgba(10,22,40,.98)';
-  navLinks.style.flexDirection = isOpen ? '' : 'column';
-  navLinks.style.padding = isOpen ? '' : '20px 32px';
-  navLinks.style.gap = isOpen ? '' : '16px';
-  navLinks.style.borderBottom = isOpen ? '' : '1px solid rgba(255,255,255,.08)';
-});
+(function() {
+var toggle = document.querySelector('.nav-toggle');
+var navLinks = document.querySelector('.nav-links');
+if (toggle && navLinks) {
+  toggle.addEventListener('click', function() {
+    var isOpen = navLinks.style.display === 'flex';
+    navLinks.style.display = isOpen ? 'none' : 'flex';
+    navLinks.style.position = isOpen ? '' : 'absolute';
+    navLinks.style.top = isOpen ? '' : '60px';
+    navLinks.style.left = isOpen ? '' : '0';
+    navLinks.style.right = isOpen ? '' : '0';
+    navLinks.style.background = isOpen ? '' : 'rgba(10,22,40,.98)';
+    navLinks.style.flexDirection = isOpen ? '' : 'column';
+    navLinks.style.padding = isOpen ? '' : '20px 32px';
+    navLinks.style.gap = isOpen ? '' : '16px';
+    navLinks.style.borderBottom = isOpen ? '' : '1px solid rgba(255,255,255,.08)';
+  });
+}
+})();
 </script>
 
 </body>
