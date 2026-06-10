@@ -120,8 +120,9 @@ thead th{
 }
 thead th:hover{color:#00a8e8}
 thead th .sort-arrow{font-size:10px;margin-left:3px;opacity:.4}
-tbody td{padding:10px;border-bottom:1px solid #f0f2f5;white-space:nowrap}
-tbody tr:hover{background:#f8fafc}
+tbody td{padding:10px;border-bottom:1px solid #e8ecf0;white-space:nowrap}
+tbody tr.row-even{background:#f0f2f5}
+tbody tr:hover{background:#e6f7ff!important}
 .cost-highlight{font-weight:800;color:#0a1628}
 .empty-row{text-align:center;padding:40px;color:#bbb;font-size:14px}
 
@@ -456,8 +457,18 @@ function renderTable(){
     return;
   }
   
-  tbody.innerHTML = filtered.map((r,i) => `
-    <tr>
+  // 按月份灰白交替
+  let lastMonth = '';
+  let monthEven = false;
+  
+  tbody.innerHTML = filtered.map((r,i) => {
+    if(r.month !== lastMonth){
+      lastMonth = r.month;
+      monthEven = !monthEven;
+    }
+    const rowClass = monthEven ? ' class="row-even"' : '';
+    return `
+    <tr${rowClass}>
       <td>${r.month}</td>
       <td>${r.spec}</td>
       <td>$${r.cna}</td>
