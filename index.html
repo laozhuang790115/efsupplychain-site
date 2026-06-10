@@ -37,6 +37,16 @@ a{text-decoration:none;color:inherit}
   transition:color .25s;letter-spacing:.5px
 }
 .nav-links a:hover{color:#00d4aa}
+.nav-halal{
+  background:linear-gradient(135deg,#00d4aa,#00a8e8);
+  color:#0a1628!important;padding:6px 14px;border-radius:20px;
+  font-weight:700;font-size:13px;transition:all .3s
+}
+.nav-halal:hover{
+  transform:translateY(-1px);
+  box-shadow:0 4px 16px rgba(0,212,170,.35);
+  color:#0a1628!important
+}
 .nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
 .nav-toggle span{width:22px;height:2px;background:#fff;border-radius:2px;transition:.3s}
 
@@ -163,6 +173,12 @@ section.full{max-width:100%;padding:100px 24px}
 .svc-card .sc-icon{font-size:38px;margin-bottom:16px}
 .svc-card h4{font-size:17px;color:#0a1628;margin-bottom:10px;font-weight:700}
 .svc-card p{font-size:13px;color:#777;line-height:1.7}
+.svc-card-link{display:block;cursor:pointer}
+.svc-badge{
+  display:inline-block;background:linear-gradient(135deg,#00d4aa,#00a8e8);
+  color:#fff;font-size:11px;padding:2px 10px;border-radius:12px;
+  font-weight:600;vertical-align:middle;margin-left:6px
+}
 
 /* ===== Strategy Banner ===== */
 .strategy-banner{
@@ -410,6 +426,7 @@ footer .ft-info{font-size:12px;color:rgba(255,255,255,.25)}
     <li><a href="#services">核心业务</a></li>
     <li><a href="#process">业务流程</a></li>
     <li><a href="#capabilities">资质能力</a></li>
+    <li><a href="halal-calculator.html" class="nav-halal">🧮 Halal测算</a></li>
     <li><a href="#contact">联系我们</a></li>
   </ul>
   <div class="nav-toggle" onclick="this.classList.toggle('open')">
@@ -557,11 +574,11 @@ footer .ft-info{font-size:12px;color:rgba(255,255,255,.25)}
       <h4>冷链服务</h4>
       <p>全国9城冷链仓储网络，WMS数字化管理，温控IoT实时监控，门到门配送。</p>
     </div>
-    <div class="svc-card">
+    <a href="halal-calculator.html" class="svc-card svc-card-link">
       <div class="sc-icon">☪️</div>
-      <h4>清真食品出海</h4>
+      <h4>清真食品出海 <span class="svc-badge">测算工具</span></h4>
       <p>配合「好品中国」，助力中国食品品牌出海，HALAL认证+海外渠道一站式服务。</p>
-    </div>
+    </a>
   </div>
 </section>
 </div>
@@ -841,6 +858,25 @@ footer .ft-info{font-size:12px;color:rgba(255,255,255,.25)}
     </div>
   </div>
 </section>
+</div>
+
+<!-- ════════════ Halal CTA ════════════ -->
+<div style="background:linear-gradient(135deg,#0a1628,#0a2848);padding:60px 24px;text-align:center">
+  <div style="max-width:700px;margin:0 auto">
+    <div style="font-size:12px;letter-spacing:4px;color:#00d4aa;text-transform:uppercase;margin-bottom:12px">Free Tool</div>
+    <div style="font-size:24px;color:#fff;font-weight:700;margin-bottom:12px">🧮 清真食品出海 · Halal认证投入产出测算</div>
+    <div style="font-size:14px;color:rgba(255,255,255,.55);margin-bottom:28px;line-height:1.8">
+      9大出海品类 × 5家国际认证机构，一键核算认证成本、市场溢价、回本周期。<br>零食·美妆·调味品·乳制品·保健品·母婴……找到你的最佳出海路径。
+    </div>
+    <a href="halal-calculator.html" style="
+      display:inline-block;background:linear-gradient(135deg,#00d4aa,#00a8e8);
+      color:#0a1628;font-weight:700;font-size:15px;padding:14px 40px;border-radius:30px;
+      text-decoration:none;transition:all .3s;box-shadow:0 4px 20px rgba(0,212,170,.25)
+    " onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 32px rgba(0,212,170,.4)'"
+       onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(0,212,170,.25)'">
+      开始测算 →
+    </a>
+  </div>
 </div>
 
 <!-- ════════════ Contact ════════════ -->
