@@ -265,6 +265,7 @@ tbody tr:hover{background:#f8fafc}
         <option value="50/60">50/60</option>
       </select>
       <button class="btn btn-outline btn-sm" onclick="exportCSV()">📥 导出CSV</button>
+      <button class="btn btn-outline btn-sm" onclick="seedDemoData()" id="seed-btn">📋 填充示例数据</button>
       <button class="btn btn-danger btn-sm" onclick="clearAll()">🗑 清空数据</button>
     </div>
   </div>
@@ -285,7 +286,7 @@ tbody tr:hover{background:#f8fafc}
         </tr>
       </thead>
       <tbody id="table-body">
-        <tr><td colspan="10" class="empty-row">📭 暂无数据，录入第一条记录吧</td></tr>
+        <tr><td colspan="10" class="empty-row">📭 暂无数据 — 点击上方「📋 填充示例数据」快速预览，或填表录入</td></tr>
       </tbody>
     </table>
   </div>
@@ -447,7 +448,7 @@ function renderTable(){
   document.getElementById('record-count').textContent = `共 ${records.length} 条记录`;
   
   if(filtered.length === 0){
-    tbody.innerHTML = '<tr><td colspan="10" class="empty-row">📭 暂无匹配数据</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="10" class="empty-row">📭 暂无匹配数据 — 点击「📋 填充示例数据」添加2026上半年行情</td></tr>';
     return;
   }
   
@@ -485,6 +486,51 @@ function clearAll(){
   renderChart();
   document.getElementById('preview-card').style.display = 'none';
   showToast('🗑 全部数据已清空', true);
+}
+
+// ========== Seed Demo Data ==========
+function seedDemoData(){
+  if(records.length > 0){
+    if(!confirm('当前已有 ' + records.length + ' 条记录。填充示例数据将追加到现有记录中，覆盖同月同规格的记录。是否继续？')) return;
+  }
+  
+  // 2026年1月-6月，按行情季节波动估算
+  const specs = [
+    { spec:'30/40', cnas:[5.80,5.50,5.20,4.80,4.50,4.60], proc:0.15 },
+    { spec:'40/50', cnas:[5.20,4.90,4.60,4.30,4.10,4.20], proc:0.15 },
+    { spec:'50/60', cnas:[4.80,4.60,4.30,4.00,3.80,3.90], proc:0.15 }
+  ];
+  const months = ['2026-01','2026-02','2026-03','2026-04','2026-05','2026-06'];
+  // 海运费季节性: Q1旺季高, Q2回落
+  const freights = [0.14,0.13,0.11,0.09,0.08,0.09];
+  const insurance = 0.02;
+  const fees = 0.05;
+  const days = 90;
+  const rate = 7.20;
+  
+  let added = 0, updated = 0;
+  
+  specs.forEach(s => {
+    months.forEach((m, i) => {
+      const calc = calculate(s.cnas[i], s.proc, freights[i], insurance, fees, days, rate);
+      const existing = records.findIndex(r => r.month === m && r.spec === s.spec);
+      const entry = { month:m, spec:s.spec, ...calc, updatedAt: new Date().toISOString(), demo:true };
+      
+      if(existing >= 0){
+        records[existing] = entry;
+        updated++;
+      } else {
+        records.push(entry);
+        added++;
+      }
+    });
+  });
+  
+  saveRecords();
+  renderTable();
+  renderChart();
+  showToast(`✅ 示例数据就绪（新增 ${added} 条，覆盖 ${updated} 条）`, true);
+  document.getElementById('seed-btn').textContent = '🔄 刷新示例数据';
 }
 
 // ========== Sort ==========
