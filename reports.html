@@ -264,6 +264,41 @@ main{max-width:1020px;margin:0 auto;padding:0 24px 80px}
 .modal-foot .btn-submit{background:linear-gradient(135deg,#00d4aa,#00a8e8);color:#0a1628}
 .modal-foot .btn-submit:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,168,232,.3)}
 
+/* ===== Read More & Full Content ===== */
+.read-more{
+  display:inline-flex;align-items:center;gap:4px;
+  margin-top:12px;padding:6px 14px;border-radius:6px;
+  border:1px solid #dde0e4;background:#fafbfc;
+  font-size:12px;color:#5a6070;cursor:pointer;transition:all .2s
+}
+.read-more:hover{border-color:#00a8e8;color:#00a8e8;background:#f0f9ff}
+.read-more .arrow{transition:transform .3s}
+.read-more.expanded .arrow{transform:rotate(90deg)}
+
+.full-content{
+  max-height:0;overflow:hidden;transition:max-height .4s ease, padding .3s ease;
+  padding:0 0 0 0
+}
+.full-content.open{
+  max-height:2000px;
+  padding:14px 0 6px 0;
+  border-top:1px dashed #e8ecf0;
+  margin-top:12px
+}
+.full-content .fc-inner{
+  font-size:13.5px;line-height:1.9;color:#3a3a50;
+  padding:0 4px
+}
+.full-content .fc-inner p{margin-bottom:10px}
+.full-content .fc-inner strong{color:#1a1a2e}
+.full-content .ext-link{
+  display:inline-flex;align-items:center;gap:4px;
+  margin-top:12px;padding:6px 14px;border-radius:6px;
+  background:linear-gradient(135deg,#00d4aa,#00a8e8);color:#fff;
+  font-size:12px;font-weight:600;text-decoration:none;transition:all .2s
+}
+.full-content .ext-link:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,168,232,.25)}
+
 /* ===== Empty State ===== */
 .empty-state{text-align:center;padding:40px 20px;color:#bbb}
 .empty-state .empty-icon{font-size:40px;margin-bottom:12px}
@@ -512,7 +547,8 @@ var DEMO_DATA = {
       id: 'n1', date: '2026-06-08',
       title: '中国1-5月肉类进口量同比增长8.3%，巴西牛肉占比突破42%',
       source: '海关总署', summary: '海关总署最新数据显示，2026年1-5月中国肉类进口总量达312万吨。其中巴西牛肉以132万吨领跑，占进口牛肉总量的42%，较去年同期提升5个百分点。',
-      tags: ['进口数据','牛肉'], url: '#'
+      tags: ['进口数据','牛肉'], url: '#',
+      content: '海关总署最新数据显示，2026年1-5月中国肉类进口总量达312万吨，同比增长8.3%，延续了近年来进口肉类需求稳步增长的态势。\n\n其中巴西牛肉以132万吨领跑，占进口牛肉总量的42%，较去年同期提升5个百分点。这一数据反映出巴西牛肉在中国市场的竞争优势持续扩大，主要体现在价格优势明显和供应稳定性强两个方面。\n\n分析师指出，受国内肉牛产能周期影响，中国牛肉自给率短期内难以大幅提升，进口依赖度仍将维持高位。预计未来6个月巴西牛肉进口份额有望进一步攀升至45%以上。'
     },
     {
       id: 'n2', date: '2026-06-05',
@@ -538,7 +574,8 @@ var DEMO_DATA = {
       id: 'e1', date: '2026-06-06',
       title: 'SIAL China 2026 在上海开幕，进口冷链专区规模扩大40%',
       source: 'SIAL China 组委会', summary: '本届SIAL中食展进口冷链专区吸引来自32个国家的600+展商，巴西、阿根廷、西班牙三国展团面积均创历史新高，反映出中国市场对进口肉类的强劲需求。',
-      tags: ['展会','进口冷链','SIAL'], url: '#'
+      tags: ['展会','进口冷链','SIAL'], url: '#',
+      content: 'SIAL China 2026于6月6日在上海新国际博览中心开幕，展览面积达23万平方米，创历史新高。\n\n本届展会最大亮点为进口冷链专区规模扩大40%，吸引来自32个国家的600余家展商参展。巴西、阿根廷、西班牙三国国家展团面积均创历史新高，合计占据进口冷链专区的58%。\n\n以鲜国际作为特邀采购商参加了本届展会，与多家巴西牛肉巨头（JBS、Marfrig、Minerva）进行了深度洽谈，并在现场签署了2026年下半年的意向采购协议。\n\n展会同期举办了"全球肉类供应链安全高峰论坛"，来自中国肉类协会、FAO、和多家头部进口商的嘉宾就供应链韧性、冷链物流升级等议题进行了深入讨论。'
     },
     {
       id: 'e2', date: '2026-05-22',
@@ -558,7 +595,8 @@ var DEMO_DATA = {
       id: 'r1', date: '2026-05-20',
       title: '2026中国进口牛肉市场年度报告：供需格局重构与价格展望',
       source: '中国肉类协会', summary: '报告全面梳理2025年进口牛肉市场，深入分析南美供应格局变化及中国市场消费趋势。预计2026年牛肉进口量将维持在280-300万吨区间，价格中枢下移。',
-      type: '行业研报', url: '#'
+      type: '行业研报', url: '#',
+      content: '中国肉类协会于2026年5月正式发布《2026中国进口牛肉市场年度报告》。报告基于海关总署、商务部及行业协会的权威数据，对2025年全年及2026年一季度的进口牛肉市场进行了全面梳理。\n\n核心发现包括：\n1. 2025年进口牛肉总量达到295万吨，同比增长6.8%，增速较前两年有所放缓；\n2. 巴西份额持续扩大，从2024年的38%提升至2025年的42%，预计2026年将突破45%；\n3. 价格方面，受巴西雷亚尔贬值和国内需求回暖双重影响，到岸均价同比下降约4.2%；\n4. 渠道方面，电商及新零售渠道占比首次突破25%，传统批发市场占比持续下滑。\n\n报告同时指出，2026年进口牛肉市场将面临三大不确定性：一是主要产出国疫病情形势；二是国际物流成本波动；三是国内消费复苏节奏。\n\n报告建议进口商加强供应链多元化布局，积极开拓澳大利亚、阿根廷等备选供应源，以分散单一市场依赖风险。'
     },
     {
       id: 'r2', date: '2026-04-15',
@@ -578,7 +616,8 @@ var DEMO_DATA = {
       id: 'pl1', date: '2026-06-01',
       title: '海关总署2026年第18号公告：调整部分进口肉类检验检疫要求',
       source: '海关总署', summary: '公告对冷冻牛肉、猪肉和禽肉的进境检验检疫标准进行了修订，新增对部分兽药残留的检测项目，自2026年7月1日起实施。',
-      url: '#'
+      url: '#',
+      content: '海关总署于2026年6月1日发布2026年第18号公告，对《进出口肉类产品检验检疫监督管理办法》相关条款进行修订。\n\n主要修订内容包括：\n1. 新增对"莱克多巴胺"等β-受体激动剂的检测要求，限量标准调整为"不得检出"（LOD=0.5μg/kg）；\n2. 冷冻肉类产品进境时需随附官方兽医卫生证书，证书有效期从原来的6个月缩短至3个月；\n3. 对来自疫区国家的肉类产品，实施100%掏箱查验，并增加沙门氏菌、单增李斯特菌等微生物指标检测；\n4. 新增可追溯性要求，进口商需建立从进境到销售终端的完整追溯记录，保存期限不少于2年。\n\n公告自2026年7月1日起正式实施。届时未完成合规整改的企业，其产品将被暂停受理进境检疫审批。\n\n以鲜国际已启动内部合规自查，确保7月1日前所有在途及待发货订单符合新公告要求。'
     },
     {
       id: 'pl2', date: '2026-05-12',
@@ -681,19 +720,41 @@ function renderAll() {
   document.getElementById('totalCount').textContent = '共收录 ' + countTotal(data) + ' 条内容';
 }
 
+// ══════════════════════════════════════
+//  TOGGLE FULL CONTENT
+// ══════════════════════════════════════
+function toggleContent(id) {
+  var fc = document.getElementById('fc-' + id);
+  var btn = document.getElementById('btn-' + id);
+  if (!fc) return;
+  var isOpen = fc.classList.contains('open');
+  fc.classList.toggle('open');
+  if (btn) btn.classList.toggle('expanded');
+}
+
 function renderNews(items) {
   var grid = document.getElementById('newsGrid');
   document.getElementById('newsCount').textContent = items.length + ' 条';
   if (!items.length) { grid.innerHTML = '<div class="empty-state"><div class="empty-icon">📭</div><p>暂无热点新闻</p></div>'; return; }
-  grid.innerHTML = items.map(function(n) {
+  grid.innerHTML = items.map(function(n, idx) {
+    var id = 'news-' + idx;
+    var hasContent = n.content && n.content.length > 0;
     var tagsHtml = (n.tags || []).map(function(t) { return '<span class="card-tag">' + esc(t) + '</span>'; }).join('');
-    return '<div class="news-card">' +
+    var readMoreBtn = hasContent ? '<button class="read-more" id="btn-' + id + '" onclick="toggleContent(\'' + id + '\')">📖 阅读全文 <span class="arrow">→</span></button>' : '';
+    var fullContent = hasContent ? '<div class="full-content" id="fc-' + id + '"><div class="fc-inner">' + (n.content||'').replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>') + '</div></div>' : '';
+    var extLink = (n.url && n.url !== '#') ? '<a href="' + esc(n.url) + '" target="_blank" class="ext-link" style="margin-top:10px;display:inline-flex">🔗 查看原文 →</a>' : '';
+    return '<div class="news-card" id="card-' + id + '">' +
       '<div class="card-top"><div class="tag-dot"></div><div class="card-title">' + esc(n.title) + '</div></div>' +
       '<div class="card-body">' + esc(n.summary || '') + '</div>' +
-      '<div class="card-foot">' +
+      (hasContent || extLink ? '<div class="card-foot" style="flex-direction:column;align-items:flex-start;gap:8px">' : '<div class="card-foot">') +
         '<div><span class="card-source">' + esc(n.source || '') + '</span> · <span class="card-date">' + esc(n.date) + '</span></div>' +
         (tagsHtml ? '<div class="card-tags">' + tagsHtml + '</div>' : '') +
-      '</div></div>';
+      '</div>' +
+      (readMoreBtn ? '<div style="padding:0 20px 14px">' + readMoreBtn + '</div>' : '') +
+      (fullContent ? '<div style="padding:0 20px 14px">' + fullContent + '</div>' : '') +
+      (extLink && !hasContent ? '<div style="padding:0 20px 14px">' + extLink + '</div>' : '') +
+      (extLink && hasContent ? '<div style="padding:0 20px 0 20px">' + extLink + '</div>' : '') +
+    '</div>';
   }).join('');
 }
 
@@ -701,15 +762,24 @@ function renderEvents(items) {
   var grid = document.getElementById('eventsGrid');
   document.getElementById('eventsCount').textContent = items.length + ' 条';
   if (!items.length) { grid.innerHTML = '<div class="empty-state"><div class="empty-icon">📭</div><p>暂无焦点事件</p></div>'; return; }
-  grid.innerHTML = items.map(function(n) {
+  grid.innerHTML = items.map(function(n, idx) {
+    var id = 'event-' + idx;
+    var hasContent = n.content && n.content.length > 0;
     var tagsHtml = (n.tags || []).map(function(t) { return '<span class="event-card-tag" style="padding:2px 8px;border-radius:4px;background:#fff7ed;color:#c2410c;font-size:10px">' + esc(t) + '</span>'; }).join('');
-    return '<div class="event-card">' +
+    var readMoreBtn = hasContent ? '<button class="read-more" id="btn-' + id + '" onclick="toggleContent(\'' + id + '\')">📖 阅读全文 <span class="arrow">→</span></button>' : '';
+    var fullContent = hasContent ? '<div class="full-content" id="fc-' + id + '"><div class="fc-inner">' + (n.content||'').replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>') + '</div></div>' : '';
+    var extLink = (n.url && n.url !== '#') ? '<a href="' + esc(n.url) + '" target="_blank" class="ext-link" style="margin-top:10px;display:inline-flex">🔗 查看原文 →</a>' : '';
+    return '<div class="event-card" id="card-' + id + '">' +
       '<div class="card-top"><div class="event-dot"></div><div class="card-title">' + esc(n.title) + '</div></div>' +
       '<div class="card-body">' + esc(n.summary || '') + '</div>' +
-      '<div class="card-foot">' +
+      (hasContent || extLink ? '<div class="card-foot" style="flex-direction:column;align-items:flex-start;gap:8px">' : '<div class="card-foot">') +
         '<div><span class="card-source">' + esc(n.source || '') + '</span> · <span class="card-date">' + esc(n.date) + '</span></div>' +
         (tagsHtml ? '<div class="card-tags">' + tagsHtml + '</div>' : '') +
-      '</div></div>';
+      '</div>' +
+      (readMoreBtn ? '<div style="padding:0 20px 14px">' + readMoreBtn + '</div>' : '') +
+      (fullContent ? '<div style="padding:0 20px 14px">' + fullContent + '</div>' : '') +
+      (extLink ? '<div style="padding:0 20px ' + (hasContent ? '0' : '14') + 'px">' + extLink + '</div>' : '') +
+    '</div>';
   }).join('');
 }
 
@@ -717,13 +787,19 @@ function renderReports(items) {
   var list = document.getElementById('reportsList');
   document.getElementById('reportsCount').textContent = items.length + ' 份';
   if (!items.length) { list.innerHTML = '<div class="empty-state"><div class="empty-icon">📂</div><p>暂无行业报告</p></div>'; return; }
-  list.innerHTML = items.map(function(r) {
-    return '<div class="report-card">' +
+  list.innerHTML = items.map(function(r, idx) {
+    var id = 'report-' + idx;
+    var hasContent = r.content && r.content.length > 0;
+    var readMoreBtn = hasContent ? '<br><button class="read-more" id="btn-' + id + '" onclick="toggleContent(\'' + id + '\')">📖 阅读全文 <span class="arrow">→</span></button>' : '';
+    var fullContent = hasContent ? '<div class="full-content" id="fc-' + id + '"><div class="fc-inner">' + (r.content||'').replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>') + '</div></div>' : '';
+    return '<div class="report-card" id="card-' + id + '">' +
       '<div class="report-icon">📄</div><div class="report-content">' +
         '<div class="report-type">' + esc(r.type || '行业报告') + '</div>' +
         '<div class="report-title">' + esc(r.title) + '</div>' +
         '<div class="report-summary">' + esc(r.summary || '') + '</div>' +
         '<div class="report-meta"><span>🏢 ' + esc(r.source || '') + '</span><span>📅 ' + esc(r.date) + '</span></div>' +
+        (readMoreBtn ? '<div style="margin-top:8px">' + readMoreBtn + '</div>' : '') +
+        (fullContent ? '<div style="margin-top:8px">' + fullContent + '</div>' : '') +
       '</div>' +
       (r.url && r.url !== '#' ? '<a href="' + esc(r.url) + '" target="_blank" class="report-dl">📥 查看</a>' : '<span class="report-dl" style="opacity:.5">📥 待上传</span>') +
     '</div>';
@@ -734,12 +810,18 @@ function renderPolicies(items) {
   var list = document.getElementById('policiesList');
   document.getElementById('policiesCount').textContent = items.length + ' 条';
   if (!items.length) { list.innerHTML = '<div class="empty-state"><div class="empty-icon">📜</div><p>暂无政策法规</p></div>'; return; }
-  list.innerHTML = items.map(function(r) {
-    return '<div class="policy-card">' +
+  list.innerHTML = items.map(function(r, idx) {
+    var id = 'policy-' + idx;
+    var hasContent = r.content && r.content.length > 0;
+    var readMoreBtn = hasContent ? '<br><button class="read-more" id="btn-' + id + '" onclick="toggleContent(\'' + id + '\')">📖 阅读全文 <span class="arrow">→</span></button>' : '';
+    var fullContent = hasContent ? '<div class="full-content" id="fc-' + id + '"><div class="fc-inner">' + (r.content||'').replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>') + '</div></div>' : '';
+    return '<div class="policy-card" id="card-' + id + '">' +
       '<div class="policy-icon">📜</div><div class="policy-content">' +
         '<div class="policy-title">' + esc(r.title) + '</div>' +
         '<div class="policy-summary">' + esc(r.summary || '') + '</div>' +
         '<div class="policy-meta"><span>🏛 ' + esc(r.source || '') + '</span><span>📅 ' + esc(r.date) + '</span></div>' +
+        (readMoreBtn ? '<div style="margin-top:8px">' + readMoreBtn + '</div>' : '') +
+        (fullContent ? '<div style="margin-top:8px">' + fullContent + '</div>' : '') +
       '</div>' +
       (r.url && r.url !== '#' ? '<a href="' + esc(r.url) + '" target="_blank" class="policy-link">📥 查看原文</a>' : '<span class="policy-link" style="opacity:.5">📥 待上传</span>') +
     '</div>';
