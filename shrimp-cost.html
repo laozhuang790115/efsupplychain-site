@@ -6,178 +6,158 @@
 <title>厄瓜多尔白虾进口成本核算 — 以鲜国际</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <style>
-/* ========== Reset & Base ========== */
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",-apple-system,sans-serif;
-  color:#1a1a2e;line-height:1.7;background:#f5f7fb;min-height:100vh
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", -apple-system, sans-serif;
+  color: #1a1a2e; line-height: 1.7; background: #f5f7fb; min-height: 100vh;
 }
-a{text-decoration:none;color:inherit}
+a { text-decoration: none; color: inherit; }
 
-/* ========== Header ========== */
-.header{
-  background:linear-gradient(135deg,#0a1628,#0a2848);
-  color:#fff;padding:48px 24px 40px;text-align:center
+.header {
+  background: linear-gradient(135deg, #0a1628, #0a2848);
+  color: #fff; padding: 48px 24px 40px; text-align: center;
 }
-.header .tag{
-  display:inline-block;font-size:11px;letter-spacing:4px;
-  color:#00d4aa;text-transform:uppercase;margin-bottom:12px
+.header .tag {
+  display: inline-block; font-size: 11px; letter-spacing: 4px;
+  color: #00d4aa; text-transform: uppercase; margin-bottom: 12px;
 }
-.header h1{font-size:26px;font-weight:800;margin-bottom:8px}
-.header .sub{font-size:14px;color:rgba(255,255,255,.5)}
-.header .back-link{
-  display:inline-block;margin-top:16px;font-size:13px;
-  color:rgba(255,255,255,.45);transition:color .2s
+.header h1 { font-size: 26px; font-weight: 800; margin-bottom: 8px; }
+.header .sub { font-size: 14px; color: rgba(255,255,255,0.5); }
+.header .back-link {
+  display: inline-block; margin-top: 16px; font-size: 13px;
+  color: rgba(255,255,255,0.45); transition: color 0.2s;
 }
-.header .back-link:hover{color:#00d4aa}
+.header .back-link:hover { color: #00d4aa; }
 
-/* ========== Container ========== */
-.container{max-width:1100px;margin:0 auto;padding:32px 24px 60px}
+.container { max-width: 1100px; margin: 0 auto; padding: 32px 24px 60px; }
 
-/* ========== Cards ========== */
-.card{
-  background:#fff;border-radius:16px;padding:28px 32px;
-  box-shadow:0 2px 16px rgba(0,0,0,.04);margin-bottom:28px
+.card {
+  background: #fff; border-radius: 16px; padding: 28px 32px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.04); margin-bottom: 28px;
 }
-.card-title{
-  font-size:17px;font-weight:700;color:#0a1628;
-  margin-bottom:20px;display:flex;align-items:center;gap:10px
+.card-title {
+  font-size: 17px; font-weight: 700; color: #0a1628;
+  margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
 }
-.card-title .icon{font-size:22px}
+.card-title .icon { font-size: 22px; }
 
-/* ========== Form ========== */
-.form-row{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-  gap:16px;margin-bottom:16px
+.form-row {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px; margin-bottom: 16px;
 }
-.form-group{display:flex;flex-direction:column;gap:6px}
-.form-group label{
-  font-size:12px;color:#888;font-weight:600;text-transform:uppercase;
-  letter-spacing:0.5px
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group label {
+  font-size: 12px; color: #888; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
-.form-group input,.form-group select{
-  padding:10px 14px;border:1.5px solid #e0e5ec;border-radius:10px;
-  font-size:14px;font-family:inherit;transition:border .2s;background:#fafbfc
+.form-group input, .form-group select {
+  padding: 10px 14px; border: 1.5px solid #e0e5ec; border-radius: 10px;
+  font-size: 14px; font-family: inherit; transition: border 0.2s; background: #fafbfc;
 }
-.form-group input:focus,.form-group select:focus{
-  outline:none;border-color:#00a8e8;background:#fff
+.form-group input:focus, .form-group select:focus {
+  outline: none; border-color: #00a8e8; background: #fff;
 }
-.form-group .unit{font-size:11px;color:#aaa;margin-top:-2px}
-.form-group .fixed-val{
-  padding:10px 14px;background:#f0f4f8;border-radius:10px;
-  font-size:14px;color:#555;font-weight:600
+.form-group .unit { font-size: 11px; color: #aaa; margin-top: -2px; }
+.form-group .fixed-val {
+  padding: 10px 14px; background: #f0f4f8; border-radius: 10px;
+  font-size: 14px; color: #555; font-weight: 600;
 }
 
-/* ========== Results ========== */
-.result-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
-  gap:14px
+.result-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 14px;
 }
-.result-item{
-  background:#f8fafc;border-radius:12px;padding:16px;
-  text-align:center;border:1.5px solid #e8edf2;transition:all .2s
+.result-item {
+  background: #f8fafc; border-radius: 12px; padding: 16px;
+  text-align: center; border: 1.5px solid #e8edf2; transition: all 0.2s;
 }
-.result-item.highlight{
-  background:linear-gradient(135deg,#0a1628,#0a2848);border-color:transparent;
-  color:#fff
+.result-item.highlight {
+  background: linear-gradient(135deg, #0a1628, #0a2848);
+  border-color: transparent; color: #fff;
 }
-.result-item .rl{font-size:11px;color:#aaa;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px}
-.result-item.highlight .rl{color:rgba(255,255,255,.5)}
-.result-item .rv{font-size:22px;font-weight:800;color:#0a1628}
-.result-item.highlight .rv{color:#00d4aa;font-size:26px}
-.result-item .rv-sm{font-size:15px;font-weight:700;color:#0a1628}
-.result-item.highlight .rv-sm{color:#fff}
-.result-item .sub{font-size:11px;color:#999;margin-top:2px}
-.result-item.highlight .sub{color:rgba(255,255,255,.45)}
+.result-item .rl { font-size: 11px; color: #aaa; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+.result-item.highlight .rl { color: rgba(255,255,255,0.5); }
+.result-item .rv { font-size: 22px; font-weight: 800; color: #0a1628; }
+.result-item.highlight .rv { color: #00d4aa; font-size: 26px; }
+.result-item .rv-sm { font-size: 15px; font-weight: 700; color: #0a1628; }
+.result-item.highlight .rv-sm { color: #fff; }
+.result-item .sub { font-size: 11px; color: #999; margin-top: 2px; }
+.result-item.highlight .sub { color: rgba(255,255,255,0.45); }
 
-/* ========== Buttons ========== */
-.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
-.btn{
-  padding:10px 24px;border:none;border-radius:10px;font-size:14px;
-  font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+.btn {
+  padding: 10px 24px; border: none; border-radius: 10px; font-size: 14px;
+  font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.2s;
 }
-.btn-primary{
-  background:linear-gradient(135deg,#00a8e8,#00d4aa);color:#fff
-}
-.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,168,232,.3)}
-.btn-outline{
-  background:#fff;border:1.5px solid #d0d8e0;color:#555
-}
-.btn-outline:hover{border-color:#00a8e8;color:#00a8e8}
-.btn-danger{background:#fff;border:1.5px solid #fcc;color:#e55}
-.btn-danger:hover{background:#fff5f5;border-color:#e55}
-.btn-sm{padding:6px 14px;font-size:12px;border-radius:8px}
+.btn-primary { background: linear-gradient(135deg, #00a8e8, #00d4aa); color: #fff; }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,168,232,0.3); }
+.btn-outline { background: #fff; border: 1.5px solid #d0d8e0; color: #555; }
+.btn-outline:hover { border-color: #00a8e8; color: #00a8e8; }
+.btn-danger { background: #fff; border: 1.5px solid #fcc; color: #e55; }
+.btn-danger:hover { background: #fff5f5; border-color: #e55; }
+.btn-sm { padding: 6px 14px; font-size: 12px; border-radius: 8px; }
 
-/* ========== Table ========== */
-.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-table{width:100%;border-collapse:collapse;font-size:13px}
-thead th{
-  background:#f0f4f8;padding:12px 10px;text-align:left;font-weight:700;
-  color:#555;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;
-  white-space:nowrap;border-bottom:2px solid #e0e5ec;
-  cursor:pointer;user-select:none
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead th {
+  background: #f0f4f8; padding: 12px 10px; text-align: left; font-weight: 700;
+  color: #555; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;
+  white-space: nowrap; border-bottom: 2px solid #e0e5ec;
+  cursor: pointer; user-select: none;
 }
-thead th:hover{color:#00a8e8}
-thead th .sort-arrow{font-size:10px;margin-left:3px;opacity:.4}
-tbody td{padding:10px;border-bottom:1px solid #e8ecf0;white-space:nowrap}
-tbody tr.row-even td{background:#dde3ea}
-tbody tr:hover td{background:#e6f7ff!important}
-.cost-highlight{font-weight:800;color:#0a1628}
-.empty-row{text-align:center;padding:40px;color:#bbb;font-size:14px}
+thead th:hover { color: #00a8e8; }
+thead th .sort-arrow { font-size: 10px; margin-left: 3px; opacity: 0.4; }
+tbody td { padding: 10px; border-bottom: 1px solid #e8ecf0; white-space: nowrap; }
+tbody tr.even-month td { background: #e8edf3; }
+tbody tr:hover td { background: #e6f7ff !important; }
+.cost-highlight { font-weight: 800; color: #0a1628; }
+.empty-row { text-align: center; padding: 40px; color: #bbb; font-size: 14px; }
 
-/* ========== Chart ========== */
-.chart-container{position:relative;height:340px;margin-top:16px}
+.chart-container { position: relative; height: 340px; margin-top: 16px; }
 
-/* ========== Toolbar ========== */
-.toolbar{
-  display:flex;justify-content:space-between;align-items:center;
-  flex-wrap:wrap;gap:12px;margin-bottom:16px
+.toolbar {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px; margin-bottom: 16px;
 }
-.toolbar .info{font-size:13px;color:#999}
-.filters{display:flex;gap:10px;flex-wrap:wrap}
+.toolbar .info { font-size: 13px; color: #999; }
+.filters { display: flex; gap: 10px; flex-wrap: wrap; }
 
-/* ========== Toast ========== */
-.toast{
-  position:fixed;top:24px;left:50%;transform:translateX(-50%);
-  background:#0a1628;color:#fff;padding:12px 28px;border-radius:10px;
-  font-size:14px;font-weight:600;z-index:9999;opacity:0;transition:opacity .3s;
-  pointer-events:none
+.toast {
+  position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
+  background: #0a1628; color: #fff; padding: 12px 28px; border-radius: 10px;
+  font-size: 14px; font-weight: 600; z-index: 9999; opacity: 0; transition: opacity 0.3s;
+  pointer-events: none;
 }
-.toast.show{opacity:1}
-.toast.success{background:linear-gradient(135deg,#00a8e8,#00d4aa)}
+.toast.show { opacity: 1; }
+.toast.success { background: linear-gradient(135deg, #00a8e8, #00d4aa); }
 
-/* ========== Responsive ========== */
-@media(max-width:768px){
-  .header h1{font-size:20px}
-  .card{padding:20px 18px} 
-  .form-row{grid-template-columns:repeat(2,1fr)}
-  .result-grid{grid-template-columns:repeat(2,1fr)}
-  .chart-container{height:260px}
+@media (max-width: 768px) {
+  .header h1 { font-size: 20px; }
+  .card { padding: 20px 18px; }
+  .form-row { grid-template-columns: repeat(2, 1fr); }
+  .result-grid { grid-template-columns: repeat(2, 1fr); }
+  .chart-container { height: 260px; }
 }
-@media(max-width:480px){
-  .form-row{grid-template-columns:1fr}
-  .result-grid{grid-template-columns:1fr 1fr}
+@media (max-width: 480px) {
+  .form-row { grid-template-columns: 1fr; }
+  .result-grid { grid-template-columns: 1fr 1fr; }
 }
 </style>
 </head>
 <body>
 
-<!-- ════════════ Header ════════════ -->
 <div class="header">
   <div class="tag">Shrimp Import Cost</div>
-  <h1>🦐 厄瓜多尔白虾进口成本核算</h1>
+  <h1>&#x1F990; 厄瓜多尔白虾进口成本核算</h1>
   <div class="sub">月度数据录入 · CIF到岸成本自动拆解 · 趋势追踪</div>
-  <a href="index.html" class="back-link">← 返回以鲜国际主页</a>
+  <a href="index.html" class="back-link">&#8592; 返回以鲜国际主页</a>
 </div>
 
-<!-- ════════════ Main Content ════════════ -->
 <div class="container">
 
-<!-- ===== 录入表单 ===== -->
 <div class="card" id="form-card">
-  <div class="card-title"><span class="icon">📝</span> 月度数据录入</div>
-
+  <div class="card-title"><span class="icon">&#x1F4DD;</span> 月度数据录入</div>
   <div class="form-row">
     <div class="form-group">
       <label>月份 *</label>
@@ -201,7 +181,6 @@ tbody tr:hover td{background:#e6f7ff!important}
       <input type="number" id="input-processing" step="0.01" min="0" placeholder="0.15" value="0.15">
     </div>
   </div>
-
   <div class="form-row">
     <div class="form-group">
       <label>海运费（USD/kg）</label>
@@ -220,7 +199,6 @@ tbody tr:hover td{background:#e6f7ff!important}
       <input type="number" id="input-days" step="1" min="0" max="365" placeholder="90" value="90">
     </div>
   </div>
-
   <div class="form-row">
     <div class="form-group">
       <label>关税税率</label>
@@ -235,27 +213,24 @@ tbody tr:hover td{background:#e6f7ff!important}
       <div class="fixed-val">6%</div>
     </div>
     <div class="form-group">
-      <label>汇率（USD→CNY）</label>
+      <label>汇率（USD&rarr;CNY）</label>
       <input type="number" id="input-rate" step="0.01" min="0" placeholder="7.20" value="7.20">
     </div>
   </div>
-
   <div class="btn-row">
-    <button class="btn btn-primary" onclick="addRecord()">💾 保存记录并计算</button>
-    <button class="btn btn-outline" onclick="resetForm()">↺ 清空表单</button>
+    <button class="btn btn-primary" onclick="addRecord()">&#x1F4BE; 保存记录并计算</button>
+    <button class="btn btn-outline" onclick="resetForm()">&#x21BA; 清空表单</button>
   </div>
 </div>
 
-<!-- ===== 即时预览 ===== -->
 <div class="card" id="preview-card" style="display:none">
-  <div class="card-title"><span class="icon">🧮</span> 到岸成本拆解 <span style="font-size:12px;color:#aaa;font-weight:400" id="preview-label"></span></div>
+  <div class="card-title"><span class="icon">&#x1F9EE;</span> 到岸成本拆解 <span style="font-size:12px;color:#aaa;font-weight:400" id="preview-label"></span></div>
   <div class="result-grid" id="preview-results"></div>
   <div style="text-align:right;margin-top:8px;font-size:11px;color:#aaa">汇率：<span id="preview-rate"></span></div>
 </div>
 
-<!-- ===== 历史记录 ===== -->
 <div class="card">
-  <div class="card-title"><span class="icon">📊</span> 历史记录</div>
+  <div class="card-title"><span class="icon">&#x1F4CA;</span> 历史记录</div>
   <div class="toolbar">
     <div class="info" id="record-count">共 0 条记录</div>
     <div class="filters">
@@ -265,37 +240,36 @@ tbody tr:hover td{background:#e6f7ff!important}
         <option value="40/50">40/50</option>
         <option value="50/60">50/60</option>
       </select>
-      <button class="btn btn-outline btn-sm" onclick="exportCSV()">📥 导出CSV</button>
-      <button class="btn btn-outline btn-sm" onclick="seedDemoData()" id="seed-btn">📋 填充示例数据</button>
-      <button class="btn btn-danger btn-sm" onclick="clearAll()">🗑 清空数据</button>
+      <button class="btn btn-outline btn-sm" onclick="exportCSV()">&#x1F4E5; 导出CSV</button>
+      <button class="btn btn-outline btn-sm" onclick="seedDemoData()" id="seed-btn">&#x1F4CB; 填充示例数据</button>
+      <button class="btn btn-danger btn-sm" onclick="clearAll()">&#x1F5D1; 清空数据</button>
     </div>
   </div>
   <div class="table-wrap">
     <table>
       <thead>
         <tr>
-          <th onclick="sortBy('month')">月份 <span class="sort-arrow">↕</span></th>
-          <th onclick="sortBy('spec')">规格 <span class="sort-arrow">↕</span></th>
-          <th onclick="sortBy('cna')">CNA(USD) <span class="sort-arrow">↕</span></th>
-          <th class="cost-highlight" onclick="sortBy('cif')">CIF(USD) <span class="sort-arrow">↕</span></th>
+          <th onclick="sortBy('month')">月份 <span class="sort-arrow">&#x2195;</span></th>
+          <th onclick="sortBy('spec')">规格 <span class="sort-arrow">&#x2195;</span></th>
+          <th onclick="sortBy('cna')">CNA(USD) <span class="sort-arrow">&#x2195;</span></th>
+          <th class="cost-highlight" onclick="sortBy('cif')">CIF(USD) <span class="sort-arrow">&#x2195;</span></th>
           <th>关税(USD)</th>
           <th>增值税(USD)</th>
           <th>利息90d(USD)</th>
-          <th class="cost-highlight" onclick="sortBy('totalCost')">到岸成本(USD) <span class="sort-arrow">↕</span></th>
+          <th class="cost-highlight" onclick="sortBy('totalCost')">到岸成本(USD) <span class="sort-arrow">&#x2195;</span></th>
           <th class="cost-highlight">到岸成本(CNY)</th>
           <th>操作</th>
         </tr>
       </thead>
       <tbody id="table-body">
-        <tr><td colspan="10" class="empty-row">📭 暂无数据 — 点击上方「📋 填充示例数据」快速预览，或填表录入</td></tr>
+        <tr><td colspan="10" class="empty-row">&#x1F4ED; 暂无数据 &mdash; 点击上方&ldquo;&#x1F4CB; 填充示例数据&rdquo;快速预览，或填表录入</td></tr>
       </tbody>
     </table>
   </div>
 </div>
 
-<!-- ===== 趋势图 ===== -->
 <div class="card" id="chart-card" style="display:none">
-  <div class="card-title"><span class="icon">📈</span> 月度趋势</div>
+  <div class="card-title"><span class="icon">&#x1F4C8;</span> 月度趋势</div>
   <div class="filters" style="margin-bottom:12px">
     <select id="chart-spec" style="padding:7px 12px;border:1.5px solid #e0e5ec;border-radius:8px;font-size:13px;font-family:inherit" onchange="renderChart()">
       <option value="">全部规格（按月份汇总）</option>
@@ -309,415 +283,551 @@ tbody tr:hover td{background:#e6f7ff!important}
 
 </div>
 
-<!-- ════════════ Toast ════════════ -->
 <div class="toast" id="toast"></div>
 
-<!-- ════════════ Scripts ════════════ -->
 <script>
-// ========== Constants ==========
-const TARIFF_RATE = 0.035;   // 关税 3.5%
-const VAT_RATE = 0.09;       // 增值税 9%
-const INTEREST_RATE = 0.06;  // 年利率 6%
+(function() {
+  "use strict";
 
-const STORAGE_KEY = 'ef_shrimp_cost_records';
+  var TARIFF_RATE = 0.035;
+  var VAT_RATE = 0.09;
+  var INTEREST_RATE = 0.06;
+  var STORAGE_KEY = "ef_shrimp_cost_records";
 
-// ========== State ==========
-let records = [];
-let sortField = 'month';
-let sortDir = 'desc';
-let chartInstance = null;
+  var records = [];
+  var sortField = "month";
+  var sortDir = "desc";
+  var chartInstance = null;
 
-// ========== Init ==========
-function init(){
-  loadRecords();
-  document.getElementById('input-month').value = getCurrentMonth();
-  // 首次访问：自动填充示例数据，历史记录默认可见
-  if(records.length === 0){
-    seedDemoData();
-  }
-}
-function getCurrentMonth(){
-  const d = new Date();
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
-}
-
-// ========== Storage ==========
-function loadRecords(){
-  try{
-    const raw = localStorage.getItem(STORAGE_KEY);
-    records = raw ? JSON.parse(raw) : [];
-  }catch(e){ records = []; }
-  renderTable();
-  renderChart();
-}
-function saveRecords(){
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
-}
-
-// ========== Calculation ==========
-function calculate(cna, processing, freight, insurance, fees, days, rate){
-  const cif = cna + processing + freight + insurance;
-  const tariff = cif * TARIFF_RATE;
-  const dutiableValue = cif + tariff;
-  const vat = dutiableValue * VAT_RATE;
-  const interest = cif * INTEREST_RATE * (days / 365);
-  const totalCost = cif + tariff + vat + fees + interest;
-  const totalCostCNY = totalCost * rate;
-  
-  return {
-    cna, processing, freight, insurance, fees,
-    cif: round(cif),
-    tariff: round(tariff),
-    vat: round(vat),
-    interest: round(interest),
-    totalCost: round(totalCost),
-    totalCostCNY: round(totalCostCNY),
-    days, rate
-  };
-}
-
-function round(v){ return Math.round(v * 100) / 100; }
-
-// ========== Add Record ==========
-function addRecord(){
-  const month = document.getElementById('input-month').value;
-  const spec = document.getElementById('input-spec').value;
-  const cna = parseFloat(document.getElementById('input-cna').value);
-  const processing = parseFloat(document.getElementById('input-processing').value) || 0;
-  const freight = parseFloat(document.getElementById('input-freight').value) || 0;
-  const insurance = parseFloat(document.getElementById('input-insurance').value) || 0;
-  const fees = parseFloat(document.getElementById('input-fees').value) || 0;
-  const days = parseInt(document.getElementById('input-days').value) || 90;
-  const rate = parseFloat(document.getElementById('input-rate').value) || 7.2;
-  
-  // Validation
-  if(!month){ showToast('请选择月份', false); return; }
-  if(!spec){ showToast('请选择产品规格', false); return; }
-  if(isNaN(cna) || cna <= 0){ showToast('请输入有效的塘头价 CNA', false); return; }
-  
-  const calc = calculate(cna, processing, freight, insurance, fees, days, rate);
-  
-  // Check duplicate (same month + spec)
-  const dupIdx = records.findIndex(r => r.month === month && r.spec === spec);
-  if(dupIdx >= 0){
-    if(!confirm(`「${month} · ${spec}」已有记录，是否覆盖？`)) return;
-    records[dupIdx] = { month, spec, ...calc, updatedAt: new Date().toISOString() };
-    showToast('✅ 记录已覆盖更新', true);
-  } else {
-    records.push({ month, spec, ...calc, updatedAt: new Date().toISOString() });
-    showToast('✅ 记录已保存', true);
-  }
-  
-  saveRecords();
-  renderTable();
-  renderChart();
-  showPreview(month, spec, calc);
-  resetForm(false);
-}
-
-function showPreview(month, spec, c){
-  const card = document.getElementById('preview-card');
-  card.style.display = 'block';
-  document.getElementById('preview-label').textContent = `${month} · ${spec}`;
-  document.getElementById('preview-rate').textContent = `USD 1 = CNY ${c.rate}`;
-  
-  document.getElementById('preview-results').innerHTML = `
-    <div class="result-item"><div class="rl">CNA 塘头价</div><div class="rv-sm">$${c.cna}</div><div class="sub">USD/kg</div></div>
-    <div class="result-item"><div class="rl">+ 加工费</div><div class="rv-sm">$${c.processing}</div></div>
-    <div class="result-item"><div class="rl">+ 运费</div><div class="rv-sm">$${c.freight}</div></div>
-    <div class="result-item"><div class="rl">+ 保险</div><div class="rv-sm">$${c.insurance}</div></div>
-    <div class="result-item" style="border:2px solid #00a8e8;background:#f0f9ff"><div class="rl">CIF 到岸价</div><div class="rv-sm">$${c.cif}</div><div class="sub">USD/kg</div></div>
-    <div class="result-item"><div class="rl">关税 3.5%</div><div class="rv-sm">$${c.tariff}</div></div>
-    <div class="result-item"><div class="rl">增值税 9%</div><div class="rv-sm">$${c.vat}</div></div>
-    <div class="result-item"><div class="rl">+ 进口费用</div><div class="rv-sm">$${c.fees}</div></div>
-    <div class="result-item"><div class="rl">利息 ${c.days}d·6%</div><div class="rv-sm">$${c.interest}</div></div>
-    <div class="result-item highlight"><div class="rl">综合到岸成本</div><div class="rv">$${c.totalCost}</div><div class="sub">USD/kg</div></div>
-    <div class="result-item highlight" style="background:linear-gradient(135deg,#00a8e8,#00d4aa);border-color:transparent"><div class="rl">综合到岸成本(¥)</div><div class="rv" style="color:#fff">¥${c.totalCostCNY}</div><div class="sub">CNY/kg</div></div>
-  `;
-  card.scrollIntoView({behavior:'smooth',block:'center'});
-}
-
-// ========== Render Table ==========
-function renderTable(){
-  const filterSpec = document.getElementById('filter-spec').value;
-  let filtered = filterSpec ? records.filter(r => r.spec === filterSpec) : [...records];
-
-  // Sort
-  filtered.sort((a,b) => {
-    let va = a[sortField], vb = b[sortField];
-    if(typeof va === 'string') return sortDir === 'asc' ? va.localeCompare(vb) : vb.localeCompare(va);
-    return sortDir === 'asc' ? va - vb : vb - va;
-  });
-
-  const tbody = document.getElementById('table-body');
-  document.getElementById('record-count').textContent = '共 ' + records.length + ' 条记录';
-
-  if(filtered.length === 0){
-    tbody.innerHTML = '<tr><td colspan="10" class="empty-row">\uD83D\uDCEC 暂无匹配数据 — 点击「\uD83D\uDCCB 填充示例数据」添加2026上半年行情</td></tr>';
-    return;
-  }
-
-  // 按月份灰白交替 — 用 forEach 拼接，避免 map+模板字面量可能的渲染问题
-  var prevMonth = null;
-  var isEven = false;
-  var rows = [];
-
-  filtered.forEach(function(r){
-    if(r.month !== prevMonth){
-      prevMonth = r.month;
-      isEven = !isEven;
+  // ========= Init =========
+  function init() {
+    loadRecords();
+    var el = document.getElementById("input-month");
+    if (el) el.value = getCurrentMonth();
+    if (records.length === 0) {
+      seedDemoDataCore(true);
     }
-    var bg = isEven ? ' style="background:#e8edf3;"' : '';
-    rows.push(
-      '<tr' + bg + '>' +
-        '<td>' + r.month + '</td>' +
-        '<td>' + r.spec + '</td>' +
-        '<td>$' + r.cna + '</td>' +
-        '<td class="cost-highlight">$' + r.cif + '</td>' +
-        '<td>$' + r.tariff + '</td>' +
-        '<td>$' + r.vat + '</td>' +
-        '<td>$' + r.interest + '</td>' +
-        '<td class="cost-highlight">$' + r.totalCost + '</td>' +
-        '<td class="cost-highlight">¥' + r.totalCostCNY + '</td>' +
-        '<td><button class="btn btn-danger btn-sm" onclick="deleteRecord(\'' + r.month + '\',\'' + r.spec + '\')">✕</button></td>' +
-      '</tr>'
-    );
-  });
-
-  tbody.innerHTML = rows.join('');
-}
-
-// ========== Delete ==========
-function deleteRecord(month, spec){
-  if(!confirm(`确认删除「${month} · ${spec}」？`)) return;
-  records = records.filter(r => !(r.month === month && r.spec === spec));
-  saveRecords();
-  renderTable();
-  renderChart();
-  showToast('🗑 记录已删除', true);
-}
-
-function clearAll(){
-  if(!confirm('⚠️ 确认清空所有历史数据？此操作不可恢复！')) return;
-  records = [];
-  saveRecords();
-  renderTable();
-  renderChart();
-  document.getElementById('preview-card').style.display = 'none';
-  showToast('🗑 全部数据已清空', true);
-}
-
-// ========== Seed Demo Data ==========
-function seedDemoData(){
-  if(records.length > 0){
-    if(!confirm('当前已有 ' + records.length + ' 条记录。填充示例数据将追加到现有记录中，覆盖同月同规格的记录。是否继续？')) return;
   }
-  
-  // 2026年1月-6月，按行情季节波动估算
-  const specs = [
-    { spec:'30/40', cnas:[5.80,5.50,5.20,4.80,4.50,4.60], proc:0.15 },
-    { spec:'40/50', cnas:[5.20,4.90,4.60,4.30,4.10,4.20], proc:0.15 },
-    { spec:'50/60', cnas:[4.80,4.60,4.30,4.00,3.80,3.90], proc:0.15 }
-  ];
-  const months = ['2026-01','2026-02','2026-03','2026-04','2026-05','2026-06'];
-  // 海运费季节性: Q1旺季高, Q2回落
-  const freights = [0.14,0.13,0.11,0.09,0.08,0.09];
-  const insurance = 0.02;
-  const fees = 0.05;
-  const days = 90;
-  const rate = 7.20;
-  
-  let added = 0, updated = 0;
-  
-  specs.forEach(s => {
-    months.forEach((m, i) => {
-      const calc = calculate(s.cnas[i], s.proc, freights[i], insurance, fees, days, rate);
-      const existing = records.findIndex(r => r.month === m && r.spec === s.spec);
-      const entry = { month:m, spec:s.spec, ...calc, updatedAt: new Date().toISOString(), demo:true };
-      
-      if(existing >= 0){
-        records[existing] = entry;
-        updated++;
-      } else {
-        records.push(entry);
-        added++;
+
+  function getCurrentMonth() {
+    var d = new Date();
+    var m = String(d.getMonth() + 1);
+    if (m.length < 2) m = "0" + m;
+    return d.getFullYear() + "-" + m;
+  }
+
+  // ========= Storage =========
+  function loadRecords() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      records = raw ? JSON.parse(raw) : [];
+    } catch(e) { records = []; }
+    renderTable();
+    renderChart();
+  }
+
+  function saveRecords() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+  }
+
+  // ========= Calculation =========
+  function calculate(cna, processing, freight, insurance, fees, days, rate) {
+    var cif = cna + processing + freight + insurance;
+    var tariff = cif * TARIFF_RATE;
+    var dutiableValue = cif + tariff;
+    var vat = dutiableValue * VAT_RATE;
+    var interest = cif * INTEREST_RATE * (days / 365);
+    var totalCost = cif + tariff + vat + fees + interest;
+    var totalCostCNY = totalCost * rate;
+    return {
+      cna: round(cna),
+      processing: round(processing),
+      freight: round(freight),
+      insurance: round(insurance),
+      fees: round(fees),
+      cif: round(cif),
+      tariff: round(tariff),
+      vat: round(vat),
+      interest: round(interest),
+      totalCost: round(totalCost),
+      totalCostCNY: round(totalCostCNY),
+      days: days,
+      rate: rate
+    };
+  }
+
+  function round(v) { return Math.round(v * 100) / 100; }
+
+  // ========= Add Record =========
+  function addRecord() {
+    var month = document.getElementById("input-month").value;
+    var spec = document.getElementById("input-spec").value;
+    var cna = parseFloat(document.getElementById("input-cna").value);
+    var processing = parseFloat(document.getElementById("input-processing").value) || 0;
+    var freight = parseFloat(document.getElementById("input-freight").value) || 0;
+    var insurance = parseFloat(document.getElementById("input-insurance").value) || 0;
+    var fees = parseFloat(document.getElementById("input-fees").value) || 0;
+    var days = parseInt(document.getElementById("input-days").value) || 90;
+    var rate = parseFloat(document.getElementById("input-rate").value) || 7.2;
+
+    if (!month) { showToast("请选择月份", false); return; }
+    if (!spec) { showToast("请选择产品规格", false); return; }
+    if (isNaN(cna) || cna <= 0) { showToast("请输入有效的塘头价 CNA", false); return; }
+
+    var calc = calculate(cna, processing, freight, insurance, fees, days, rate);
+
+    var dupIdx = -1;
+    for (var i = 0; i < records.length; i++) {
+      if (records[i].month === month && records[i].spec === spec) { dupIdx = i; break; }
+    }
+
+    if (dupIdx >= 0) {
+      if (!confirm(month + " · " + spec + " 已有记录，是否覆盖？")) return;
+      records[dupIdx].cna = calc.cna;
+      records[dupIdx].processing = calc.processing;
+      records[dupIdx].freight = calc.freight;
+      records[dupIdx].insurance = calc.insurance;
+      records[dupIdx].fees = calc.fees;
+      records[dupIdx].cif = calc.cif;
+      records[dupIdx].tariff = calc.tariff;
+      records[dupIdx].vat = calc.vat;
+      records[dupIdx].interest = calc.interest;
+      records[dupIdx].totalCost = calc.totalCost;
+      records[dupIdx].totalCostCNY = calc.totalCostCNY;
+      records[dupIdx].days = calc.days;
+      records[dupIdx].rate = calc.rate;
+      records[dupIdx].updatedAt = new Date().toISOString();
+      showToast("记录已覆盖更新", true);
+    } else {
+      records.push({
+        month: month,
+        spec: spec,
+        cna: calc.cna,
+        processing: calc.processing,
+        freight: calc.freight,
+        insurance: calc.insurance,
+        fees: calc.fees,
+        cif: calc.cif,
+        tariff: calc.tariff,
+        vat: calc.vat,
+        interest: calc.interest,
+        totalCost: calc.totalCost,
+        totalCostCNY: calc.totalCostCNY,
+        days: calc.days,
+        rate: calc.rate,
+        updatedAt: new Date().toISOString(),
+        demo: true
+      });
+      showToast("记录已保存", true);
+    }
+
+    saveRecords();
+    renderTable();
+    renderChart();
+    showPreview(month, spec, calc);
+    resetForm(false);
+  }
+
+  function showPreview(month, spec, c) {
+    var card = document.getElementById("preview-card");
+    card.style.display = "block";
+    document.getElementById("preview-label").textContent = month + " · " + spec;
+    document.getElementById("preview-rate").textContent = "USD 1 = CNY " + c.rate;
+    var el = document.getElementById("preview-results");
+    el.innerHTML =
+      "<div class=\"result-item\"><div class=\"rl\">CNA 塘头价</div><div class=\"rv-sm\">$" + c.cna + "</div><div class=\"sub\">USD/kg</div></div>" +
+      "<div class=\"result-item\"><div class=\"rl\">+ 加工费</div><div class=\"rv-sm\">$" + c.processing + "</div></div>" +
+      "<div class=\"result-item\"><div class=\"rl\">+ 运费</div><div class=\"rv-sm\">$" + c.freight + "</div></div>" +
+      "<div class=\"result-item\"><div class=\"rl\">+ 保险</div><div class=\"rv-sm\">$" + c.insurance + "</div></div>" +
+      "<div class=\"result-item\" style=\"border:2px solid #00a8e8;background:#f0f9ff\"><div class=\"rl\">CIF 到岸价</div><div class=\"rv-sm\">$" + c.cif + "</div><div class=\"sub\">USD/kg</div></div>" +
+      "<div class=\"result-item\"><div class=\"rl\">关税 3.5%</div><div class=\"rv-sm\">$" + c.tariff + "</div></div>" +
+      "<div class=\"result-item\"><div class=\"rl\">增值税 9%</div><div class=\"rv-sm\">$" + c.vat + "</div></div>" +
+      "<div class=\"result-item\"><div class=\"rl\">+ 进口费用</div><div class=\"rv-sm\">$" + c.fees + "</div></div>" +
+      "<div class=\"result-item\"><div class=\"rl\">利息 " + c.days + "d·6%</div><div class=\"rv-sm\">$" + c.interest + "</div></div>" +
+      "<div class=\"result-item highlight\"><div class=\"rl\">综合到岸成本</div><div class=\"rv\">$" + c.totalCost + "</div><div class=\"sub\">USD/kg</div></div>" +
+      "<div class=\"result-item highlight\" style=\"background:linear-gradient(135deg,#00a8e8,#00d4aa);border-color:transparent\"><div class=\"rl\">综合到岸成本(¥)</div><div class=\"rv\" style=\"color:#fff\">¥" + c.totalCostCNY + "</div><div class=\"sub\">CNY/kg</div></div>";
+    card.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  // ========= Render Table =========
+  function renderTable() {
+    var filterSpec = document.getElementById("filter-spec").value;
+    var filtered = filterSpec ? [] : records.slice();
+    if (filterSpec) {
+      for (var i = 0; i < records.length; i++) {
+        if (records[i].spec === filterSpec) filtered.push(records[i]);
       }
+    }
+
+    // Sort
+    filtered.sort(function(a, b) {
+      var va = a[sortField], vb = b[sortField];
+      if (typeof va === "string") return sortDir === "asc" ? va.localeCompare(vb) : vb.localeCompare(va);
+      return sortDir === "asc" ? va - vb : vb - va;
     });
-  });
-  
-  saveRecords();
-  renderTable();
-  renderChart();
-  showToast(`✅ 示例数据就绪（新增 ${added} 条，覆盖 ${updated} 条）`, true);
-  document.getElementById('seed-btn').textContent = '🔄 刷新示例数据';
-}
 
-// ========== Sort ==========
-function sortBy(field){
-  if(sortField === field){ sortDir = sortDir === 'asc' ? 'desc' : 'asc'; }
-  else { sortField = field; sortDir = 'desc'; }
-  renderTable();
-}
+    var tbody = document.getElementById("table-body");
+    document.getElementById("record-count").textContent = "共 " + records.length + " 条记录";
 
-// ========== Export CSV ==========
-function exportCSV(){
-  if(records.length === 0){ showToast('暂无数据可导出', false); return; }
-  
-  const headers = ['月份','规格','CNA(USD)','加工费(USD)','运费(USD)','保险(USD)','CIF(USD)',
-                    '关税(USD)','增值税(USD)','进口费用(USD)','利息(USD)',
-                    '到岸成本(USD)','到岸成本(CNY)','账期(天)','汇率'];
-  const rows = records.map(r => [
-    r.month, r.spec, r.cna, r.processing, r.freight, r.insurance, r.cif,
-    r.tariff, r.vat, r.fees, r.interest,
-    r.totalCost, r.totalCostCNY, r.days, r.rate
-  ]);
-  
-  const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
-  const blob = new Blob(['\uFEFF' + csv], {type:'text/csv;charset=utf-8'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = `厄瓜多尔白虾进口成本_${new Date().toISOString().slice(0,10)}.csv`;
-  a.click(); URL.revokeObjectURL(url);
-  showToast('📥 CSV已下载', true);
-}
+    if (filtered.length === 0) {
+      tbody.innerHTML = "<tr><td colspan=\"10\" class=\"empty-row\">&#x1F4ED; 暂无匹配数据</td></tr>";
+      return;
+    }
 
-// ========== Chart ==========
-function renderChart(){
-  const chartCard = document.getElementById('chart-card');
-  if(records.length === 0){ chartCard.style.display = 'none'; return; }
-  chartCard.style.display = 'block';
-  
-  const chartSpec = document.getElementById('chart-spec').value;
-  let data = chartSpec ? records.filter(r => r.spec === chartSpec) : records;
-  if(data.length === 0) return;
-  
-  // Aggregate by month if "all specs"
-  let aggregated = [];
-  if(!chartSpec){
-    const byMonth = {};
-    data.forEach(r => {
-      if(!byMonth[r.month]) byMonth[r.month] = { month:r.month, cnas:[], totalCosts:[], totalCostCNYs:[] };
-      byMonth[r.month].cnas.push(r.cna);
-      byMonth[r.month].totalCosts.push(r.totalCost);
-      byMonth[r.month].totalCostCNYs.push(r.totalCostCNY);
-    });
-    aggregated = Object.values(byMonth).map(m => ({
-      month: m.month,
-      cna: round(m.cnas.reduce((a,b)=>a+b,0) / m.cnas.length),
-      totalCost: round(m.totalCosts.reduce((a,b)=>a+b,0) / m.totalCosts.length),
-      totalCostCNY: round(m.totalCostCNYs.reduce((a,b)=>a+b,0) / m.totalCostCNYs.length)
-    }));
-  } else {
-    aggregated = data;
+    // Build rows with month-based alternating colors
+    var prevMonth = "";
+    var even = false;
+    var html = "";
+
+    for (var i = 0; i < filtered.length; i++) {
+      var r = filtered[i];
+      if (r.month !== prevMonth) {
+        prevMonth = r.month;
+        even = !even;
+      }
+      var cls = even ? " class=\"even-month\"" : "";
+      html += "<tr" + cls + ">" +
+        "<td>" + esc(r.month) + "</td>" +
+        "<td>" + esc(r.spec) + "</td>" +
+        "<td>$" + r.cna + "</td>" +
+        "<td class=\"cost-highlight\">$" + r.cif + "</td>" +
+        "<td>$" + r.tariff + "</td>" +
+        "<td>$" + r.vat + "</td>" +
+        "<td>$" + r.interest + "</td>" +
+        "<td class=\"cost-highlight\">$" + r.totalCost + "</td>" +
+        "<td class=\"cost-highlight\">¥" + r.totalCostCNY + "</td>" +
+        "<td><button class=\"btn btn-danger btn-sm\" onclick=\"deleteRecord(this)\">&#x2715;</button></td>" +
+        "</tr>";
+    }
+    tbody.innerHTML = html;
   }
-  aggregated.sort((a,b) => a.month.localeCompare(b.month));
-  
-  const labels  = aggregated.map(r => r.month);
-  const cnaData = aggregated.map(r => r.cna);
-  const costData = aggregated.map(r => r.totalCostCNY);
-  
-  const ctx = document.getElementById('trendChart').getContext('2d');
-  if(chartInstance) chartInstance.destroy();
-  
-  chartInstance = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels,
-      datasets: [
-        {
-          label: '塘头价 CNA (USD/kg)',
-          data: cnaData,
-          borderColor: '#f59e0b',
-          backgroundColor: 'rgba(245,158,11,.08)',
-          borderWidth: 2.5,
-          tension: 0.35,
-          fill: true,
-          pointRadius: 5,
-          pointBackgroundColor: '#f59e0b',
-          yAxisID: 'y'
-        },
-        {
-          label: '综合到岸成本 (CNY/kg)',
-          data: costData,
-          borderColor: '#00a8e8',
-          backgroundColor: 'rgba(0,168,232,.05)',
-          borderWidth: 2.5,
-          tension: 0.35,
-          fill: true,
-          pointRadius: 5,
-          pointBackgroundColor: '#00a8e8',
-          yAxisID: 'y1'
+
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  // ========= Delete =========
+  function deleteRecord(btn) {
+    var tr = btn.closest("tr");
+    if (!tr) return;
+    var month = tr.getAttribute("data-month");
+    var spec = tr.getAttribute("data-spec");
+    if (!confirm("确认删除「" + month + " · " + spec + "」？")) return;
+    for (var i = records.length - 1; i >= 0; i--) {
+      if (records[i].month === month && records[i].spec === spec) { records.splice(i, 1); break; }
+    }
+    saveRecords();
+    renderTable();
+    renderChart();
+    showToast("记录已删除", true);
+  }
+
+  // Fix: add data-month and data-spec to rows after rendering
+  var origRenderTable = renderTable;
+  // We override renderTable to add data attributes via DOM after setting innerHTML
+  // Actually, let us just set innerHTML and then fix the rows
+  function renderTableFix() {
+    origRenderTable();
+    var tbody = document.getElementById("table-body");
+    var rows = tbody.getElementsByTagName("tr");
+    // Re-get filtered list (same logic as renderTable)
+    var filterSpec = document.getElementById("filter-spec").value;
+    var filtered = filterSpec ? [] : records.slice();
+    if (filterSpec) {
+      for (var i = 0; i < records.length; i++) {
+        if (records[i].spec === filterSpec) filtered.push(records[i]);
+      }
+    }
+    filtered.sort(function(a, b) {
+      var va = a[sortField], vb = b[sortField];
+      if (typeof va === "string") return sortDir === "asc" ? va.localeCompare(vb) : vb.localeCompare(va);
+      return sortDir === "asc" ? va - vb : vb - va;
+    });
+    for (var j = 0; j < rows.length && j < filtered.length; j++) {
+      rows[j].setAttribute("data-month", filtered[j].month);
+      rows[j].setAttribute("data-spec", filtered[j].spec);
+    }
+  }
+  // Replace renderTable with the fixed version
+  window.renderTable = renderTableFix;
+
+  function clearAll() {
+    if (!confirm("确认清空所有历史数据？此操作不可恢复！")) return;
+    records = [];
+    saveRecords();
+    renderTable();
+    renderChart();
+    document.getElementById("preview-card").style.display = "none";
+    showToast("全部数据已清空", true);
+  }
+
+  // ========= Seed Demo Data =========
+  function seedDemoData() {
+    seedDemoDataCore(false);
+  }
+
+  function seedDemoDataCore(silent) {
+    var specs = [
+      { spec: "30/40", cnas: [5.80, 5.50, 5.20, 4.80, 4.50, 4.60], proc: 0.15 },
+      { spec: "40/50", cnas: [5.20, 4.90, 4.60, 4.30, 4.10, 4.20], proc: 0.15 },
+      { spec: "50/60", cnas: [4.80, 4.60, 4.30, 4.00, 3.80, 3.90], proc: 0.15 }
+    ];
+    var months = ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06"];
+    var freights = [0.14, 0.13, 0.11, 0.09, 0.08, 0.09];
+    var insurance = 0.02, fees = 0.05, days = 90, rate = 7.20;
+
+    var added = 0, updated = 0;
+
+    for (var s = 0; s < specs.length; s++) {
+      for (var m = 0; m < months.length; m++) {
+        var calc = calculate(specs[s].cnas[m], specs[s].proc, freights[m], insurance, fees, days, rate);
+        var existing = -1;
+        for (var i = 0; i < records.length; i++) {
+          if (records[i].month === months[m] && records[i].spec === specs[s].spec) { existing = i; break; }
         }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      interaction: { mode: 'index', intersect: false },
-      plugins: {
-        legend: { position: 'bottom', labels: { usePointStyle: true, padding: 24, font: { size: 12 } } },
-        tooltip: {
-          backgroundColor: 'rgba(10,22,40,.92)',
-          titleFont: { size: 13 },
-          bodyFont: { size: 13 },
-          padding: 14,
-          cornerRadius: 8,
-          callbacks: {
-            label: ctx => `${ctx.dataset.label}: ${ctx.raw.toFixed(2)} ${ctx.dataset.yAxisID === 'y' ? 'USD/kg' : 'CNY/kg'}`
+        if (existing >= 0) {
+          records[existing].cna = calc.cna;
+          records[existing].processing = calc.processing;
+          records[existing].freight = calc.freight;
+          records[existing].insurance = calc.insurance;
+          records[existing].fees = calc.fees;
+          records[existing].cif = calc.cif;
+          records[existing].tariff = calc.tariff;
+          records[existing].vat = calc.vat;
+          records[existing].interest = calc.interest;
+          records[existing].totalCost = calc.totalCost;
+          records[existing].totalCostCNY = calc.totalCostCNY;
+          records[existing].days = calc.days;
+          records[existing].rate = calc.rate;
+          records[existing].updatedAt = new Date().toISOString();
+          updated++;
+        } else {
+          records.push({
+            month: months[m],
+            spec: specs[s].spec,
+            cna: calc.cna,
+            processing: calc.processing,
+            freight: calc.freight,
+            insurance: calc.insurance,
+            fees: calc.fees,
+            cif: calc.cif,
+            tariff: calc.tariff,
+            vat: calc.vat,
+            interest: calc.interest,
+            totalCost: calc.totalCost,
+            totalCostCNY: calc.totalCostCNY,
+            days: calc.days,
+            rate: calc.rate,
+            updatedAt: new Date().toISOString(),
+            demo: true
+          });
+          added++;
+        }
+      }
+    }
+
+    saveRecords();
+    renderTable();
+    renderChart();
+    if (!silent) {
+      showToast("示例数据就绪（新增 " + added + " 条，覆盖 " + updated + " 条）", true);
+      document.getElementById("seed-btn").textContent = "刷新示例数据";
+    }
+  }
+
+  // ========= Sort =========
+  function sortBy(field) {
+    if (sortField === field) {
+      sortDir = sortDir === "asc" ? "desc" : "asc";
+    } else {
+      sortField = field;
+      sortDir = "desc";
+    }
+    renderTable();
+  }
+
+  // ========= Export CSV =========
+  function exportCSV() {
+    if (records.length === 0) { showToast("暂无数据可导出", false); return; }
+    var headers = ["月份","规格","CNA(USD)","加工费(USD)","运费(USD)","保险(USD)","CIF(USD)","关税(USD)","增值税(USD)","进口费用(USD)","利息(USD)","到岸成本(USD)","到岸成本(CNY)","账期(天)","汇率"];
+    var rows = [];
+    for (var i = 0; i < records.length; i++) {
+      var r = records[i];
+      rows.push([r.month, r.spec, r.cna, r.processing, r.freight, r.insurance, r.cif, r.tariff, r.vat, r.fees, r.interest, r.totalCost, r.totalCostCNY, r.days, r.rate].join(","));
+    }
+    var csv = "\uFEFF" + headers.join(",") + "\n" + rows.join("\n");
+    var blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "厄瓜多尔白虾进口成本_" + new Date().toISOString().slice(0, 10) + ".csv";
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast("CSV已下载", true);
+  }
+
+  // ========= Chart =========
+  function renderChart() {
+    var chartCard = document.getElementById("chart-card");
+    if (records.length === 0) { chartCard.style.display = "none"; return; }
+    chartCard.style.display = "block";
+
+    var chartSpec = document.getElementById("chart-spec").value;
+    var data = chartSpec ? [] : records.slice();
+    if (chartSpec) {
+      for (var i = 0; i < records.length; i++) {
+        if (records[i].spec === chartSpec) data.push(records[i]);
+      }
+    }
+    if (data.length === 0) { if (chartInstance) chartInstance.destroy(); chartInstance = null; return; }
+
+    var aggregated = [];
+    if (!chartSpec) {
+      var byMonth = {};
+      for (var j = 0; j < data.length; j++) {
+        var r = data[j];
+        if (!byMonth[r.month]) byMonth[r.month] = { month: r.month, cnas: [], totalCosts: [], totalCostCNYs: [] };
+        byMonth[r.month].cnas.push(r.cna);
+        byMonth[r.month].totalCosts.push(r.totalCost);
+        byMonth[r.month].totalCostCNYs.push(r.totalCostCNY);
+      }
+      var monthKeys = [];
+      for (var k in byMonth) { if (byMonth.hasPRoperty(k)) monthKeys.push(k); }
+      for (var m = 0; m < monthKeys.length; m++) {
+        var mk = monthKeys[m], mv = byMonth[mk];
+        aggregated.push({
+          month: mk,
+          cna: round(mv.cnas.reduce(function(a, b) { return a + b; }, 0) / mv.cnas.length),
+          totalCost: round(mv.totalCosts.reduce(function(a, b) { return a + b; }, 0) / mv.totalCosts.length),
+          totalCostCNY: round(mv.totalCostCNYs.reduce(function(a, b) { return a + b; }, 0) / mv.totalCostCNYs.length)
+        });
+      }
+    } else {
+      aggregated = data;
+    }
+    aggregated.sort(function(a, b) { return a.month.localeCompare(b.month); });
+
+    var labels = [];
+    for (var n = 0; n < aggregated.length; n++) labels.push(aggregated[n].month);
+    var cnaData = [], costData = [];
+    for (var n2 = 0; n2 < aggregated.length; n2++) { cnaData.push(aggregated[n2].cna); costData.push(aggregated[n2].totalCostCNY); }
+
+    var ctx = document.getElementById("trendChart").getContext("2d");
+    if (chartInstance) chartInstance.destroy();
+
+    chartInstance = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "塘头价 CNA (USD/kg)",
+            data: cnaData,
+            borderColor: "#f59e0b",
+            backgroundColor: "rgba(245,158,11,0.08)",
+            borderWidth: 2.5,
+            tension: 0.35,
+            fill: true,
+            pointRadius: 5,
+            pointBackgroundColor: "#f59e0b",
+            yAxisID: "y"
+          },
+          {
+            label: "综合到岸成本 (CNY/kg)",
+            data: costData,
+            borderColor: "#00a8e8",
+            backgroundColor: "rgba(0,168,232,0.05)",
+            borderWidth: 2.5,
+            tension: 0.35,
+            fill: true,
+            pointRadius: 5,
+            pointBackgroundColor: "#00a8e8",
+            yAxisID: "y1"
           }
-        }
+        ]
       },
-      scales: {
-        y: {
-          type: 'linear',
-          position: 'left',
-          title: { display: true, text: 'USD/kg', font: { size: 11 }, color: '#f59e0b' },
-          grid: { color: 'rgba(0,0,0,.04)' },
-          ticks: { callback: v => '$' + v.toFixed(1) }
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: { position: "bottom", labels: { usePointStyle: true, padding: 24, font: { size: 12 } } },
+          tooltip: {
+            backgroundColor: "rgba(10,22,40,0.92)",
+            titleFont: { size: 13 },
+            bodyFont: { size: 13 },
+            padding: 14,
+            cornerRadius: 8,
+            callbacks: {
+              label: function(ctx) {
+                return ctx.dataset.label + ": " + ctx.raw.toFixed(2) + (ctx.dataset.yAxisID === "y" ? " USD/kg" : " CNY/kg");
+              }
+            }
+          }
         },
-        y1: {
-          type: 'linear',
-          position: 'right',
-          title: { display: true, text: 'CNY/kg', font: { size: 11 }, color: '#00a8e8' },
-          grid: { drawOnChartArea: false },
-          ticks: { callback: v => '¥' + v.toFixed(1) }
-        },
-        x: {
-          grid: { display: false }
+        scales: {
+          y: {
+            type: "linear",
+            position: "left",
+            title: { display: true, text: "USD/kg", font: { size: 11 }, color: "#f59e0b" },
+            grid: { color: "rgba(0,0,0,0.04)" },
+            ticks: { callback: function(v) { return "$" + v.toFixed(1); } }
+          },
+          y1: {
+            type: "linear",
+            position: "right",
+            title: { display: true, text: "CNY/kg", font: { size: 11 }, color: "#00a8e8" },
+            grid: { drawOnChartArea: false },
+            ticks: { callback: function(v) { return "¥" + v.toFixed(1); } }
+          },
+          x: { grid: { display: false } }
         }
       }
-    }
+    });
+  }
+
+  // ========= Form =========
+  function resetForm(clearMonth) {
+    document.getElementById("input-spec").value = "";
+    document.getElementById("input-cna").value = "";
+    document.getElementById("input-processing").value = "0.15";
+    document.getElementById("input-freight").value = "0.10";
+    document.getElementById("input-insurance").value = "0.02";
+    document.getElementById("input-fees").value = "0.05";
+    document.getElementById("input-days").value = "90";
+    document.getElementById("input-rate").value = "7.20";
+    if (clearMonth) document.getElementById("input-month").value = getCurrentMonth();
+  }
+
+  // ========= Toast =========
+  function showToast(msg, success) {
+    var t = document.getElementById("toast");
+    t.textContent = msg;
+    t.className = "toast" + (success ? " success" : "") + " show";
+    setTimeout(function() { t.className = "toast"; }, 2200);
+  }
+
+  // ========= Keyboard shortcut =========
+  document.addEventListener("keydown", function(e) {
+    if ((e.metaKey || e.ctrlKey) && e.key === "Enter") addRecord();
   });
-}
 
-// ========== Form ==========
-function resetForm(clearMonth){
-  document.getElementById('input-spec').value = '';
-  document.getElementById('input-cna').value = '';
-  document.getElementById('input-processing').value = '0.15';
-  document.getElementById('input-freight').value = '0.10';
-  document.getElementById('input-insurance').value = '0.02';
-  document.getElementById('input-fees').value = '0.05';
-  document.getElementById('input-days').value = '90';
-  document.getElementById('input-rate').value = '7.20';
-  if(clearMonth) document.getElementById('input-month').value = getCurrentMonth();
-}
+  // Make functions global so onclick handlers can find them
+  window.addRecord = addRecord;
+  window.resetForm = resetForm;
+  window.renderTable = renderTable;
+  window.renderChart = renderChart;
+  window.sortBy = sortBy;
+  window.exportCSV = exportCSV;
+  window.seedDemoData = seedDemoData;
+  window.clearAll = clearAll;
+  window.deleteRecord = deleteRecord;
+  window.showPreview = showPreview;
 
-// ========== Toast ==========
-function showToast(msg, success){
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast ' + (success ? 'success' : '') + ' show';
-  setTimeout(() => { t.className = 'toast'; }, 2200);
-}
+  // Init
+  init();
 
-// ========== Keyboard shortcut ==========
-document.addEventListener('keydown', e => {
-  if((e.metaKey || e.ctrlKey) && e.key === 'Enter') addRecord();
-});
-
-// ========== Boot ==========
-init();
+})();
 </script>
 </body>
 </html>
