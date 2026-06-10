@@ -441,46 +441,50 @@ function showPreview(month, spec, c){
 function renderTable(){
   const filterSpec = document.getElementById('filter-spec').value;
   let filtered = filterSpec ? records.filter(r => r.spec === filterSpec) : [...records];
-  
+
   // Sort
   filtered.sort((a,b) => {
     let va = a[sortField], vb = b[sortField];
     if(typeof va === 'string') return sortDir === 'asc' ? va.localeCompare(vb) : vb.localeCompare(va);
     return sortDir === 'asc' ? va - vb : vb - va;
   });
-  
+
   const tbody = document.getElementById('table-body');
-  document.getElementById('record-count').textContent = `共 ${records.length} 条记录`;
-  
+  document.getElementById('record-count').textContent = '共 ' + records.length + ' 条记录';
+
   if(filtered.length === 0){
-    tbody.innerHTML = '<tr><td colspan="10" class="empty-row">📭 暂无匹配数据 — 点击「📋 填充示例数据」添加2026上半年行情</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="10" class="empty-row">\uD83D\uDCEC 暂无匹配数据 — 点击「\uD83D\uDCCB 填充示例数据」添加2026上半年行情</td></tr>';
     return;
   }
-  
-  // 按月份灰白交替
-  let lastMonth = '';
-  let monthEven = false;
-  
-  tbody.innerHTML = filtered.map((r,i) => {
-    if(r.month !== lastMonth){
-      lastMonth = r.month;
-      monthEven = !monthEven;
+
+  // 按月份灰白交替 — 用 forEach 拼接，避免 map+模板字面量可能的渲染问题
+  var prevMonth = null;
+  var isEven = false;
+  var rows = [];
+
+  filtered.forEach(function(r){
+    if(r.month !== prevMonth){
+      prevMonth = r.month;
+      isEven = !isEven;
     }
-    const bgStyle = monthEven ? ' style="background:#eef1f6"' : '';
-    return `
-    <tr${bgStyle}>
-      <td>${r.month}</td>
-      <td>${r.spec}</td>
-      <td>$${r.cna}</td>
-      <td class="cost-highlight">$${r.cif}</td>
-      <td>$${r.tariff}</td>
-      <td>$${r.vat}</td>
-      <td>$${r.interest}</td>
-      <td class="cost-highlight">$${r.totalCost}</td>
-      <td class="cost-highlight">¥${r.totalCostCNY}</td>
-      <td><button class="btn btn-danger btn-sm" onclick="deleteRecord('${r.month}','${r.spec}')">✕</button></td>
-    </tr>
-  `).join('');
+    var bg = isEven ? ' style="background:#e8edf3;"' : '';
+    rows.push(
+      '<tr' + bg + '>' +
+        '<td>' + r.month + '</td>' +
+        '<td>' + r.spec + '</td>' +
+        '<td>$' + r.cna + '</td>' +
+        '<td class="cost-highlight">$' + r.cif + '</td>' +
+        '<td>$' + r.tariff + '</td>' +
+        '<td>$' + r.vat + '</td>' +
+        '<td>$' + r.interest + '</td>' +
+        '<td class="cost-highlight">$' + r.totalCost + '</td>' +
+        '<td class="cost-highlight">¥' + r.totalCostCNY + '</td>' +
+        '<td><button class="btn btn-danger btn-sm" onclick="deleteRecord(\'' + r.month + '\',\'' + r.spec + '\')">✕</button></td>' +
+      '</tr>'
+    );
+  });
+
+  tbody.innerHTML = rows.join('');
 }
 
 // ========== Delete ==========
