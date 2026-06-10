@@ -330,6 +330,10 @@ let chartInstance = null;
 function init(){
   loadRecords();
   document.getElementById('input-month').value = getCurrentMonth();
+  // 首次访问：自动填充示例数据，历史记录默认可见
+  if(records.length === 0){
+    seedDemoData();
+  }
 }
 function getCurrentMonth(){
   const d = new Date();
