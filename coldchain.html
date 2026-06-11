@@ -64,8 +64,8 @@ nav {
   width: 100%; height: auto; background: #e8f4fd; border-radius: 16px;
   border: 1.5px solid #cce9fb;
 }
-.map-bg { fill: #d4ecfc; stroke: #8ecae6; stroke-width: 1.2; }
-.map-bg-tw { fill: #e8f4fd; stroke: #8ecae6; stroke-width: 1; }
+.map-bg { fill: #d4ecfc; stroke: #4da8da; stroke-width: 2; stroke-linejoin: round; }
+.map-bg-tw { fill: #e8f4fd; stroke: #4da8da; stroke-width: 1.5; stroke-linejoin: round; }
 .city-dot { cursor: pointer; }
 .city-dot circle, .city-dot rect { transition: all 0.2s; }
 .city-dot text { font-size: 10px; fill: #1a3a5c; pointer-events: none; font-weight: 600; }
@@ -224,13 +224,37 @@ footer { text-align: center; padding: 24px; font-size: 12px; color: #aaa; border
     <h2>🗺️ 中国冷库分布图 <span style="font-size:12px;color:#aaa;font-weight:400">— 点击城市查看冷库，双击底色可放大</span></h2>
     <svg class="map-svg" viewBox="0 0 680 560" id="china-map">
       <!-- China mainland refined outline -->
+      <!-- China mainland outline: NE head → east coast (generous right-ward) → south coast → west border → north border back to head -->
       <path class="map-bg" d="
-        M 598,68 L 588,63 L 576,60 L 562,57 L 548,55 L 534,53 L 520,52 L 506,50 L 492,48 L 478,46 L 464,44 L 450,42 L 436,40 L 422,38 L 408,36 L 394,34 L 380,32 L 366,30 L 352,28 L 338,27 L 324,26 L 310,25 L 296,24 L 282,24 L 268,24 L 254,24 L 240,25 L 226,28 L 212,32 L 198,36 L 186,40 L 174,43 L 162,47 L 152,51 L 142,57 L 134,62 L 126,68 L 118,75 L 110,83 L 104,91 L 98,100 L 92,110 L 88,119 L 84,128 L 80,138 L 76,148 L 73,158 L 70,168 L 68,178 L 68,188 L 72,198 L 78,207 L 84,216 L 92,224 L 100,233 L 108,240 L 118,248 L 128,255 L 138,262 L 150,270 L 162,278 L 174,286 L 186,294 L 198,301 L 210,307 L 222,311 L 234,311 L 244,307 L 254,300 L 262,292 L 268,284 L 274,278 L 280,273 L 288,270 L 296,270 L 304,274 L 312,279 L 320,286 L 328,295 L 336,304 L 344,314 L 352,324 L 360,335 L 368,344 L 376,352 L 384,358 L 392,356 L 398,348 L 404,340 L 410,333 L 416,326 L 422,320 L 428,314 L 435,308 L 442,302 L 448,297 L 456,291 L 462,283 L 468,275 L 474,267 L 480,259 L 484,251 L 488,243 L 492,235 L 494,227 L 496,219 L 496,211 L 494,203 L 490,196 L 486,188 L 482,182 L 478,176 L 474,170 L 478,164 L 486,160 L 494,158 L 502,160 L 508,165 L 506,172 L 498,175 L 488,178 L 480,175 L 474,170 L 468,164 L 462,158 L 458,152 L 456,146 L 462,140 L 470,133 L 480,128 L 490,124 L 500,120 L 510,117 L 518,118 L 520,124 L 514,128 L 506,126 L 498,124 L 494,121 L 500,117 L 508,111 L 518,105 L 528,98 L 538,92 L 548,87 L 558,82 L 568,78 L 578,74 L 588,71 L 598,68 Z
+        M 540,48
+        L 536,58 L 540,68 L 538,78 L 542,88 L 540,98 L 538,108 L 544,118 L 540,130 L 532,140
+        L 510,135 L 492,128 L 478,120
+        L 472,124 L 482,135
+        L 518,168 L 528,176 L 524,188
+        L 522,200 L 530,214 L 535,228
+        L 530,240 L 524,252 L 518,264
+        L 512,275 L 508,288 L 502,298 L 498,310
+        L 492,322 L 488,332 L 484,344 L 480,354
+        L 466,358 L 448,352 L 432,348
+        L 418,352 L 405,360 L 392,372 L 382,378
+        L 362,355 L 348,344 L 338,340
+        L 324,340 L 310,335
+        L 288,325 L 258,315 L 228,305
+        L 195,290 L 165,272 L 145,252
+        L 118,232 L 88,212
+        L 65,190 L 50,168
+        L 45,142 L 48,118
+        L 55,98 L 65,80
+        L 75,68 L 95,55 L 115,48
+        L 155,42 L 210,37
+        L 268,34 L 330,34 L 390,36 L 448,42
+        L 502,46 L 530,48
+        Z
       " />
       <!-- Taiwan -->
-      <path class="map-bg-tw" d="M 528,304 L 534,300 L 540,302 L 544,310 L 542,318 L 536,324 L 528,322 L 524,314 L 526,306 Z" />
+      <path class="map-bg-tw" d="M 515,290 L 524,286 L 530,292 L 532,302 L 528,310 L 520,312 L 514,306 L 512,296 Z" />
       <!-- Hainan -->
-      <path class="map-bg-tw" d="M 396,374 L 404,370 L 412,372 L 416,380 L 412,388 L 404,392 L 396,390 L 392,382 Z" />
+      <path class="map-bg-tw" d="M 390,378 L 404,374 L 416,380 L 420,392 L 416,404 L 404,410 L 390,406 L 384,394 Z" />
     </svg>
   </div>
 
@@ -465,8 +489,8 @@ var CITY_POSITIONS = {
   zhanjiang:    { x: 393, y: 350, r:  5, port: true, labelDy:  14 },
   haikou:       { x: 408, y: 380, r:  5, port: true, labelDy:  14 },
   fangchenggang:{ x: 345, y: 338, r:  4,              labelDy:  14 },
-  nanning:      { x: 358, y: 328, r:  5,              labelDy:  14 },
-  kunming:      { x: 260, y: 316, r:  5,              labelDy:  14 },
+  nanning:      { x: 358, y: 324, r:  5,              labelDy:  14 },
+  kunming:      { x: 268, y: 312, r:  5,              labelDy:  14 },
   guiyang:      { x: 325, y: 290, r:  5,              labelDy: -14 },
   chengdu:      { x: 278, y: 238, r:  7,              labelDy: -14 },
   chongqing:    { x: 315, y: 250, r:  5,              labelDy:  14 },
