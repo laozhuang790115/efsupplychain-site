@@ -18,15 +18,22 @@ nav {
   background: rgba(255,255,255,0.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid #e8edf2; position: sticky; top: 0; z-index: 100; padding: 0 24px;
 }
-.nav-inner {
-  max-width: 1200px; margin: 0 auto; display: flex; align-items: center; height: 52px;
-}
+.nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; height: 52px; }
 .nav-logo { font-size: 18px; font-weight: 800; color: #00a8e8; margin-right: 32px; }
 .nav-links { display: flex; gap: 20px; align-items: center; }
 .nav-links a { font-size: 13px; font-weight: 500; color: #555; transition: color 0.2s; }
 .nav-links a:hover { color: #00a8e8; }
 .nav-tools { background: #f59e0b; color: #fff !important; padding: 5px 14px; border-radius: 20px; font-size: 12px; }
 .nav-tools:hover { background: #e08f0b; color: #fff !important; }
+
+/* Admin bar */
+.admin-bar {
+  display: none; background: #1a3a5c; color: #fff; padding: 8px 24px;
+  font-size: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+}
+.admin-bar.show { display: flex; }
+.admin-bar .admin-lock { cursor: pointer; padding: 4px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.3); background: none; color: #fff; font-size: 11px; font-family: inherit; }
+.admin-bar .admin-hint { opacity: 0.7; font-size: 11px; }
 
 /* Masthead */
 .masthead {
@@ -38,8 +45,7 @@ nav {
 
 /* Main layout */
 .main-wrap {
-  max-width: 1300px; margin: 0 auto; padding: 24px; display: flex; gap: 24px;
-  min-height: 600px;
+  max-width: 1300px; margin: 0 auto; padding: 24px; display: flex; gap: 24px; min-height: 600px;
 }
 
 /* Map section */
@@ -52,21 +58,21 @@ nav {
   display: flex; align-items: center; gap: 8px;
 }
 .map-svg { width: 100%; height: auto; }
+.map-bg { fill: #e8f4f8; stroke: #b8d8e8; stroke-width: 1.8; stroke-linejoin: round; }
 .city-dot { cursor: pointer; transition: all 0.2s; }
-.city-dot:hover { filter: brightness(1.2); }
-.city-dot circle { transition: r 0.2s; }
+.city-dot:hover { filter: brightness(1.15); }
+.city-dot circle { transition: r 0.2s, fill 0.2s; }
 .city-dot:hover circle { r: 10; }
-.city-label { font-size: 10px; font-weight: 600; fill: #1a3a5c; pointer-events: none; }
-.map-tip {
-  text-align: center; color: #aaa; font-size: 12px; margin-top: 8px;
-}
+.city-dot text { font-size: 10px; font-weight: 600; fill: #1a3a5c; pointer-events: none; }
+.city-dot .city-pin { fill: #fff; }
+.map-tip { text-align: center; color: #aaa; font-size: 12px; margin-top: 8px; }
 
 /* Side panel */
 .side-panel {
   width: 380px; flex-shrink: 0; background: #fff; border-radius: 16px;
   box-shadow: 0 2px 16px rgba(0,0,0,0.06); padding: 24px;
   display: flex; flex-direction: column; gap: 16px;
-  max-height: 640px; overflow: hidden;
+  max-height: 660px; overflow: hidden;
 }
 .panel-empty {
   flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -74,32 +80,39 @@ nav {
 }
 .panel-empty .icon { font-size: 48px; }
 .panel-city-header {
-  display: flex; align-items: center; gap: 12px; padding-bottom: 16px;
-  border-bottom: 1px solid #e8edf2;
+  display: flex; align-items: center; gap: 12px; padding-bottom: 12px;
+  border-bottom: 1px solid #e8edf2; justify-content: space-between;
 }
-.panel-city-header .city-icon { font-size: 32px; }
+.panel-city-header .city-left { display: flex; align-items: center; gap: 12px; }
+.panel-city-header .city-icon { font-size: 28px; }
 .panel-city-header h3 { font-size: 18px; font-weight: 700; color: #1a3a5c; }
 .panel-city-header .count { font-size: 12px; color: #888; }
+.panel-city-header .add-btn {
+  display: none; background: #00a8e8; color: #fff; border: none; border-radius: 8px;
+  padding: 6px 12px; font-size: 11px; cursor: pointer; font-family: inherit; font-weight: 600;
+}
+.panel-city-header .add-btn.visible { display: inline-block; }
 .warehouse-list {
-  flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;
-  padding-right: 4px;
+  flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-right: 4px;
 }
 .wh-card {
   background: #f8fafc; border: 1.5px solid #e8edf2; border-radius: 12px;
-  padding: 14px 16px; cursor: pointer; transition: all 0.2s;
+  padding: 14px 16px; cursor: pointer; transition: all 0.2s; position: relative;
 }
 .wh-card:hover { border-color: #00a8e8; background: #f0f9ff; }
 .wh-card .wh-name { font-size: 14px; font-weight: 700; color: #1a3a5c; margin-bottom: 4px; }
-.wh-card .wh-meta {
-  display: flex; gap: 12px; flex-wrap: wrap; font-size: 11px; color: #888;
-}
+.wh-card .wh-meta { display: flex; gap: 12px; flex-wrap: wrap; font-size: 11px; color: #888; }
 .wh-card .wh-meta span { display: flex; align-items: center; gap: 4px; }
 .wh-card .wh-tags { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
-.wh-card .tag {
-  font-size: 10px; padding: 2px 8px; border-radius: 10px;
-  background: #e8f5e9; color: #2e7d32; font-weight: 600;
-}
+.wh-card .tag { font-size: 10px; padding: 2px 8px; border-radius: 10px; background: #e8f5e9; color: #2e7d32; font-weight: 600; }
 .wh-card .tag.blue { background: #e3f2fd; color: #1565c0; }
+.wh-card .edit-btn {
+  display: none; position: absolute; top: 10px; right: 10px;
+  background: #e8edf2; border: none; border-radius: 6px; padding: 3px 8px;
+  font-size: 11px; cursor: pointer; color: #555; font-family: inherit;
+}
+.wh-card .edit-btn:hover { background: #00a8e8; color: #fff; }
+.wh-card .edit-btn.visible { display: block; }
 
 /* Detail modal */
 .modal-overlay {
@@ -108,8 +121,8 @@ nav {
 }
 .modal-overlay.show { display: flex; }
 .modal-box {
-  background: #fff; border-radius: 20px; max-width: 600px; width: 90%;
-  max-height: 80vh; overflow-y: auto; box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+  background: #fff; border-radius: 20px; max-width: 620px; width: 92%;
+  max-height: 85vh; overflow-y: auto; box-shadow: 0 8px 40px rgba(0,0,0,0.2);
 }
 .modal-body { padding: 28px; }
 .modal-close {
@@ -131,10 +144,56 @@ nav {
 .modal-features { margin-top: 16px; }
 .modal-features h4 { font-size: 13px; font-weight: 700; color: #1a3a5c; margin-bottom: 8px; }
 .modal-features ul { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
-.modal-features li {
-  font-size: 11px; padding: 4px 10px; border-radius: 8px;
-  background: #e8f5e9; color: #2e7d32;
+.modal-features li { font-size: 11px; padding: 4px 10px; border-radius: 8px; background: #e8f5e9; color: #2e7d32; }
+.modal-actions { margin-top: 20px; display: flex; gap: 8px; justify-content: flex-end; border-top: 1px solid #e8edf2; padding-top: 16px; }
+.modal-actions.admin-only { display: none; }
+.modal-actions.admin-only.visible { display: flex; }
+.modal-actions button {
+  padding: 8px 16px; border-radius: 8px; border: none; font-size: 12px;
+  font-family: inherit; cursor: pointer; font-weight: 600;
 }
+.btn-edit-wh { background: #e3f2fd; color: #1565c0; }
+.btn-edit-wh:hover { background: #bbdefb; }
+.btn-del-wh { background: #fde8e8; color: #c62828; }
+.btn-del-wh:hover { background: #ffcdd2; }
+
+/* Edit / Add Modal */
+.edit-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+  z-index: 300; align-items: center; justify-content: center;
+}
+.edit-overlay.show { display: flex; }
+.edit-box {
+  background: #fff; border-radius: 20px; max-width: 580px; width: 92%;
+  max-height: 85vh; overflow-y: auto; box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+}
+.edit-body { padding: 28px; }
+.edit-body h3 { font-size: 18px; font-weight: 700; color: #1a3a5c; margin-bottom: 20px; }
+.edit-body .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+.edit-body .form-full { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.edit-body label { font-size: 12px; color: #888; font-weight: 600; }
+.edit-body input, .edit-body textarea, .edit-body select {
+  padding: 10px 14px; border: 1.5px solid #e0e5ec; border-radius: 10px;
+  font-size: 13px; font-family: inherit; background: #fafbfc;
+}
+.edit-body input:focus, .edit-body textarea:focus { outline: none; border-color: #00a8e8; }
+.edit-body textarea { min-height: 80px; resize: vertical; }
+.edit-body .edit-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; }
+.edit-body .edit-actions button {
+  padding: 10px 20px; border-radius: 10px; border: none; font-size: 13px;
+  font-family: inherit; cursor: pointer; font-weight: 600;
+}
+.btn-save { background: #00a8e8; color: #fff; }
+.btn-save:hover { background: #0284c7; }
+.btn-cancel { background: #e8edf2; color: #555; }
+.btn-cancel:hover { background: #d0d5dc; }
+.tags-input-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag-chip {
+  display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 12px;
+  background: #e3f2fd; color: #1565c0; font-size: 11px; font-weight: 600;
+}
+.tag-chip .remove-tag { cursor: pointer; font-size: 14px; line-height: 1; }
+.tag-chip .remove-tag:hover { color: #c62828; }
 
 /* Footer */
 footer {
@@ -157,10 +216,17 @@ footer {
     <div class="nav-links">
       <a href="index.html">&#x1F3E0; 主页</a>
       <a href="tools.html" class="nav-tools">&#x1F9ED; 工具罗盘</a>
+      <a href="coldchain.html">&#x2744;&#xFE0F; 冷链服务</a>
       <a href="reports.html">&#x1F4F0; 老庄报告</a>
     </div>
   </div>
 </nav>
+
+<!-- Admin Bar -->
+<div class="admin-bar" id="admin-bar">
+  <span>&#x1F512; <strong>管理模式</strong> <span class="admin-hint">可编辑/新增冷库信息</span></span>
+  <button class="admin-lock" onclick="logoutAdmin()">&#x1F513; 退出管理</button>
+</div>
 
 <div class="masthead">
   <h1>&#x2744;&#xFE0F; 冷链仓储网络</h1>
@@ -172,85 +238,112 @@ footer {
   <div class="map-section">
     <h2>&#x1F5FA;&#xFE0F; 中国冷库分布图 <span style="font-size:12px;color:#aaa;font-weight:400">— 点击城市查看冷库</span></h2>
     <svg class="map-svg" viewBox="0 0 680 560" id="china-map">
-      <!-- Mainland outline (simplified) -->
-      <path d="M520,85 L545,78 L570,65 L595,58 L610,68 L620,82 L622,100 L615,112 
-               L600,118 L590,125 L580,148 L575,170 L568,188 L555,200 L548,195 
-               L540,185 L530,192 L520,210 L510,225 L515,240 L525,255 L530,270 
-               L535,285 L548,300 L555,310 L560,325 L548,340 L535,350 L520,360 
-               L510,375 L495,390 L485,405 L475,420 L460,435 L445,448 L430,455 
-               L415,460 L400,452 L388,440 L378,425 L365,410 L355,395 L345,378 
-               L332,360 L320,345 L310,330 L295,320 L278,308 L265,295 L255,280 
-               L250,268 L255,255 L265,242 L278,230 L290,220 L298,208 L305,195 
-               L310,180 L308,165 L300,150 L295,138 L300,125 L312,115 L328,108 
-               L345,102 L365,98 L390,95 L415,90 L445,85 L475,82 L500,83" 
-            fill="#e8f4f8" stroke="#b8d8e8" stroke-width="2" stroke-linejoin="round"/>
+      <!-- Mainland outline -->
+      <path class="map-bg" d="
+        M 598,28 L 582,30 L 565,35 L 550,38 L 538,42 L 545,48 L 555,52 
+        L 562,55 L 568,60 L 572,68 L 575,72 L 578,80 L 575,85 L 570,88 
+        L 562,90 L 555,88 L 548,85 L 540,88 L 532,90 L 525,92 L 518,95 
+        L 510,98 L 505,102 L 500,105 L 498,110 L 500,115 L 505,118 
+        L 508,125 L 510,130 L 515,135 L 525,132 L 535,128 L 542,125 
+        L 548,128 L 552,132 L 555,138 L 550,145 L 545,152 L 540,158 
+        L 538,165 L 540,172 L 542,180 L 545,188 L 548,195 L 552,202 
+        L 555,210 L 552,218 L 548,225 L 545,232 L 540,238 L 535,242 
+        L 530,248 L 528,255 L 532,262 L 535,268 L 538,275 L 542,280 
+        L 545,285 L 550,290 L 555,295 L 558,300 L 555,305 L 550,308 
+        L 545,312 L 540,318 L 535,322 L 530,325 L 525,330 L 520,335 
+        L 515,340 L 510,345 L 505,350 L 498,355 L 492,360 L 485,365 
+        L 478,370 L 472,375 L 468,380 L 462,385 L 458,390 L 452,395 
+        L 445,400 L 440,405 L 435,410 L 430,418 L 425,425 L 418,432 
+        L 410,438 L 402,442 L 395,445 L 388,442 L 382,438 L 375,432 
+        L 368,425 L 362,418 L 358,410 L 355,402 L 352,395 L 348,388 
+        L 342,382 L 335,378 L 328,375 L 320,372 L 312,370 L 305,368 
+        L 298,365 L 290,362 L 282,358 L 275,355 L 268,350 L 260,348 
+        L 252,345 L 245,342 L 238,340 L 230,338 L 222,335 L 215,332 
+        L 208,328 L 200,325 L 192,322 L 185,320 L 178,318 L 170,315 
+        L 162,312 L 155,308 L 148,305 L 140,302 L 132,300 L 125,298 
+        L 118,296 L 112,294 L 108,290 L 105,285 L 102,280 L 100,274 
+        L 102,268 L 105,262 L 108,258 L 112,255 L 115,250 L 118,245 
+        L 120,240 L 118,235 L 115,230 L 112,228 L 108,225 L 105,222 
+        L 102,218 L 100,212 L 98,208 L 95,205 L 92,202 L 88,200 
+        L 85,198 L 82,195 L 80,190 L 82,185 L 85,182 L 88,178 
+        L 92,175 L 95,172 L 98,168 L 100,165 L 102,160 L 105,155 
+        L 108,150 L 112,145 L 115,142 L 118,140 L 120,138 L 122,135 
+        L 125,132 L 128,130 L 132,128 L 135,125 L 138,122 L 142,120 
+        L 148,118 L 152,115 L 158,112 L 165,110 L 172,108 L 180,105 
+        L 188,102 L 198,100 L 208,98 L 218,95 L 228,92 L 240,90 
+        L 252,88 L 265,85 L 278,82 L 292,80 L 305,78 L 318,75 
+        L 332,72 L 345,70 L 358,68 L 372,65 L 385,62 L 398,60 
+        L 412,58 L 425,56 L 438,55 L 452,54 L 465,53 L 478,52 
+        L 492,50 L 505,48 L 518,46 L 530,44 L 542,42 L 555,40 
+        L 565,38 L 575,35 L 585,32 L 595,30 Z
+      "/>
       
       <!-- Hainan -->
-      <path d="M370,470 L385,465 L400,468 L405,478 L395,485 L378,482 Z" fill="#e8f4f8" stroke="#b8d8e8" stroke-width="2"/>
+      <path class="map-bg" d="M 375,470 L 390,465 L 402,470 L 408,480 L 400,488 L 385,485 L 375,478 Z"/>
       
       <!-- Taiwan -->
-      <path d="M570,320 L578,312 L585,325 L590,340 L585,358 L576,365 L568,355 L565,338 Z" fill="#e8f4f8" stroke="#b8d8e8" stroke-width="2"/>
+      <path class="map-bg" d="M 570,320 L 578,312 L 585,325 L 590,340 L 585,358 L 576,365 L 568,355 L 565,338 Z"/>
 
       <!-- Cities -->
       <g class="city-dot" data-city="dalian" onclick="selectCity('dalian')">
-        <circle cx="545" cy="178" r="7" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
-        <text class="city-label" x="545" y="164" text-anchor="middle">大连</text>
+        <circle cx="535" cy="185" r="6" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
+        <text x="535" y="172" text-anchor="middle">大连</text>
       </g>
       <g class="city-dot" data-city="tianjin" onclick="selectCity('tianjin')">
-        <circle cx="480" cy="162" r="8" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
-        <text class="city-label" x="480" y="148" text-anchor="middle">天津</text>
+        <circle cx="490" cy="165" r="7" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
+        <text x="490" y="150" text-anchor="middle">天津</text>
       </g>
       <g class="city-dot" data-city="qingdao" onclick="selectCity('qingdao')">
-        <circle cx="510" cy="198" r="8" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
-        <text class="city-label" x="510" y="184" text-anchor="middle">青岛</text>
+        <circle cx="515" cy="210" r="7" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
+        <text x="515" y="196" text-anchor="middle">青岛</text>
       </g>
       <g class="city-dot" data-city="shanghai" onclick="selectCity('shanghai')">
-        <circle cx="540" cy="278" r="9" fill="#f59e0b" stroke="#fff" stroke-width="2"/>
-        <text class="city-label" x="555" y="275" text-anchor="start">上海</text>
+        <circle cx="542" cy="278" r="8" fill="#f59e0b" stroke="#fff" stroke-width="2"/>
+        <text x="557" y="275" text-anchor="start">上海</text>
       </g>
       <g class="city-dot" data-city="ningbo" onclick="selectCity('ningbo')">
-        <circle cx="548" cy="308" r="7" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
-        <text class="city-label" x="563" y="305" text-anchor="start">宁波</text>
+        <circle cx="550" cy="308" r="6" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
+        <text x="565" y="305" text-anchor="start">宁波</text>
       </g>
       <g class="city-dot" data-city="xiamen" onclick="selectCity('xiamen')">
-        <circle cx="508" cy="378" r="7" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
-        <text class="city-label" x="508" y="364" text-anchor="middle">厦门</text>
+        <circle cx="522" cy="362" r="6" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
+        <text x="522" y="348" text-anchor="middle">厦门</text>
       </g>
       <g class="city-dot" data-city="guangzhou" onclick="selectCity('guangzhou')">
-        <circle cx="440" cy="420" r="8" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
-        <text class="city-label" x="440" y="438" text-anchor="middle">广州</text>
+        <circle cx="460" cy="410" r="7" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
+        <text x="460" y="428" text-anchor="middle">广州</text>
       </g>
       <g class="city-dot" data-city="shenzhen" onclick="selectCity('shenzhen')">
-        <circle cx="453" cy="432" r="8" fill="#f59e0b" stroke="#fff" stroke-width="2"/>
-        <text class="city-label" x="468" y="435" text-anchor="start">深圳</text>
+        <circle cx="470" cy="425" r="7" fill="#f59e0b" stroke="#fff" stroke-width="2"/>
+        <text x="485" y="428" text-anchor="start">深圳</text>
       </g>
       <g class="city-dot" data-city="wuhan" onclick="selectCity('wuhan')">
-        <circle cx="428" cy="295" r="7" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
-        <text class="city-label" x="428" y="280" text-anchor="middle">武汉</text>
+        <circle cx="440" cy="288" r="6" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
+        <text x="440" y="274" text-anchor="middle">武汉</text>
       </g>
       <g class="city-dot" data-city="zhengzhou" onclick="selectCity('zhengzhou')">
-        <circle cx="418" cy="218" r="7" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
-        <text class="city-label" x="418" y="202" text-anchor="middle">郑州</text>
+        <circle cx="430" cy="218" r="6" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
+        <text x="430" y="202" text-anchor="middle">郑州</text>
       </g>
       <g class="city-dot" data-city="chongqing" onclick="selectCity('chongqing')">
-        <circle cx="330" cy="318" r="7" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
-        <text class="city-label" x="330" y="302" text-anchor="middle">重庆</text>
+        <circle cx="340" cy="310" r="6" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
+        <text x="340" y="294" text-anchor="middle">重庆</text>
       </g>
       <g class="city-dot" data-city="chengdu" onclick="selectCity('chengdu')">
-        <circle cx="245" cy="308" r="7" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
-        <text class="city-label" x="245" y="292" text-anchor="middle">成都</text>
+        <circle cx="275" cy="300" r="6" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
+        <text x="275" y="284" text-anchor="middle">成都</text>
       </g>
       <g class="city-dot" data-city="xian" onclick="selectCity('xian')">
-        <circle cx="340" cy="232" r="7" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
-        <text class="city-label" x="340" y="216" text-anchor="middle">西安</text>
+        <circle cx="360" cy="225" r="6" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
+        <text x="360" y="210" text-anchor="middle">西安</text>
       </g>
       <g class="city-dot" data-city="kunming" onclick="selectCity('kunming')">
-        <circle cx="205" cy="380" r="6" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
-        <text class="city-label" x="205" y="396" text-anchor="middle">昆明</text>
+        <circle cx="240" cy="370" r="5" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
+        <text x="240" y="386" text-anchor="middle">昆明</text>
       </g>
       <g class="city-dot" data-city="harbin" onclick="selectCity('harbin')">
-        <circle cx="575" cy="82" r="7" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
-        <text class="city-label" x="590" y="85" text-anchor="start">哈尔滨</text>
+        <circle cx="555" cy="86" r="6" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
+        <text x="570" y="89" text-anchor="start">哈尔滨</text>
       </g>
     </svg>
     <div class="map-tip">&#x1F4A1; 橙色标记为进口冻品核心口岸 &nbsp;|&nbsp; 点击城市查看冷库资源</div>
@@ -263,7 +356,7 @@ footer {
       <div style="font-size:14px;font-weight:600;color:#bbb">点击地图城市</div>
       <div style="font-size:12px">查看该城市冷链仓储资源</div>
     </div>
-    <div id="panel-content" style="display:none;flex-direction:column;gap:16px;flex:1;min-height:0">
+    <div id="panel-content" style="display:none;flex-direction:column;gap:12px;flex:1;min-height:0">
       <div class="panel-city-header" id="panel-header"></div>
       <div class="warehouse-list" id="warehouse-list"></div>
     </div>
@@ -277,171 +370,219 @@ footer {
   </div>
 </div>
 
+<!-- Edit / Add Modal -->
+<div class="edit-overlay" id="edit-overlay" onclick="closeEditModal(event)">
+  <div class="edit-box" id="edit-box" onclick="event.stopPropagation()">
+    <div class="edit-body" id="edit-body"></div>
+  </div>
+</div>
+
 <footer>
   &copy; 2026 以鲜国际供应链 &middot; 冷链数据持续更新中
 </footer>
 
 <script>
-// ====== Warehouse Data ======
-var coldStores = {
+// ====== Default Warehouse Data ======
+var DEFAULT_STORES = {
   dalian: {
-    name: '大连',
-    icon: '&#x26F5;&#xFE0F;',
-    desc: '东北最大口岸，辐射东三省及蒙东',
+    name: '大连', icon: '&#x26F5;&#xFE0F;', desc: '东北最大口岸，辐射东三省及蒙东',
     stores: [
-      { name: '大窑湾冷链物流园', area: '金州区大窑湾港', capacity: '20万吨', temp: '-25°C ~ +5°C', cert: '海关监管库', tags: ['海关监管','保税仓','铁路冷链'], desc: '大连港核心冷链枢纽，紧邻大窑湾集装箱码头，拥有自动化立体冷库和铁路冷链专线，配套海关查验平台，进口冻品可一站式完成清关、查验、入库。', features: ['海关驻库查验','自动化立体库','铁路冷链专线','多点温区','保税仓储','国际中转'] },
-      { name: '辽渔国际水产品冷链基地', area: '甘井子区大连湾', capacity: '12万吨', temp: '-30°C ~ 0°C', cert: 'HACCP', tags: ['水产专库','加工配套'], desc: '以水产品为主的冷链基地，配套加工车间，可实现进口水产的分拣、加工、换包装，再分拨全国。', features: ['水产品加工车间','急冻隧道','分拣包装线','冷藏车月台'] },
-      { name: '大连港毅都冷链', area: '保税区', capacity: '8万吨', temp: '-25°C ~ +5°C', cert: '海关监管·CIQ备案', tags: ['保税仓','肉类专库','水果专库'], desc: '保税区内专业冷链，进口肉类、水果指定查验场，保税状态下可存储、分拨，灵活处理完税节奏。', features: ['肉类指定库','水果指定库','保税仓储','海关查验场'] }
+      { id:'d1', name:'大窑湾冷链物流园', area:'金州区大窑湾港', capacity:'20万吨', temp:'-25°C ~ +5°C', cert:'海关监管库', tags:['海关监管','保税仓','铁路冷链'], desc:'大连港核心冷链枢纽，紧邻大窑湾集装箱码头，拥有自动化立体冷库和铁路冷链专线，配套海关查验平台，进口冻品可一站式完成清关、查验、入库。', features:['海关驻库查验','自动化立体库','铁路冷链专线','多点温区','保税仓储','国际中转'] },
+      { id:'d2', name:'辽渔国际水产品冷链基地', area:'甘井子区大连湾', capacity:'12万吨', temp:'-30°C ~ 0°C', cert:'HACCP', tags:['水产专库','加工配套'], desc:'以水产品为主的冷链基地，配套加工车间，可实现进口水产的分拣、加工、换包装，再分拨全国。', features:['水产品加工车间','急冻隧道','分拣包装线','冷藏车月台'] },
+      { id:'d3', name:'大连港毅都冷链', area:'保税区', capacity:'8万吨', temp:'-25°C ~ +5°C', cert:'海关监管·CIQ备案', tags:['保税仓','肉类专库','水果专库'], desc:'保税区内专业冷链，进口肉类、水果指定查验场，保税状态下可存储、分拨，灵活处理完税节奏。', features:['肉类指定库','水果指定库','保税仓储','海关查验场'] }
     ]
   },
   tianjin: {
-    name: '天津',
-    icon: '&#x26F5;&#xFE0F;',
-    desc: '华北核心口岸，辐射京津冀',
+    name:'天津', icon:'&#x26F5;&#xFE0F;', desc:'华北核心口岸，辐射京津冀',
     stores: [
-      { name: '天津港国际冷链物流中心', area: '滨海新区东疆保税港', capacity: '30万吨', temp: '-30°C ~ +5°C', cert: '海关监管库', tags: ['海关监管','保税仓','肉类专库'], desc: '东疆保税港区核心冷链设施，天津港最大的进口冻品集散地，进口肉类指定查验存储场，紧邻码头作业区，通关时效全国领先。', features: ['肉类指定库','保税仓储','码头直连','自动温控','海关驻库','检验检疫平台'] },
-      { name: '华锐冷链天津基地', area: '滨海新区开发区', capacity: '10万吨', temp: '-25°C ~ +5°C', cert: 'ISO22000', tags: ['第三方物流','多温区'], desc: '标准化第三方冷链物流基地，服务多家进口贸易商，支持多温区存储、城市配送、干线运输。', features: ['多温区','城配网络','干线冷链车','WMS仓储管理'] },
-      { name: '中农批天津冷链物流园', area: '静海区', capacity: '15万吨', temp: '-25°C ~ +5°C', cert: '海关监管·HACCP', tags: ['海关监管','批发市场配套'], desc: '中国农批旗下冷链园区，配套大型冻品批发市场，进口冻品可直通市场交易，产地到餐桌全链条。', features: ['批发市场联动','展示交易厅','供应链金融','电商发货'] }
+      { id:'t1', name:'天津港国际冷链物流中心', area:'滨海新区东疆保税港', capacity:'30万吨', temp:'-30°C ~ +5°C', cert:'海关监管库', tags:['海关监管','保税仓','肉类专库'], desc:'东疆保税港区核心冷链设施，天津港最大的进口冻品集散地，进口肉类指定查验存储场，紧邻码头作业区。', features:['肉类指定库','保税仓储','码头直连','自动温控','海关驻库','检验检疫平台'] },
+      { id:'t2', name:'华锐冷链天津基地', area:'滨海新区开发区', capacity:'10万吨', temp:'-25°C ~ +5°C', cert:'ISO22000', tags:['第三方物流','多温区'], desc:'标准化第三方冷链物流基地，服务多家进口贸易商，支持多温区存储、城市配送、干线运输。', features:['多温区','城配网络','干线冷链车','WMS仓储管理'] },
+      { id:'t3', name:'中农批天津冷链物流园', area:'静海区', capacity:'15万吨', temp:'-25°C ~ +5°C', cert:'海关监管·HACCP', tags:['海关监管','批发市场配套'], desc:'中国农批旗下冷链园区，配套大型冻品批发市场，进口冻品可直通市场交易。', features:['批发市场联动','展示交易厅','供应链金融','电商发货'] }
     ]
   },
   qingdao: {
-    name: '青岛',
-    icon: '&#x26F5;&#xFE0F;',
-    desc: '山东核心口岸，辐射华东华北',
+    name:'青岛', icon:'&#x26F5;&#xFE0F;', desc:'山东核心口岸，辐射华东华北',
     stores: [
-      { name: '青岛港冷链物流中心', area: '黄岛区前湾港', capacity: '18万吨', temp: '-30°C ~ +5°C', cert: '海关监管库', tags: ['海关监管','码头直连','水产专库'], desc: '青岛前湾港核心冷链设施，进口水产、肉类指定查验存储场。山东是中国最大水产品加工基地，冷库配套加工能力突出。', features: ['水产指定库','肉类指定库','加工配套','码头直连','冷链分拨'] },
-      { name: '巴龙国际冷链食品交易中心', area: '即墨区', capacity: '10万吨', temp: '-25°C ~ +5°C', cert: 'ISO22000', tags: ['交易市场','展示中心'], desc: '集展示交易、仓储物流、加工配送于一体的大型冷链食品交易平台，进口冻品可在展示中心直面下游客户。', features: ['展示交易大厅','电商直播基地','供应链金融','加工包装'] },
-      { name: '青岛鲁海丰冷链基地', area: '黄岛区董家口', capacity: '8万吨', temp: '-30°C ~ 0°C', cert: 'HACCP·MSC', tags: ['水产加工','出口配套'], desc: '以水产为主的专业冷链基地，进口高端水产原料在此加工后分销全国及出口日韩。', features: ['水产精深加工','MSC认证','日韩出口通道','急冻设施'] }
+      { id:'q1', name:'青岛港冷链物流中心', area:'黄岛区前湾港', capacity:'18万吨', temp:'-30°C ~ +5°C', cert:'海关监管库', tags:['海关监管','码头直连','水产专库'], desc:'青岛前湾港核心冷链设施，进口水产、肉类指定查验存储场。山东是中国最大水产品加工基地。', features:['水产指定库','肉类指定库','加工配套','码头直连','冷链分拨'] },
+      { id:'q2', name:'巴龙国际冷链食品交易中心', area:'即墨区', capacity:'10万吨', temp:'-25°C ~ +5°C', cert:'ISO22000', tags:['交易市场','展示中心'], desc:'集展示交易、仓储物流、加工配送于一体的大型冷链食品交易平台。', features:['展示交易大厅','电商直播基地','供应链金融','加工包装'] },
+      { id:'q3', name:'青岛鲁海丰冷链基地', area:'黄岛区董家口', capacity:'8万吨', temp:'-30°C ~ 0°C', cert:'HACCP·MSC', tags:['水产加工','出口配套'], desc:'以水产为主的专业冷链基地，进口高端水产原料在此加工后分销全国及出口日韩。', features:['水产精深加工','MSC认证','日韩出口通道','急冻设施'] }
     ]
   },
   shanghai: {
-    name: '上海',
-    icon: '&#x1F4CD;',
-    desc: '中国最大进口口岸，辐射长三角及全国',
+    name:'上海', icon:'&#x1F4CD;', desc:'中国最大进口口岸，辐射长三角及全国',
     stores: [
-      { name: '上海临港冷链物流园', area: '浦东新区临港新片区', capacity: '35万吨', temp: '-30°C ~ +8°C', cert: '海关监管库·ISO22000', tags: ['海关监管','保税仓','超高吞吐'], desc: '洋山港配套的超大型冷链枢纽，长三角最大进口冻品集散地。自动化立体库、无人叉车、RFID追溯，单日吞吐量超5000吨。', features: ['自动化立体库','RFID溯源','无人叉车','保税仓储','海关驻库','7×24运营'] },
-      { name: '太古冷链上海物流中心', area: '嘉定区', capacity: '12万吨', temp: '-25°C ~ +5°C', cert: 'ISO9001·ISO22000', tags: ['外资品牌','多温区','高端客户'], desc: '太古集团旗下专业冷链，服务国际食品巨头和高端餐饮客户，拥有多温区恒温存储和城市精细配送能力。', features: ['多温区恒温','城市精细配送','国际标准','实时温控监测','高端餐饮专送'] },
-      { name: '上海郑明现代冷链物流园', area: '松江区', capacity: '8万吨', temp: '-25°C ~ +5°C', cert: 'ISO22000', tags: ['第三方物流','城配网络'], desc: '郑明现代物流上海枢纽，覆盖上海及周边城市的冷链配送网络，支持一件代发和商超门店配送。', features: ['一件代发','商超配送','电商冷链','实时轨迹追踪'] },
-      { name: '普冷国际上海运营中心', area: '宝山区', capacity: '6万吨', temp: '-25°C ~ +5°C', cert: 'HACCP', tags: ['进口食品','分拨中心'], desc: '专注进口冷冻食品的仓储分拨，配备恒温月台和智能化温控系统，可满足高端进口食品的苛刻存储要求。', features: ['恒温月台','智能温控','进口食品专库','分拨集散'] }
+      { id:'s1', name:'上海临港冷链物流园', area:'浦东新区临港新片区', capacity:'35万吨', temp:'-30°C ~ +8°C', cert:'海关监管库·ISO22000', tags:['海关监管','保税仓','超高吞吐'], desc:'洋山港配套的超大型冷链枢纽，长三角最大进口冻品集散地。自动化立体库、无人叉车、RFID追溯，单日吞吐量超5000吨。', features:['自动化立体库','RFID溯源','无人叉车','保税仓储','海关驻库','7×24运营'] },
+      { id:'s2', name:'太古冷链上海物流中心', area:'嘉定区', capacity:'12万吨', temp:'-25°C ~ +5°C', cert:'ISO9001·ISO22000', tags:['外资品牌','多温区','高端客户'], desc:'太古集团旗下专业冷链，服务国际食品巨头和高端餐饮客户，拥有多温区恒温存储和城市精细配送能力。', features:['多温区恒温','城市精细配送','国际标准','实时温控监测','高端餐饮专送'] },
+      { id:'s3', name:'上海郑明现代冷链物流园', area:'松江区', capacity:'8万吨', temp:'-25°C ~ +5°C', cert:'ISO22000', tags:['第三方物流','城配网络'], desc:'郑明现代物流上海枢纽，覆盖上海及周边城市的冷链配送网络，支持一件代发和商超门店配送。', features:['一件代发','商超配送','电商冷链','实时轨迹追踪'] },
+      { id:'s4', name:'普冷国际上海运营中心', area:'宝山区', capacity:'6万吨', temp:'-25°C ~ +5°C', cert:'HACCP', tags:['进口食品','分拨中心'], desc:'专注进口冷冻食品的仓储分拨，配备恒温月台和智能化温控系统。', features:['恒温月台','智能温控','进口食品专库','分拨集散'] }
     ]
   },
   ningbo: {
-    name: '宁波',
-    icon: '&#x26F5;&#xFE0F;',
-    desc: '浙江核心口岸，辐射浙闽赣',
+    name:'宁波', icon:'&#x26F5;&#xFE0F;', desc:'浙江核心口岸，辐射浙闽赣',
     stores: [
-      { name: '宁波梅山冷链物流中心', area: '北仑区梅山保税港', capacity: '15万吨', temp: '-25°C ~ +5°C', cert: '海关监管库', tags: ['海关监管','保税仓','肉类水产'], desc: '梅山保税港区配套冷链设施，宁波-舟山港核心区块，进口肉类、水产指定查验存储场，距码头仅3公里。', features: ['码头3公里','肉类水产专库','保税仓储','海关查验平台'] },
-      { name: '宁波万纬冷链物流园', area: '鄞州区', capacity: '8万吨', temp: '-25°C ~ +5°C', cert: 'ISO22000', tags: ['万科旗下','多温区'], desc: '万纬物流（万科旗下）在宁波的冷链节点，标准化运营、多温区覆盖，服务进口贸易商和本地食品企业。', features: ['万纬标准化','多温区','WMS仓储管理','城市配送'] }
+      { id:'n1', name:'宁波梅山冷链物流中心', area:'北仑区梅山保税港', capacity:'15万吨', temp:'-25°C ~ +5°C', cert:'海关监管库', tags:['海关监管','保税仓','肉类水产'], desc:'梅山保税港区配套冷链设施，宁波-舟山港核心区块，进口肉类、水产指定查验存储场，距码头仅3公里。', features:['码头3公里','肉类水产专库','保税仓储','海关查验平台'] },
+      { id:'n2', name:'宁波万纬冷链物流园', area:'鄞州区', capacity:'8万吨', temp:'-25°C ~ +5°C', cert:'ISO22000', tags:['万科旗下','多温区'], desc:'万纬物流（万科旗下）在宁波的冷链节点，标准化运营、多温区覆盖。', features:['万纬标准化','多温区','WMS仓储管理','城市配送'] }
     ]
   },
   xiamen: {
-    name: '厦门',
-    icon: '&#x26F5;&#xFE0F;',
-    desc: '福建核心口岸，辐射闽台及东南亚',
+    name:'厦门', icon:'&#x26F5;&#xFE0F;', desc:'福建核心口岸，辐射闽台及东南亚',
     stores: [
-      { name: '厦门海沧冷链物流中心', area: '海沧区海沧港', capacity: '10万吨', temp: '-25°C ~ +5°C', cert: '海关监管库', tags: ['海关监管','对台冷链'], desc: '海沧港区冷链枢纽，对台贸易冷链重要节点，进口水产、肉类指定查验存储场。', features: ['对台冷链通道','水产肉类专库','海关查验','小额分拨'] },
-      { name: '厦门中盛冷链基地', area: '同安区', capacity: '5万吨', temp: '-22°C ~ +5°C', cert: 'HACCP', tags: ['水产加工','民营企业'], desc: '福建本地冷链企业，配套水产加工线，进口水产在此精加工后分销全国及出口东南亚。', features: ['水产加工线','精深加工','东南亚出口'] }
+      { id:'xm1', name:'厦门海沧冷链物流中心', area:'海沧区海沧港', capacity:'10万吨', temp:'-25°C ~ +5°C', cert:'海关监管库', tags:['海关监管','对台冷链'], desc:'海沧港区冷链枢纽，对台贸易冷链重要节点，进口水产、肉类指定查验存储场。', features:['对台冷链通道','水产肉类专库','海关查验','小额分拨'] },
+      { id:'xm2', name:'厦门中盛冷链基地', area:'同安区', capacity:'5万吨', temp:'-22°C ~ +5°C', cert:'HACCP', tags:['水产加工','民营企业'], desc:'福建本地冷链企业，配套水产加工线，进口水产在此精加工后分销全国及出口东南亚。', features:['水产加工线','精深加工','东南亚出口'] }
     ]
   },
   guangzhou: {
-    name: '广州',
-    icon: '&#x26F5;&#xFE0F;',
-    desc: '华南核心口岸，辐射珠三角',
+    name:'广州', icon:'&#x26F5;&#xFE0F;', desc:'华南核心口岸，辐射珠三角',
     stores: [
-      { name: '南沙国际冷链物流中心', area: '南沙区南沙港', capacity: '25万吨', temp: '-30°C ~ +5°C', cert: '海关监管库', tags: ['海关监管','华南最大','保税仓'], desc: '南沙港配套的华南最大单体冷链设施，进口冻品清关后可就近入库。覆盖珠三角核心消费区，配送半径短、时效高。', features: ['华南最大单体库','保税仓储','海关驻库','自动温控','珠三角当日达'] },
-      { name: '广州江南冷链交易市场', area: '白云区', capacity: '5万吨', temp: '-22°C ~ +5°C', cert: '市场备案', tags: ['批发市场','交易展示'], desc: '广州最大冻品批发市场配套冷库，进口冻品可在这里直面终端批发商，快速交易变现。', features: ['批发市场直连','交易展示','小额批发','快速周转'] },
-      { name: '广州保事达冷链', area: '黄埔区', capacity: '6万吨', temp: '-25°C ~ +5°C', cert: 'ISO22000', tags: ['第三方物流','城配'], desc: '服务进口食品的第三方冷链物流，城市配送覆盖广州及珠三角，支持商超、餐饮门店直送。', features: ['商超门店配送','餐饮直送','温控追踪','灵活仓储'] }
+      { id:'gz1', name:'南沙国际冷链物流中心', area:'南沙区南沙港', capacity:'25万吨', temp:'-30°C ~ +5°C', cert:'海关监管库', tags:['海关监管','华南最大','保税仓'], desc:'南沙港配套的华南最大单体冷链设施，进口冻品清关后可就近入库。覆盖珠三角核心消费区。', features:['华南最大单体库','保税仓储','海关驻库','自动温控','珠三角当日达'] },
+      { id:'gz2', name:'广州江南冷链交易市场', area:'白云区', capacity:'5万吨', temp:'-22°C ~ +5°C', cert:'市场备案', tags:['批发市场','交易展示'], desc:'广州最大冻品批发市场配套冷库，进口冻品可直面终端批发商，快速交易变现。', features:['批发市场直连','交易展示','小额批发','快速周转'] },
+      { id:'gz3', name:'广州保事达冷链', area:'黄埔区', capacity:'6万吨', temp:'-25°C ~ +5°C', cert:'ISO22000', tags:['第三方物流','城配'], desc:'服务进口食品的第三方冷链物流，城市配送覆盖广州及珠三角。', features:['商超门店配送','餐饮直送','温控追踪','灵活仓储'] }
     ]
   },
   shenzhen: {
-    name: '深圳',
-    icon: '&#x1F4CD;',
-    desc: '珠三角核心口岸，辐射大湾区',
+    name:'深圳', icon:'&#x1F4CD;', desc:'珠三角核心口岸，辐射大湾区',
     stores: [
-      { name: '盐田港冷链服务基地', area: '盐田区盐田港', capacity: '15万吨', temp: '-30°C ~ +5°C', cert: '海关监管库', tags: ['海关监管','港口直连','进口肉类'], desc: '盐田港配套冷链设施，进口肉类指定口岸查验场。盐田港是华南最大集装箱港，进口冻柜可直接入库。', features: ['华南最大集装箱港','进口肉类指定','码头直连','查验平台'] },
-      { name: '深圳国际食品冷链物流港', area: '龙岗区平湖', capacity: '12万吨', temp: '-25°C ~ +5°C', cert: 'ISO22000·海关监管', tags: ['海关监管','食品专库','大湾区枢纽'], desc: '深圳最大食品冷链枢纽，地处平湖物流基地核心区，覆盖深圳及香港，生鲜食品跨境冷链标杆。', features: ['供港冷链通道','大湾区当日达','食品专库','跨境冷链'] },
-      { name: '深粮冷链物流基地', area: '龙华区', capacity: '5万吨', temp: '-22°C ~ +5°C', cert: 'HACCP', tags: ['国企','食品安全'], desc: '深粮集团旗下专业冷链，国有背景、食品安全管控严格，服务高端进口食品品牌客户。', features: ['国企品质','食品安全严控','高端食品','温控溯源'] }
+      { id:'sz1', name:'盐田港冷链服务基地', area:'盐田区盐田港', capacity:'15万吨', temp:'-30°C ~ +5°C', cert:'海关监管库', tags:['海关监管','港口直连','进口肉类'], desc:'盐田港配套冷链设施，进口肉类指定口岸查验场。盐田港是华南最大集装箱港。', features:['华南最大集装箱港','进口肉类指定','码头直连','查验平台'] },
+      { id:'sz2', name:'深圳国际食品冷链物流港', area:'龙岗区平湖', capacity:'12万吨', temp:'-25°C ~ +5°C', cert:'ISO22000·海关监管', tags:['海关监管','食品专库','大湾区枢纽'], desc:'深圳最大食品冷链枢纽，地处平湖物流基地核心区，覆盖深圳及香港。', features:['供港冷链通道','大湾区当日达','食品专库','跨境冷链'] },
+      { id:'sz3', name:'深粮冷链物流基地', area:'龙华区', capacity:'5万吨', temp:'-22°C ~ +5°C', cert:'HACCP', tags:['国企','食品安全'], desc:'深粮集团旗下专业冷链，国有背景、食品安全管控严格。', features:['国企品质','食品安全严控','高端食品','温控溯源'] }
     ]
   },
   wuhan: {
-    name: '武汉',
-    icon: '&#x1F681;',
-    desc: '华中物流枢纽，九省通衢',
+    name:'武汉', icon:'&#x1F681;', desc:'华中物流枢纽，九省通衢',
     stores: [
-      { name: '武汉阳逻港冷链物流园', area: '新洲区阳逻港', capacity: '10万吨', temp: '-25°C ~ +5°C', cert: '海关监管库', tags: ['海关监管','水铁联运'], desc: '长江中游最大冷链节点，阳逻港水铁联运优势，进口冻品经上海或宁波江海联运直达，成本比陆运低60%。', features: ['江海联运','水铁联运','海关查验','低运输成本'] },
-      { name: '武汉白沙洲冷链市场', area: '洪山区', capacity: '8万吨', temp: '-22°C ~ +5°C', cert: '市场备案', tags: ['批发市场','中部分拨'], desc: '华中最大冻品批发市场配套冷库，辐射湖北及周边省市，是中部地区进口冻品核心分拨节点。', features: ['华中最大冻品市场','中部分拨枢纽','交易展示','冷链配送网络'] }
+      { id:'wh1', name:'武汉阳逻港冷链物流园', area:'新洲区阳逻港', capacity:'10万吨', temp:'-25°C ~ +5°C', cert:'海关监管库', tags:['海关监管','水铁联运'], desc:'长江中游最大冷链节点，阳逻港水铁联运优势，进口冻品经江海联运直达，成本比陆运低60%。', features:['江海联运','水铁联运','海关查验','低运输成本'] },
+      { id:'wh2', name:'武汉白沙洲冷链市场', area:'洪山区', capacity:'8万吨', temp:'-22°C ~ +5°C', cert:'市场备案', tags:['批发市场','中部分拨'], desc:'华中最大冻品批发市场配套冷库，辐射湖北及周边省市。', features:['华中最大冻品市场','中部分拨枢纽','交易展示','冷链配送网络'] }
     ]
   },
   zhengzhou: {
-    name: '郑州',
-    icon: '&#x1F681;',
-    desc: '中原核心枢纽，辐射华北华中',
+    name:'郑州', icon:'&#x1F681;', desc:'中原核心枢纽，辐射华北华中',
     stores: [
-      { name: '郑州航空港冷链物流中心', area: '航空港区', capacity: '12万吨', temp: '-25°C ~ +5°C', cert: '海关监管库', tags: ['航空冷链','中欧班列','海关监管'], desc: '郑州航空港综合保税区冷链枢纽，中欧班列+航空双重通道，进口冻品可经中欧班列从欧洲直送，时效优于海运。', features: ['中欧班列冷链','航空冷链','综合保税区','高铁快运'] },
-      { name: '郑州万邦国际冷链物流城', area: '中牟县', capacity: '15万吨', temp: '-25°C ~ +5°C', cert: 'ISO22000', tags: ['大型交易市场','中原枢纽'], desc: '万邦国际农产品物流城配套冷链，中原地区最大农产品交易市场联动，冻品交易活跃，周转极快。', features: ['万邦市场联动','交易活跃','中部分拨','多温区'] }
+      { id:'zz1', name:'郑州航空港冷链物流中心', area:'航空港区', capacity:'12万吨', temp:'-25°C ~ +5°C', cert:'海关监管库', tags:['航空冷链','中欧班列','海关监管'], desc:'郑州航空港综合保税区冷链枢纽，中欧班列+航空双重通道。', features:['中欧班列冷链','航空冷链','综合保税区','高铁快运'] },
+      { id:'zz2', name:'郑州万邦国际冷链物流城', area:'中牟县', capacity:'15万吨', temp:'-25°C ~ +5°C', cert:'ISO22000', tags:['大型交易市场','中原枢纽'], desc:'万邦国际农产品物流城配套冷链，中原地区最大农产品交易市场联动。', features:['万邦市场联动','交易活跃','中部分拨','多温区'] }
     ]
   },
   chongqing: {
-    name: '重庆',
-    icon: '&#x1F681;',
-    desc: '西南枢纽，辐射川渝及西部',
+    name:'重庆', icon:'&#x1F681;', desc:'西南枢纽，辐射川渝及西部',
     stores: [
-      { name: '重庆果园港冷链物流园', area: '江北区果园港', capacity: '8万吨', temp: '-25°C ~ +5°C', cert: '海关监管库', tags: ['海关监管','水铁联运','中欧班列'], desc: '果园港国家物流枢纽冷链节点，长江上游最大港口+中欧班列重庆起点，进口冻品可经两种通道覆盖西南。', features: ['长江上游最大港','中欧班列起点','水铁联运','海关查验'] },
-      { name: '重庆明品福冷链物流市场', area: '九龙坡区', capacity: '12万吨', temp: '-25°C ~ +5°C', cert: '市场备案', tags: ['西南最大交易市场','分拨中心'], desc: '西南地区规模最大的冻品交易市场，仓储+交易一体化，进口冻品在此分拨川渝云贵各省。', features: ['西南最大冻品市场','交易+仓储一体','川渝云贵分拨','展示交易'] }
+      { id:'cq1', name:'重庆果园港冷链物流园', area:'江北区果园港', capacity:'8万吨', temp:'-25°C ~ +5°C', cert:'海关监管库', tags:['海关监管','水铁联运','中欧班列'], desc:'果园港国家物流枢纽冷链节点，长江上游最大港口+中欧班列重庆起点。', features:['长江上游最大港','中欧班列起点','水铁联运','海关查验'] },
+      { id:'cq2', name:'重庆明品福冷链物流市场', area:'九龙坡区', capacity:'12万吨', temp:'-25°C ~ +5°C', cert:'市场备案', tags:['西南最大交易市场','分拨中心'], desc:'西南地区规模最大的冻品交易市场，仓储+交易一体化。', features:['西南最大冻品市场','交易+仓储一体','川渝云贵分拨','展示交易'] }
     ]
   },
   chengdu: {
-    name: '成都',
-    icon: '&#x1F681;',
-    desc: '西部核心枢纽，辐射川藏云贵',
+    name:'成都', icon:'&#x1F681;', desc:'西部核心枢纽，辐射川藏云贵',
     stores: [
-      { name: '成都青白江冷链物流基地', area: '青白江区成都国际铁路港', capacity: '10万吨', temp: '-25°C ~ +5°C', cert: '海关监管库', tags: ['海关监管','中欧班列','铁路枢纽'], desc: '成都国际铁路港核心冷链设施，中欧班列"蓉欧快铁"终点站，欧洲进口冻品可直达成都入库，辐射整个西南。', features: ['蓉欧快铁直达','海关驻库','铁路冷链','西南枢纽'] },
-      { name: '成都银犁冷链物流中心', area: '青白江区', capacity: '12万吨', temp: '-25°C ~ +5°C', cert: 'ISO22000', tags: ['西部最大单体','交易市场'], desc: '西部最大单体冷库之一，配套冻品交易市场，进口冻品在此实现仓储+展示+交易一站式服务。', features: ['西部最大单体','展示交易','仓储交易一体','西南分拨'] }
+      { id:'cd1', name:'成都青白江冷链物流基地', area:'青白江区成都国际铁路港', capacity:'10万吨', temp:'-25°C ~ +5°C', cert:'海关监管库', tags:['海关监管','中欧班列','铁路枢纽'], desc:'成都国际铁路港核心冷链设施，中欧班列"蓉欧快铁"终点站，欧洲进口冻品可直达成都入库。', features:['蓉欧快铁直达','海关驻库','铁路冷链','西南枢纽'] },
+      { id:'cd2', name:'成都银犁冷链物流中心', area:'青白江区', capacity:'12万吨', temp:'-25°C ~ +5°C', cert:'ISO22000', tags:['西部最大单体','交易市场'], desc:'西部最大单体冷库之一，配套冻品交易市场，仓储+展示+交易一站式服务。', features:['西部最大单体','展示交易','仓储交易一体','西南分拨'] }
     ]
   },
   xian: {
-    name: '西安',
-    icon: '&#x1F681;',
-    desc: '西北枢纽，辐射陕甘宁青新',
+    name:'西安', icon:'&#x1F681;', desc:'西北枢纽，辐射陕甘宁青新',
     stores: [
-      { name: '西安国际港务区冷链基地', area: '灞桥区西安国际港务区', capacity: '8万吨', temp: '-25°C ~ +5°C', cert: '海关监管库', tags: ['海关监管','中欧班列','西北枢纽'], desc: '中欧班列"长安号"核心冷链节点，进口冻品经中亚班列或海运转陆运至此，辐射整个西北市场。', features: ['长安号班列','海关监管','西北分拨','铁路冷链'] },
-      { name: '西安雨润冷链物流中心', area: '未央区', capacity: '6万吨', temp: '-22°C ~ +5°C', cert: 'ISO22000', tags: ['雨润集团','城市配送'], desc: '雨润集团西北冷链节点，城市配送覆盖西安及周边，支持商超门店、餐饮客户精细配送。', features: ['雨润网络','城市精细配送','商超餐饮直送'] }
+      { id:'xa1', name:'西安国际港务区冷链基地', area:'灞桥区西安国际港务区', capacity:'8万吨', temp:'-25°C ~ +5°C', cert:'海关监管库', tags:['海关监管','中欧班列','西北枢纽'], desc:'中欧班列"长安号"核心冷链节点，进口冻品经中亚班列或海运转陆运至此。', features:['长安号班列','海关监管','西北分拨','铁路冷链'] },
+      { id:'xa2', name:'西安雨润冷链物流中心', area:'未央区', capacity:'6万吨', temp:'-22°C ~ +5°C', cert:'ISO22000', tags:['雨润集团','城市配送'], desc:'雨润集团西北冷链节点，城市配送覆盖西安及周边。', features:['雨润网络','城市精细配送','商超餐饮直送'] }
     ]
   },
   kunming: {
-    name: '昆明',
-    icon: '&#x1F681;',
-    desc: '西南门户，辐射云南及东南亚',
+    name:'昆明', icon:'&#x1F681;', desc:'西南门户，辐射云南及东南亚',
     stores: [
-      { name: '昆明宝象万吨冷链港', area: '官渡区', capacity: '12万吨', temp: '-25°C ~ +5°C', cert: '海关监管库', tags: ['海关监管','东南亚通道'], desc: '云南最大冷链枢纽，面向东南亚的冷链门户。进口冻品可经东南亚通道（中老铁路）或海运转陆运抵达，服务云南及东南亚市场。', features: ['中老铁路通道','东南亚冷链','海关监管','云南最大'] },
-      { name: '昆明东盟冷链物流中心', area: '呈贡区', capacity: '5万吨', temp: '-22°C ~ +5°C', cert: 'ISO22000', tags: ['东盟贸易','水果肉类'], desc: '专注东盟贸易的冷链物流中心，进口东南亚水产、水果、肉类分拨中心。', features: ['东盟贸易专长','水产水果','小额分拨'] }
+      { id:'km1', name:'昆明宝象万吨冷链港', area:'官渡区', capacity:'12万吨', temp:'-25°C ~ +5°C', cert:'海关监管库', tags:['海关监管','东南亚通道'], desc:'云南最大冷链枢纽，面向东南亚的冷链门户。进口冻品可经中老铁路或海运转陆运抵达。', features:['中老铁路通道','东南亚冷链','海关监管','云南最大'] },
+      { id:'km2', name:'昆明东盟冷链物流中心', area:'呈贡区', capacity:'5万吨', temp:'-22°C ~ +5°C', cert:'ISO22000', tags:['东盟贸易','水果肉类'], desc:'专注东盟贸易的冷链物流中心，进口东南亚水产、水果、肉类分拨中心。', features:['东盟贸易专长','水产水果','小额分拨'] }
     ]
   },
   harbin: {
-    name: '哈尔滨',
-    icon: '&#x2744;&#xFE0F;',
-    desc: '东北枢纽，辐射黑龙江及俄罗斯',
+    name:'哈尔滨', icon:'&#x2744;&#xFE0F;', desc:'东北枢纽，辐射黑龙江及俄罗斯',
     stores: [
-      { name: '哈尔滨综合保税区冷链物流中心', area: '香坊区综合保税区', capacity: '6万吨', temp: '-30°C ~ +5°C', cert: '海关监管库', tags: ['海关监管','对俄冷链'], desc: '哈尔滨综合保税区冷链枢纽，俄罗斯进口冻品（水产、肉类）的首要入境节点，对俄贸易冷链核心通道。', features: ['对俄冷链通道','海关监管','保税仓储','水产肉类专库'] },
-      { name: '哈尔滨润恒冷链物流园', area: '松北区', capacity: '8万吨', temp: '-25°C ~ +5°C', cert: 'ISO22000', tags: ['东北分拨','批发市场'], desc: '东北北部最大冻品交易市场配套冷库，辐射黑龙江及内蒙古东部，冬季天然低温降低能耗成本。', features: ['东北最大冻品市场','低能耗','交易展示','冷链配送'] }
+      { id:'h1', name:'哈尔滨综合保税区冷链物流中心', area:'香坊区综合保税区', capacity:'6万吨', temp:'-30°C ~ +5°C', cert:'海关监管库', tags:['海关监管','对俄冷链'], desc:'哈尔滨综合保税区冷链枢纽，俄罗斯进口冻品（水产、肉类）的首要入境节点。', features:['对俄冷链通道','海关监管','保税仓储','水产肉类专库'] },
+      { id:'h2', name:'哈尔滨润恒冷链物流园', area:'松北区', capacity:'8万吨', temp:'-25°C ~ +5°C', cert:'ISO22000', tags:['东北分拨','批发市场'], desc:'东北北部最大冻品交易市场配套冷库，辐射黑龙江及内蒙古东部。', features:['东北最大冻品市场','低能耗','交易展示','冷链配送'] }
     ]
   }
 };
 
+// ====== State ======
+var ADMIN_PASSWORD = 'laozhuang2026';
+var isAdmin = false;
+var currentCityKey = null;
+
+// ====== Data Layer ======
+function loadCustomData() {
+  try { return JSON.parse(localStorage.getItem('COLDCHAIN_CUSTOM') || '{}'); }
+  catch(e) { return {}; }
+}
+function saveCustomData(custom) {
+  localStorage.setItem('COLDCHAIN_CUSTOM', JSON.stringify(custom));
+}
+function getMergedStores() {
+  var custom = loadCustomData();
+  var merged = {};
+  for (var key in DEFAULT_STORES) {
+    var def = DEFAULT_STORES[key];
+    var cityCustom = custom[key] || {};
+    merged[key] = {
+      name: cityCustom.name || def.name,
+      icon: cityCustom.icon || def.icon,
+      desc: cityCustom.desc || def.desc,
+      stores: (cityCustom.stores || def.stores).slice()
+    };
+  }
+  return merged;
+}
+
+// Generate unique ID
+function genId() { return 'wh_' + Date.now() + '_' + Math.random().toString(36).slice(2,6); }
+
+// ====== Admin ======
+function checkPassword() {
+  var pw = prompt('请输入管理密码：');
+  if (pw === ADMIN_PASSWORD) {
+    isAdmin = true;
+    document.getElementById('admin-bar').classList.add('show');
+    if (currentCityKey) renderCityPanel(currentCityKey);
+    alert('✅ 管理模式已开启，现在可以编辑和新增冷库信息。');
+  } else if (pw !== null) {
+    alert('❌ 密码错误');
+  }
+}
+function logoutAdmin() {
+  isAdmin = false;
+  document.getElementById('admin-bar').classList.remove('show');
+  if (currentCityKey) renderCityPanel(currentCityKey);
+}
+
 // ====== Select City ======
 function selectCity(cityKey) {
-  var city = coldStores[cityKey];
+  currentCityKey = cityKey;
+  var stores = getMergedStores();
+  var city = stores[cityKey];
   if (!city) return;
-  
+  renderCityPanel(cityKey);
+
+  // Highlight on map
+  var dots = document.querySelectorAll('.city-dot');
+  for (var j = 0; j < dots.length; j++) {
+    var isSel = dots[j].getAttribute('data-city') === cityKey;
+    dots[j].querySelector('circle').setAttribute('fill', isSel ? '#f59e0b' : '#00a8e8');
+    dots[j].querySelector('circle').setAttribute('r', isSel ? '10' : (dots[j].querySelector('circle').getAttribute('r') === '8' ? '7' : dots[j].querySelector('circle').getAttribute('r') === '7' ? '6' : '5'));
+  }
+}
+
+function renderCityPanel(cityKey) {
+  var stores = getMergedStores();
+  var city = stores[cityKey];
+  if (!city) return;
+
   var header = document.getElementById('panel-header');
-  header.innerHTML = '<div class="city-icon">' + city.icon + '</div>' +
-    '<div><h3>' + city.name + '</h3><div class="count">' + city.desc + ' &middot; ' + city.stores.length + ' 座冷库</div></div>';
-  
+  header.innerHTML = '<div class="city-left">' +
+    '<div class="city-icon">' + city.icon + '</div>' +
+    '<div><h3>' + city.name + '</h3><div class="count">' + city.desc + ' &middot; ' + city.stores.length + ' 座冷库</div></div>' +
+    '</div>' +
+    '<button class="add-btn' + (isAdmin ? ' visible' : '') + '" onclick="openAddModal(\'' + cityKey + '\')">+ 新增冷库</button>';
+
   var list = document.getElementById('warehouse-list');
   list.innerHTML = '';
   for (var i = 0; i < city.stores.length; i++) {
     var s = city.stores[i];
     list.innerHTML += '<div class="wh-card" onclick="showDetail(\'' + cityKey + '\',' + i + ')">' +
+      '<button class="edit-btn' + (isAdmin ? ' visible' : '') + '" onclick="event.stopPropagation();openEditModal(\'' + cityKey + '\',' + i + ')">&#x270F;&#xFE0F; 编辑</button>' +
       '<div class="wh-name">' + s.name + '</div>' +
       '<div class="wh-meta">' +
         '<span>&#x1F4CD; ' + s.area + '</span>' +
@@ -451,23 +592,17 @@ function selectCity(cityKey) {
       '<div class="wh-tags">' + s.tags.map(function(t){ return '<span class="tag' + (t.indexOf('海关')>=0||t.indexOf('保税')>=0?' blue':'') + '">' + t + '</span>'; }).join('') + '</div>' +
     '</div>';
   }
-  
+
   document.getElementById('panel-empty').style.display = 'none';
   document.getElementById('panel-content').style.display = 'flex';
-  
-  // Highlight on map
-  var dots = document.querySelectorAll('.city-dot');
-  for (var j = 0; j < dots.length; j++) {
-    dots[j].querySelector('circle').setAttribute('fill', dots[j].getAttribute('data-city') === cityKey ? '#f59e0b' : '#00a8e8');
-    dots[j].querySelector('circle').setAttribute('r', dots[j].getAttribute('data-city') === cityKey ? '10' : '7');
-  }
 }
 
 // ====== Show Detail ======
 function showDetail(cityKey, index) {
-  var city = coldStores[cityKey];
+  var stores = getMergedStores();
+  var city = stores[cityKey];
   var s = city.stores[index];
-  
+
   var modal = document.getElementById('modal-body');
   modal.innerHTML = '<button class="modal-close" onclick="closeModal()">&times;</button>' +
     '<div class="modal-header">' +
@@ -484,8 +619,12 @@ function showDetail(cityKey, index) {
     '<div class="modal-features">' +
       '<h4>核心能力</h4>' +
       '<ul>' + s.features.map(function(f){ return '<li>' + f + '</li>'; }).join('') + '</ul>' +
+    '</div>' +
+    '<div class="modal-actions admin-only' + (isAdmin ? ' visible' : '') + '">' +
+      '<button class="btn-edit-wh" onclick="closeModal();openEditModal(\'' + cityKey + '\',' + index + ')">&#x270F;&#xFE0F; 编辑</button>' +
+      '<button class="btn-del-wh" onclick="deleteWarehouse(\'' + cityKey + '\',' + index + ')">&#x1F5D1;&#xFE0F; 删除</button>' +
     '</div>';
-  
+
   document.getElementById('modal-overlay').classList.add('show');
   document.body.style.overflow = 'hidden';
 }
@@ -495,6 +634,127 @@ function closeModal(e) {
   document.getElementById('modal-overlay').classList.remove('show');
   document.body.style.overflow = '';
 }
+
+// ====== Edit Warehouse ======
+function openEditModal(cityKey, index) {
+  if (!isAdmin) { checkPassword(); if (!isAdmin) return; }
+  var stores = getMergedStores();
+  var s = stores[cityKey].stores[index];
+
+  buildEditForm('编辑冷库', cityKey, index, s);
+  document.getElementById('edit-overlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+// ====== Add Warehouse ======
+function openAddModal(cityKey) {
+  if (!isAdmin) { checkPassword(); if (!isAdmin) return; }
+  buildEditForm('新增冷库', cityKey, null, { name:'', area:'', capacity:'', temp:'', cert:'', tags:[], desc:'', features:[] });
+  document.getElementById('edit-overlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function buildEditForm(title, cityKey, index, data) {
+  var tagsHtml = data.tags.map(function(t){ return '<span class="tag-chip">' + t + '<span class="remove-tag" onclick="this.parentElement.remove()">×</span></span>'; }).join('');
+  var featuresHtml = data.features.join('\n');
+
+  document.getElementById('edit-body').innerHTML =
+    '<button class="modal-close" onclick="closeEditModal()">&times;</button>' +
+    '<h3>' + title + '</h3>' +
+    '<div class="form-row">' +
+      '<div class="form-full"><label>冷库名称 *</label><input id="ef-name" value="' + esc(data.name) + '" placeholder="e.g. 上海临港冷链物流园"></div>' +
+    '</div>' +
+    '<div class="form-row">' +
+      '<div><label>所在区域 *</label><input id="ef-area" value="' + esc(data.area) + '" placeholder="e.g. 浦东新区临港"></div>' +
+      '<div><label>库容规模</label><input id="ef-capacity" value="' + esc(data.capacity) + '" placeholder="e.g. 20万吨"></div>' +
+    '</div>' +
+    '<div class="form-row">' +
+      '<div><label>温区范围</label><input id="ef-temp" value="' + esc(data.temp) + '" placeholder="e.g. -25°C ~ +5°C"></div>' +
+      '<div><label>资质认证</label><input id="ef-cert" value="' + esc(data.cert) + '" placeholder="e.g. 海关监管库"></div>' +
+    '</div>' +
+    '<div class="form-full"><label>标签（逗号分隔）</label><div style="display:flex;gap:6px;align-items:center"><input id="ef-tags" value="' + esc(data.tags.join(',')) + '" placeholder="海关监管,保税仓,肉类专库" style="flex:1"><span style="font-size:11px;color:#aaa">逗号分隔</span></div></div>' +
+    '<div class="form-full"><label>简介</label><textarea id="ef-desc" placeholder="冷库详细介绍...">' + esc(data.desc) + '</textarea></div>' +
+    '<div class="form-full"><label>核心能力（每行一个）</label><textarea id="ef-features" placeholder="自动化立体库&#10;RFID溯源&#10;海关驻库">' + featuresHtml + '</textarea></div>' +
+    '<div class="edit-actions">' +
+      '<button class="btn-cancel" onclick="closeEditModal()">取消</button>' +
+      (index !== null ? '<button class="btn-del-wh" style="margin-right:auto" onclick="deleteWarehouse(\'' + cityKey + '\',' + index + ')">&#x1F5D1;&#xFE0F; 删除</button>' : '') +
+      '<button class="btn-save" onclick="saveWarehouse(\'' + cityKey + '\',' + (index !== null ? index : -1) + ')">&#x1F4BE; 保存</button>' +
+    '</div>';
+}
+
+function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function saveWarehouse(cityKey, index) {
+  var name = document.getElementById('ef-name').value.trim();
+  if (!name) { alert('请输入冷库名称'); return; }
+  var area = document.getElementById('ef-area').value.trim();
+  var capacity = document.getElementById('ef-capacity').value.trim();
+  var temp = document.getElementById('ef-temp').value.trim();
+  var cert = document.getElementById('ef-cert').value.trim();
+  var tags = document.getElementById('ef-tags').value.split(',').map(function(t){ return t.trim(); }).filter(function(t){ return t; });
+  var desc = document.getElementById('ef-desc').value.trim();
+  var features = document.getElementById('ef-features').value.split('\n').map(function(f){ return f.trim(); }).filter(function(f){ return f; });
+
+  var custom = loadCustomData();
+  if (!custom[cityKey]) {
+    custom[cityKey] = { stores: JSON.parse(JSON.stringify(DEFAULT_STORES[cityKey].stores)) };
+  }
+  if (!custom[cityKey].stores) {
+    custom[cityKey].stores = JSON.parse(JSON.stringify(DEFAULT_STORES[cityKey].stores));
+  }
+
+  var storeObj = { name:name, area:area, capacity:capacity, temp:temp, cert:cert, tags:tags, desc:desc, features:features };
+
+  if (index >= 0) {
+    // Edit existing
+    storeObj.id = custom[cityKey].stores[index].id || genId();
+    custom[cityKey].stores[index] = storeObj;
+  } else {
+    // Add new
+    storeObj.id = genId();
+    custom[cityKey].stores.push(storeObj);
+  }
+
+  saveCustomData(custom);
+  closeEditModal();
+  renderCityPanel(cityKey);
+}
+
+function deleteWarehouse(cityKey, index) {
+  if (!confirm('确定要删除这个冷库吗？此操作不可恢复。')) return;
+  var custom = loadCustomData();
+  if (!custom[cityKey]) {
+    custom[cityKey] = { stores: JSON.parse(JSON.stringify(DEFAULT_STORES[cityKey].stores)) };
+  }
+  if (!custom[cityKey].stores) {
+    custom[cityKey].stores = JSON.parse(JSON.stringify(DEFAULT_STORES[cityKey].stores));
+  }
+  custom[cityKey].stores.splice(index, 1);
+  saveCustomData(custom);
+  closeModal();
+  closeEditModal();
+  renderCityPanel(cityKey);
+}
+
+function closeEditModal(e) {
+  if (e && e.target !== document.getElementById('edit-overlay')) return;
+  document.getElementById('edit-overlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+// ====== Init ======
+// Click masthead for admin
+document.querySelector('.masthead').style.cursor = 'default';
+document.querySelector('.masthead').addEventListener('dblclick', function(e) {
+  if (!isAdmin) checkPassword();
+});
+
+// Keyboard shortcut: Ctrl+Shift+A for admin
+document.addEventListener('keydown', function(e) {
+  if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+    if (!isAdmin) checkPassword();
+  }
+});
 </script>
 </body>
 </html>
