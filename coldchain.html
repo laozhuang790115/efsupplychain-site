@@ -409,6 +409,75 @@ var COLDCHAIN_DATA = {
     stores: [
       { name: "西安国际港务区冷链中心", zone: "国际港务区", capacity: "12万吨", temp: "-25℃ ~ 12℃", cert: "ISO9001", tags: ["第三方物流", "铁路港"], desc: "依托中欧班列（西安）集结中心，提供进口冻品铁路到达后的冷链存储和西北分拨。", features: ["中欧班列", "西北枢纽", "多式联运"] }
     ]
+  },
+  zhanjiang: {
+    name: "湛江", icon: "🦐", desc: "粤西冷链门户",
+    stores: [
+      { name: "湛江港冷链物流中心", zone: "湛江港区", capacity: "8万吨", temp: "-25℃ ~ 12℃", cert: "海关监管", tags: ["海关监管", "港口配套"], desc: "粤西地区核心冷链节点，服务湛江港进口冻品（对虾、罗非鱼等）的存储与分拨。", features: ["港口配套", "粤西分拨", "海关查验"] },
+      { name: "湛江万吨冷库", zone: "麻章区", capacity: "5万吨", temp: "-25℃ ~ 10℃", cert: "ISO9001", tags: ["第三方物流"], desc: "湛江本地最大民用冷库，承接进口冻品暂存与珠三角方向干线配送。", features: ["多温区", "粤西配送", "WMS管理"] }
+    ]
+  },
+  haikou: {
+    name: "海口", icon: "🏝️", desc: "海南自贸港冷链节点",
+    stores: [
+      { name: "海口综合保税区冷链中心", zone: "综保区", capacity: "6万吨", temp: "-25℃ ~ 12℃", cert: "海关监管·ISO9001", tags: ["海关监管", "保税仓"], desc: "海南自贸港核心冷链设施，享有零关税政策，进口冻品入区保税存储。", features: ["自贸港政策", "保税仓储", "离岛免税联动"] }
+    ]
+  },
+  guiyang: {
+    name: "贵阳", icon: "🏔️", desc: "西南陆路冷链枢纽",
+    stores: [
+      { name: "贵阳国际陆港冷链中心", zone: "综保区", capacity: "10万吨", temp: "-25℃ ~ 12℃", cert: "ISO9001", tags: ["第三方物流", "陆港"], desc: "依托贵阳国际陆港，辐射贵州全省及云南、广西邻近地区，是西南陆路冷链核心节点。", features: ["陆港枢纽", "西南分拨", "多温区"] }
+    ]
+  },
+  jinan: {
+    name: "济南", icon: "🌿", desc: "山东内陆冷链枢纽",
+    stores: [
+      { name: "济南维尔康冷链物流中心", zone: "历城区", capacity: "20万吨", temp: "-25℃ ~ 15℃", cert: "ISO9001·BRC", tags: ["第三方物流"], desc: "山东省最大冷链物流基地，承接青岛港进口冻品的内陆分拨，辐射华北市场。", features: ["华北枢纽", "多温区", "WMS管理"] }
+    ]
+  },
+  wurumqi: {
+    name: "乌鲁木齐", icon: "🐫", desc: "丝绸之路冷链枢纽",
+    stores: [
+      { name: "乌鲁木齐国际陆港区冷链中心", zone: "经开区", capacity: "8万吨", temp: "-25℃ ~ 12℃", cert: "海关监管", tags: ["海关监管", "陆港"], desc: "丝绸之路经济带核心区冷链节点，承接中欧班列进口冻品存储及中亚方向分拨。", features: ["中欧班列", "丝路枢纽", "中亚通道"] }
+    ]
+  },
+  kashi: {
+    name: "喀什", icon: "🕌", desc: "中巴经济走廊冷链节点",
+    stores: [
+      { name: "喀什综合保税区冷链仓库", zone: "综保区", capacity: "3万吨", temp: "-25℃ ~ 10℃", cert: "海关监管", tags: ["海关监管", "保税仓"], desc: "中巴经济走廊国内起点，面向中亚和南亚的冷链物流节点，享有保税政策。", features: ["中巴走廊", "保税仓储", "边境口岸"] }
+    ]
+  },
+  fuzhou: {
+    name: "福州", icon: "🌊", desc: "海峡西岸冷链枢纽",
+    stores: [
+      { name: "福州马尾冷链物流中心", zone: "马尾区", capacity: "12万吨", temp: "-25℃ ~ 12℃", cert: "ISO9001·HACCP", tags: ["海关监管", "第三方物流"], desc: "福建省核心冷链节点，辐射福州都市圈及浙南地区，承接东南沿海进口冻品分拨。", features: ["海峡西岸", "多温区", "WMS管理"] }
+    ]
+  },
+  kunshan: {
+    name: "昆山", icon: "🏭", desc: "长三角冷链配送枢纽",
+    stores: [
+      { name: "昆山京东冷链产业园", zone: "开发区", capacity: "15万吨", temp: "-25℃ ~ 15℃", cert: "ISO9001·BRC", tags: ["第三方物流"], desc: "长三角核心冷链配送枢纽，紧邻上海，承接进口冻品华东区域分拨与城配。", features: ["长三角枢纽", "城配网络", "多温区"] },
+      { name: "昆山普洛斯冷链园", zone: "千灯镇", capacity: "8万吨", temp: "-25℃ ~ 12℃", cert: "ISO9001", tags: ["第三方物流"], desc: "国际化冷链园区，服务长三角高端商超与餐饮渠道的进口冻品存储配送。", features: ["商超配送", "餐饮渠道", "WMS管理"] }
+    ]
+  },
+  changsha: {
+    name: "长沙", icon: "🌶️", desc: "华中冷链枢纽",
+    stores: [
+      { name: "长沙红星冷链物流中心", zone: "雨花区", capacity: "15万吨", temp: "-25℃ ~ 12℃", cert: "ISO9001", tags: ["第三方物流", "批发市场"], desc: "华中地区核心冷链节点，辐射湖南全省及赣西、鄂南地区，承接珠三角冻品北上分拨。", features: ["华中枢纽", "批发联动", "多温区"] }
+    ]
+  },
+  nanning: {
+    name: "南宁", icon: "🌴", desc: "东盟冷链门户",
+    stores: [
+      { name: "南宁国际铁路港冷链中心", zone: "经开区", capacity: "10万吨", temp: "-25℃ ~ 12℃", cert: "海关监管", tags: ["海关监管", "铁路港"], desc: "西部陆海新通道核心节点，面向东盟的进口冻品集散中心，辐射广西及云贵邻近地区。", features: ["东盟门户", "陆海新通道", "铁路港"] }
+    ]
+  },
+  hongkong: {
+    name: "香港", icon: "🇭🇰", desc: "国际冷链中转枢纽",
+    stores: [
+      { name: "香港国际机场货运冷链中心", zone: "赤鱲角", capacity: "8万吨", temp: "-25℃ ~ 15℃", cert: "ISO9001·IATA", tags: ["航空港", "保税仓"], desc: "国际航空冷链枢纽，承接高端进口冻品的中转与香港本地配送，24小时通关。", features: ["航空枢纽", "国际中转", "24小时通关"] },
+      { name: "香港西九龙冷链配送中心", zone: "西九龙", capacity: "5万吨", temp: "-25℃ ~ 15℃", cert: "HACCP", tags: ["第三方物流"], desc: "服务香港本地商超、餐饮及酒店渠道，提供进口冻品最后一公里的冷链配送。", features: ["本地配送", "商超服务", "多温区"] }
+    ]
   }
 };
 
@@ -427,7 +496,18 @@ var CITY_POSITIONS = {
   zhengzhou:    { x: 375, y: 198, r: 5 },
   wuhan:        { x: 395, y: 232, r: 5 },
   chongqing:    { x: 330, y: 248, r: 5 },
-  xian:         { x: 330, y: 195, r: 5 }
+  xian:         { x: 330, y: 195, r: 5 },
+  zhanjiang:    { x: 385, y: 342, r: 5 },
+  haikou:       { x: 425, y: 367, r: 5 },
+  guiyang:      { x: 322, y: 285, r: 5 },
+  jinan:        { x: 452, y: 157, r: 5 },
+  wurumqi:      { x: 148, y: 108, r: 5 },
+  kashi:        { x: 100, y: 155, r: 4 },
+  fuzhou:       { x: 465, y: 276, r: 5 },
+  kunshan:      { x: 492, y: 225, r: 4 },
+  changsha:     { x: 408, y: 260, r: 5 },
+  nanning:      { x: 358, y: 326, r: 5 },
+  hongkong:     { x: 432, y: 322, r: 4 }
 };
 
 var ADMIN_PASSWORD = "laozhuang2026";
