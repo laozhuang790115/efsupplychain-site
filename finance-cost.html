@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>进口融资成本核算 — 以鲜国际</title>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", -apple-system, sans-serif;
+  color: #1a1a2e; line-height: 1.7; background: #f5f7fb; min-height: 100vh;
+}
+a { text-decoration: none; color: inherit; }
+
+.header {
+  background: linear-gradient(135deg, #0a1628, #0a2848);
+  color: #fff; padding: 48px 24px 40px; text-align: center;
+}
+.header .tag {
+  display: inline-block; font-size: 11px; letter-spacing: 4px;
+  color: #00d4aa; text-transform: uppercase; margin-bottom: 12px;
+}
+.header h1 { font-size: 26px; font-weight: 800; margin-bottom: 8px; }
+.header .sub { font-size: 14px; color: rgba(255,255,255,0.5); }
+.header .back-link {
+  display: inline-block; margin-top: 16px; font-size: 13px;
+  color: rgba(255,255,255,0.45); transition: color 0.2s;
+}
+.header .back-link:hover { color: #00d4aa; }
+
+.container { max-width: 800px; margin: 0 auto; padding: 32px 24px 60px; }
+
+.card {
+  background: #fff; border-radius: 16px; padding: 28px 32px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.04); margin-bottom: 24px;
+}
+.card-title {
+  font-size: 17px; font-weight: 700; color: #0a1628;
+  margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+}
+.card-title .icon { font-size: 22px; }
+
+/* Form */
+.form-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 18px 24px; margin-bottom: 20px;
+}
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-group label {
+  font-size: 12px; color: #888; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.form-group .input-row {
+  display: flex; align-items: center; gap: 8px;
+}
+.form-group input {
+  padding: 10px 14px; border: 1.5px solid #e0e5ec; border-radius: 10px;
+  font-size: 15px; font-family: inherit; transition: border 0.2s;
+  background: #fafbfc; width: 100%;
+}
+.form-group input:focus {
+  outline: none; border-color: #b8860b; background: #fff;
+}
+.form-group input.readonly {
+  background: #f0f4f8; color: #555; font-weight: 600;
+  cursor: default;
+}
+.form-group .unit {
+  font-size: 12px; color: #aaa; white-space: nowrap; min-width: 28px;
+}
+.form-group .hint { font-size: 11px; color: #bbb; margin-top: -2px; }
+
+.divider {
+  border: none; border-top: 1px dashed #e0e5ec;
+  margin: 16px 0;
+}
+
+/* Result */
+.result-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+.result-item {
+  background: #f8fafc; border-radius: 14px; padding: 20px 16px;
+  text-align: center; border: 1.5px solid #e8edf2;
+  transition: all 0.3s;
+}
+.result-item.primary {
+  background: linear-gradient(135deg, #0a1628, #1a3a5c);
+  border-color: transparent; color: #fff;
+}
+.result-item .rl {
+  font-size: 11px; color: #aaa; text-transform: uppercase;
+  letter-spacing: 0.5px; margin-bottom: 8px;
+}
+.result-item.primary .rl { color: rgba(255,255,255,0.5); }
+.result-item .rv {
+  font-size: 26px; font-weight: 800;
+  color: #0a1628;
+}
+.result-item.primary .rv { color: #ffd700; font-size: 30px; }
+.result-item .rv small { font-size: 14px; font-weight: 400; color: #888; }
+.result-item.primary .rv small { color: rgba(255,255,255,0.7); }
+
+/* Formula explainer */
+.formula-box {
+  background: #fffdf5; border: 1px solid #f0e6b0; border-radius: 12px;
+  padding: 18px 22px; margin-top: 20px;
+}
+.formula-box .ft { font-size: 12px; color: #b8860b; font-weight: 600; margin-bottom: 8px; }
+.formula-box .fm {
+  font-family: "SF Mono", "Menlo", "Consolas", monospace;
+  font-size: 13px; color: #5a4a0a; line-height: 1.9;
+}
+.formula-box .fm span { color: #b8860b; font-weight: 700; }
+
+/* Responsive */
+@media (max-width: 640px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .result-row { grid-template-columns: 1fr; }
+  .header h1 { font-size: 22px; }
+  .card { padding: 20px 18px; }
+}
+
+.footer-link {
+  text-align: center; margin-top: 16px; font-size: 13px; color: #aaa;
+}
+.footer-link a { color: #00a8e8; }
+.footer-link a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="tag">Financial Tools</div>
+  <h1>&#x1F4B0; 进口融资成本核算</h1>
+  <div class="sub">货柜融资 · 利息测算 · 费率一目了然</div>
+  <a href="tools.html" class="back-link">&#8592; 返回工具罗盘</a>
+</div>
+
+<div class="container">
+
+<!-- Input Card -->
+<div class="card">
+  <div class="card-title">
+    <span class="icon">&#x1F4CB;</span> 融资参数
+  </div>
+
+  <div class="form-grid">
+    <div class="form-group">
+      <label>CIF 产品总价</label>
+      <div class="input-row">
+        <input type="number" id="cifPrice" value="1000000" step="1" min="0" oninput="calc()">
+        <span class="unit">元</span>
+      </div>
+      <span class="hint">报关 CIF 总金额</span>
+    </div>
+
+    <div class="form-group">
+      <label>首付款比例</label>
+      <div class="input-row">
+        <input type="number" id="downPct" value="20" step="0.1" min="0" max="100" oninput="calc()">
+        <span class="unit">%</span>
+      </div>
+      <span class="hint">自有资金占比</span>
+    </div>
+
+    <div class="form-group">
+      <label>融资金额</label>
+      <div class="input-row">
+        <input type="text" id="financingAmt" value="800,000" class="readonly" readonly tabindex="-1">
+        <span class="unit">元</span>
+      </div>
+      <span class="hint">CIF × (1 − 首付比) · 自动计算</span>
+    </div>
+
+    <div class="form-group">
+      <label>年化利率</label>
+      <div class="input-row">
+        <input type="number" id="rate" value="5.8" step="0.01" min="0" oninput="calc()">
+        <span class="unit">%</span>
+      </div>
+      <span class="hint">融资年化利率</span>
+    </div>
+
+    <div class="form-group full" style="max-width:50%;">
+      <label>用款时间</label>
+      <div class="input-row">
+        <input type="number" id="days" value="60" step="1" min="1" oninput="calc()">
+        <span class="unit">天</span>
+      </div>
+      <span class="hint">融资占用天数</span>
+    </div>
+  </div>
+</div>
+
+<!-- Result Card -->
+<div class="card">
+  <div class="card-title">
+    <span class="icon">&#x1F4CA;</span> 核算结果
+  </div>
+
+  <div class="result-row">
+    <div class="result-item primary" id="resInterest">
+      <div class="rl">利息总额</div>
+      <div class="rv" id="valInterest">¥7,733</div>
+    </div>
+    <div class="result-item" id="resFeeRate">
+      <div class="rl">融资费用率</div>
+      <div class="rv" id="valFeeRate">0.97<small>%</small></div>
+    </div>
+    <div class="result-item" id="resProductRate">
+      <div class="rl">融资费产品比</div>
+      <div class="rv" id="valProductRate">0.77<small>%</small></div>
+    </div>
+  </div>
+
+  <!-- Formula explainer -->
+  <div class="formula-box">
+    <div class="ft">&#x1F4D0; 计算公式</div>
+    <div class="fm">
+      利息总额 = <span id="fmFinancing">800,000</span> × <span id="fmRate">5.80%</span> ÷ 360 × <span id="fmDays">60</span> = <span id="fmInterest">&#xa5;7,733</span><br>
+      融资费用率 = <span id="fmInterest2">7,733</span> ÷ <span id="fmFinancing2">800,000</span> = <span id="fmFeeRate">0.97%</span><br>
+      融资费产品比 = <span id="fmInterest3">7,733</span> ÷ <span id="fmCif">1,000,000</span> = <span id="fmProductRate">0.77%</span>
+    </div>
+  </div>
+</div>
+
+<div class="footer-link">
+  <a href="tools.html">&#8592; 返回工具罗盘</a>
+</div>
+
+</div>
+
+<script>
+function fmt(n, dec) {
+  if (dec === undefined) dec = 0;
+  return n.toLocaleString('zh-CN', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+}
+
+function calc() {
+  var cif = parseFloat(document.getElementById('cifPrice').value) || 0;
+  var downPct = parseFloat(document.getElementById('downPct').value) || 0;
+  var rate = parseFloat(document.getElementById('rate').value) || 0;
+  var days = parseInt(document.getElementById('days').value) || 0;
+
+  // Financing amount
+  var financing = cif * (1 - downPct / 100);
+  document.getElementById('financingAmt').value = fmt(Math.round(financing));
+
+  // Interest
+  var interest = Math.round(financing * (rate / 100) / 360 * days);
+
+  // Rates
+  var feeRate = financing > 0 ? (interest / financing) * 100 : 0;
+  var productRate = cif > 0 ? (interest / cif) * 100 : 0;
+
+  // Update result cards
+  document.getElementById('valInterest').innerHTML = '&yen;' + fmt(interest);
+  document.getElementById('valFeeRate').innerHTML = feeRate.toFixed(2) + '<small>%</small>';
+  document.getElementById('valProductRate').innerHTML = productRate.toFixed(2) + '<small>%</small>';
+
+  // Update formula explainer
+  document.getElementById('fmFinancing').textContent = fmt(Math.round(financing));
+  document.getElementById('fmRate').textContent = rate.toFixed(2) + '%';
+  document.getElementById('fmDays').textContent = days;
+  document.getElementById('fmInterest').textContent = '\xa5' + fmt(interest);
+  document.getElementById('fmInterest2').textContent = fmt(interest);
+  document.getElementById('fmFinancing2').textContent = fmt(Math.round(financing));
+  document.getElementById('fmFeeRate').textContent = feeRate.toFixed(2) + '%';
+  document.getElementById('fmInterest3').textContent = fmt(interest);
+  document.getElementById('fmCif').textContent = fmt(Math.round(cif));
+  document.getElementById('fmProductRate').textContent = productRate.toFixed(2) + '%';
+}
+
+// Run on load
+calc();
+</script>
+
+</body>
+</html>
