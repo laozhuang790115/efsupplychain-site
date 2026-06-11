@@ -758,6 +758,7 @@ function openEditModal(cityKey, idx) {
   currentDetailIdx = idx;
   var stores = getMergedStores();
   var s = stores[cityKey].stores[idx];
+  var body = document.getElementById('edit-body');
   var supervised = s.supervised ? ' checked' : '';
   body.innerHTML =
     '<h3>✏️ 编辑冷库 — ' + s.name + '</h3>' +
