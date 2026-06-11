@@ -152,7 +152,7 @@ a { text-decoration: none; color: inherit; }
     <div class="form-group">
       <label>CIF 产品总价</label>
       <div class="input-row">
-        <input type="number" id="cifPrice" value="1000000" step="1" min="0" oninput="calc()">
+        <input type="number" id="cifPrice" value="1250000" step="1" min="0" oninput="calc()">
         <span class="unit">元</span>
       </div>
       <span class="hint">报关 CIF 总金额</span>
@@ -170,7 +170,7 @@ a { text-decoration: none; color: inherit; }
     <div class="form-group">
       <label>融资金额</label>
       <div class="input-row">
-        <input type="text" id="financingAmt" value="800,000" class="readonly" readonly tabindex="-1">
+        <input type="text" id="financingAmt" value="1,000,000" class="readonly" readonly tabindex="-1">
         <span class="unit">元</span>
       </div>
       <span class="hint">CIF × (1 − 首付比) · 自动计算</span>
@@ -179,7 +179,7 @@ a { text-decoration: none; color: inherit; }
     <div class="form-group">
       <label>年化利率</label>
       <div class="input-row">
-        <input type="number" id="rate" value="5.8" step="0.01" min="0" oninput="calc()">
+        <input type="number" id="rate" value="6" step="0.01" min="0" oninput="calc()">
         <span class="unit">%</span>
       </div>
       <span class="hint">融资年化利率</span>
@@ -208,11 +208,11 @@ a { text-decoration: none; color: inherit; }
       <div class="rv" id="valInterest">¥7,733</div>
     </div>
     <div class="result-item" id="resFeeRate">
-      <div class="rl">融资费用率</div>
+      <div class="rl">融资月利率</div>
       <div class="rv" id="valFeeRate">0.97<small>%</small></div>
     </div>
     <div class="result-item" id="resProductRate">
-      <div class="rl">融资费产品比</div>
+      <div class="rl">融资费货值占比</div>
       <div class="rv" id="valProductRate">0.77<small>%</small></div>
     </div>
   </div>
@@ -222,8 +222,8 @@ a { text-decoration: none; color: inherit; }
     <div class="ft">&#x1F4D0; 计算公式</div>
     <div class="fm">
       利息总额 = <span id="fmFinancing">800,000</span> × <span id="fmRate">5.80%</span> ÷ 360 × <span id="fmDays">60</span> = <span id="fmInterest">&#xa5;7,733</span><br>
-      融资费用率 = <span id="fmInterest2">7,733</span> ÷ <span id="fmFinancing2">800,000</span> = <span id="fmFeeRate">0.97%</span><br>
-      融资费产品比 = <span id="fmInterest3">7,733</span> ÷ <span id="fmCif">1,000,000</span> = <span id="fmProductRate">0.77%</span>
+      融资月利率 = <span id="fmInterest2">7,733</span> ÷ <span id="fmFinancing2">800,000</span> = <span id="fmFeeRate">0.97%</span><br>
+      融资费货值占比 = <span id="fmInterest3">7,733</span> ÷ <span id="fmCif">1,000,000</span> = <span id="fmProductRate">0.77%</span>
     </div>
   </div>
 </div>
