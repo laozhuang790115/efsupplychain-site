@@ -322,11 +322,12 @@ tbody tr:hover td { background: #e6f7ff !important; }
           <th>融资比例</th>
           <th class="cost-highlight" onclick="sortBy('totalCost')">到岸成本(USD) <span class="sort-arrow">&#x2195;</span></th>
           <th class="cost-highlight">到岸成本(CNY)</th>
+          <th>汇率</th>
           <th>操作</th>
         </tr>
       </thead>
       <tbody id="table-body">
-        <tr><td colspan="11" class="empty-row">&#x1F4ED; 暂无数据 &mdash; 点击上方&ldquo;&#x1F4CB; 填充示例数据&rdquo;快速预览，或填表录入</td></tr>
+        <tr><td colspan="12" class="empty-row">&#x1F4ED; 暂无数据 &mdash; 点击上方&ldquo;&#x1F4CB; 填充示例数据&rdquo;快速预览，或填表录入</td></tr>
       </tbody>
     </table>
   </div>
@@ -534,7 +535,7 @@ tbody tr:hover td { background: #e6f7ff !important; }
     document.getElementById("record-count").textContent = "共 " + records.length + " 条记录";
 
     if (filtered.length === 0) {
-      tbody.innerHTML = "<tr><td colspan=\"11\" class=\"empty-row\">&#x1F4ED; 暂无匹配数据</td></tr>";
+      tbody.innerHTML = "<tr><td colspan=\"12\" class=\"empty-row\">&#x1F4ED; 暂无匹配数据</td></tr>";
       return;
     }
 
@@ -561,6 +562,7 @@ tbody tr:hover td { background: #e6f7ff !important; }
         "<td>" + Math.round(r.finRatio*100) + "%</td>" +
         "<td class=\"cost-highlight\">$" + r.totalCost + "</td>" +
         "<td class=\"cost-highlight\">¥" + r.totalCostCNY + "</td>" +
+        "<td>¥" + r.rate + "</td>" +
         "<td><button class=\"btn btn-danger btn-sm\" onclick=\"deleteRecord(this)\">&#x2715;</button></td>" +
         "</tr>";
     }
