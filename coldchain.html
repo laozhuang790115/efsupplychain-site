@@ -44,12 +44,13 @@ nav {
 .masthead h1 { font-size: 28px; font-weight: 800; margin-bottom: 6px; }
 .masthead p { font-size: 14px; opacity: 0.85; max-width: 600px; margin: 0 auto; }
 .masthead .admin-hint {
-  position: absolute; bottom: 10px; right: 20px; font-size: 11px;
-  color: rgba(255,255,255,0.55); cursor: pointer;
-  border: 1px solid rgba(255,255,255,0.25); border-radius: 6px;
-  padding: 3px 10px; transition: all 0.2s;
+  position: absolute; bottom: 14px; right: 24px; font-size: 13px; font-weight: 600;
+  color: #fff; cursor: pointer;
+  background: rgba(255,255,255,0.18); border: 1.5px solid rgba(255,255,255,0.5); border-radius: 8px;
+  padding: 6px 16px; transition: all 0.2s;
+  display: inline-block;
 }
-.masthead .admin-hint:hover { color: #fff; background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.5); }
+.masthead .admin-hint:hover { background: rgba(255,255,255,0.3); border-color: #fff; transform: scale(1.05); }
 
 /* Main layout */
 .main-wrap {
@@ -200,6 +201,7 @@ footer { text-align: center; padding: 24px; font-size: 12px; color: #aaa; border
       <a href="tools.html" class="nav-tools">🧭 工具罗盘</a>
       <a href="coldchain.html">❄️ 冷链服务</a>
       <a href="reports.html">📰 老庄报告</a>
+      <a href="#" onclick="event.preventDefault();checkPassword()" style="background:#1a3a5c;color:#fff!important;padding:5px 14px;border-radius:20px;font-size:12px;">🔒 管理</a>
     </div>
   </div>
 </nav>
