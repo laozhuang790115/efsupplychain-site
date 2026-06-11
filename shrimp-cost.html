@@ -259,7 +259,7 @@ tbody tr:hover td { background: #e6f7ff !important; }
     </div>
     <div class="form-group">
       <label>账期天数</label>
-      <input type="number" id="input-days" step="1" min="0" max="365" placeholder="90" value="90">
+      <input type="number" id="input-days" step="1" min="0" max="365" placeholder="0" value="0">
     </div>
   </div>
   <div class="form-row">
@@ -277,7 +277,7 @@ tbody tr:hover td { background: #e6f7ff !important; }
     </div>
     <div class="form-group">
       <label>汇率（USD&rarr;CNY）</label>
-      <input type="number" id="input-rate" step="0.01" min="0" placeholder="7.20" value="7.20">
+      <input type="number" id="input-rate" step="0.01" min="0" placeholder="6.8" value="6.8">
     </div>
   </div>
   <div class="btn-row">
@@ -430,8 +430,8 @@ tbody tr:hover td { background: #e6f7ff !important; }
     var freight = parseFloat(document.getElementById("input-freight").value) || 0;
     var insurance = parseFloat(document.getElementById("input-insurance").value) || 0;
     var fees = parseFloat(document.getElementById("input-fees").value) || 0;
-    var days = parseInt(document.getElementById("input-days").value) || 90;
-    var rate = parseFloat(document.getElementById("input-rate").value) || 7.2;
+    var days = parseInt(document.getElementById("input-days").value) || 0;
+    var rate = parseFloat(document.getElementById("input-rate").value) || 6.8;
 
     if (!month) { showToast("请选择月份", false); return; }
     if (!spec) { showToast("请选择产品规格", false); return; }
@@ -637,7 +637,7 @@ tbody tr:hover td { background: #e6f7ff !important; }
     ];
     var months = ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06"];
     var freights = [0.14, 0.13, 0.11, 0.09, 0.08, 0.09];
-    var insurance = 0.02, fees = 0.05, days = 90, rate = 7.20;
+    var insurance = 0.02, fees = 0.05, days = 0, rate = 6.8;
 
     var added = 0, updated = 0;
 
@@ -857,8 +857,8 @@ tbody tr:hover td { background: #e6f7ff !important; }
     document.getElementById("input-freight").value = "0.10";
     document.getElementById("input-insurance").value = "0.02";
     document.getElementById("input-fees").value = "0.05";
-    document.getElementById("input-days").value = "90";
-    document.getElementById("input-rate").value = "7.20";
+    document.getElementById("input-days").value = "0";
+    document.getElementById("input-rate").value = "6.8";
     if (clearMonth) document.getElementById("input-month").value = getCurrentMonth();
   }
 
