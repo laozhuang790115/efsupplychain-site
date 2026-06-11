@@ -67,9 +67,9 @@ nav {
 .map-bg { fill: #d4ecfc; stroke: #8ecae6; stroke-width: 1.2; }
 .map-bg-tw { fill: #e8f4fd; stroke: #8ecae6; stroke-width: 1; }
 .city-dot { cursor: pointer; }
-.city-dot circle { transition: all 0.2s; }
+.city-dot circle, .city-dot rect { transition: all 0.2s; }
 .city-dot text { font-size: 10px; fill: #1a3a5c; pointer-events: none; font-weight: 600; }
-.city-dot:hover circle { r: 10; fill: #f59e0b; }
+.city-dot:hover circle, .city-dot:hover rect { fill: #f59e0b; }
 
 /* Side panel */
 .side-panel {
@@ -482,32 +482,32 @@ var COLDCHAIN_DATA = {
 };
 
 var CITY_POSITIONS = {
-  dalian:       { x: 500, y: 118, r: 7 },
-  tianjin:      { x: 418, y: 135, r: 7 },
-  qingdao:      { x: 445, y: 170, r: 6 },
-  shanghai:     { x: 480, y: 228, r: 9, core: true },
-  ningbo:       { x: 475, y: 252, r: 5 },
-  xiamen:       { x: 448, y: 290, r: 5 },
-  shenzhen:     { x: 425, y: 315, r: 9, core: true },
-  guangzhou:    { x: 405, y: 310, r: 7 },
-  fangchenggang:{ x: 330, y: 330, r: 4 },
-  kunming:      { x: 280, y: 305, r: 5 },
-  chengdu:      { x: 298, y: 232, r: 7 },
-  zhengzhou:    { x: 375, y: 198, r: 5 },
-  wuhan:        { x: 395, y: 232, r: 5 },
-  chongqing:    { x: 330, y: 248, r: 5 },
-  xian:         { x: 330, y: 195, r: 5 },
-  zhanjiang:    { x: 385, y: 342, r: 5 },
-  haikou:       { x: 425, y: 367, r: 5 },
-  guiyang:      { x: 322, y: 285, r: 5 },
-  jinan:        { x: 452, y: 157, r: 5 },
-  wurumqi:      { x: 148, y: 108, r: 5 },
-  kashi:        { x: 100, y: 155, r: 4 },
-  fuzhou:       { x: 465, y: 276, r: 5 },
-  kunshan:      { x: 492, y: 225, r: 4 },
-  changsha:     { x: 408, y: 260, r: 5 },
-  nanning:      { x: 358, y: 326, r: 5 },
-  hongkong:     { x: 432, y: 322, r: 4 }
+  dalian:       { x: 500, y: 118, r:  7, port: true, labelDy:  14 },
+  tianjin:      { x: 418, y: 135, r:  7, port: true, labelDy:  14 },
+  qingdao:      { x: 445, y: 170, r:  6, port: true, labelDy: -14 },
+  shanghai:     { x: 480, y: 228, r:  9, port: true, core: true, labelDy:  14 },
+  ningbo:       { x: 475, y: 252, r:  5, port: true, labelDy:  14 },
+  xiamen:       { x: 448, y: 290, r:  5, port: true, labelDy:  14 },
+  shenzhen:     { x: 425, y: 315, r:  9, port: true, core: true, labelDx:  10, labelDy:   4 },
+  guangzhou:    { x: 405, y: 310, r:  7, port: true, labelDy: -14 },
+  fangchenggang:{ x: 330, y: 330, r:  4,              labelDy:  14 },
+  kunming:      { x: 280, y: 305, r:  5,              labelDy: -14 },
+  chengdu:      { x: 298, y: 232, r:  7,              labelDy: -14 },
+  zhengzhou:    { x: 375, y: 198, r:  5,              labelDy: -14 },
+  wuhan:        { x: 395, y: 232, r:  5,              labelDy: -14 },
+  chongqing:    { x: 330, y: 248, r:  5,              labelDy: -14 },
+  xian:         { x: 330, y: 195, r:  5,              labelDy: -14 },
+  zhanjiang:    { x: 385, y: 342, r:  5, port: true, labelDy:  14 },
+  haikou:       { x: 425, y: 367, r:  5, port: true, labelDy:  14 },
+  guiyang:      { x: 322, y: 285, r:  5,              labelDy:  14 },
+  jinan:        { x: 452, y: 157, r:  5,              labelDy: -14 },
+  wurumqi:      { x: 148, y: 108, r:  5,              labelDy:  14 },
+  kashi:        { x: 100, y: 155, r:  4,              labelDy:  14 },
+  fuzhou:       { x: 465, y: 276, r:  5, port: true, labelDy: -14 },
+  kunshan:      { x: 492, y: 225, r:  4,              labelDy:  14 },
+  changsha:     { x: 408, y: 260, r:  5,              labelDy: -14 },
+  nanning:      { x: 358, y: 326, r:  5,              labelDy:  14 },
+  hongkong:     { x: 432, y: 322, r:  4, port: true, labelDx:   8, labelDy:   4 }
 };
 
 var ADMIN_PASSWORD = "laozhuang2026";
@@ -611,13 +611,31 @@ function selectCity(cityKey) {
   var dots = document.querySelectorAll('.city-dot');
   for (var j = 0; j < dots.length; j++) {
     var isSel = dots[j].getAttribute('data-city') === cityKey;
-    var circ = dots[j].querySelector('circle');
-    circ.setAttribute('fill', isSel ? '#f59e0b' : '#00a8e8');
-    if (isSel) {
-      circ.setAttribute('r', '10');
+    var pos = CITY_POSITIONS[dots[j].getAttribute('data-city')];
+    var isPort = pos && pos.port;
+
+    if (isPort) {
+      // Port city: <rect>
+      var rect = dots[j].querySelector('rect');
+      if (!rect) continue;
+      rect.setAttribute('fill', isSel ? '#f59e0b' : (pos.core ? '#e65100' : '#00a8e8'));
+      if (isSel) {
+        rect.setAttribute('stroke-width', '4');
+        rect.setAttribute('stroke', '#f59e0b');
+      } else {
+        rect.setAttribute('stroke-width', '2');
+        rect.setAttribute('stroke', '#fff');
+      }
     } else {
-      var pos = CITY_POSITIONS[dots[j].getAttribute('data-city')];
-      if (pos) circ.setAttribute('r', pos.r);
+      // Inland city: <circle>
+      var circ = dots[j].querySelector('circle');
+      if (!circ) continue;
+      circ.setAttribute('fill', isSel ? '#f59e0b' : (pos.core ? '#e65100' : '#00a8e8'));
+      if (isSel) {
+        circ.setAttribute('r', '10');
+      } else {
+        if (pos) circ.setAttribute('r', pos.r);
+      }
     }
   }
 }
@@ -831,18 +849,37 @@ function initMap() {
     g.setAttribute('class','city-dot');
     g.setAttribute('data-city', key);
     g.setAttribute('onclick',"selectCity('" + key + "')");
-    var circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
-    circle.setAttribute('cx', p.x);
-    circle.setAttribute('cy', p.y);
-    circle.setAttribute('r', p.r);
-    circle.setAttribute('fill', p.core ? '#e65100' : '#00a8e8');
-    circle.setAttribute('stroke','#fff');
-    circle.setAttribute('stroke-width','2');
-    g.appendChild(circle);
+
+    if (p.port) {
+      // Port city: use <rect> (square)
+      var rect = document.createElementNS('http://www.w3.org/2000/svg','rect');
+      var size = (p.r || 5) * 2;
+      rect.setAttribute('x', p.x - p.r);
+      rect.setAttribute('y', p.y - p.r);
+      rect.setAttribute('width', size);
+      rect.setAttribute('height', size);
+      rect.setAttribute('rx', 2);
+      rect.setAttribute('ry', 2);
+      rect.setAttribute('fill', p.core ? '#e65100' : '#00a8e8');
+      rect.setAttribute('stroke','#fff');
+      rect.setAttribute('stroke-width','2');
+      g.appendChild(rect);
+    } else {
+      // Inland city: use <circle>
+      var circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      circle.setAttribute('cx', p.x);
+      circle.setAttribute('cy', p.y);
+      circle.setAttribute('r', p.r);
+      circle.setAttribute('fill', p.core ? '#e65100' : '#00a8e8');
+      circle.setAttribute('stroke','#fff');
+      circle.setAttribute('stroke-width','2');
+      g.appendChild(circle);
+    }
+
     var text = document.createElementNS('http://www.w3.org/2000/svg','text');
-    text.setAttribute('x', p.x + p.r + 4);
-    text.setAttribute('y', p.y + 4);
-    text.textContent = (CITY_POSITIONS[key].label || getMergedStores()[key].name);
+    text.setAttribute('x', p.x + (p.labelDx || (p.port ? p.r + 6 : p.r + 4)));
+    text.setAttribute('y', p.y + (p.labelDy || 4));
+    text.textContent = (p.label || getMergedStores()[key].name);
     g.appendChild(text);
     frag.appendChild(g);
   }
