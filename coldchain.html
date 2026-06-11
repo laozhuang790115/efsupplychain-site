@@ -183,6 +183,10 @@ nav {
 .btn-save:hover { background: #0284c7; }
 .btn-cancel { background: #e8edf2; color: #555; }
 .btn-cancel:hover { background: #d0d5dc; }
+.edit-body .radio-group { display: flex; gap: 16px; align-items: center; }
+.edit-body .radio-group label.radio-label { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #444; cursor: pointer; font-weight: 400; }
+.edit-body .radio-group input[type="radio"] { width: auto; margin: 0; }
+.badge-supervised { display: inline-block; background: #fff3e0; color: #e65100; font-size: 11px; padding: 2px 8px; border-radius: 10px; border: 1px solid #ffe0b2; margin-left: 8px; font-weight: 600; }
 
 /* Footer */
 footer { text-align: center; padding: 24px; font-size: 12px; color: #aaa; border-top: 1px solid #e8edf2; margin-top: 40px; }
@@ -654,7 +658,7 @@ function renderCityPanel(cityKey) {
     card.setAttribute('onclick', 'showDetail(\'' + cityKey + '\',' + i + ')');
     card.innerHTML =
       '<button class="edit-btn' + (isAdmin ? ' show' : '') + '" onclick="event.stopPropagation();openEditModal(\'' + cityKey + '\',' + i + ')">✏️ 编辑</button>' +
-      '<div class="wh-name">' + s.name + '</div>' +
+      '<div class="wh-name">' + s.name + (s.supervised ? '<span class="badge-supervised">🔐 监管仓</span>' : '') + '</div>' +
       '<div class="wh-meta"><span>📍 ' + s.zone + '</span><span>📦 ' + s.capacity + '</span><span>🌡️ ' + s.temp + '</span></div>' +
       '<div class="wh-tags">' + s.tags.map(function(t){return '<span class="tag' + (t==='海关监管'||t==='保税仓'?' blue':'') + '">' + t + '</span>';}).join('') + '</div>';
     list.appendChild(card);
@@ -674,7 +678,7 @@ function showDetail(cityKey, idx) {
   currentDetailCity = cityKey;
 
   document.getElementById('modal-title').textContent = s.name;
-  document.getElementById('modal-city-badge').textContent = city.name + ' · ' + s.zone;
+  document.getElementById('modal-city-badge').textContent = city.name + ' · ' + s.zone + (s.supervised ? ' · 🔐 金融监管仓' : '');
 
   document.getElementById('modal-info').innerHTML =
     '<div class="modal-info-item"><div class="label">库容</div><div class="value">' + s.capacity + '</div></div>' +
@@ -731,6 +735,14 @@ function openAddModal(cityKey) {
     '<div class="form-row">' +
       '<div class="form-full"><label>资质认证</label><input id="edit-cert" placeholder="例：海关监管·ISO9001"></div>' +
     '</div>' +
+    '<div class="form-row">' +
+      '<div class="form-full"><label>是否金融监管仓</label>' +
+        '<div class="radio-group">' +
+          '<label class="radio-label"><input type="radio" name="edit-supervised" value="1"> 是（金融监管仓）</label>' +
+          '<label class="radio-label"><input type="radio" name="edit-supervised" value="0" checked> 否（普通冷库）</label>' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
     '<div class="form-full"><label>标签（逗号分隔）</label><input id="edit-tags" placeholder="例：海关监管,保税仓"></div>' +
     '<div class="form-full"><label>简介</label><textarea id="edit-desc" placeholder="冷库简介..."></textarea></div>' +
     '<div class="form-full"><label>核心能力（逗号分隔）</label><input id="edit-features" placeholder="例：临港区位,海关监管,多温区"></div>' +
@@ -746,7 +758,7 @@ function openEditModal(cityKey, idx) {
   currentDetailIdx = idx;
   var stores = getMergedStores();
   var s = stores[cityKey].stores[idx];
-  var body = document.getElementById('edit-body');
+  var supervised = s.supervised ? ' checked' : '';
   body.innerHTML =
     '<h3>✏️ 编辑冷库 — ' + s.name + '</h3>' +
     '<div class="form-row">' +
@@ -761,6 +773,14 @@ function openEditModal(cityKey, idx) {
     '</div>' +
     '<div class="form-row">' +
       '<div class="form-full"><label>资质认证</label><input id="edit-cert" value="' + escAttr(s.cert) + '"></div>' +
+    '</div>' +
+    '<div class="form-row">' +
+      '<div class="form-full"><label>是否金融监管仓</label>' +
+        '<div class="radio-group">' +
+          '<label class="radio-label"><input type="radio" name="edit-supervised" value="1"' + supervised + '> 是（金融监管仓）</label>' +
+          '<label class="radio-label"><input type="radio" name="edit-supervised" value="0"' + (supervised ? '' : ' checked') + '> 否（普通冷库）</label>' +
+        '</div>' +
+      '</div>' +
     '</div>' +
     '<div class="form-full"><label>标签（逗号分隔）</label><input id="edit-tags" value="' + s.tags.join(',') + '"></div>' +
     '<div class="form-full"><label>简介</label><textarea id="edit-desc">' + escHtml(s.desc) + '</textarea></div>' +
@@ -787,11 +807,14 @@ function saveNewWh(cityKey) {
   var tags = document.getElementById('edit-tags').value.split(',').map(function(t){return t.trim();}).filter(Boolean);
   var desc = document.getElementById('edit-desc').value.trim();
   var features = document.getElementById('edit-features').value.split(',').map(function(t){return t.trim();}).filter(Boolean);
+  var supervisedEl = document.querySelector('input[name="edit-supervised"]:checked');
+  var supervised = supervisedEl && supervisedEl.value === '1';
 
   var merged = getMergedStores();
   merged[cityKey].stores.push({
     name: name, zone: zone, capacity: capacity, temp: temp, cert: cert,
-    tags: tags.length ? tags : ['第三方物流'], desc: desc, features: features.length ? features : ['冷链存储']
+    tags: tags.length ? tags : ['第三方物流'], desc: desc, features: features.length ? features : ['冷链存储'],
+    supervised: supervised
   });
   saveMergedStores(merged);
 
@@ -809,11 +832,14 @@ function saveEditWh(cityKey, idx) {
   var tags = document.getElementById('edit-tags').value.split(',').map(function(t){return t.trim();}).filter(Boolean);
   var desc = document.getElementById('edit-desc').value.trim();
   var features = document.getElementById('edit-features').value.split(',').map(function(t){return t.trim();}).filter(Boolean);
+  var supervisedEl = document.querySelector('input[name="edit-supervised"]:checked');
+  var supervised = supervisedEl && supervisedEl.value === '1';
 
   var merged = getMergedStores();
   merged[cityKey].stores[idx] = {
     name: name, zone: zone, capacity: capacity, temp: temp, cert: cert,
-    tags: tags.length ? tags : ['第三方物流'], desc: desc, features: features.length ? features : ['冷链存储']
+    tags: tags.length ? tags : ['第三方物流'], desc: desc, features: features.length ? features : ['冷链存储'],
+    supervised: supervised
   };
   saveMergedStores(merged);
 
