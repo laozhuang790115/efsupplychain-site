@@ -19,7 +19,8 @@ nav {
   border-bottom: 1px solid #e8edf2; position: sticky; top: 0; z-index: 100; padding: 0 24px;
 }
 .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; height: 52px; }
-.nav-logo { font-size: 18px; font-weight: 800; color: #00a8e8; margin-right: 32px; }
+.nav-logo { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 800; color: #00a8e8; margin-right: 32px; }
+.nav-logo img { width: 28px; height: 28px; }
 .nav-links { display: flex; gap: 20px; align-items: center; }
 .nav-links a { font-size: 13px; font-weight: 500; color: #555; transition: color 0.2s; }
 .nav-links a:hover { color: #00a8e8; }
@@ -245,7 +246,7 @@ footer { text-align: center; padding: 24px; font-size: 12px; color: #aaa; border
 
 <nav>
   <div class="nav-inner">
-    <div class="nav-logo">🦐 以鲜国际</div>
+    <div class="nav-logo"><img src="logo.svg" alt="">以鲜国际</div>
     <div class="nav-links">
       <a href="index.html">🏠 主页</a>
       <a href="tools.html" class="nav-tools">🧭 工具罗盘</a>

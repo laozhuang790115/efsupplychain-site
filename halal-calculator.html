@@ -116,11 +116,8 @@ body {
   transition:all .3s
 }
 .nav-brand{display:flex;align-items:center;gap:10px}
-.nav-logo{
-  width:36px;height:36px;border-radius:10px;
-  background:linear-gradient(135deg,#00d4aa,#00a8e8);
-  display:flex;align-items:center;justify-content:center;font-size:18px
-}
+.nav-logo { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 800; color: #00a8e8; margin-right: 32px; }
+.nav-logo img { width: 28px; height: 28px; }
 .nav-name{color:#fff;font-size:15px;font-weight:600;letter-spacing:1px}
 .nav-links{display:flex;gap:28px;list-style:none}
 .nav-links a{
@@ -160,7 +157,7 @@ body {
 <body>
 <nav class="nav">
   <a href="index.html" class="nav-brand">
-    <span class="nav-logo">🦐</span>
+    <div class="nav-logo"><img src="logo.svg" alt="">以鲜国际</div>
     <span class="nav-name">以鲜国际</span>
   </a>
   <ul class="nav-links">
