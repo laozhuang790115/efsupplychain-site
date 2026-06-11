@@ -252,8 +252,12 @@ tbody tr:hover td { background: #e6f7ff !important; }
   </div>
   <div class="form-row">
     <div class="form-group">
-      <label>进口费用估算（USD/kg）</label>
+      <label>进口操作费（USD/kg）</label>
       <input type="number" id="input-fees" step="0.01" min="0" placeholder="0.05" value="0.05">
+    </div>
+    <div class="form-group">
+      <label>特殊费用（USD/kg）</label>
+      <input type="number" id="input-special" step="0.01" min="0" placeholder="0.00" value="0.00">
     </div>
     <div class="form-group">
       <label>账期天数</label>
@@ -398,8 +402,8 @@ tbody tr:hover td { background: #e6f7ff !important; }
   }
 
   // ========= Calculation =========
-  function calculate(fob, freight, insurance, fees, days, rate, finRatio) {
-    var cif = fob + freight + insurance;
+  function calculate(fob, freight, insurance, special, fees, days, rate, finRatio) {
+    var cif = fob + freight + insurance + special;
     var tariff = cif * TARIFF_RATE;
     var dutiableValue = cif + tariff;
     var vat = dutiableValue * VAT_RATE;
@@ -410,6 +414,7 @@ tbody tr:hover td { background: #e6f7ff !important; }
       fob: round(fob),
       freight: round(freight),
       insurance: round(insurance),
+      special: round(special),
       fees: round(fees),
       cif: round(cif),
       tariff: round(tariff),
@@ -433,6 +438,7 @@ tbody tr:hover td { background: #e6f7ff !important; }
     var freight = parseFloat(document.getElementById("input-freight").value) || 0;
     var insurance = parseFloat(document.getElementById("input-insurance").value) || 0;
     var fees = parseFloat(document.getElementById("input-fees").value) || 0;
+    var special = parseFloat(document.getElementById("input-special").value) || 0;
     var days = parseInt(document.getElementById("input-days").value) || 0;
     var rate = parseFloat(document.getElementById("input-rate").value) || 6.8;
     var finRatio = parseFloat(document.getElementById("input-finRatio").value) || 0.80;
@@ -441,7 +447,7 @@ tbody tr:hover td { background: #e6f7ff !important; }
     if (!spec) { showToast("请选择产品规格", false); return; }
     if (isNaN(fob) || fob <= 0) { showToast("请输入有效的 FOB 离岸价", false); return; }
 
-    var calc = calculate(fob, freight, insurance, fees, days, rate, finRatio);
+    var calc = calculate(fob, freight, insurance, special, fees, days, rate, finRatio);
 
     var dupIdx = -1;
     for (var i = 0; i < records.length; i++) {
@@ -453,6 +459,7 @@ tbody tr:hover td { background: #e6f7ff !important; }
       records[dupIdx].fob = calc.fob;
       records[dupIdx].freight = calc.freight;
       records[dupIdx].insurance = calc.insurance;
+      records[dupIdx].special = calc.special;
       records[dupIdx].fees = calc.fees;
       records[dupIdx].cif = calc.cif;
       records[dupIdx].tariff = calc.tariff;
@@ -472,6 +479,7 @@ tbody tr:hover td { background: #e6f7ff !important; }
         fob: calc.fob,
         freight: calc.freight,
         insurance: calc.insurance,
+        special: calc.special,
         fees: calc.fees,
         cif: calc.cif,
         tariff: calc.tariff,
@@ -506,10 +514,11 @@ tbody tr:hover td { background: #e6f7ff !important; }
        +
       "<div class=\"result-item\"><div class=\"rl\">+ 运费</div><div class=\"rv-sm\">$" + c.freight + "</div></div>" +
       "<div class=\"result-item\"><div class=\"rl\">+ 保险</div><div class=\"rv-sm\">$" + c.insurance + "</div></div>" +
+      (c.special > 0 ? "<div class=\"result-item\"><div class=\"rl\">+ 特殊费用</div><div class=\"rv-sm\">$" + c.special + "</div></div>" : "") +
       "<div class=\"result-item\" style=\"border:2px solid #00a8e8;background:#f0f9ff\"><div class=\"rl\">CIF 到岸价</div><div class=\"rv-sm\">$" + c.cif + "</div><div class=\"sub\">USD/kg</div></div>" +
       "<div class=\"result-item\"><div class=\"rl\">关税 3.5%</div><div class=\"rv-sm\">$" + c.tariff + "</div></div>" +
       "<div class=\"result-item\"><div class=\"rl\">增值税 9%</div><div class=\"rv-sm\">$" + c.vat + "</div></div>" +
-      "<div class=\"result-item\"><div class=\"rl\">+ 进口费用</div><div class=\"rv-sm\">$" + c.fees + "</div></div>" +
+      "<div class=\"result-item\"><div class=\"rl\">+ 进口操作费</div><div class=\"rv-sm\">$" + c.fees + "</div></div>" +
       "<div class=\"result-item\"><div class=\"rl\">利息 " + c.days + "d·6%</div><div class=\"rv-sm\">$" + c.interest + "</div></div>" +
       "<div class=\"result-item highlight\"><div class=\"rl\">综合到岸成本</div><div class=\"rv\">$" + c.totalCost + "</div><div class=\"sub\">USD/kg</div></div>" +
       "<div class=\"result-item highlight\" style=\"background:linear-gradient(135deg,#00a8e8,#00d4aa);border-color:transparent\"><div class=\"rl\">综合到岸成本(¥)</div><div class=\"rv\" style=\"color:#fff\">¥" + c.totalCostCNY + "</div><div class=\"sub\">CNY/kg</div></div>";
@@ -643,13 +652,13 @@ tbody tr:hover td { background: #e6f7ff !important; }
     ];
     var months = ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06"];
     var freights = [0.14, 0.13, 0.11, 0.09, 0.08, 0.09];
-    var insurance = 0.02, fees = 0.05, days = 0, rate = 6.8;
+    var insurance = 0.02, special = 0.00, fees = 0.05, days = 0, finRatio = 0.80, rate = 6.8;
 
     var added = 0, updated = 0;
 
     for (var s = 0; s < specs.length; s++) {
       for (var m = 0; m < months.length; m++) {
-        var calc = calculate(specs[s].fobs[m], freights[m], insurance, fees, days, rate, finRatio);
+        var calc = calculate(specs[s].fobs[m], freights[m], insurance, special, fees, days, rate, finRatio);
         var existing = -1;
         for (var i = 0; i < records.length; i++) {
           if (records[i].month === months[m] && records[i].spec === specs[s].spec) { existing = i; break; }
@@ -658,6 +667,7 @@ tbody tr:hover td { background: #e6f7ff !important; }
           records[existing].fob = calc.fob;
           records[existing].freight = calc.freight;
           records[existing].insurance = calc.insurance;
+          records[existing].special = calc.special;
           records[existing].fees = calc.fees;
           records[existing].cif = calc.cif;
           records[existing].tariff = calc.tariff;
@@ -676,6 +686,7 @@ tbody tr:hover td { background: #e6f7ff !important; }
             fob: calc.fob,
             freight: calc.freight,
             insurance: calc.insurance,
+            special: calc.special,
             fees: calc.fees,
             cif: calc.cif,
             tariff: calc.tariff,
@@ -717,11 +728,11 @@ tbody tr:hover td { background: #e6f7ff !important; }
   // ========= Export CSV =========
   function exportCSV() {
     if (records.length === 0) { showToast("暂无数据可导出", false); return; }
-    var headers = ["月份","规格","FOB(USD)","运费(USD)","保险(USD)","CIF(USD)","关税(USD)","增值税(USD)","进口费用(USD)","利息(USD)","融资比例","到岸成本(USD)","到岸成本(CNY)","账期(天)","汇率"];
+    var headers = ["月份","规格","FOB(USD)","运费(USD)","保险(USD)","特殊费(USD)","CIF(USD)","关税(USD)","增值税(USD)","进口操作费(USD)","利息(USD)","融资比例","到岸成本(USD)","到岸成本(CNY)","账期(天)","汇率"];
     var rows = [];
     for (var i = 0; i < records.length; i++) {
       var r = records[i];
-      rows.push([r.month, r.spec, r.fob, r.freight, r.insurance, r.cif, r.tariff, r.vat, r.fees, r.interest, r.finRatio, r.totalCost, r.totalCostCNY, r.days, r.rate].join(","));
+      rows.push([r.month, r.spec, r.fob, r.freight, r.insurance, r.special, r.cif, r.tariff, r.vat, r.fees, r.interest, r.finRatio, r.totalCost, r.totalCostCNY, r.days, r.rate].join(","));
     }
     var csv = "\uFEFF" + headers.join(",") + "\n" + rows.join("\n");
     var blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
@@ -860,6 +871,7 @@ tbody tr:hover td { background: #e6f7ff !important; }
     document.getElementById("input-fob").value = "";
     document.getElementById("input-freight").value = "0.23";
     document.getElementById("input-insurance").value = "0.02";
+    document.getElementById("input-special").value = "0.00";
     document.getElementById("input-fees").value = "0.05";
     document.getElementById("input-days").value = "0";
     document.getElementById("input-rate").value = "6.8";

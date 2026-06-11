@@ -257,7 +257,7 @@ tbody tr:hover td { background: #fef3c7 !important; }
   </div>
   <div class="form-row">
     <div class="form-group">
-      <label>进口杂费（USD/kg）</label>
+      <label>进口操作费（USD/kg）</label>
       <input type="number" id="input-fees" step="0.01" min="0" placeholder="0.05" value="0.05">
     </div>
     <div class="form-group">
@@ -534,7 +534,7 @@ tbody tr:hover td { background: #fef3c7 !important; }
       "<div class='result-item' style='border:2px solid #f59e0b;background:#fffbeb'><div class='rl'>CIF 到岸价</div><div class='rv-sm'>$" + c.cif + "</div><div class='sub'>USD/kg</div></div>" +
       "<div class='result-item'><div class='rl'>关税 6%（配额内）</div><div class='rv-sm'>$" + c.tariff + "</div></div>" +
       "<div class='result-item'><div class='rl'>增值税 9%</div><div class='rv-sm'>$" + c.vat + "</div></div>" +
-      "<div class='result-item'><div class='rl'>+ 进口杂费</div><div class='rv-sm'>$" + c.fees + "</div></div>" +
+      "<div class='result-item'><div class='rl'>+ 进口操作费</div><div class='rv-sm'>$" + c.fees + "</div></div>" +
       "<div class='result-item'><div class='rl'>利息 " + c.days + "d·6%</div><div class='rv-sm'>$" + c.interest + "</div></div>" +
       "<div class='result-item highlight'><div class='rl'>综合到岸成本</div><div class='rv'>$" + c.totalCost + "</div><div class='sub'>USD/kg</div></div>" +
       "<div class='result-item highlight' style='background:linear-gradient(135deg,#f59e0b,#d97706);border-color:transparent'><div class='rl'>综合到岸成本(¥)</div><div class='rv' style='color:#fff'>¥" + c.totalCostCNY + "</div><div class='sub'>CNY/kg</div></div>";
@@ -723,7 +723,7 @@ tbody tr:hover td { background: #fef3c7 !important; }
   // ========= Export CSV =========
   function exportCSV() {
     if (records.length === 0) { showToast("暂无数据可导出", false); return; }
-    var headers = ["月份","部位","FOB(USD)","海运费(USD)","保险费(USD)","特殊费(USD)","进口杂费(USD)","CIF(USD)","关税(USD)","增值税(USD)","利息(USD)","融资比例","到岸成本(USD)","到岸成本(CNY)","账期(天)","汇率"];
+    var headers = ["月份","部位","FOB(USD)","海运费(USD)","保险费(USD)","特殊费(USD)","进口操作费(USD)","CIF(USD)","关税(USD)","增值税(USD)","利息(USD)","融资比例","到岸成本(USD)","到岸成本(CNY)","账期(天)","汇率"];
     var rows = [];
     for (var i = 0; i < records.length; i++) {
       var r = records[i];
