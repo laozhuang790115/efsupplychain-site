@@ -266,6 +266,10 @@ tbody tr:hover td { background: #fef3c7 !important; }
       <label>账期天数</label>
       <input type="number" id="input-days" step="1" min="0" max="365" placeholder="0" value="0">
     </div>
+    <div class="form-group">
+      <label>融资比例</label>
+      <input type="number" id="input-finRatio" step="0.01" min="0" max="1" placeholder="0.60" value="0.60">
+    </div>
   </div>
   <div class="form-row">
     <div class="form-group">
@@ -330,6 +334,7 @@ tbody tr:hover td { background: #fef3c7 !important; }
           <th>关税(USD)</th>
           <th>增值税(USD)</th>
           <th>利息(USD)</th>
+          <th>融资比例</th>
           <th class="cost-highlight" onclick="sortBy('totalCost')">到岸成本(USD) <span class="sort-arrow">&#x2195;</span></th>
           <th class="cost-highlight">到岸成本(CNY)</th>
           <th>汇率</th>
@@ -337,7 +342,7 @@ tbody tr:hover td { background: #fef3c7 !important; }
         </tr>
       </thead>
       <tbody id="table-body">
-        <tr><td colspan="11" class="empty-row">&#x1F4ED; 暂无数据 &mdash; 点击上方&ldquo;&#x1F4CB; 填充示例数据&rdquo;快速预览，或填表录入</td></tr>
+        <tr><td colspan="12" class="empty-row">&#x1F4ED; 暂无数据 &mdash; 点击上方&ldquo;&#x1F4CB; 填充示例数据&rdquo;快速预览，或填表录入</td></tr>
       </tbody>
     </table>
   </div>
@@ -412,12 +417,12 @@ tbody tr:hover td { background: #fef3c7 !important; }
   }
 
   // ========= Calculation =========
-  function calculate(fob, freight, insurance, special, fees, days, rate) {
+  function calculate(fob, freight, insurance, special, fees, days, rate, finRatio) {
     var cif = fob + freight + insurance + special;
     var tariff = cif * TARIFF_RATE;
     var dutiableValue = cif + tariff;
     var vat = dutiableValue * VAT_RATE;
-    var interest = cif * INTEREST_RATE * (days / 365);
+    var interest = cif * finRatio * INTEREST_RATE * (days / 365);
     var totalCost = cif + tariff + vat + fees + interest;
     var totalCostCNY = totalCost * rate;
     return {
@@ -433,7 +438,8 @@ tbody tr:hover td { background: #fef3c7 !important; }
       totalCost: round(totalCost),
       totalCostCNY: round(totalCostCNY),
       days: days,
-      rate: rate
+      rate: rate,
+      finRatio: round(finRatio)
     };
   }
 
@@ -450,12 +456,13 @@ tbody tr:hover td { background: #fef3c7 !important; }
     var fees = parseFloat(document.getElementById("input-fees").value) || 0;
     var days = parseInt(document.getElementById("input-days").value) || 0;
     var rate = parseFloat(document.getElementById("input-rate").value) || 6.8;
+    var finRatio = parseFloat(document.getElementById("input-finRatio").value) || 0.60;
 
     if (!month) { showToast("请选择月份", false); return; }
     if (!spec) { showToast("请选择产品部位", false); return; }
     if (isNaN(fob) || fob <= 0) { showToast("请输入有效的 FOB 报价", false); return; }
 
-    var calc = calculate(fob, freight, insurance, special, fees, days, rate);
+    var calc = calculate(fob, freight, insurance, special, fees, days, rate, finRatio);
 
     var dupIdx = -1;
     for (var i = 0; i < records.length; i++) {
@@ -477,6 +484,7 @@ tbody tr:hover td { background: #fef3c7 !important; }
       records[dupIdx].totalCostCNY = calc.totalCostCNY;
       records[dupIdx].days = calc.days;
       records[dupIdx].rate = calc.rate;
+      records[dupIdx].finRatio = calc.finRatio;
       records[dupIdx].updatedAt = new Date().toISOString();
       showToast("记录已覆盖更新", true);
     } else {
@@ -496,6 +504,7 @@ tbody tr:hover td { background: #fef3c7 !important; }
         totalCostCNY: calc.totalCostCNY,
         days: calc.days,
         rate: calc.rate,
+            finRatio: calc.finRatio,
         updatedAt: new Date().toISOString(),
         demo: false
       });
@@ -552,7 +561,7 @@ tbody tr:hover td { background: #fef3c7 !important; }
     document.getElementById("record-count").textContent = "共 " + records.length + " 条记录";
 
     if (filtered.length === 0) {
-      tbody.innerHTML = "<tr><td colspan='11' class='empty-row'>&#x1F4ED; 暂无匹配数据</td></tr>";
+      tbody.innerHTML = "<tr><td colspan='12' class='empty-row'>&#x1F4ED; 暂无匹配数据</td></tr>";
       return;
     }
 
@@ -575,6 +584,7 @@ tbody tr:hover td { background: #fef3c7 !important; }
         "<td>$" + r.tariff + "</td>" +
         "<td>$" + r.vat + "</td>" +
         "<td>$" + r.interest + "</td>" +
+        "<td>" + Math.round(r.finRatio*100) + "%</td>" +
         "<td class='cost-highlight'>$" + r.totalCost + "</td>" +
         "<td class='cost-highlight'>¥" + r.totalCostCNY + "</td>" +
         "<td>¥" + r.rate + "</td>" +
@@ -635,13 +645,13 @@ tbody tr:hover td { background: #fef3c7 !important; }
     var months = ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06"];
     var freights = [0.18, 0.17, 0.15, 0.13, 0.12, 0.13];
     var rates     = [7.18, 7.22, 7.25, 7.20, 7.15, 7.10];
-    var insurance = 0.02, special = 0.00, fees = 0.05, days = 0;
+    var insurance = 0.02, special = 0.00, fees = 0.05, days = 0, finRatio = 0.60;
 
     var added = 0, updated = 0;
 
     for (var s = 0; s < cuts.length; s++) {
       for (var m = 0; m < months.length; m++) {
-        var calc = calculate(cuts[s].fobs[m], freights[m], insurance, special, fees, days, rates[m]);
+        var calc = calculate(cuts[s].fobs[m], freights[m], insurance, special, fees, days, rates[m], finRatio);
         var existing = -1;
         for (var i = 0; i < records.length; i++) {
           if (records[i].month === months[m] && records[i].spec === cuts[s].spec) { existing = i; break; }
@@ -679,6 +689,7 @@ tbody tr:hover td { background: #fef3c7 !important; }
             totalCostCNY: calc.totalCostCNY,
             days: calc.days,
             rate: calc.rate,
+            finRatio: calc.finRatio,
             updatedAt: new Date().toISOString(),
             demo: true
           });
@@ -710,11 +721,11 @@ tbody tr:hover td { background: #fef3c7 !important; }
   // ========= Export CSV =========
   function exportCSV() {
     if (records.length === 0) { showToast("暂无数据可导出", false); return; }
-    var headers = ["月份","部位","FOB(USD)","海运费(USD)","保险费(USD)","特殊费(USD)","进口杂费(USD)","CIF(USD)","关税(USD)","增值税(USD)","利息(USD)","到岸成本(USD)","到岸成本(CNY)","账期(天)","汇率"];
+    var headers = ["月份","部位","FOB(USD)","海运费(USD)","保险费(USD)","特殊费(USD)","进口杂费(USD)","CIF(USD)","关税(USD)","增值税(USD)","利息(USD)","融资比例","到岸成本(USD)","到岸成本(CNY)","账期(天)","汇率"];
     var rows = [];
     for (var i = 0; i < records.length; i++) {
       var r = records[i];
-      rows.push([r.month, r.spec, r.fob, r.freight, r.insurance, r.special, r.fees, r.cif, r.tariff, r.vat, r.interest, r.totalCost, r.totalCostCNY, r.days, r.rate].join(","));
+      rows.push([r.month, r.spec, r.fob, r.freight, r.insurance, r.special, r.fees, r.cif, r.tariff, r.vat, r.interest, r.finRatio, r.totalCost, r.totalCostCNY, r.days, r.rate].join(","));
     }
     var csv = "\uFEFF" + headers.join(",") + "\n" + rows.join("\n");
     var blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
@@ -863,6 +874,7 @@ tbody tr:hover td { background: #fef3c7 !important; }
     document.getElementById("input-fees").value = "0.05";
     document.getElementById("input-days").value = "0";
     document.getElementById("input-rate").value = "6.8";
+    document.getElementById("input-finRatio").value = "0.60";
     if (clearMonth) document.getElementById("input-month").value = getCurrentMonth();
   }
 
