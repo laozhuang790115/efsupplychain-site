@@ -213,7 +213,7 @@ tbody tr:hover td { background: #e6f7ff !important; }
 <div class="header" style="margin-top:60px">
   <div class="tag">Shrimp Import Cost</div>
   <h1>&#x1F990; 厄瓜多尔白虾进口成本核算</h1>
-  <div class="sub">月度数据录入 · CIF到岸成本自动拆解 · 趋势追踪</div>
+  <div class="sub">月度数据录入 · FOB离岸价起算 · 趋势追踪</div>
   <a href="index.html" class="back-link">&#8592; 返回以鲜国际主页</a>
 </div>
 
@@ -236,18 +236,14 @@ tbody tr:hover td { background: #e6f7ff !important; }
       </select>
     </div>
     <div class="form-group">
-      <label>产地塘头价 CNA（USD/kg）*</label>
-      <input type="number" id="input-cna" step="0.01" min="0" placeholder="e.g. 4.50">
-    </div>
-    <div class="form-group">
-      <label>加工费用估算（USD/kg）</label>
-      <input type="number" id="input-processing" step="0.01" min="0" placeholder="0.15" value="0.15">
+      <label>FOB 离岸价（USD/kg）*</label>
+      <input type="number" id="input-fob" step="0.01" min="0" placeholder="e.g. 5.60">
     </div>
   </div>
   <div class="form-row">
     <div class="form-group">
       <label>海运费（USD/kg）</label>
-      <input type="number" id="input-freight" step="0.01" min="0" placeholder="0.10" value="0.10">
+      <input type="number" id="input-freight" step="0.01" min="0" placeholder="0.23" value="0.23">
     </div>
     <div class="form-group">
       <label>保险费（USD/kg）</label>
@@ -314,7 +310,7 @@ tbody tr:hover td { background: #e6f7ff !important; }
         <tr>
           <th onclick="sortBy('month')">月份 <span class="sort-arrow">&#x2195;</span></th>
           <th onclick="sortBy('spec')">规格 <span class="sort-arrow">&#x2195;</span></th>
-          <th onclick="sortBy('cna')">CNA(USD) <span class="sort-arrow">&#x2195;</span></th>
+          <th onclick="sortBy('fob')">FOB(USD) <span class="sort-arrow">&#x2195;</span></th>
           <th class="cost-highlight" onclick="sortBy('cif')">CIF(USD) <span class="sort-arrow">&#x2195;</span></th>
           <th>关税(USD)</th>
           <th>增值税(USD)</th>
@@ -394,8 +390,8 @@ tbody tr:hover td { background: #e6f7ff !important; }
   }
 
   // ========= Calculation =========
-  function calculate(cna, processing, freight, insurance, fees, days, rate) {
-    var cif = cna + processing + freight + insurance;
+  function calculate(fob, freight, insurance, fees, days, rate) {
+    var cif = fob + freight + insurance;
     var tariff = cif * TARIFF_RATE;
     var dutiableValue = cif + tariff;
     var vat = dutiableValue * VAT_RATE;
@@ -403,8 +399,7 @@ tbody tr:hover td { background: #e6f7ff !important; }
     var totalCost = cif + tariff + vat + fees + interest;
     var totalCostCNY = totalCost * rate;
     return {
-      cna: round(cna),
-      processing: round(processing),
+      fob: round(fob),
       freight: round(freight),
       insurance: round(insurance),
       fees: round(fees),
@@ -425,8 +420,7 @@ tbody tr:hover td { background: #e6f7ff !important; }
   function addRecord() {
     var month = document.getElementById("input-month").value;
     var spec = document.getElementById("input-spec").value;
-    var cna = parseFloat(document.getElementById("input-cna").value);
-    var processing = parseFloat(document.getElementById("input-processing").value) || 0;
+    var fob = parseFloat(document.getElementById("input-fob").value);
     var freight = parseFloat(document.getElementById("input-freight").value) || 0;
     var insurance = parseFloat(document.getElementById("input-insurance").value) || 0;
     var fees = parseFloat(document.getElementById("input-fees").value) || 0;
@@ -435,9 +429,9 @@ tbody tr:hover td { background: #e6f7ff !important; }
 
     if (!month) { showToast("请选择月份", false); return; }
     if (!spec) { showToast("请选择产品规格", false); return; }
-    if (isNaN(cna) || cna <= 0) { showToast("请输入有效的塘头价 CNA", false); return; }
+    if (isNaN(fob) || fob <= 0) { showToast("请输入有效的 FOB 离岸价", false); return; }
 
-    var calc = calculate(cna, processing, freight, insurance, fees, days, rate);
+    var calc = calculate(fob, freight, insurance, fees, days, rate);
 
     var dupIdx = -1;
     for (var i = 0; i < records.length; i++) {
@@ -446,8 +440,7 @@ tbody tr:hover td { background: #e6f7ff !important; }
 
     if (dupIdx >= 0) {
       if (!confirm(month + " · " + spec + " 已有记录，是否覆盖？")) return;
-      records[dupIdx].cna = calc.cna;
-      records[dupIdx].processing = calc.processing;
+      records[dupIdx].fob = calc.fob;
       records[dupIdx].freight = calc.freight;
       records[dupIdx].insurance = calc.insurance;
       records[dupIdx].fees = calc.fees;
@@ -465,8 +458,7 @@ tbody tr:hover td { background: #e6f7ff !important; }
       records.push({
         month: month,
         spec: spec,
-        cna: calc.cna,
-        processing: calc.processing,
+        fob: calc.fob,
         freight: calc.freight,
         insurance: calc.insurance,
         fees: calc.fees,
@@ -498,8 +490,8 @@ tbody tr:hover td { background: #e6f7ff !important; }
     document.getElementById("preview-rate").textContent = "USD 1 = CNY " + c.rate;
     var el = document.getElementById("preview-results");
     el.innerHTML =
-      "<div class=\"result-item\"><div class=\"rl\">CNA 塘头价</div><div class=\"rv-sm\">$" + c.cna + "</div><div class=\"sub\">USD/kg</div></div>" +
-      "<div class=\"result-item\"><div class=\"rl\">+ 加工费</div><div class=\"rv-sm\">$" + c.processing + "</div></div>" +
+      "<div class=\"result-item\"><div class=\"rl\">FOB 离岸价</div><div class=\"rv-sm\">$" + c.fob + "</div><div class=\"sub\">USD/kg</div></div>" +
+       +
       "<div class=\"result-item\"><div class=\"rl\">+ 运费</div><div class=\"rv-sm\">$" + c.freight + "</div></div>" +
       "<div class=\"result-item\"><div class=\"rl\">+ 保险</div><div class=\"rv-sm\">$" + c.insurance + "</div></div>" +
       "<div class=\"result-item\" style=\"border:2px solid #00a8e8;background:#f0f9ff\"><div class=\"rl\">CIF 到岸价</div><div class=\"rv-sm\">$" + c.cif + "</div><div class=\"sub\">USD/kg</div></div>" +
@@ -552,7 +544,7 @@ tbody tr:hover td { background: #e6f7ff !important; }
       html += "<tr" + cls + ">" +
         "<td>" + esc(r.month) + "</td>" +
         "<td>" + esc(r.spec) + "</td>" +
-        "<td>$" + r.cna + "</td>" +
+        "<td>$" + r.fob + "</td>" +
         "<td class=\"cost-highlight\">$" + r.cif + "</td>" +
         "<td>$" + r.tariff + "</td>" +
         "<td>$" + r.vat + "</td>" +
@@ -631,9 +623,9 @@ tbody tr:hover td { background: #e6f7ff !important; }
 
   function seedDemoDataCore(silent) {
     var specs = [
-      { spec: "30/40", cnas: [5.80, 5.50, 5.20, 4.80, 4.50, 4.60], proc: 0.15 },
-      { spec: "40/50", cnas: [5.20, 4.90, 4.60, 4.30, 4.10, 4.20], proc: 0.15 },
-      { spec: "50/60", cnas: [4.80, 4.60, 4.30, 4.00, 3.80, 3.90], proc: 0.15 }
+      { spec: "30/40", fobs: [5.60, 5.30, 5.00, 4.60, 4.40, 4.50] },
+      { spec: "40/50", fobs: [5.00, 4.70, 4.40, 4.10, 3.90, 4.00] },
+      { spec: "50/60", fobs: [4.60, 4.40, 4.10, 3.80, 3.60, 3.70] }
     ];
     var months = ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06"];
     var freights = [0.14, 0.13, 0.11, 0.09, 0.08, 0.09];
@@ -643,14 +635,13 @@ tbody tr:hover td { background: #e6f7ff !important; }
 
     for (var s = 0; s < specs.length; s++) {
       for (var m = 0; m < months.length; m++) {
-        var calc = calculate(specs[s].cnas[m], specs[s].proc, freights[m], insurance, fees, days, rate);
+        var calc = calculate(specs[s].fobs[m], freights[m], insurance, fees, days, rate);
         var existing = -1;
         for (var i = 0; i < records.length; i++) {
           if (records[i].month === months[m] && records[i].spec === specs[s].spec) { existing = i; break; }
         }
         if (existing >= 0) {
-          records[existing].cna = calc.cna;
-          records[existing].processing = calc.processing;
+          records[existing].fob = calc.fob;
           records[existing].freight = calc.freight;
           records[existing].insurance = calc.insurance;
           records[existing].fees = calc.fees;
@@ -668,8 +659,7 @@ tbody tr:hover td { background: #e6f7ff !important; }
           records.push({
             month: months[m],
             spec: specs[s].spec,
-            cna: calc.cna,
-            processing: calc.processing,
+            fob: calc.fob,
             freight: calc.freight,
             insurance: calc.insurance,
             fees: calc.fees,
@@ -712,11 +702,11 @@ tbody tr:hover td { background: #e6f7ff !important; }
   // ========= Export CSV =========
   function exportCSV() {
     if (records.length === 0) { showToast("暂无数据可导出", false); return; }
-    var headers = ["月份","规格","CNA(USD)","加工费(USD)","运费(USD)","保险(USD)","CIF(USD)","关税(USD)","增值税(USD)","进口费用(USD)","利息(USD)","到岸成本(USD)","到岸成本(CNY)","账期(天)","汇率"];
+    var headers = ["月份","规格","FOB(USD)","运费(USD)","保险(USD)","CIF(USD)","关税(USD)","增值税(USD)","进口费用(USD)","利息(USD)","到岸成本(USD)","到岸成本(CNY)","账期(天)","汇率"];
     var rows = [];
     for (var i = 0; i < records.length; i++) {
       var r = records[i];
-      rows.push([r.month, r.spec, r.cna, r.processing, r.freight, r.insurance, r.cif, r.tariff, r.vat, r.fees, r.interest, r.totalCost, r.totalCostCNY, r.days, r.rate].join(","));
+      rows.push([r.month, r.spec, r.fob, r.freight, r.insurance, r.cif, r.tariff, r.vat, r.fees, r.interest, r.totalCost, r.totalCostCNY, r.days, r.rate].join(","));
     }
     var csv = "\uFEFF" + headers.join(",") + "\n" + rows.join("\n");
     var blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
@@ -749,8 +739,8 @@ tbody tr:hover td { background: #e6f7ff !important; }
       var byMonth = {};
       for (var j = 0; j < data.length; j++) {
         var r = data[j];
-        if (!byMonth[r.month]) byMonth[r.month] = { month: r.month, cnas: [], totalCosts: [], totalCostCNYs: [] };
-        byMonth[r.month].cnas.push(r.cna);
+        if (!byMonth[r.month]) byMonth[r.month] = { month: r.month, fobs: [], totalCosts: [], totalCostCNYs: [] };
+        byMonth[r.month].fobs.push(r.fob);
         byMonth[r.month].totalCosts.push(r.totalCost);
         byMonth[r.month].totalCostCNYs.push(r.totalCostCNY);
       }
@@ -760,7 +750,7 @@ tbody tr:hover td { background: #e6f7ff !important; }
         var mk = monthKeys[m], mv = byMonth[mk];
         aggregated.push({
           month: mk,
-          cna: round(mv.cnas.reduce(function(a, b) { return a + b; }, 0) / mv.cnas.length),
+          fob: round(mv.fobs.reduce(function(a, b) { return a + b; }, 0) / mv.fobs.length),
           totalCost: round(mv.totalCosts.reduce(function(a, b) { return a + b; }, 0) / mv.totalCosts.length),
           totalCostCNY: round(mv.totalCostCNYs.reduce(function(a, b) { return a + b; }, 0) / mv.totalCostCNYs.length)
         });
@@ -772,8 +762,8 @@ tbody tr:hover td { background: #e6f7ff !important; }
 
     var labels = [];
     for (var n = 0; n < aggregated.length; n++) labels.push(aggregated[n].month);
-    var cnaData = [], costData = [];
-    for (var n2 = 0; n2 < aggregated.length; n2++) { cnaData.push(aggregated[n2].cna); costData.push(aggregated[n2].totalCostCNY); }
+    var fobData = [], costData = [];
+    for (var n2 = 0; n2 < aggregated.length; n2++) { fobData.push(aggregated[n2].fob); costData.push(aggregated[n2].totalCostCNY); }
 
     var ctx = document.getElementById("trendChart").getContext("2d");
     if (chartInstance) chartInstance.destroy();
@@ -784,8 +774,8 @@ tbody tr:hover td { background: #e6f7ff !important; }
         labels: labels,
         datasets: [
           {
-            label: "塘头价 CNA (USD/kg)",
-            data: cnaData,
+            label: "FOB 离岸价 (USD/kg)",
+            data: fobData,
             borderColor: "#f59e0b",
             backgroundColor: "rgba(245,158,11,0.08)",
             borderWidth: 2.5,
@@ -852,9 +842,8 @@ tbody tr:hover td { background: #e6f7ff !important; }
   // ========= Form =========
   function resetForm(clearMonth) {
     document.getElementById("input-spec").value = "";
-    document.getElementById("input-cna").value = "";
-    document.getElementById("input-processing").value = "0.15";
-    document.getElementById("input-freight").value = "0.10";
+    document.getElementById("input-fob").value = "";
+    document.getElementById("input-freight").value = "0.23";
     document.getElementById("input-insurance").value = "0.02";
     document.getElementById("input-fees").value = "0.05";
     document.getElementById("input-days").value = "0";
