@@ -44,10 +44,12 @@ nav {
 .masthead h1 { font-size: 28px; font-weight: 800; margin-bottom: 6px; }
 .masthead p { font-size: 14px; opacity: 0.85; max-width: 600px; margin: 0 auto; }
 .masthead .admin-hint {
-  position: absolute; bottom: 8px; right: 16px; font-size: 10px; opacity: 0;
-  transition: opacity 0.3s; color: rgba(255,255,255,0.4);
+  position: absolute; bottom: 10px; right: 20px; font-size: 11px;
+  color: rgba(255,255,255,0.55); cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.25); border-radius: 6px;
+  padding: 3px 10px; transition: all 0.2s;
 }
-.masthead:hover .admin-hint { opacity: 1; }
+.masthead .admin-hint:hover { color: #fff; background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.5); }
 
 /* Main layout */
 .main-wrap {
@@ -211,7 +213,7 @@ footer { text-align: center; padding: 24px; font-size: 12px; color: #aaa; border
 <div class="masthead" id="masthead">
   <h1>❄️ 冷链仓储网络</h1>
   <p>覆盖全国核心港口与物流枢纽城市，进口冻品清关后无缝衔接高品质冷库</p>
-  <div class="admin-hint">双击此处进入管理模式</div>
+  <div class="admin-hint" onclick="if(!isAdmin)checkPassword()" title="点击进入管理模式">🔒 管理冷库</div>
 </div>
 
 <div class="main-wrap">
