@@ -51,6 +51,50 @@ nav {
   display: inline-block;
 }
 .masthead .admin-hint:hover { background: rgba(255,255,255,0.3); border-color: #fff; transform: scale(1.05); }
+.masthead .search-hint {
+  position: absolute; bottom: 14px; right: 150px; font-size: 13px; font-weight: 600;
+  color: #fff; cursor: pointer;
+  background: rgba(255,255,255,0.18); border: 1.5px solid rgba(255,255,255,0.5); border-radius: 8px;
+  padding: 6px 16px; transition: all 0.2s;
+  display: inline-block;
+}
+.masthead .search-hint:hover { background: rgba(255,255,255,0.3); border-color: #fff; transform: scale(1.05); }
+
+/* Search modal */
+.search-filter-section { margin-bottom: 16px; }
+.search-filter-section h4 { font-size: 13px; font-weight: 700; color: #1a3a5c; margin-bottom: 8px; }
+.tag-checkbox-group { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag-checkbox-group label.tag-cb {
+  display: flex; align-items: center; gap: 4px; font-size: 12px; color: #555;
+  padding: 4px 10px; border: 1px solid #ddd; border-radius: 16px; cursor: pointer;
+  transition: all 0.15s; user-select: none;
+}
+.tag-checkbox-group label.tag-cb:hover { border-color: #00a8e8; background: #f0f9ff; }
+.tag-checkbox-group label.tag-cb.checked { background: #00a8e8; color: #fff; border-color: #00a8e8; }
+.tag-checkbox-group label.tag-cb input { display: none; }
+.search-radio-group { display: flex; gap: 12px; align-items: center; }
+.search-radio-group label.sr-label {
+  display: flex; align-items: center; gap: 5px; font-size: 12px; color: #555; cursor: pointer;
+  padding: 4px 12px; border: 1px solid #ddd; border-radius: 16px; transition: all 0.15s;
+}
+.search-radio-group label.sr-label:hover { border-color: #00a8e8; }
+.search-radio-group label.sr-label.checked { background: #fff3e0; color: #e65100; border-color: #e65100; }
+.search-radio-group input[type="radio"] { display: none; }
+.search-results { max-height: 420px; overflow-y: auto; }
+.search-results .sr-card {
+  display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid #e8edf2;
+  border-radius: 10px; margin-bottom: 8px; cursor: pointer; transition: all 0.15s;
+}
+.search-results .sr-card:hover { border-color: #00a8e8; background: #f0f9ff; }
+.sr-card .sr-city { font-size: 11px; color: #aaa; min-width: 50px; text-align: center; }
+.sr-card .sr-city-icon { font-size: 20px; display: block; }
+.sr-card .sr-info { flex: 1; min-width: 0; }
+.sr-card .sr-name { font-size: 14px; font-weight: 700; color: #1a3a5c; }
+.sr-card .sr-meta { font-size: 11px; color: #888; margin-top: 2px; }
+.sr-card .sr-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px; }
+.sr-card .sr-tags .tag { font-size: 10px; padding: 2px 6px; border-radius: 8px; background: #e8f5e9; color: #2e7d32; }
+.sr-card .sr-tags .tag.blue { background: #e3f2fd; color: #1565c0; }
+.sr-empty { text-align: center; padding: 32px; color: #aaa; font-size: 14px; }
 
 /* Main layout */
 .main-wrap {
@@ -219,6 +263,7 @@ footer { text-align: center; padding: 24px; font-size: 12px; color: #aaa; border
 <div class="masthead" id="masthead">
   <h1>❄️ 冷链仓储网络</h1>
   <p>覆盖全国核心港口与物流枢纽城市，进口冻品清关后无缝衔接高品质冷库</p>
+  <div class="search-hint" onclick="openSearchModal()" title="按标签和监管仓筛选冷库">🔍 查找冷库</div>
   <div class="admin-hint" onclick="if(!isAdmin)checkPassword()" title="点击进入管理模式">🔒 管理冷库</div>
 </div>
 
@@ -296,6 +341,22 @@ footer { text-align: center; padding: 24px; font-size: 12px; color: #aaa; border
 <div class="edit-overlay" id="edit-modal">
   <div class="edit-box">
     <div class="edit-body" id="edit-body"></div>
+  </div>
+</div>
+
+<!-- Search Modal -->
+<div class="modal-overlay" id="search-modal">
+  <div class="modal-box" style="max-width:680px;">
+    <div class="modal-body">
+      <button class="modal-close" onclick="closeSearchModal()">✕</button>
+      <div class="modal-header"><h2>🔍 查找冷库</h2></div>
+      <div id="search-filters"></div>
+      <div class="search-results" id="search-results"><div class="sr-empty">请选择筛选条件后点击「搜索」</div></div>
+      <div style="margin-top:16px;display:flex;gap:8px;justify-content:flex-end;">
+        <button class="btn-cancel" onclick="closeSearchModal()" style="padding:8px 16px;border-radius:8px;border:none;font-size:12px;font-family:inherit;cursor:pointer;font-weight:600;background:#e8edf2;color:#555;">关闭</button>
+        <button onclick="doSearch()" style="padding:8px 20px;border-radius:8px;border:none;font-size:12px;font-family:inherit;cursor:pointer;font-weight:600;background:#00a8e8;color:#fff;">🔍 搜索</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -795,6 +856,145 @@ function openEditModal(cityKey, idx) {
 function closeEdit() {
   document.getElementById('edit-modal').classList.remove('show');
 }
+
+// ====== Search Modal ======
+var searchFilters = { tags: [], supervised: '' };
+
+function openSearchModal() {
+  // Collect all unique tags
+  var allTags = {};
+  var stores = getMergedStores();
+  var cities = Object.keys(stores);
+  for (var c = 0; c < cities.length; c++) {
+    var cityStores = stores[cities[c]].stores;
+    for (var s = 0; s < cityStores.length; s++) {
+      var tgs = cityStores[s].tags || [];
+      for (var t = 0; t < tgs.length; t++) {
+        allTags[tgs[t]] = (allTags[tgs[t]] || 0) + 1;
+      }
+    }
+  }
+  var tagList = Object.keys(allTags).sort();
+
+  var filterHtml = '<div class="search-filter-section">';
+  filterHtml += '<h4>🏷️ 按标签筛选（可多选，留空 = 不限）</h4>';
+  filterHtml += '<div class="tag-checkbox-group" id="tag-checkboxes">';
+  for (var i = 0; i < tagList.length; i++) {
+    var checked = searchFilters.tags.indexOf(tagList[i]) >= 0;
+    filterHtml += '<label class="tag-cb' + (checked ? ' checked' : '') + '" data-tag="' + escAttr(tagList[i]) + '" onclick="toggleTagCb(this)">' + tagList[i] + ' <span style="opacity:0.6;font-size:10px">(' + allTags[tagList[i]] + ')</span></label>';
+  }
+  filterHtml += '</div></div>';
+
+  filterHtml += '<div class="search-filter-section">';
+  filterHtml += '<h4>🔐 是否金融监管仓</h4>';
+  filterHtml += '<div class="search-radio-group" id="supervised-radios">';
+  var opts = [
+    { v: '', label: '全部' },
+    { v: '1', label: '是（金融监管仓）' },
+    { v: '0', label: '否（普通冷库）' }
+  ];
+  for (var k = 0; k < opts.length; k++) {
+    var sel = searchFilters.supervised === opts[k].v;
+    filterHtml += '<label class="sr-label' + (sel ? ' checked' : '') + '" data-v="' + opts[k].v + '" onclick="toggleSupervisedR(this)">' + opts[k].label + '</label>';
+  }
+  filterHtml += '</div></div>';
+
+  document.getElementById('search-filters').innerHTML = filterHtml;
+  document.getElementById('search-modal').classList.add('show');
+
+  // Restore previous results if any
+  if (searchFilters.tags.length > 0 || searchFilters.supervised !== '') {
+    doSearch();
+  } else {
+    document.getElementById('search-results').innerHTML = '<div class="sr-empty">请选择筛选条件后点击「搜索」</div>';
+  }
+}
+
+function toggleTagCb(el) {
+  el.classList.toggle('checked');
+}
+
+function toggleSupervisedR(el) {
+  var group = document.getElementById('supervised-radios');
+  var labels = group.querySelectorAll('.sr-label');
+  for (var i = 0; i < labels.length; i++) {
+    labels[i].classList.remove('checked');
+  }
+  el.classList.add('checked');
+}
+
+function doSearch() {
+  // Read selected tags
+  var cbs = document.querySelectorAll('#tag-checkboxes .tag-cb.checked');
+  var selectedTags = [];
+  for (var i = 0; i < cbs.length; i++) {
+    selectedTags.push(cbs[i].getAttribute('data-tag'));
+  }
+
+  // Read supervised radio
+  var radios = document.querySelectorAll('#supervised-radios .sr-label.checked');
+  var supervisedVal = radios.length > 0 ? radios[0].getAttribute('data-v') : '';
+
+  // Save state
+  searchFilters.tags = selectedTags;
+  searchFilters.supervised = supervisedVal;
+
+  // Collect all matching stores
+  var stores = getMergedStores();
+  var cities = Object.keys(stores);
+  var results = [];
+  for (var c = 0; c < cities.length; c++) {
+    var cityKey = cities[c];
+    var city = stores[cityKey];
+    for (var s = 0; s < city.stores.length; s++) {
+      var st = city.stores[s];
+      // Tag filter
+      if (selectedTags.length > 0) {
+        var matchTag = false;
+        for (var t = 0; t < selectedTags.length; t++) {
+          if (st.tags && st.tags.indexOf(selectedTags[t]) >= 0) {
+            matchTag = true;
+            break;
+          }
+        }
+        if (!matchTag) continue;
+      }
+      // Supervised filter
+      if (supervisedVal === '1' && !st.supervised) continue;
+      if (supervisedVal === '0' && st.supervised) continue;
+
+      results.push({ cityKey: cityKey, city: city, store: st, idx: s });
+    }
+  }
+
+  var listEl = document.getElementById('search-results');
+  if (results.length === 0) {
+    listEl.innerHTML = '<div class="sr-empty">😕 没有匹配的冷库，请调整筛选条件</div>';
+    return;
+  }
+
+  var html = '<div style="font-size:11px;color:#aaa;margin-bottom:8px;">找到 ' + results.length + ' 个冷库</div>';
+  for (var r = 0; r < results.length; r++) {
+    var it = results[r];
+    var st = it.store;
+    var city = it.city;
+    var cityKey = it.cityKey;
+    var idx = it.idx;
+    html += '<div class="sr-card" onclick="closeSearchModal();showDetail(\'' + cityKey + '\',' + idx + ')">';
+    html += '<div class="sr-city"><span class="sr-city-icon">' + city.icon + '</span>' + city.name + '</div>';
+    html += '<div class="sr-info">';
+    html += '<div class="sr-name">' + st.name + (st.supervised ? ' <span class="badge-supervised">🔐 监管仓</span>' : '') + '</div>';
+    html += '<div class="sr-meta">📍 ' + st.zone + ' · 📦 ' + st.capacity + ' · 🌡️ ' + st.temp + ' · 🏅 ' + (st.cert || '无') + '</div>';
+    html += '<div class="sr-tags">' + st.tags.map(function(tg){return '<span class="tag' + (tg==='海关监管'||tg==='保税仓'?' blue':'') + '">' + tg + '</span>';}).join('') + '</div>';
+    html += '</div></div>';
+  }
+  listEl.innerHTML = html;
+}
+
+function closeSearchModal() {
+  document.getElementById('search-modal').classList.remove('show');
+}
+
 function escAttr(s) { return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function escHtml(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
