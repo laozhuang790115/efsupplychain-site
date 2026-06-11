@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>冷链服务 — 以鲜国际</title>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", -apple-system, sans-serif;
+  color: #1a1a2e; line-height: 1.7; background: #f5f7fb; min-height: 100vh;
+}
+a { text-decoration: none; color: inherit; }
+
+/* Nav */
+nav {
+  background: rgba(255,255,255,0.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid #e8edf2; position: sticky; top: 0; z-index: 100; padding: 0 24px;
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto; display: flex; align-items: center; height: 52px;
+}
+.nav-logo { font-size: 18px; font-weight: 800; color: #00a8e8; margin-right: 32px; }
+.nav-links { display: flex; gap: 20px; align-items: center; }
+.nav-links a { font-size: 13px; font-weight: 500; color: #555; transition: color 0.2s; }
+.nav-links a:hover { color: #00a8e8; }
+.nav-tools { background: #f59e0b; color: #fff !important; padding: 5px 14px; border-radius: 20px; font-size: 12px; }
+.nav-tools:hover { background: #e08f0b; color: #fff !important; }
+
+/* Masthead */
+.masthead {
+  background: linear-gradient(135deg, #0a1628 0%, #1a3a5c 50%, #00a8e8 100%);
+  color: #fff; text-align: center; padding: 40px 24px 36px;
+}
+.masthead h1 { font-size: 28px; font-weight: 800; margin-bottom: 6px; }
+.masthead p { font-size: 14px; opacity: 0.85; max-width: 600px; margin: 0 auto; }
+
+/* Main layout */
+.main-wrap {
+  max-width: 1300px; margin: 0 auto; padding: 24px; display: flex; gap: 24px;
+  min-height: 600px;
+}
+
+/* Map section */
+.map-section {
+  flex: 1; min-width: 0; background: #fff; border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06); padding: 24px; position: relative;
+}
+.map-section h2 {
+  font-size: 16px; font-weight: 700; margin-bottom: 12px; color: #1a3a5c;
+  display: flex; align-items: center; gap: 8px;
+}
+.map-svg { width: 100%; height: auto; }
+.city-dot { cursor: pointer; transition: all 0.2s; }
+.city-dot:hover { filter: brightness(1.2); }
+.city-dot circle { transition: r 0.2s; }
+.city-dot:hover circle { r: 10; }
+.city-label { font-size: 10px; font-weight: 600; fill: #1a3a5c; pointer-events: none; }
+.map-tip {
+  text-align: center; color: #aaa; font-size: 12px; margin-top: 8px;
+}
+
+/* Side panel */
+.side-panel {
+  width: 380px; flex-shrink: 0; background: #fff; border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06); padding: 24px;
+  display: flex; flex-direction: column; gap: 16px;
+  max-height: 640px; overflow: hidden;
+}
+.panel-empty {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  color: #ccc; text-align: center; gap: 12px;
+}
+.panel-empty .icon { font-size: 48px; }
+.panel-city-header {
+  display: flex; align-items: center; gap: 12px; padding-bottom: 16px;
+  border-bottom: 1px solid #e8edf2;
+}
+.panel-city-header .city-icon { font-size: 32px; }
+.panel-city-header h3 { font-size: 18px; font-weight: 700; color: #1a3a5c; }
+.panel-city-header .count { font-size: 12px; color: #888; }
+.warehouse-list {
+  flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;
+  padding-right: 4px;
+}
+.wh-card {
+  background: #f8fafc; border: 1.5px solid #e8edf2; border-radius: 12px;
+  padding: 14px 16px; cursor: pointer; transition: all 0.2s;
+}
+.wh-card:hover { border-color: #00a8e8; background: #f0f9ff; }
+.wh-card .wh-name { font-size: 14px; font-weight: 700; color: #1a3a5c; margin-bottom: 4px; }
+.wh-card .wh-meta {
+  display: flex; gap: 12px; flex-wrap: wrap; font-size: 11px; color: #888;
+}
+.wh-card .wh-meta span { display: flex; align-items: center; gap: 4px; }
+.wh-card .wh-tags { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+.wh-card .tag {
+  font-size: 10px; padding: 2px 8px; border-radius: 10px;
+  background: #e8f5e9; color: #2e7d32; font-weight: 600;
+}
+.wh-card .tag.blue { background: #e3f2fd; color: #1565c0; }
+
+/* Detail modal */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+  z-index: 200; align-items: center; justify-content: center;
+}
+.modal-overlay.show { display: flex; }
+.modal-box {
+  background: #fff; border-radius: 20px; max-width: 600px; width: 90%;
+  max-height: 80vh; overflow-y: auto; box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+}
+.modal-body { padding: 28px; }
+.modal-close {
+  float: right; background: none; border: none; font-size: 22px;
+  cursor: pointer; color: #aaa; padding: 4px; line-height: 1;
+}
+.modal-close:hover { color: #333; }
+.modal-header { margin-bottom: 20px; }
+.modal-header h2 { font-size: 20px; font-weight: 700; color: #1a3a5c; margin-bottom: 4px; }
+.modal-header .city-badge {
+  display: inline-block; font-size: 11px; padding: 3px 10px; border-radius: 12px;
+  background: #e3f2fd; color: #1565c0; font-weight: 600;
+}
+.modal-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.modal-info-item { background: #f8fafc; border-radius: 10px; padding: 12px; }
+.modal-info-item .label { font-size: 11px; color: #aaa; text-transform: uppercase; letter-spacing: 0.5px; }
+.modal-info-item .value { font-size: 14px; font-weight: 600; color: #1a3a5c; margin-top: 2px; }
+.modal-desc { font-size: 13px; color: #555; line-height: 1.8; }
+.modal-features { margin-top: 16px; }
+.modal-features h4 { font-size: 13px; font-weight: 700; color: #1a3a5c; margin-bottom: 8px; }
+.modal-features ul { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
+.modal-features li {
+  font-size: 11px; padding: 4px 10px; border-radius: 8px;
+  background: #e8f5e9; color: #2e7d32;
+}
+
+/* Footer */
+footer {
+  text-align: center; padding: 24px; font-size: 12px; color: #aaa;
+  border-top: 1px solid #e8edf2; margin-top: 40px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .main-wrap { flex-direction: column; }
+  .side-panel { width: 100%; max-height: 400px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">&#x1F9CA; 以鲜国际</div>
+    <div class="nav-links">
+      <a href="index.html">&#x1F3E0; 主页</a>
+      <a href="tools.html" class="nav-tools">&#x1F9ED; 工具罗盘</a>
+      <a href="reports.html">&#x1F4F0; 老庄报告</a>
+    </div>
+  </div>
+</nav>
+
+<div class="masthead">
+  <h1>&#x2744;&#xFE0F; 冷链仓储网络</h1>
+  <p>覆盖全国核心港口与物流枢纽城市，进口冻品清关后无缝衔接高品质冷库</p>
+</div>
+
+<div class="main-wrap">
+  <!-- Map -->
+  <div class="map-section">
+    <h2>&#x1F5FA;&#xFE0F; 中国冷库分布图 <span style="font-size:12px;color:#aaa;font-weight:400">— 点击城市查看冷库</span></h2>
+    <svg class="map-svg" viewBox="0 0 680 560" id="china-map">
+      <!-- Mainland outline (simplified) -->
+      <path d="M520,85 L545,78 L570,65 L595,58 L610,68 L620,82 L622,100 L615,112 
+               L600,118 L590,125 L580,148 L575,170 L568,188 L555,200 L548,195 
+               L540,185 L530,192 L520,210 L510,225 L515,240 L525,255 L530,270 
+               L535,285 L548,300 L555,310 L560,325 L548,340 L535,350 L520,360 
+               L510,375 L495,390 L485,405 L475,420 L460,435 L445,448 L430,455 
+               L415,460 L400,452 L388,440 L378,425 L365,410 L355,395 L345,378 
+               L332,360 L320,345 L310,330 L295,320 L278,308 L265,295 L255,280 
+               L250,268 L255,255 L265,242 L278,230 L290,220 L298,208 L305,195 
+               L310,180 L308,165 L300,150 L295,138 L300,125 L312,115 L328,108 
+               L345,102 L365,98 L390,95 L415,90 L445,85 L475,82 L500,83" 
+            fill="#e8f4f8" stroke="#b8d8e8" stroke-width="2" stroke-linejoin="round"/>
+      
+      <!-- Hainan -->
+      <path d="M370,470 L385,465 L400,468 L405,478 L395,485 L378,482 Z" fill="#e8f4f8" stroke="#b8d8e8" stroke-width="2"/>
+      
+      <!-- Taiwan -->
+      <path d="M570,320 L578,312 L585,325 L590,340 L585,358 L576,365 L568,355 L565,338 Z" fill="#e8f4f8" stroke="#b8d8e8" stroke-width="2"/>
+
+      <!-- Cities -->
+      <g class="city-dot" data-city="dalian" onclick="selectCity('dalian')">
+        <circle cx="545" cy="178" r="7" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
+        <text class="city-label" x="545" y="164" text-anchor="middle">大连</text>
+      </g>
+      <g class="city-dot" data-city="tianjin" onclick="selectCity('tianjin')">
+        <circle cx="480" cy="162" r="8" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
+        <text class="city-label" x="480" y="148" text-anchor="middle">天津</text>
+      </g>
+      <g class="city-dot" data-city="qingdao" onclick="selectCity('qingdao')">
+        <circle cx="510" cy="198" r="8" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
+        <text class="city-label" x="510" y="184" text-anchor="middle">青岛</text>
+      </g>
+      <g class="city-dot" data-city="shanghai" onclick="selectCity('shanghai')">
+        <circle cx="540" cy="278" r="9" fill="#f59e0b" stroke="#fff" stroke-width="2"/>
+        <text class="city-label" x="555" y="275" text-anchor="start">上海</text>
+      </g>
+      <g class="city-dot" data-city="ningbo" onclick="selectCity('ningbo')">
+        <circle cx="548" cy="308" r="7" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
+        <text class="city-label" x="563" y="305" text-anchor="start">宁波</text>
+      </g>
+      <g class="city-dot" data-city="xiamen" onclick="selectCity('xiamen')">
+        <circle cx="508" cy="378" r="7" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
+        <text class="city-label" x="508" y="364" text-anchor="middle">厦门</text>
+      </g>
+      <g class="city-dot" data-city="guangzhou" onclick="selectCity('guangzhou')">
+        <circle cx="440" cy="420" r="8" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
+        <text class="city-label" x="440" y="438" text-anchor="middle">广州</text>
+      </g>
+      <g class="city-dot" data-city="shenzhen" onclick="selectCity('shenzhen')">
+        <circle cx="453" cy="432" r="8" fill="#f59e0b" stroke="#fff" stroke-width="2"/>
+        <text class="city-label" x="468" y="435" text-anchor="start">深圳</text>
+      </g>
+      <g class="city-dot" data-city="wuhan" onclick="selectCity('wuhan')">
+        <circle cx="428" cy="295" r="7" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
+        <text class="city-label" x="428" y="280" text-anchor="middle">武汉</text>
+      </g>
+      <g class="city-dot" data-city="zhengzhou" onclick="selectCity('zhengzhou')">
+        <circle cx="418" cy="218" r="7" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
+        <text class="city-label" x="418" y="202" text-anchor="middle">郑州</text>
+      </g>
+      <g class="city-dot" data-city="chongqing" onclick="selectCity('chongqing')">
+        <circle cx="330" cy="318" r="7" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
+        <text class="city-label" x="330" y="302" text-anchor="middle">重庆</text>
+      </g>
+      <g class="city-dot" data-city="chengdu" onclick="selectCity('chengdu')">
+        <circle cx="245" cy="308" r="7" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
+        <text class="city-label" x="245" y="292" text-anchor="middle">成都</text>
+      </g>
+      <g class="city-dot" data-city="xian" onclick="selectCity('xian')">
+        <circle cx="340" cy="232" r="7" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
+        <text class="city-label" x="340" y="216" text-anchor="middle">西安</text>
+      </g>
+      <g class="city-dot" data-city="kunming" onclick="selectCity('kunming')">
+        <circle cx="205" cy="380" r="6" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
+        <text class="city-label" x="205" y="396" text-anchor="middle">昆明</text>
+      </g>
+      <g class="city-dot" data-city="harbin" onclick="selectCity('harbin')">
+        <circle cx="575" cy="82" r="7" fill="#00a8e8" stroke="#fff" stroke-width="2"/>
+        <text class="city-label" x="590" y="85" text-anchor="start">哈尔滨</text>
+      </g>
+    </svg>
+    <div class="map-tip">&#x1F4A1; 橙色标记为进口冻品核心口岸 &nbsp;|&nbsp; 点击城市查看冷库资源</div>
+  </div>
+
+  <!-- Side panel -->
+  <div class="side-panel" id="side-panel">
+    <div class="panel-empty" id="panel-empty">
+      <div class="icon">&#x1F4CD;</div>
+      <div style="font-size:14px;font-weight:600;color:#bbb">点击地图城市</div>
+      <div style="font-size:12px">查看该城市冷链仓储资源</div>
+    </div>
+    <div id="panel-content" style="display:none;flex-direction:column;gap:16px;flex:1;min-height:0">
+      <div class="panel-city-header" id="panel-header"></div>
+      <div class="warehouse-list" id="warehouse-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Detail Modal -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal-box" id="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<footer>
+  &copy; 2026 以鲜国际供应链 &middot; 冷链数据持续更新中
+</footer>
+
+<script>
+// ====== Warehouse Data ======
+var coldStores = {
+  dalian: {
+    name: '大连',
+    icon: '&#x26F5;&#xFE0F;',
+    desc: '东北最大口岸，辐射东三省及蒙东',
+    stores: [
+      { name: '大窑湾冷链物流园', area: '金州区大窑湾港', capacity: '20万吨', temp: '-25°C ~ +5°C', cert: '海关监管库', tags: ['海关监管','保税仓','铁路冷链'], desc: '大连港核心冷链枢纽，紧邻大窑湾集装箱码头，拥有自动化立体冷库和铁路冷链专线，配套海关查验平台，进口冻品可一站式完成清关、查验、入库。', features: ['海关驻库查验','自动化立体库','铁路冷链专线','多点温区','保税仓储','国际中转'] },
+      { name: '辽渔国际水产品冷链基地', area: '甘井子区大连湾', capacity: '12万吨', temp: '-30°C ~ 0°C', cert: 'HACCP', tags: ['水产专库','加工配套'], desc: '以水产品为主的冷链基地，配套加工车间，可实现进口水产的分拣、加工、换包装，再分拨全国。', features: ['水产品加工车间','急冻隧道','分拣包装线','冷藏车月台'] },
+      { name: '大连港毅都冷链', area: '保税区', capacity: '8万吨', temp: '-25°C ~ +5°C', cert: '海关监管·CIQ备案', tags: ['保税仓','肉类专库','水果专库'], desc: '保税区内专业冷链，进口肉类、水果指定查验场，保税状态下可存储、分拨，灵活处理完税节奏。', features: ['肉类指定库','水果指定库','保税仓储','海关查验场'] }
+    ]
+  },
+  tianjin: {
+    name: '天津',
+    icon: '&#x26F5;&#xFE0F;',
+    desc: '华北核心口岸，辐射京津冀',
+    stores: [
+      { name: '天津港国际冷链物流中心', area: '滨海新区东疆保税港', capacity: '30万吨', temp: '-30°C ~ +5°C', cert: '海关监管库', tags: ['海关监管','保税仓','肉类专库'], desc: '东疆保税港区核心冷链设施，天津港最大的进口冻品集散地，进口肉类指定查验存储场，紧邻码头作业区，通关时效全国领先。', features: ['肉类指定库','保税仓储','码头直连','自动温控','海关驻库','检验检疫平台'] },
+      { name: '华锐冷链天津基地', area: '滨海新区开发区', capacity: '10万吨', temp: '-25°C ~ +5°C', cert: 'ISO22000', tags: ['第三方物流','多温区'], desc: '标准化第三方冷链物流基地，服务多家进口贸易商，支持多温区存储、城市配送、干线运输。', features: ['多温区','城配网络','干线冷链车','WMS仓储管理'] },
+      { name: '中农批天津冷链物流园', area: '静海区', capacity: '15万吨', temp: '-25°C ~ +5°C', cert: '海关监管·HACCP', tags: ['海关监管','批发市场配套'], desc: '中国农批旗下冷链园区，配套大型冻品批发市场，进口冻品可直通市场交易，产地到餐桌全链条。', features: ['批发市场联动','展示交易厅','供应链金融','电商发货'] }
+    ]
+  },
+  qingdao: {
+    name: '青岛',
+    icon: '&#x26F5;&#xFE0F;',
+    desc: '山东核心口岸，辐射华东华北',
+    stores: [
+      { name: '青岛港冷链物流中心', area: '黄岛区前湾港', capacity: '18万吨', temp: '-30°C ~ +5°C', cert: '海关监管库', tags: ['海关监管','码头直连','水产专库'], desc: '青岛前湾港核心冷链设施，进口水产、肉类指定查验存储场。山东是中国最大水产品加工基地，冷库配套加工能力突出。', features: ['水产指定库','肉类指定库','加工配套','码头直连','冷链分拨'] },
+      { name: '巴龙国际冷链食品交易中心', area: '即墨区', capacity: '10万吨', temp: '-25°C ~ +5°C', cert: 'ISO22000', tags: ['交易市场','展示中心'], desc: '集展示交易、仓储物流、加工配送于一体的大型冷链食品交易平台，进口冻品可在展示中心直面下游客户。', features: ['展示交易大厅','电商直播基地','供应链金融','加工包装'] },
+      { name: '青岛鲁海丰冷链基地', area: '黄岛区董家口', capacity: '8万吨', temp: '-30°C ~ 0°C', cert: 'HACCP·MSC', tags: ['水产加工','出口配套'], desc: '以水产为主的专业冷链基地，进口高端水产原料在此加工后分销全国及出口日韩。', features: ['水产精深加工','MSC认证','日韩出口通道','急冻设施'] }
+    ]
+  },
+  shanghai: {
+    name: '上海',
+    icon: '&#x1F4CD;',
+    desc: '中国最大进口口岸，辐射长三角及全国',
+    stores: [
+      { name: '上海临港冷链物流园', area: '浦东新区临港新片区', capacity: '35万吨', temp: '-30°C ~ +8°C', cert: '海关监管库·ISO22000', tags: ['海关监管','保税仓','超高吞吐'], desc: '洋山港配套的超大型冷链枢纽，长三角最大进口冻品集散地。自动化立体库、无人叉车、RFID追溯，单日吞吐量超5000吨。', features: ['自动化立体库','RFID溯源','无人叉车','保税仓储','海关驻库','7×24运营'] },
+      { name: '太古冷链上海物流中心', area: '嘉定区', capacity: '12万吨', temp: '-25°C ~ +5°C', cert: 'ISO9001·ISO22000', tags: ['外资品牌','多温区','高端客户'], desc: '太古集团旗下专业冷链，服务国际食品巨头和高端餐饮客户，拥有多温区恒温存储和城市精细配送能力。', features: ['多温区恒温','城市精细配送','国际标准','实时温控监测','高端餐饮专送'] },
+      { name: '上海郑明现代冷链物流园', area: '松江区', capacity: '8万吨', temp: '-25°C ~ +5°C', cert: 'ISO22000', tags: ['第三方物流','城配网络'], desc: '郑明现代物流上海枢纽，覆盖上海及周边城市的冷链配送网络，支持一件代发和商超门店配送。', features: ['一件代发','商超配送','电商冷链','实时轨迹追踪'] },
+      { name: '普冷国际上海运营中心', area: '宝山区', capacity: '6万吨', temp: '-25°C ~ +5°C', cert: 'HACCP', tags: ['进口食品','分拨中心'], desc: '专注进口冷冻食品的仓储分拨，配备恒温月台和智能化温控系统，可满足高端进口食品的苛刻存储要求。', features: ['恒温月台','智能温控','进口食品专库','分拨集散'] }
+    ]
+  },
+  ningbo: {
+    name: '宁波',
+    icon: '&#x26F5;&#xFE0F;',
+    desc: '浙江核心口岸，辐射浙闽赣',
+    stores: [
+      { name: '宁波梅山冷链物流中心', area: '北仑区梅山保税港', capacity: '15万吨', temp: '-25°C ~ +5°C', cert: '海关监管库', tags: ['海关监管','保税仓','肉类水产'], desc: '梅山保税港区配套冷链设施，宁波-舟山港核心区块，进口肉类、水产指定查验存储场，距码头仅3公里。', features: ['码头3公里','肉类水产专库','保税仓储','海关查验平台'] },
+      { name: '宁波万纬冷链物流园', area: '鄞州区', capacity: '8万吨', temp: '-25°C ~ +5°C', cert: 'ISO22000', tags: ['万科旗下','多温区'], desc: '万纬物流（万科旗下）在宁波的冷链节点，标准化运营、多温区覆盖，服务进口贸易商和本地食品企业。', features: ['万纬标准化','多温区','WMS仓储管理','城市配送'] }
+    ]
+  },
+  xiamen: {
+    name: '厦门',
+    icon: '&#x26F5;&#xFE0F;',
+    desc: '福建核心口岸，辐射闽台及东南亚',
+    stores: [
+      { name: '厦门海沧冷链物流中心', area: '海沧区海沧港', capacity: '10万吨', temp: '-25°C ~ +5°C', cert: '海关监管库', tags: ['海关监管','对台冷链'], desc: '海沧港区冷链枢纽，对台贸易冷链重要节点，进口水产、肉类指定查验存储场。', features: ['对台冷链通道','水产肉类专库','海关查验','小额分拨'] },
+      { name: '厦门中盛冷链基地', area: '同安区', capacity: '5万吨', temp: '-22°C ~ +5°C', cert: 'HACCP', tags: ['水产加工','民营企业'], desc: '福建本地冷链企业，配套水产加工线，进口水产在此精加工后分销全国及出口东南亚。', features: ['水产加工线','精深加工','东南亚出口'] }
+    ]
+  },
+  guangzhou: {
+    name: '广州',
+    icon: '&#x26F5;&#xFE0F;',
+    desc: '华南核心口岸，辐射珠三角',
+    stores: [
+      { name: '南沙国际冷链物流中心', area: '南沙区南沙港', capacity: '25万吨', temp: '-30°C ~ +5°C', cert: '海关监管库', tags: ['海关监管','华南最大','保税仓'], desc: '南沙港配套的华南最大单体冷链设施，进口冻品清关后可就近入库。覆盖珠三角核心消费区，配送半径短、时效高。', features: ['华南最大单体库','保税仓储','海关驻库','自动温控','珠三角当日达'] },
+      { name: '广州江南冷链交易市场', area: '白云区', capacity: '5万吨', temp: '-22°C ~ +5°C', cert: '市场备案', tags: ['批发市场','交易展示'], desc: '广州最大冻品批发市场配套冷库，进口冻品可在这里直面终端批发商，快速交易变现。', features: ['批发市场直连','交易展示','小额批发','快速周转'] },
+      { name: '广州保事达冷链', area: '黄埔区', capacity: '6万吨', temp: '-25°C ~ +5°C', cert: 'ISO22000', tags: ['第三方物流','城配'], desc: '服务进口食品的第三方冷链物流，城市配送覆盖广州及珠三角，支持商超、餐饮门店直送。', features: ['商超门店配送','餐饮直送','温控追踪','灵活仓储'] }
+    ]
+  },
+  shenzhen: {
+    name: '深圳',
+    icon: '&#x1F4CD;',
+    desc: '珠三角核心口岸，辐射大湾区',
+    stores: [
+      { name: '盐田港冷链服务基地', area: '盐田区盐田港', capacity: '15万吨', temp: '-30°C ~ +5°C', cert: '海关监管库', tags: ['海关监管','港口直连','进口肉类'], desc: '盐田港配套冷链设施，进口肉类指定口岸查验场。盐田港是华南最大集装箱港，进口冻柜可直接入库。', features: ['华南最大集装箱港','进口肉类指定','码头直连','查验平台'] },
+      { name: '深圳国际食品冷链物流港', area: '龙岗区平湖', capacity: '12万吨', temp: '-25°C ~ +5°C', cert: 'ISO22000·海关监管', tags: ['海关监管','食品专库','大湾区枢纽'], desc: '深圳最大食品冷链枢纽，地处平湖物流基地核心区，覆盖深圳及香港，生鲜食品跨境冷链标杆。', features: ['供港冷链通道','大湾区当日达','食品专库','跨境冷链'] },
+      { name: '深粮冷链物流基地', area: '龙华区', capacity: '5万吨', temp: '-22°C ~ +5°C', cert: 'HACCP', tags: ['国企','食品安全'], desc: '深粮集团旗下专业冷链，国有背景、食品安全管控严格，服务高端进口食品品牌客户。', features: ['国企品质','食品安全严控','高端食品','温控溯源'] }
+    ]
+  },
+  wuhan: {
+    name: '武汉',
+    icon: '&#x1F681;',
+    desc: '华中物流枢纽，九省通衢',
+    stores: [
+      { name: '武汉阳逻港冷链物流园', area: '新洲区阳逻港', capacity: '10万吨', temp: '-25°C ~ +5°C', cert: '海关监管库', tags: ['海关监管','水铁联运'], desc: '长江中游最大冷链节点，阳逻港水铁联运优势，进口冻品经上海或宁波江海联运直达，成本比陆运低60%。', features: ['江海联运','水铁联运','海关查验','低运输成本'] },
+      { name: '武汉白沙洲冷链市场', area: '洪山区', capacity: '8万吨', temp: '-22°C ~ +5°C', cert: '市场备案', tags: ['批发市场','中部分拨'], desc: '华中最大冻品批发市场配套冷库，辐射湖北及周边省市，是中部地区进口冻品核心分拨节点。', features: ['华中最大冻品市场','中部分拨枢纽','交易展示','冷链配送网络'] }
+    ]
+  },
+  zhengzhou: {
+    name: '郑州',
+    icon: '&#x1F681;',
+    desc: '中原核心枢纽，辐射华北华中',
+    stores: [
+      { name: '郑州航空港冷链物流中心', area: '航空港区', capacity: '12万吨', temp: '-25°C ~ +5°C', cert: '海关监管库', tags: ['航空冷链','中欧班列','海关监管'], desc: '郑州航空港综合保税区冷链枢纽，中欧班列+航空双重通道，进口冻品可经中欧班列从欧洲直送，时效优于海运。', features: ['中欧班列冷链','航空冷链','综合保税区','高铁快运'] },
+      { name: '郑州万邦国际冷链物流城', area: '中牟县', capacity: '15万吨', temp: '-25°C ~ +5°C', cert: 'ISO22000', tags: ['大型交易市场','中原枢纽'], desc: '万邦国际农产品物流城配套冷链，中原地区最大农产品交易市场联动，冻品交易活跃，周转极快。', features: ['万邦市场联动','交易活跃','中部分拨','多温区'] }
+    ]
+  },
+  chongqing: {
+    name: '重庆',
+    icon: '&#x1F681;',
+    desc: '西南枢纽，辐射川渝及西部',
+    stores: [
+      { name: '重庆果园港冷链物流园', area: '江北区果园港', capacity: '8万吨', temp: '-25°C ~ +5°C', cert: '海关监管库', tags: ['海关监管','水铁联运','中欧班列'], desc: '果园港国家物流枢纽冷链节点，长江上游最大港口+中欧班列重庆起点，进口冻品可经两种通道覆盖西南。', features: ['长江上游最大港','中欧班列起点','水铁联运','海关查验'] },
+      { name: '重庆明品福冷链物流市场', area: '九龙坡区', capacity: '12万吨', temp: '-25°C ~ +5°C', cert: '市场备案', tags: ['西南最大交易市场','分拨中心'], desc: '西南地区规模最大的冻品交易市场，仓储+交易一体化，进口冻品在此分拨川渝云贵各省。', features: ['西南最大冻品市场','交易+仓储一体','川渝云贵分拨','展示交易'] }
+    ]
+  },
+  chengdu: {
+    name: '成都',
+    icon: '&#x1F681;',
+    desc: '西部核心枢纽，辐射川藏云贵',
+    stores: [
+      { name: '成都青白江冷链物流基地', area: '青白江区成都国际铁路港', capacity: '10万吨', temp: '-25°C ~ +5°C', cert: '海关监管库', tags: ['海关监管','中欧班列','铁路枢纽'], desc: '成都国际铁路港核心冷链设施，中欧班列"蓉欧快铁"终点站，欧洲进口冻品可直达成都入库，辐射整个西南。', features: ['蓉欧快铁直达','海关驻库','铁路冷链','西南枢纽'] },
+      { name: '成都银犁冷链物流中心', area: '青白江区', capacity: '12万吨', temp: '-25°C ~ +5°C', cert: 'ISO22000', tags: ['西部最大单体','交易市场'], desc: '西部最大单体冷库之一，配套冻品交易市场，进口冻品在此实现仓储+展示+交易一站式服务。', features: ['西部最大单体','展示交易','仓储交易一体','西南分拨'] }
+    ]
+  },
+  xian: {
+    name: '西安',
+    icon: '&#x1F681;',
+    desc: '西北枢纽，辐射陕甘宁青新',
+    stores: [
+      { name: '西安国际港务区冷链基地', area: '灞桥区西安国际港务区', capacity: '8万吨', temp: '-25°C ~ +5°C', cert: '海关监管库', tags: ['海关监管','中欧班列','西北枢纽'], desc: '中欧班列"长安号"核心冷链节点，进口冻品经中亚班列或海运转陆运至此，辐射整个西北市场。', features: ['长安号班列','海关监管','西北分拨','铁路冷链'] },
+      { name: '西安雨润冷链物流中心', area: '未央区', capacity: '6万吨', temp: '-22°C ~ +5°C', cert: 'ISO22000', tags: ['雨润集团','城市配送'], desc: '雨润集团西北冷链节点，城市配送覆盖西安及周边，支持商超门店、餐饮客户精细配送。', features: ['雨润网络','城市精细配送','商超餐饮直送'] }
+    ]
+  },
+  kunming: {
+    name: '昆明',
+    icon: '&#x1F681;',
+    desc: '西南门户，辐射云南及东南亚',
+    stores: [
+      { name: '昆明宝象万吨冷链港', area: '官渡区', capacity: '12万吨', temp: '-25°C ~ +5°C', cert: '海关监管库', tags: ['海关监管','东南亚通道'], desc: '云南最大冷链枢纽，面向东南亚的冷链门户。进口冻品可经东南亚通道（中老铁路）或海运转陆运抵达，服务云南及东南亚市场。', features: ['中老铁路通道','东南亚冷链','海关监管','云南最大'] },
+      { name: '昆明东盟冷链物流中心', area: '呈贡区', capacity: '5万吨', temp: '-22°C ~ +5°C', cert: 'ISO22000', tags: ['东盟贸易','水果肉类'], desc: '专注东盟贸易的冷链物流中心，进口东南亚水产、水果、肉类分拨中心。', features: ['东盟贸易专长','水产水果','小额分拨'] }
+    ]
+  },
+  harbin: {
+    name: '哈尔滨',
+    icon: '&#x2744;&#xFE0F;',
+    desc: '东北枢纽，辐射黑龙江及俄罗斯',
+    stores: [
+      { name: '哈尔滨综合保税区冷链物流中心', area: '香坊区综合保税区', capacity: '6万吨', temp: '-30°C ~ +5°C', cert: '海关监管库', tags: ['海关监管','对俄冷链'], desc: '哈尔滨综合保税区冷链枢纽，俄罗斯进口冻品（水产、肉类）的首要入境节点，对俄贸易冷链核心通道。', features: ['对俄冷链通道','海关监管','保税仓储','水产肉类专库'] },
+      { name: '哈尔滨润恒冷链物流园', area: '松北区', capacity: '8万吨', temp: '-25°C ~ +5°C', cert: 'ISO22000', tags: ['东北分拨','批发市场'], desc: '东北北部最大冻品交易市场配套冷库，辐射黑龙江及内蒙古东部，冬季天然低温降低能耗成本。', features: ['东北最大冻品市场','低能耗','交易展示','冷链配送'] }
+    ]
+  }
+};
+
+// ====== Select City ======
+function selectCity(cityKey) {
+  var city = coldStores[cityKey];
+  if (!city) return;
+  
+  var header = document.getElementById('panel-header');
+  header.innerHTML = '<div class="city-icon">' + city.icon + '</div>' +
+    '<div><h3>' + city.name + '</h3><div class="count">' + city.desc + ' &middot; ' + city.stores.length + ' 座冷库</div></div>';
+  
+  var list = document.getElementById('warehouse-list');
+  list.innerHTML = '';
+  for (var i = 0; i < city.stores.length; i++) {
+    var s = city.stores[i];
+    list.innerHTML += '<div class="wh-card" onclick="showDetail(\'' + cityKey + '\',' + i + ')">' +
+      '<div class="wh-name">' + s.name + '</div>' +
+      '<div class="wh-meta">' +
+        '<span>&#x1F4CD; ' + s.area + '</span>' +
+        '<span>&#x1F4E6; ' + s.capacity + '</span>' +
+        '<span>&#x1F321;&#xFE0F; ' + s.temp + '</span>' +
+      '</div>' +
+      '<div class="wh-tags">' + s.tags.map(function(t){ return '<span class="tag' + (t.indexOf('海关')>=0||t.indexOf('保税')>=0?' blue':'') + '">' + t + '</span>'; }).join('') + '</div>' +
+    '</div>';
+  }
+  
+  document.getElementById('panel-empty').style.display = 'none';
+  document.getElementById('panel-content').style.display = 'flex';
+  
+  // Highlight on map
+  var dots = document.querySelectorAll('.city-dot');
+  for (var j = 0; j < dots.length; j++) {
+    dots[j].querySelector('circle').setAttribute('fill', dots[j].getAttribute('data-city') === cityKey ? '#f59e0b' : '#00a8e8');
+    dots[j].querySelector('circle').setAttribute('r', dots[j].getAttribute('data-city') === cityKey ? '10' : '7');
+  }
+}
+
+// ====== Show Detail ======
+function showDetail(cityKey, index) {
+  var city = coldStores[cityKey];
+  var s = city.stores[index];
+  
+  var modal = document.getElementById('modal-body');
+  modal.innerHTML = '<button class="modal-close" onclick="closeModal()">&times;</button>' +
+    '<div class="modal-header">' +
+      '<h2>' + s.name + '</h2>' +
+      '<span class="city-badge">' + city.icon + ' ' + city.name + '</span>' +
+    '</div>' +
+    '<div class="modal-info-grid">' +
+      '<div class="modal-info-item"><div class="label">地址</div><div class="value">' + s.area + '</div></div>' +
+      '<div class="modal-info-item"><div class="label">库容规模</div><div class="value">' + s.capacity + '</div></div>' +
+      '<div class="modal-info-item"><div class="label">温区范围</div><div class="value">' + s.temp + '</div></div>' +
+      '<div class="modal-info-item"><div class="label">资质认证</div><div class="value">' + s.cert + '</div></div>' +
+    '</div>' +
+    '<div class="modal-desc"><strong>简介</strong><br>' + s.desc + '</div>' +
+    '<div class="modal-features">' +
+      '<h4>核心能力</h4>' +
+      '<ul>' + s.features.map(function(f){ return '<li>' + f + '</li>'; }).join('') + '</ul>' +
+    '</div>';
+  
+  document.getElementById('modal-overlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('modal-overlay')) return;
+  document.getElementById('modal-overlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+</script>
+</body>
+</html>
