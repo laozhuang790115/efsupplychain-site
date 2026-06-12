@@ -466,8 +466,8 @@ function renderExpo(cat) {
     var st = getStatus(e);
     return '<div class="expo-card">' +
       '<div class="card-actions' + (isAdmin ? ' show' : '') + '">' +
-        '<button class="btn-edit" onclick="event.stopPropagation();openEditModal(' + e.id + ')" title="编辑">✎</button>' +
-        '<button class="btn-del" onclick="event.stopPropagation();deleteExpo(' + e.id + ')" title="删除">✕</button>' +
+        '<button class="btn-edit" onclick="event.stopPropagation();openEditModal(\'' + e.id + '\')" title="编辑">✎</button>' +
+        '<button class="btn-del" onclick="event.stopPropagation();deleteExpo(\'' + e.id + '\')" title="删除">✕</button>' +
       '</div>' +
       '<div class="expo-header">' +
         '<div class="expo-icon">' + (e.emoji || '🎪') + '</div>' +
