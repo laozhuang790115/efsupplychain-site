@@ -280,6 +280,90 @@ footer a { color: #00a8e8; }
   .product-grid { grid-template-columns: 1fr; }
   .nav-links a:not(.nav-products):not(.nav-tools) { display: none; }
 }
+
+/* ===== Admin Bar ===== */
+.admin-bar {
+  display: none; background: #1a3a5c; color: #fff; padding: 8px 24px;
+  font-size: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+}
+.admin-bar.show { display: flex !important; }
+.admin-bar .admin-info { display: flex; align-items: center; gap: 16px; }
+.admin-bar .admin-btn {
+  cursor: pointer; padding: 5px 14px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.3);
+  background: none; color: #fff; font-size: 11px; font-family: inherit; transition: all 0.2s;
+}
+.admin-bar .admin-btn:hover { background: rgba(255,255,255,0.1); }
+.admin-bar .admin-btn.add { background: #00d4aa; border-color: #00d4aa; color: #0a1628; font-weight: 700; }
+.admin-bar .admin-btn.add:hover { background: #00b894; }
+
+/* Admin overlay on product cards */
+.card-actions {
+  position: absolute; top: 8px; right: 8px; display: none; gap: 4px; z-index: 5;
+}
+.card-actions.show { display: flex; }
+.card-actions button {
+  width: 28px; height: 28px; border: none; border-radius: 6px; cursor: pointer;
+  font-size: 12px; display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s;
+}
+.card-actions .btn-edit { background: rgba(0,168,232,0.85); color: #fff; }
+.card-actions .btn-edit:hover { background: #00a8e8; }
+.card-actions .btn-del { background: rgba(255,107,107,0.85); color: #fff; }
+.card-actions .btn-del:hover { background: #ff6b6b; }
+.product-card { position: relative; }
+
+/* Edit modal */
+.edit-modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 400;
+  background: rgba(10,22,40,0.55); backdrop-filter: blur(4px);
+  align-items: center; justify-content: center; padding: 20px;
+}
+.edit-modal-overlay.show { display: flex; }
+.edit-modal-box {
+  background: #fff; border-radius: 18px; width: 100%; max-width: 500px;
+  padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  position: relative; animation: slideUp 0.25s ease;
+  max-height: 90vh; overflow-y: auto;
+}
+.edit-modal-box h3 { font-size: 18px; font-weight: 800; color: #0a1628; margin-bottom: 20px; }
+.edit-close {
+  position: absolute; top: 14px; right: 18px;
+  font-size: 20px; color: #bbb; cursor: pointer; background: none; border: none;
+}
+.edit-close:hover { color: #333; }
+
+.edit-form-group { margin-bottom: 14px; }
+.edit-form-group label { display: block; font-size: 12px; font-weight: 600; color: #666; margin-bottom: 5px; }
+.edit-form-group input, .edit-form-group select, .edit-form-group textarea {
+  width: 100%; padding: 9px 12px; border: 1px solid #e0e4e8; border-radius: 8px;
+  font-size: 13px; font-family: inherit; color: #333; background: #fafbfc;
+  transition: border-color 0.2s;
+}
+.edit-form-group input:focus, .edit-form-group select:focus, .edit-form-group textarea:focus {
+  outline: none; border-color: #00a8e8; background: #fff;
+  box-shadow: 0 0 0 3px rgba(0,168,232,0.08);
+}
+.edit-form-group textarea { resize: vertical; min-height: 60px; }
+.edit-form-row { display: flex; gap: 12px; }
+.edit-form-row .edit-form-group { flex: 1; }
+.edit-form-group .specs-input { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.edit-form-group .specs-input input { flex: 1; min-width: 120px; }
+.edit-form-group .specs-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 6px; }
+.edit-form-group .specs-tags span {
+  background: #e8f4fd; padding: 2px 8px; border-radius: 4px; font-size: 11px;
+  display: flex; align-items: center; gap: 4px;
+}
+.edit-form-group .specs-tags span .del-spec { cursor: pointer; color: #ff6b6b; font-weight: bold; }
+
+.edit-submit {
+  width: 100%; padding: 10px 0; border: none; border-radius: 10px;
+  background: linear-gradient(135deg,#00d4aa,#00a8e8);
+  color: #fff; font-size: 14px; font-weight: 700; cursor: pointer;
+  font-family: inherit; margin-top: 4px;
+}
+.edit-submit:hover { box-shadow: 0 4px 16px rgba(0,168,232,0.3); }
+.edit-submit.danger { background: #ff6b6b; }
+.edit-submit.danger:hover { box-shadow: 0 4px 16px rgba(255,107,107,0.3); }
 </style>
 </head>
 <body>
@@ -297,9 +381,22 @@ footer a { color: #00a8e8; }
       <a href="products.html" class="nav-products">🤝 产品展示</a>
       <a href="coldchain.html" class="nav-cold">❄️ 冷链</a>
       <a href="tools.html" class="nav-tools">🧭 工具</a>
+      <a href="#" onclick="event.preventDefault();checkPassword()" style="background:#1a3a5c;color:#fff!important;padding:5px 14px;border-radius:20px;font-size:12px;">🔒 管理</a>
     </div>
   </div>
 </nav>
+
+<!-- Admin Bar -->
+<div class="admin-bar" id="adminBar">
+  <div class="admin-info">
+    <span>🔒 <strong>管理模式</strong></span>
+    <span style="opacity:0.7;font-size:11px">可新增 / 编辑 / 删除商品</span>
+  </div>
+  <div style="display:flex;gap:8px">
+    <button class="admin-btn add" onclick="openEditModal()">＋ 新增商品</button>
+    <button class="admin-btn" onclick="logoutAdmin()">🔓 退出管理</button>
+  </div>
+</div>
 
 <!-- Masthead -->
 <div class="masthead">
@@ -336,14 +433,27 @@ footer a { color: #00a8e8; }
   <span class="fab-badge" id="fabBadge" style="display:none">0</span>
 </button>
 
+<!-- Edit Product Modal -->
+<div class="edit-modal-overlay" id="editModal">
+  <div class="edit-modal-box" id="editModalContent">
+    <!-- filled by JS -->
+  </div>
+</div>
+
 <footer>
   <p>&copy; 2026 以鲜国际供应链（广东）有限公司 · EverFresh Supply Chain</p>
   <p style="margin-top:4px"><a href="index.html">返回首页</a></p>
 </footer>
 
 <script>
-// ===== Product Data =====
-var products = [
+// ===== Admin =====
+var ADMIN_PASSWORD = 'laozhuang2026';
+var ADMIN_KEY = 'ef_products_admin';
+var PROD_KEY = 'ef_products_data';
+var isAdmin = sessionStorage.getItem(ADMIN_KEY) === '1';
+
+// ===== Product Data (from localStorage with defaults) =====
+var DEFAULT_PRODUCTS = [
   { id: 1, name: '南美白虾 40/50', cat: '虾类', origin: '厄瓜多尔', emoji: '🦐',
     specs: ['40/50 只/公斤', '1.8kg×6/箱', '盐冻'], hot: true,
     desc: '厄瓜多尔顶级白虾，肉质鲜甜弹嫩，适合商超、餐饮、电商全渠道。中国进口量最大单品。',
@@ -394,6 +504,21 @@ var products = [
     price: '面议', stock: '有限' },
 ];
 
+function loadProducts() {
+  try {
+    var data = localStorage.getItem(PROD_KEY);
+    if (data) { var arr = JSON.parse(data); if (arr.length > 0) return arr; }
+  } catch(e) {}
+  return JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+}
+
+function saveProducts() {
+  localStorage.setItem(PROD_KEY, JSON.stringify(products));
+}
+
+var products = loadProducts();
+var nextId = products.length > 0 ? Math.max.apply(null, products.map(function(p){return p.id;})) + 1 : 1;
+
 // ===== Build filter bar =====
 var cats = [];
 products.forEach(function(p) {
@@ -427,6 +552,10 @@ function renderProducts(cat) {
         '<span class="emoji-prod">' + p.emoji + '</span>' +
         '<span class="tag-origin">' + p.origin + '</span>' +
         (p.hot ? '<span class="tag-hot">🔥 热销</span>' : '') +
+        '<div class="card-actions' + (isAdmin ? ' show' : '') + '">' +
+          '<button class="btn-edit" onclick="event.stopPropagation();openEditModal(' + p.id + ')" title="编辑">✎</button>' +
+          '<button class="btn-del" onclick="event.stopPropagation();deleteProduct(' + p.id + ')" title="删除">✕</button>' +
+        '</div>' +
       '</div>' +
       '<div class="card-body">' +
         '<h3>' + p.name + '</h3>' +
@@ -471,8 +600,194 @@ filterBar.addEventListener('click', function(e) {
 });
 
 // ===== Init =====
+updateAdminUI();
 renderProducts('all');
 updateStats('all');
+
+// ===== Admin Functions =====
+function checkPassword() {
+  var pw = prompt('请输入管理密码（默认：laozhuang2026）：');
+  if (pw === ADMIN_PASSWORD) {
+    isAdmin = true;
+    sessionStorage.setItem(ADMIN_KEY, '1');
+    updateAdminUI();
+    refreshAll();
+  } else if (pw !== null) {
+    alert('密码错误');
+  }
+}
+
+function logoutAdmin() {
+  isAdmin = false;
+  sessionStorage.removeItem(ADMIN_KEY);
+  updateAdminUI();
+  refreshAll();
+}
+
+function updateAdminUI() {
+  var bar = document.getElementById('adminBar');
+  if (isAdmin) {
+    bar.classList.add('show');
+    document.querySelectorAll('.card-actions').forEach(function(el) { el.classList.add('show'); });
+  } else {
+    bar.classList.remove('show');
+    document.querySelectorAll('.card-actions').forEach(function(el) { el.classList.remove('show'); });
+  }
+}
+
+function refreshAll() {
+  var activeBtn = document.querySelector('.filter-btn.active');
+  var cat = activeBtn ? activeBtn.getAttribute('data-cat') : 'all';
+  renderProducts(cat);
+  updateStats(cat);
+  updateAdminUI();
+}
+
+function deleteProduct(id) {
+  if (!isAdmin) return;
+  var p = products.find(function(x) { return x.id === id; });
+  if (!p) return;
+  if (!confirm('确定删除商品「' + p.name + '」？此操作不可恢复。')) return;
+  products = products.filter(function(x) { return x.id !== id; });
+  saveProducts();
+  refreshAll();
+}
+
+// ===== Edit Product Modal =====
+var editingId = null;
+
+function openEditModal(id) {
+  if (!isAdmin) { checkPassword(); return; }
+  editingId = id || null;
+  var p = id ? products.find(function(x) { return x.id === id; }) : null;
+  var title = p ? '编辑商品' : '新增商品';
+
+  var html =
+    '<button class="edit-close" onclick="closeEditModal()">✕</button>' +
+    '<h3>' + (p ? '✏️ ' : '➕ ') + title + '</h3>' +
+    '<div class="edit-form-row">' +
+      '<div class="edit-form-group">' +
+        '<label>商品名称 <span style="color:#ff6b6b">*</span></label>' +
+        '<input type="text" id="epName" value="' + (p ? p.name : '') + '" placeholder="如：南美白虾 40/50">' +
+      '</div>' +
+    '</div>' +
+    '<div class="edit-form-row">' +
+      '<div class="edit-form-group">' +
+        '<label>分类 <span style="color:#ff6b6b">*</span></label>' +
+        '<select id="epCat">' +
+          '<option value="虾类"' + (p && p.cat === '虾类' ? ' selected' : '') + '>虾类</option>' +
+          '<option value="鱼类"' + (p && p.cat === '鱼类' ? ' selected' : '') + '>鱼类</option>' +
+          '<option value="牛肉"' + (p && p.cat === '牛肉' ? ' selected' : '') + '>牛肉</option>' +
+          '<option value="猪肉"' + (p && p.cat === '猪肉' ? ' selected' : '') + '>猪肉</option>' +
+          '<option value="禽类"' + (p && p.cat === '禽类' ? ' selected' : '') + '>禽类</option>' +
+          '<option value="其他"' + (p && p.cat === '其他' ? ' selected' : '') + '>其他</option>' +
+        '</select>' +
+      '</div>' +
+      '<div class="edit-form-group">' +
+        '<label>Emoji 图标</label>' +
+        '<input type="text" id="epEmoji" value="' + (p ? p.emoji : '📦') + '" placeholder="如：🦐" style="font-size:20px;text-align:center;width:60px">' +
+      '</div>' +
+    '</div>' +
+    '<div class="edit-form-row">' +
+      '<div class="edit-form-group">' +
+        '<label>产地 <span style="color:#ff6b6b">*</span></label>' +
+        '<input type="text" id="epOrigin" value="' + (p ? p.origin : '') + '" placeholder="如：厄瓜多尔">' +
+      '</div>' +
+      '<div class="edit-form-group">' +
+        '<label>库存状态</label>' +
+        '<select id="epStock">' +
+          '<option value="充足"' + (p && p.stock === '充足' ? ' selected' : '') + '>充足</option>' +
+          '<option value="有限"' + (p && p.stock === '有限' ? ' selected' : '') + '>有限</option>' +
+        '</select>' +
+      '</div>' +
+    '</div>' +
+    '<div class="edit-form-group">' +
+      '<label>规格参数（逗号分隔）</label>' +
+      '<div class="specs-input">' +
+        '<input type="text" id="epSpecs" value="' + (p ? p.specs.join(', ') : '') + '" placeholder="如：40/50 只/公斤, 1.8kg×6/箱, 盐冻">' +
+      '</div>' +
+    '</div>' +
+    '<div class="edit-form-group">' +
+      '<label>价格</label>' +
+      '<input type="text" id="epPrice" value="' + (p ? p.price : '面议') + '" placeholder="如：面议 或 ¥88/箱">' +
+    '</div>' +
+    '<div class="edit-form-group">' +
+      '<label>商品描述</label>' +
+      '<textarea id="epDesc" placeholder="简要描述产品特点和适用渠道">' + (p ? p.desc : '') + '</textarea>' +
+    '</div>' +
+    '<div class="edit-form-group">' +
+      '<label><input type="checkbox" id="epHot"' + (p && p.hot ? ' checked' : '') + ' style="width:auto;margin-right:6px">标记为热销</label>' +
+    '</div>' +
+    '<button class="edit-submit" onclick="saveEditProduct()">' + (p ? '💾 保存修改' : '➕ 添加商品') + '</button>' +
+    (p ? '<button class="edit-submit danger" style="margin-top:8px" onclick="deleteProduct(' + p.id + ');closeEditModal()">🗑 删除此商品</button>' : '');
+
+  document.getElementById('editModalContent').innerHTML = html;
+  document.getElementById('editModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeEditModal() {
+  document.getElementById('editModal').classList.remove('show');
+  document.body.style.overflow = '';
+  editingId = null;
+}
+
+function saveEditProduct() {
+  var name = document.getElementById('epName').value.trim();
+  var cat = document.getElementById('epCat').value;
+  var origin = document.getElementById('epOrigin').value.trim();
+  if (!name || !origin) { alert('请填写商品名称和产地'); return; }
+
+  var specsRaw = document.getElementById('epSpecs').value.trim();
+  var specs = specsRaw ? specsRaw.split(',').map(function(s){ return s.trim(); }).filter(function(s){ return s; }) : [];
+
+  var data = {
+    id: editingId || nextId,
+    name: name,
+    cat: cat,
+    origin: origin,
+    emoji: document.getElementById('epEmoji').value.trim() || '📦',
+    specs: specs,
+    hot: document.getElementById('epHot').checked,
+    desc: document.getElementById('epDesc').value.trim(),
+    price: document.getElementById('epPrice').value.trim() || '面议',
+    stock: document.getElementById('epStock').value
+  };
+
+  if (editingId) {
+    var idx = products.findIndex(function(x) { return x.id === editingId; });
+    if (idx >= 0) products[idx] = data;
+  } else {
+    products.push(data);
+    nextId++;
+  }
+
+  saveProducts();
+  closeEditModal();
+  refreshAll();
+}
+
+// Edit modal overlay click to close
+document.getElementById('editModal').addEventListener('click', function(e) {
+  if (e.target === this) closeEditModal();
+});
+
+// Masthead double-click for admin
+document.querySelector('.masthead').addEventListener('dblclick', function(e) {
+  if (!isAdmin) checkPassword();
+});
+
+// Ctrl+Shift+A for admin
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    if (document.getElementById('editModal').classList.contains('show')) closeEditModal();
+    else if (document.getElementById('inquiryModal').classList.contains('show')) closeInquiryModal();
+  }
+  if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+    e.preventDefault();
+    if (!isAdmin) checkPassword();
+  }
+});
 
 // ===== Inquiry / Contact System =====
 var STORAGE_KEY = 'ef_inquiries';
@@ -611,11 +926,6 @@ function submitInquiry(e) {
 // Close on overlay click
 document.getElementById('inquiryModal').addEventListener('click', function(e) {
   if (e.target === this) closeInquiryModal();
-});
-
-// Close on Escape
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeInquiryModal();
 });
 
 // Init fab badge
