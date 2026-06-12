@@ -278,7 +278,7 @@ footer a { color: #00a8e8; }
 @media (max-width: 640px) {
   .masthead h1 { font-size: 22px; }
   .product-grid { grid-template-columns: 1fr; }
-  .nav-links a:not(.nav-products):not(.nav-tools) { display: none; }
+  .nav-links a:not(.nav-products):not(.nav-tools):not(.nav-admin) { display: none; }
 }
 
 /* ===== Admin Bar ===== */
@@ -381,7 +381,7 @@ footer a { color: #00a8e8; }
       <a href="products.html" class="nav-products">🤝 产品展示</a>
       <a href="coldchain.html" class="nav-cold">❄️ 冷链</a>
       <a href="tools.html" class="nav-tools">🧭 工具</a>
-      <a href="#" onclick="event.preventDefault();checkPassword()" style="background:#1a3a5c;color:#fff!important;padding:5px 14px;border-radius:20px;font-size:12px;">🔒 管理</a>
+      <a href="#" onclick="event.preventDefault();checkPassword()" class="nav-admin" style="background:#1a3a5c;color:#fff!important;padding:5px 14px;border-radius:20px;font-size:12px;">🔒 管理</a>
     </div>
   </div>
 </nav>
