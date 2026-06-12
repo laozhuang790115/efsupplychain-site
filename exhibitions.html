@@ -62,6 +62,16 @@ body{
 .admin-bar .admin-btn.add{background:#f59e0b;border-color:#f59e0b;color:#0a1628;font-weight:700}
 .admin-bar .admin-btn.add:hover{background:#f97316}
 
+/* ===== Card Admin Actions ===== */
+.card-actions{position:absolute;top:8px;right:8px;display:none;gap:4px;z-index:5}
+.card-actions.show{display:flex}
+.card-actions button{width:28px;height:28px;border:none;border-radius:6px;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.card-actions .btn-edit{background:rgba(0,168,232,.85);color:#fff}
+.card-actions .btn-edit:hover{background:#00a8e8}
+.card-actions .btn-del{background:rgba(255,107,107,.85);color:#fff}
+.card-actions .btn-del:hover{background:#ff6b6b}
+.expo-card{position:relative}
+
 /* ===== Review Queue ===== */
 .review-section{display:none;max-width:1200px;margin:0 auto;padding:24px}
 .review-section.show{display:block}
@@ -449,6 +459,10 @@ function renderExpo(cat) {
   grid.innerHTML = filtered.map(function(e) {
     var st = getStatus(e);
     return '<div class="expo-card">' +
+      '<div class="card-actions' + (isAdmin ? ' show' : '') + '">' +
+        '<button class="btn-edit" onclick="event.stopPropagation();openEditModal(' + e.id + ')" title="编辑">✎</button>' +
+        '<button class="btn-del" onclick="event.stopPropagation();deleteExpo(' + e.id + ')" title="删除">✕</button>' +
+      '</div>' +
       '<div class="expo-header">' +
         '<div class="expo-icon">' + (e.emoji || '🎪') + '</div>' +
         '<div class="expo-info">' +
@@ -539,6 +553,7 @@ function checkPassword() {
     isAdmin = true;
     sessionStorage.setItem(ADMIN_KEY, '1');
     updateAdminUI();
+    refreshAll();
     window.scrollTo({top:0,behavior:'smooth'});
   } else if (pw !== null) {
     alert('密码错误');
@@ -549,12 +564,14 @@ function logoutAdmin() {
   isAdmin = false;
   sessionStorage.removeItem(ADMIN_KEY);
   updateAdminUI();
+  refreshAll();
 }
 
 function updateAdminUI() {
   var bar = document.getElementById('adminBar');
   if (isAdmin) {
     bar.classList.add('show');
+    document.getElementById('reviewSection').classList.add('show');
     renderReviewQueue();
   } else {
     bar.classList.remove('show');
