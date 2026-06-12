@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>代销产品展示 — 以鲜国际</title>
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+  color: #1a1a2e; line-height: 1.7; background: #f5f7fb; min-height: 100vh;
+}
+a { text-decoration: none; color: inherit; }
+
+/* Nav */
+nav {
+  background: rgba(255,255,255,0.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid #e8edf2; position: sticky; top: 0; z-index: 100; padding: 0 24px;
+}
+.nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; height: 52px; }
+.nav-logo { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 800; color: #00a8e8; margin-right: 32px; }
+.nav-logo .logo-box {
+  width: 60px; height: 30px; display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.95); border: 2px solid #d0d8e0; border-radius: 6px;
+  flex-shrink: 0; overflow: hidden;
+}
+.nav-logo .logo-box img { height: 22px; width: auto; }
+.nav-links { display: flex; gap: 20px; align-items: center; }
+.nav-links a { font-size: 13px; font-weight: 500; color: #555; transition: color 0.2s; }
+.nav-links a:hover { color: #00a8e8; }
+.nav-tools { background: #f59e0b; color: #fff !important; padding: 5px 14px; border-radius: 20px; font-size: 12px; }
+.nav-tools:hover { background: #e08f0b; color: #fff !important; }
+.nav-cold { background: #00a8e8; color: #fff !important; padding: 5px 14px; border-radius: 20px; font-size: 12px; }
+.nav-cold:hover { background: #0088c8; color: #fff !important; }
+.nav-products { background: #00d4aa; color: #fff !important; padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+.nav-products:hover { background: #00b894; color: #fff !important; }
+
+/* Masthead */
+.masthead {
+  background: linear-gradient(135deg, #0a1628 0%, #1a3a5c 50%, #00a8e8 100%);
+  color: #fff; text-align: center; padding: 48px 24px 40px;
+  position: relative;
+}
+.masthead::after {
+  content: ''; position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30Z' fill='none' stroke='rgba(255,255,255,0.03)' stroke-width='1'/%3E%3C/svg%3E") 0 0/60px 60px;
+  pointer-events: none;
+}
+.masthead h1 { font-size: 28px; font-weight: 800; margin-bottom: 8px; position: relative; z-index: 1; }
+.masthead p { font-size: 14px; opacity: 0.6; max-width: 500px; margin: 0 auto; position: relative; z-index: 1; }
+.masthead .breadcrumb { font-size: 12px; opacity: 0.4; margin-bottom: 16px; position: relative; z-index: 1; }
+.masthead .breadcrumb a { color: #00d4aa; }
+.masthead .breadcrumb a:hover { text-decoration: underline; }
+
+/* Filter bar */
+.filter-bar {
+  max-width: 1200px; margin: 0 auto; padding: 20px 24px;
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+  justify-content: center;
+}
+.filter-btn {
+  padding: 8px 20px; border-radius: 99px; border: 1px solid #d0d8e0;
+  background: #fff; font-size: 13px; color: #555; cursor: pointer;
+  transition: all 0.2s; font-family: inherit;
+}
+.filter-btn:hover { border-color: #00a8e8; color: #00a8e8; }
+.filter-btn.active {
+  background: #00a8e8; color: #fff; border-color: #00a8e8;
+  box-shadow: 0 2px 12px rgba(0,168,232,0.25);
+}
+.filter-count { font-size: 11px; opacity: 0.6; margin-left: 4px; }
+
+/* Product grid */
+.main-wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px 60px; }
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+.product-card {
+  background: #fff; border-radius: 14px; overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+  transition: transform 0.25s, box-shadow 0.25s;
+  cursor: default;
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+}
+
+/* Product image area */
+.card-img {
+  height: 180px; background: linear-gradient(135deg, #f0f4f8, #e8edf2);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.card-img .emoji-prod { font-size: 64px; opacity: 0.85; }
+.card-img .tag-origin {
+  position: absolute; top: 12px; left: 12px;
+  background: rgba(10,22,40,0.75); color: #fff;
+  font-size: 11px; padding: 3px 10px; border-radius: 6px;
+  backdrop-filter: blur(6px);
+}
+.card-img .tag-hot {
+  position: absolute; top: 12px; right: 12px;
+  background: #ff6b6b; color: #fff;
+  font-size: 11px; padding: 3px 10px; border-radius: 6px;
+  font-weight: 600;
+}
+
+/* Card body */
+.card-body { padding: 20px; }
+.card-body h3 { font-size: 15px; font-weight: 700; color: #0a1628; margin-bottom: 6px; }
+.card-body .specs {
+  font-size: 12px; color: #888; margin-bottom: 12px;
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.card-body .specs span {
+  background: #f0f4f8; padding: 2px 8px; border-radius: 4px;
+  font-size: 11px; color: #666;
+}
+.card-body .desc { font-size: 12px; color: #999; line-height: 1.6; margin-bottom: 14px; }
+
+/* Price area */
+.card-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid #f0f4f8; padding-top: 12px;
+}
+.price-range { font-size: 14px; font-weight: 700; color: #00a8e8; }
+.price-range em { font-size: 11px; font-weight: 400; color: #999; margin-left: 4px; }
+.stock-tag {
+  font-size: 11px; padding: 3px 10px; border-radius: 6px;
+  background: #e8f8f0; color: #00b894; font-weight: 600;
+}
+.stock-tag.limited { background: #fff3e0; color: #f59e0b; }
+
+/* Empty state */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center; padding: 60px 20px;
+}
+.empty-state .empty-icon { font-size: 56px; margin-bottom: 16px; }
+.empty-state p { font-size: 14px; color: #999; }
+
+/* Stats bar */
+.stats-bar {
+  max-width: 1200px; margin: 0 auto; padding: 0 24px 24px;
+  display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+}
+.stat-item {
+  background: #fff; border-radius: 10px; padding: 14px 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+  text-align: center; min-width: 100px;
+}
+.stat-item .sv { font-size: 22px; font-weight: 800; color: #00a8e8; }
+.stat-item .sl { font-size: 11px; color: #999; margin-top: 2px; }
+
+/* Footer */
+footer {
+  text-align: center; padding: 32px 24px; color: #999; font-size: 12px;
+  border-top: 1px solid #e8edf2; background: #fff;
+}
+footer a { color: #00a8e8; }
+
+/* Responsive */
+@media (max-width: 640px) {
+  .masthead h1 { font-size: 22px; }
+  .product-grid { grid-template-columns: 1fr; }
+  .nav-links a:not(.nav-products):not(.nav-tools) { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-box"><img src="logo.png" alt="以鲜国际"></div>
+      以鲜国际
+    </a>
+    <div class="nav-links">
+      <a href="index.html">首页</a>
+      <a href="index.html#about">关于</a>
+      <a href="index.html#services">业务</a>
+      <a href="products.html" class="nav-products">🤝 产品展示</a>
+      <a href="coldchain.html" class="nav-cold">❄️ 冷链</a>
+      <a href="tools.html" class="nav-tools">🧭 工具</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Masthead -->
+<div class="masthead">
+  <div class="breadcrumb">
+    <a href="index.html">首页</a> › <a href="index.html#services">核心业务</a> › 代销分销
+  </div>
+  <h1>🤝 代销产品展示</h1>
+  <p>精选全球优质冻品，海外产地直供，一手货源，诚邀经销商合作代销</p>
+</div>
+
+<!-- Stats bar -->
+<div class="stats-bar" id="statsBar"></div>
+
+<!-- Filter -->
+<div class="filter-bar" id="filterBar">
+  <button class="filter-btn active" data-cat="all">全部商品</button>
+</div>
+
+<!-- Product grid -->
+<div class="main-wrap">
+  <div class="product-grid" id="productGrid"></div>
+</div>
+
+<footer>
+  <p>&copy; 2026 以鲜国际供应链（广东）有限公司 · EverFresh Supply Chain</p>
+  <p style="margin-top:4px"><a href="index.html">返回首页</a></p>
+</footer>
+
+<script>
+// ===== Product Data =====
+var products = [
+  { id: 1, name: '南美白虾 40/50', cat: '虾类', origin: '厄瓜多尔', emoji: '🦐',
+    specs: ['40/50 只/公斤', '1.8kg×6/箱', '盐冻'], hot: true,
+    desc: '厄瓜多尔顶级白虾，肉质鲜甜弹嫩，适合商超、餐饮、电商全渠道。中国进口量最大单品。',
+    price: '面议', stock: '充足' },
+  { id: 2, name: '南美白虾 30/40', cat: '虾类', origin: '厄瓜多尔', emoji: '🦐',
+    specs: ['30/40 只/公斤', '1.8kg×6/箱', '盐冻'],
+    desc: '大规格白虾，体型饱满，适合高端餐饮、酒店自助、礼盒渠道。',
+    price: '面议', stock: '充足' },
+  { id: 3, name: '南美白虾 50/60', cat: '虾类', origin: '印度', emoji: '🦐',
+    specs: ['50/60 只/公斤', '1.8kg×6/箱', '块冻'],
+    desc: '印度产区性价比之选，规格均匀，适合团餐、学校食堂、加工厂原料。',
+    price: '面议', stock: '有限' },
+  { id: 4, name: '印尼阿曼带鱼', cat: '鱼类', origin: '印尼', emoji: '🐟',
+    specs: ['200/300g', '10kg/箱', '船冻'], hot: true,
+    desc: '印尼远洋捕捞，船冻锁鲜，肉质细腻少刺，适合家庭消费和餐饮渠道。',
+    price: '面议', stock: '充足' },
+  { id: 5, name: '印尼鱿鱼', cat: '鱼类', origin: '印尼', emoji: '🦑',
+    specs: ['300/500g', '10kg/箱', '船冻'],
+    desc: '印尼深海鱿鱼，肉质厚实有嚼劲，适合烧烤、火锅、铁板烧等餐饮场景。',
+    price: '面议', stock: '充足' },
+  { id: 6, name: '牛腩', cat: '牛肉', origin: '巴西', emoji: '🥩',
+    specs: ['90VL', '25kg/箱', '冷冻'],
+    desc: '巴西草饲牛腩，肥瘦相间，适合红烧、炖煮，中餐渠道刚需品。',
+    price: '面议', stock: '充足' },
+  { id: 7, name: '牛腱', cat: '牛肉', origin: '阿根廷', emoji: '🥩',
+    specs: ['整腱', '25kg/箱', '冷冻'],
+    desc: '阿根廷谷饲牛腱，筋肉分明，酱卤出品率高，卤味连锁首选原料。',
+    price: '面议', stock: '有限' },
+  { id: 8, name: '西冷牛排', cat: '牛肉', origin: '巴西', emoji: '🥩',
+    specs: ['200g±', '25kg/箱', '冷冻'], hot: true,
+    desc: '巴西草饲西冷，性价比高，适合西餐厅、牛排馆、电商零售渠道。',
+    price: '面议', stock: '充足' },
+  { id: 9, name: '猪肋排', cat: '猪肉', origin: '西班牙', emoji: '🐷',
+    specs: ['整排', '10kg/箱', '冷冻'],
+    desc: '西班牙猪肋排，肉质细嫩，适合烧烤、红烧、糖醋，中餐热销品。',
+    price: '面议', stock: '充足' },
+  { id: 10, name: '五花肉', cat: '猪肉', origin: '西班牙', emoji: '🐷',
+    specs: ['去皮', '10kg/箱', '冷冻'],
+    desc: '西班牙精品五花肉，三线分明，适合红烧肉、扣肉等传统中餐。',
+    price: '面议', stock: '充足' },
+  { id: 11, name: '梅花肉', cat: '猪肉', origin: '巴西', emoji: '🐷',
+    specs: ['修整', '10kg/箱', '冷冻'],
+    desc: '巴西梅花肉，肉质嫩滑多汁，适合煎烤、火锅切片，出餐多样。',
+    price: '面议', stock: '充足' },
+  { id: 12, name: '鸡中翅', cat: '禽类', origin: '巴西', emoji: '🍗',
+    specs: ['30/40g', '15kg/箱', '冷冻'], hot: true,
+    desc: '巴西鸡中翅，规格均匀，适合炸鸡连锁、烧烤、商超零售，需求旺盛。',
+    price: '面议', stock: '有限' },
+];
+
+// ===== Build filter bar =====
+var cats = [];
+products.forEach(function(p) {
+  if (cats.indexOf(p.cat) === -1) cats.push(p.cat);
+});
+
+var filterBar = document.getElementById('filterBar');
+cats.forEach(function(c) {
+  var btn = document.createElement('button');
+  btn.className = 'filter-btn';
+  btn.setAttribute('data-cat', c);
+  btn.textContent = c;
+  filterBar.appendChild(btn);
+});
+
+// ===== Render products =====
+function renderProducts(cat) {
+  var grid = document.getElementById('productGrid');
+  var filtered = cat === 'all' ? products : products.filter(function(p) { return p.cat === cat; });
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div class="empty-state"><div class="empty-icon">📭</div><p>暂无该分类产品</p></div>';
+    return;
+  }
+
+  var html = '';
+  filtered.forEach(function(p) {
+    var stockClass = p.stock === '有限' ? 'limited' : '';
+    html += '<div class="product-card">' +
+      '<div class="card-img">' +
+        '<span class="emoji-prod">' + p.emoji + '</span>' +
+        '<span class="tag-origin">' + p.origin + '</span>' +
+        (p.hot ? '<span class="tag-hot">🔥 热销</span>' : '') +
+      '</div>' +
+      '<div class="card-body">' +
+        '<h3>' + p.name + '</h3>' +
+        '<div class="specs">' + p.specs.map(function(s) { return '<span>' + s + '</span>'; }).join('') + '</div>' +
+        '<div class="desc">' + p.desc + '</div>' +
+        '<div class="card-footer">' +
+          '<div class="price-range">' + p.price + '<em>起订量可议</em></div>' +
+          '<div class="stock-tag ' + stockClass + '">' + (p.stock === '充足' ? '✅ ' : '⚠️ ') + p.stock + '</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  });
+  grid.innerHTML = html;
+}
+
+// ===== Update stats =====
+function updateStats(cat) {
+  var count = cat === 'all' ? products.length : products.filter(function(p) { return p.cat === cat; }).length;
+  var origins = [];
+  var originSet = {};
+  var source = cat === 'all' ? products : products.filter(function(p) { return p.cat === cat; });
+  source.forEach(function(p) {
+    if (!originSet[p.origin]) { originSet[p.origin] = true; origins.push(p.origin); }
+  });
+  document.getElementById('statsBar').innerHTML =
+    '<div class="stat-item"><div class="sv">' + count + '</div><div class="sl">在售商品</div></div>' +
+    '<div class="stat-item"><div class="sv">' + origins.length + '</div><div class="sl">产地国</div></div>' +
+    '<div class="stat-item"><div class="sv">' + cats.length + '</div><div class="sl">品类</div></div>';
+}
+
+// ===== Filter click =====
+filterBar.addEventListener('click', function(e) {
+  if (e.target.classList.contains('filter-btn')) {
+    var btns = filterBar.querySelectorAll('.filter-btn');
+    btns.forEach(function(b) { b.classList.remove('active'); });
+    e.target.classList.add('active');
+    var cat = e.target.getAttribute('data-cat');
+    renderProducts(cat);
+    updateStats(cat);
+  }
+});
+
+// ===== Init =====
+renderProducts('all');
+updateStats('all');
+</script>
+
+</body>
+</html>
