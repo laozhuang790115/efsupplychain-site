@@ -24,8 +24,14 @@ a { text-decoration: none; color: inherit; }
   transition:all .3s
 }
 .nav-brand{display:flex;align-items:center;gap:10px}
-.nav-logo { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 800; color: #00a8e8; margin-right: 32px; }
-.nav-logo img { width: 28px; height: 28px; }
+.nav-logo { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 800; color: #00a8e8; margin-right: 32px; }
+.nav-logo .logo-box {
+  width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.95); border: 2px solid #d0d8e0; border-radius: 8px;
+  flex-shrink: 0;
+}
+.nav-logo .logo-box img { width: 26px; height: 26px; }
+
 .nav-name{color:#fff;font-size:15px;font-weight:600;letter-spacing:1px}
 .nav-links{display:flex;gap:28px;list-style:none}
 .nav-links a{
@@ -196,7 +202,7 @@ tbody tr:hover td { background: #fef3c7 !important; }
 
 <nav class="nav">
   <a href="index.html" class="nav-brand">
-    <div class="nav-logo"><img src="logo.png" alt="">以鲜国际</div>
+    <div class="nav-logo"><div class="logo-box"><img src="logo.png" alt=""></div>以鲜国际</div>
     <span class="nav-name">以鲜国际</span>
   </a>
   <ul class="nav-links">
