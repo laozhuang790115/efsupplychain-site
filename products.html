@@ -612,6 +612,7 @@ function checkPassword() {
     sessionStorage.setItem(ADMIN_KEY, '1');
     updateAdminUI();
     refreshAll();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   } else if (pw !== null) {
     alert('密码错误');
   }
@@ -626,11 +627,22 @@ function logoutAdmin() {
 
 function updateAdminUI() {
   var bar = document.getElementById('adminBar');
+  var btn = document.querySelector('.nav-admin');
   if (isAdmin) {
     bar.classList.add('show');
+    if (btn) {
+      btn.textContent = '✅ 管理模式';
+      btn.style.background = '#00b894';
+      btn.style.color = '#fff';
+    }
     document.querySelectorAll('.card-actions').forEach(function(el) { el.classList.add('show'); });
   } else {
     bar.classList.remove('show');
+    if (btn) {
+      btn.textContent = '🔒 管理';
+      btn.style.background = '#1a3a5c';
+      btn.style.color = '#fff';
+    }
     document.querySelectorAll('.card-actions').forEach(function(el) { el.classList.remove('show'); });
   }
 }
