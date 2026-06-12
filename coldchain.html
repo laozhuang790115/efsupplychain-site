@@ -14,34 +14,25 @@ body {
 a { text-decoration: none; color: inherit; }
 
 /* Nav */
-.nav{
-  position:fixed;top:0;left:0;right:0;z-index:1000;
-  background:rgba(10,22,40,.92);backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid rgba(255,255,255,.06);
-  padding:0 32px;height:60px;
-  display:flex;align-items:center;justify-content:space-between;
-  transition:all .3s
+nav {
+  background: rgba(255,255,255,0.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid #e8edf2; position: sticky; top: 0; z-index: 100; padding: 0 24px;
 }
-.nav-brand{display:flex;align-items:center;gap:10px}
-.nav-logo{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:800;color:#00a8e8;margin-right:32px}
-.nav-logo .logo-box{width:60px;height:30px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.95);border:2px solid #d0d8e0;border-radius:6px;overflow:hidden}
-.nav-logo .logo-box img{height:22px;width:auto}
-.nav-links{display:flex;gap:28px;list-style:none}
-.nav-links a{color:rgba(255,255,255,.65);font-size:13px;transition:color .25s;letter-spacing:.5px}
-.nav-links a:hover{color:#00d4aa}
-.nav-halal{background:linear-gradient(135deg,#00d4aa,#00a8e8);color:#0a1628!important;padding:6px 14px;border-radius:20px;font-weight:700;font-size:13px;transition:all .3s}
-.nav-halal:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,212,170,.35);color:#0a1628!important}
-.nav-tools{background:linear-gradient(135deg,#f59e0b,#f97316);color:#0a1628!important;padding:6px 14px;border-radius:20px;font-weight:700;font-size:13px;transition:all .3s}
-.nav-tools:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(245,158,11,.35);color:#0a1628!important}
-.nav-cold{background:#00a8e8;color:#fff!important;padding:5px 14px;border-radius:20px;font-size:12px}
-.nav-cold:hover{background:#0088c8;color:#fff!important}
-.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
-.nav-toggle span{width:22px;height:2px;background:#fff;border-radius:2px;transition:.3s}
-@media(max-width:900px){
-  .nav-links{display:none}
-  .nav-toggle{display:flex}
+.nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; height: 52px; }
+.nav-logo { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 800; color: #00a8e8; margin-right: 32px; }
+.nav-logo .logo-box {
+  width: 60px; height: 30px; display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.95); border: 2px solid #d0d8e0; border-radius: 6px;
+  flex-shrink: 0; overflow: hidden;
 }
+.nav-logo .logo-box img { height: 22px; width: auto; }
+.nav-links { display: flex; gap: 20px; align-items: center; }
+.nav-links a { font-size: 13px; font-weight: 500; color: #555; transition: color 0.2s; }
+.nav-links a:hover { color: #00a8e8; }
+.nav-tools { background: #f59e0b; color: #fff !important; padding: 5px 14px; border-radius: 20px; font-size: 12px; }
+.nav-tools:hover { background: #e08f0b; color: #fff !important; }
+.nav-cold { background: #00a8e8; color: #fff !important; padding: 5px 14px; border-radius: 20px; font-size: 12px; }
+.nav-cold:hover { background: #0088c8; color: #fff !important; }
 
 /* Admin bar */
 .admin-bar {
@@ -258,23 +249,18 @@ footer { text-align: center; padding: 24px; font-size: 12px; color: #aaa; border
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-brand">
+<nav>
+  <div class="nav-inner">
     <div class="nav-logo"><div class="logo-box"><img src="logo.png" alt=""></div>以鲜国际</div>
-  </div>
-  <ul class="nav-links">
-    <li><a href="index.html">首页</a></li>
-    <li><a href="index.html#about">关于我们</a></li>
-    <li><a href="index.html#services">核心业务</a></li>
-    <li><a href="tools.html" class="nav-tools">🧭 工具罗盘</a></li>
-    <li><a href="exhibitions.html" style="background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff!important;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700">🎪 食品展会</a></li>
-    <li><a href="coldchain.html" class="nav-cold">❄️ 冷链服务</a></li>
-    <li><a href="products.html" style="background:#00d4aa;color:#fff!important;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700">🤝 产品展示</a></li>
-    <li><a href="reports.html" class="nav-halal">📋 老庄报告</a></li>
-    <li><a href="index.html#contact">联系我们</a></li>
-  </ul>
-  <div class="nav-toggle" onclick="this.classList.toggle('open')">
-    <span></span><span></span><span></span>
+    <div class="nav-links">
+      <a href="index.html">🏠 主页</a>
+      <a href="tools.html" class="nav-tools">🧭 国际代采</a>
+      <a href="exhibitions.html" style="background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff!important;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700">🎪 展会</a>
+      <a href="coldchain.html" class="nav-cold">❄️ 冷链服务</a>
+      <a href="products.html" style="background:#00d4aa;color:#fff!important;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700">🤝 代销分销</a>
+      <a href="reports.html">📰 老庄报告</a>
+      <a href="#" onclick="event.preventDefault();checkPassword()" style="background:#1a3a5c;color:#fff!important;padding:5px 14px;border-radius:20px;font-size:12px;">🔒 管理</a>
+    </div>
   </div>
 </nav>
 
@@ -1146,28 +1132,6 @@ document.addEventListener('keydown', function(e) {
     else alert('已在管理模式中');
   }
 });
-</script>
-<script>
-// Mobile nav toggle
-(function() {
-var toggle = document.querySelector('.nav-toggle');
-var navLinks = document.querySelector('.nav-links');
-if (toggle && navLinks) {
-  toggle.addEventListener('click', function() {
-    var isOpen = navLinks.style.display === 'flex';
-    navLinks.style.display = isOpen ? 'none' : 'flex';
-    navLinks.style.position = isOpen ? '' : 'absolute';
-    navLinks.style.top = isOpen ? '' : '60px';
-    navLinks.style.left = isOpen ? '' : '0';
-    navLinks.style.right = isOpen ? '' : '0';
-    navLinks.style.background = isOpen ? '' : 'rgba(10,22,40,.98)';
-    navLinks.style.flexDirection = isOpen ? '' : 'column';
-    navLinks.style.padding = isOpen ? '' : '20px 32px';
-    navLinks.style.gap = isOpen ? '' : '16px';
-    navLinks.style.borderBottom = isOpen ? '' : '1px solid rgba(255,255,255,.08)';
-  });
-}
-})();
 </script>
 </body>
 </html>
