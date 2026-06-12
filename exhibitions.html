@@ -51,7 +51,8 @@ body{
 /* ===== Admin Bar ===== */
 .admin-bar{
   display:none;background:#1a3a5c;color:#fff;padding:8px 24px;
-  font-size:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px
+  font-size:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;
+  position:sticky;top:0;z-index:100
 }
 .admin-bar.show{display:flex!important}
 .admin-bar .admin-btn{
@@ -316,7 +317,12 @@ footer a{color:#00a8e8}
 
 <!-- Review Queue -->
 <div class="review-section" id="reviewSection">
-  <h3>📋 审核队列 <span style="font-size:11px;font-weight:400;color:#999">— WorkBuddy 自动搜集 + 用户提交</span></h3>
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px">
+    <div>
+      <h3 style="margin:0">📋 审核队列 <span style="font-size:11px;font-weight:400;color:#999">— WorkBuddy 自动搜集 + 用户提交</span></h3>
+    </div>
+    <button class="admin-btn add" onclick="openEditModal()" style="padding:8px 18px;font-size:13px">＋ 手动新增展会</button>
+  </div>
   <div class="review-stats" id="reviewStats"></div>
   <div id="reviewQueue"></div>
   <div class="pub-bar" id="pubBar" style="display:none">
