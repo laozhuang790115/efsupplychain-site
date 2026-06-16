@@ -573,41 +573,41 @@ footer .ft-info{font-size:12px;color:rgba(255,255,255,.25)}
   <div class="s-label">Services</div>
   <div class="s-title">核心<em>业务</em></div>
   <div class="svc-grid">
-    <a href="tools.html" class="svc-card svc-card-link">
+    <div class="svc-card svc-card-link" onclick="location.href='tools.html'" role="link" tabindex="0">
       <div class="sc-icon">🌐</div>
       <h4>代理代采 <span class="svc-badge">国际代采</span></h4>
       <p>南美白虾、印尼阿曼带鱼鱿鱼等核心品类，海外产地直采，一手货源价格透明。</p>
-    </a>
+    </div>
     <div class="svc-card">
       <div class="sc-icon">📋</div>
       <h4>清关报关</h4>
       <p>专业报关团队，冻品进口全流程，单一窗口电子申报，高效通关合规无忧。</p>
     </div>
-    <a href="finance-cost.html" class="svc-card svc-card-link">
+    <div class="svc-card svc-card-link" onclick="location.href='finance-cost.html'" role="link" tabindex="0">
       <div class="sc-icon">💰</div>
       <h4>贸易融资 <span class="svc-badge">测算工具</span></h4>
       <p>经销商只需20%订金，剩余80%由平台融资垫付，货到入库还款提货。</p>
-    </a>
-    <a href="coldchain.html" class="svc-card svc-card-link">
+    </div>
+    <div class="svc-card svc-card-link" onclick="location.href='coldchain.html'" role="link" tabindex="0">
       <div class="sc-icon">🚢</div>
       <h4>冷链服务 <span class="svc-badge">冷库地图</span></h4>
       <p>全国15城冷链仓储网络，WMS数字化管理，温控IoT实时监控，门到门配送。</p>
-    </a>
-    <a href="halal-calculator.html" class="svc-card svc-card-link">
+    </div>
+    <div class="svc-card svc-card-link" onclick="location.href='halal-calculator.html'" role="link" tabindex="0">
       <div class="sc-icon">☪️</div>
       <h4>清真食品出海 <span class="svc-badge">测算工具</span></h4>
       <p>配合「好品中国」，助力中国食品品牌出海，HALAL认证+海外渠道一站式服务。</p>
-    </a>
-    <a href="products.html" class="svc-card svc-card-link">
+    </div>
+    <div class="svc-card svc-card-link" onclick="location.href='products.html'" role="link" tabindex="0">
       <div class="sc-icon">🤝</div>
       <h4>代销分销 <span class="svc-badge">代销分销</span></h4>
       <p>为海外供应商搭建中国分销网络，覆盖批发市场、餐饮、电商等全渠道，快速铺货终端，降低库存资金占用。</p>
-    </a>
-    <a href="exhibitions.html" class="svc-card svc-card-link">
+    </div>
+    <div class="svc-card svc-card-link" onclick="location.href='exhibitions.html'" role="link" tabindex="0">
       <div class="sc-icon">🎪</div>
       <h4>食品进出口展会 <span class="svc-badge">展会信息</span></h4>
       <p>协助海外客户来华参展对接中国买家，同时组织国内客户赴海外参展考察，双向搭建食品贸易桥梁。</p>
-    </a>
+    </div>
   </div>
 </section>
 </div>
@@ -972,6 +972,13 @@ if (toggle && navLinks) {
   });
 }
 })();
+
+// Service card keyboard support (Enter to navigate)
+document.querySelectorAll('.svc-card-link').forEach(function(card){
+  card.addEventListener('keydown', function(e){
+    if(e.key==='Enter') card.click();
+  });
+});
 </script>
 
 </body>
