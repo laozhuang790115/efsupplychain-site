@@ -27,6 +27,9 @@ body{
 .nav-logo{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:800;color:#00a8e8;margin-right:32px}
 .nav-logo .logo-box{width:60px;height:30px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.95);border:2px solid #d0d8e0;border-radius:6px;overflow:hidden}
 .nav-logo .logo-box img{height:22px;width:auto}
+.nav-logo .logo-text { display: flex; flex-direction: column; line-height: 1.15; }
+.nav-logo .logo-main { font-size: 18px; font-weight: 800; color: #00a8e8; }
+.nav-logo .logo-sub { font-size: 10px; font-weight: 400; color: rgba(255,255,255,.55); white-space: nowrap; letter-spacing: 0.5px; }
 .nav-links{display:flex;gap:28px;list-style:none}
 .nav-links a{color:rgba(255,255,255,.65);font-size:13px;transition:color .25s;letter-spacing:.5px}
 .nav-links a:hover{color:#00d4aa}
@@ -301,7 +304,7 @@ footer a{color:#00a8e8}
 <!-- Nav -->
 <nav class="nav">
   <div class="nav-brand">
-    <div class="nav-logo"><div class="logo-box"><img src="logo.png" alt="以鲜国际"></div>以鲜国际</div>
+    <div class="nav-logo"><div class="logo-box"><img src="logo.png" alt=""></div><div class="logo-text"><span class="logo-main">以鲜国际</span><span class="logo-sub">恒心集团旗下成员企业</span></div></div>
   </div>
   <ul class="nav-links">
     <li><a href="index.html">首页</a></li>
