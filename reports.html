@@ -315,6 +315,28 @@ main{max-width:1020px;margin:0 auto;padding:0 24px 80px}
 }
 .full-content .ext-link:hover{transform: translateY(-1px);box-shadow:0 4px 12px rgba(0,168,232,.25)}
 
+/* ===== Section View More & Section Page ===== */
+.section-more-wrap{text-align:center;margin-top:20px;padding-top:16px;border-top:1px dashed #e8ecf0}
+.section-more{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 24px;border-radius:8px;
+  border:1px solid #dde0e4;background:#fff;
+  font-size:13px;color:#5a6070;text-decoration:none;cursor:pointer;transition:all .2s
+}
+.section-more:hover{border-color:#00a8e8;color:#00a8e8;background:#f0f9ff;transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,168,232,.1)}
+.section-more .arrow{font-size:14px;transition:transform .2s}
+.section-more:hover .arrow{transform:translateX(3px)}
+/* Single-section full view */
+.section-page{display:none}
+.section-page.active{display:block}
+.section-back{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:6px 14px;margin-bottom:20px;border-radius:6px;
+  border:1px solid #dde0e4;background:#fafbfc;
+  font-size:12px;color:#5a6070;text-decoration:none;cursor:pointer;transition:all .2s
+}
+.section-back:hover{border-color:#00a8e8;color:#00a8e8;background:#f0f9ff}
+
 /* ===== Empty State ===== */
 .empty-state{text-align:center;padding:40px 20px;color:#bbb}
 .empty-state .empty-icon{font-size:40px;margin-bottom:12px}
@@ -485,6 +507,7 @@ footer{text-align:center;padding:40px 24px;color:#bbb;font-size:12px;border-top:
     <div class="section-divider"></div>
   </div>
   <div class="news-grid" id="newsGrid"></div>
+  <div class="section-more-wrap" id="newsMoreWrap"><a class="section-more" href="?section=news">查看更多热点新闻 <span class="arrow">→</span></a></div>
 </div>
 
 <!-- 📰 焦点事件 -->
@@ -496,6 +519,7 @@ footer{text-align:center;padding:40px 24px;color:#bbb;font-size:12px;border-top:
     <div class="section-divider"></div>
   </div>
   <div class="events-grid" id="eventsGrid"></div>
+  <div class="section-more-wrap" id="eventsMoreWrap"><a class="section-more" href="?section=events">查看更多焦点事件 <span class="arrow">→</span></a></div>
 </div>
 
 <!-- 📊 行业报告 -->
@@ -507,6 +531,7 @@ footer{text-align:center;padding:40px 24px;color:#bbb;font-size:12px;border-top:
     <div class="section-divider"></div>
   </div>
   <div class="reports-list" id="reportsList"></div>
+  <div class="section-more-wrap" id="reportsMoreWrap"><a class="section-more" href="?section=reports">查看更多行业报告 <span class="arrow">→</span></a></div>
 </div>
 
 <!-- ⚖️ 政策法规 -->
@@ -518,6 +543,7 @@ footer{text-align:center;padding:40px 24px;color:#bbb;font-size:12px;border-top:
     <div class="section-divider"></div>
   </div>
   <div class="policies-list" id="policiesList"></div>
+  <div class="section-more-wrap" id="policiesMoreWrap"><a class="section-more" href="?section=policies">查看更多政策法规 <span class="arrow">→</span></a></div>
 </div>
 
 </main>
@@ -557,6 +583,18 @@ footer{text-align:center;padding:40px 24px;color:#bbb;font-size:12px;border-top:
 <div class="toast" id="toast"></div>
 
 <script>
+// ═══════════════════════════════════════
+//  CONSTANTS
+// ═══════════════════════════════════════
+var ITEM_LIMIT = 4;          // 首页每板块最多显示条数
+var KEYS = ['news','events','reports','policies'];
+var sectionView = getUrlParam('section'); // null=首页, 'news'|'events'|'reports'|'policies'=子页面
+
+function getUrlParam(name) {
+  var m = location.search.match(new RegExp('[?&]' + name + '=([^&]*)'));
+  return m ? decodeURIComponent(m[1]) : null;
+}
+
 // ═══════════════════════════════════════
 //  DATA
 // ═══════════════════════════════════════
@@ -796,7 +834,6 @@ var REVIEW_QUEUE = [
 //  STATE
 // ═══════════════════════════════════════
 var currentType = 'news';
-var KEYS = ['news','events','reports','policies'];
 var KEY = 'laozhuang_reports_user';
 var DECISIONS_KEY = 'laozhuang_review_decisions';  // 审核决定
 var PUBLISHED_KEY = 'laozhuang_review_published';   // 已通过待合并的内容
@@ -850,11 +887,50 @@ function countTotal(data) {
 // ═══════════════════════════════════════
 function renderAll() {
   var data = loadAllData();
-  renderNews(data.news);
-  renderEvents(data.events);
-  renderReports(data.reports);
-  renderPolicies(data.policies);
+  var limit = sectionView ? 999 : ITEM_LIMIT; // 子页面显示全部
+
+  // 隐藏/显示各板块
+  var hideAll = !!sectionView;
+  showSection('news-section', !hideAll || sectionView === 'news');
+  showSection('events-section', !hideAll || sectionView === 'events');
+  showSection('reports-section', !hideAll || sectionView === 'reports');
+  showSection('policies-section', !hideAll || sectionView === 'policies');
+
+  // 查看更多的链接：子页面隐藏
+  showMoreWrap('newsMoreWrap', !sectionView && data.news.length > ITEM_LIMIT);
+  showMoreWrap('eventsMoreWrap', !sectionView && data.events.length > ITEM_LIMIT);
+  showMoreWrap('reportsMoreWrap', !sectionView && data.reports.length > ITEM_LIMIT);
+  showMoreWrap('policiesMoreWrap', !sectionView && data.policies.length > ITEM_LIMIT);
+
+  // 子页面顶部显示返回链接
+  if (sectionView) {
+    var masthead = document.querySelector('.masthead');
+    var existingBack = document.getElementById('sectionBack');
+    if (!existingBack) {
+      var back = document.createElement('a');
+      back.id = 'sectionBack';
+      back.className = 'section-back';
+      back.href = 'reports.html';
+      back.innerHTML = '← 返回老庄报告首页';
+      masthead.appendChild(back);
+    }
+  }
+
+  renderNews(data.news, limit);
+  renderEvents(data.events, limit);
+  renderReports(data.reports, limit);
+  renderPolicies(data.policies, limit);
   document.getElementById('totalCount').textContent = '共收录 ' + countTotal(data) + ' 条内容';
+}
+
+function showSection(id, visible) {
+  var el = document.getElementById(id);
+  if (el) el.style.display = visible ? '' : 'none';
+}
+
+function showMoreWrap(id, visible) {
+  var el = document.getElementById(id);
+  if (el) el.style.display = visible ? '' : 'none';
 }
 
 // ══════════════════════════════════════
@@ -869,11 +945,15 @@ function toggleContent(id) {
   if (btn) btn.classList.toggle('expanded');
 }
 
-function renderNews(items) {
+function renderNews(items, limit) {
+  limit = limit || items.length;
+  var displayItems = items.slice(0, limit);
   var grid = document.getElementById('newsGrid');
-  document.getElementById('newsCount').textContent = items.length + ' 条';
-  if (!items.length) { grid.innerHTML = '<div class="empty-state"><div class="empty-icon">📭</div><p>暂无热点新闻</p></div>'; return; }
-  grid.innerHTML = items.map(function(n, idx) {
+  var total = items.length;
+  var shown = displayItems.length;
+  document.getElementById('newsCount').textContent = (limit < total) ? shown + ' / ' + total + ' 条' : total + ' 条';
+  if (!displayItems.length) { grid.innerHTML = '<div class="empty-state"><div class="empty-icon">📭</div><p>暂无热点新闻</p></div>'; return; }
+  grid.innerHTML = displayItems.map(function(n, idx) {
     var id = 'news-' + idx;
     var hasContent = n.content && n.content.length > 0;
     var tagsHtml = (n.tags || []).map(function(t) { return '<span class="card-tag">' + esc(t) + '</span>'; }).join('');
@@ -895,11 +975,15 @@ function renderNews(items) {
   }).join('');
 }
 
-function renderEvents(items) {
+function renderEvents(items, limit) {
+  limit = limit || items.length;
+  var displayItems = items.slice(0, limit);
   var grid = document.getElementById('eventsGrid');
-  document.getElementById('eventsCount').textContent = items.length + ' 条';
-  if (!items.length) { grid.innerHTML = '<div class="empty-state"><div class="empty-icon">📭</div><p>暂无焦点事件</p></div>'; return; }
-  grid.innerHTML = items.map(function(n, idx) {
+  var total = items.length;
+  var shown = displayItems.length;
+  document.getElementById('eventsCount').textContent = (limit < total) ? shown + ' / ' + total + ' 条' : total + ' 条';
+  if (!displayItems.length) { grid.innerHTML = '<div class="empty-state"><div class="empty-icon">📭</div><p>暂无焦点事件</p></div>'; return; }
+  grid.innerHTML = displayItems.map(function(n, idx) {
     var id = 'event-' + idx;
     var hasContent = n.content && n.content.length > 0;
     var tagsHtml = (n.tags || []).map(function(t) { return '<span class="event-card-tag" style="padding:2px 8px;border-radius:4px;background:#fff7ed;color:#c2410c;font-size:10px">' + esc(t) + '</span>'; }).join('');
@@ -920,11 +1004,15 @@ function renderEvents(items) {
   }).join('');
 }
 
-function renderReports(items) {
+function renderReports(items, limit) {
+  limit = limit || items.length;
+  var displayItems = items.slice(0, limit);
   var list = document.getElementById('reportsList');
-  document.getElementById('reportsCount').textContent = items.length + ' 份';
-  if (!items.length) { list.innerHTML = '<div class="empty-state"><div class="empty-icon">📂</div><p>暂无行业报告</p></div>'; return; }
-  list.innerHTML = items.map(function(r, idx) {
+  var total = items.length;
+  var shown = displayItems.length;
+  document.getElementById('reportsCount').textContent = (limit < total) ? shown + ' / ' + total + ' 份' : total + ' 份';
+  if (!displayItems.length) { list.innerHTML = '<div class="empty-state"><div class="empty-icon">📂</div><p>暂无行业报告</p></div>'; return; }
+  list.innerHTML = displayItems.map(function(r, idx) {
     var id = 'report-' + idx;
     var hasContent = r.content && r.content.length > 0;
     var readMoreBtn = hasContent ? '<br><button class="read-more" id="btn-' + id + '" onclick="toggleContent(\'' + id + '\')">📖 阅读全文 <span class="arrow">→</span></button>' : '';
@@ -943,11 +1031,15 @@ function renderReports(items) {
   }).join('');
 }
 
-function renderPolicies(items) {
+function renderPolicies(items, limit) {
+  limit = limit || items.length;
+  var displayItems = items.slice(0, limit);
   var list = document.getElementById('policiesList');
-  document.getElementById('policiesCount').textContent = items.length + ' 条';
-  if (!items.length) { list.innerHTML = '<div class="empty-state"><div class="empty-icon">📜</div><p>暂无政策法规</p></div>'; return; }
-  list.innerHTML = items.map(function(r, idx) {
+  var total = items.length;
+  var shown = displayItems.length;
+  document.getElementById('policiesCount').textContent = (limit < total) ? shown + ' / ' + total + ' 条' : total + ' 条';
+  if (!displayItems.length) { list.innerHTML = '<div class="empty-state"><div class="empty-icon">📜</div><p>暂无政策法规</p></div>'; return; }
+  list.innerHTML = displayItems.map(function(r, idx) {
     var id = 'policy-' + idx;
     var hasContent = r.content && r.content.length > 0;
     var readMoreBtn = hasContent ? '<br><button class="read-more" id="btn-' + id + '" onclick="toggleContent(\'' + id + '\')">📖 阅读全文 <span class="arrow">→</span></button>' : '';
