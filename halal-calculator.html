@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Halal认证投入产出测算工具（2026版）</title>
+<style>
+:root {
+  --bg: #0a1628;
+  --card: #111e35;
+  --border: rgba(255,255,255,.08);
+  --text: #e0e6f0;
+  --muted: rgba(255,255,255,.45);
+  --accent: #00a8e8;
+  --teal: #00d4aa;
+  --amber: #f0a830;
+  --green: #2ecc71;
+  --radius: 14px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+.container { max-width: 1100px; margin: 0 auto; padding: 48px 24px; }
+.header { text-align: center; margin-bottom: 40px; }
+.header .badge { display: inline-block; font-size: 11px; letter-spacing: 3px; color: var(--teal); text-transform: uppercase; margin-bottom: 8px; }
+.header h1 { font-size: 26px; font-weight: 700; color: #fff; }
+.header h1 em { font-style: normal; color: var(--teal); }
+.header p { color: var(--muted); font-size: 14px; margin-top: 6px; }
+
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+
+.card-title {
+  font-size: 13px; letter-spacing: 2px; color: var(--accent);
+  text-transform: uppercase; margin-bottom: 20px; font-weight: 600;
+}
+
+.form-group { margin-bottom: 18px; }
+.form-group label {
+  display: block; font-size: 12px; color: var(--muted);
+  margin-bottom: 6px; font-weight: 500;
+}
+.form-group select {
+  width: 100%; padding: 12px 14px; border-radius: 10px;
+  border: 1px solid var(--border); background: rgba(255,255,255,.04);
+  color: var(--text); font-size: 14px; outline: none;
+  appearance: none; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,.4)' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center;
+}
+.form-group select:focus { border-color: var(--accent); }
+
+.check-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; background: rgba(255,255,255,.03);
+  border-radius: 10px; margin-bottom: 8px; cursor: pointer;
+}
+.check-row input[type=checkbox] { accent-color: var(--accent); width: 16px; height: 16px; }
+.check-row span { font-size: 13px; color: var(--text); }
+.check-row .extra { color: var(--muted); font-size: 11px; margin-left: auto; }
+
+.result-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+@media (max-width: 500px) { .result-metrics { grid-template-columns: 1fr; } }
+
+.metric {
+  background: rgba(0,168,232,.06);
+  border: 1px solid rgba(0,168,232,.12);
+  border-radius: 12px; padding: 16px; text-align: center;
+}
+.metric .label { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+.metric .value { font-size: 26px; font-weight: 700; color: #fff; }
+.metric .unit { font-size: 13px; color: var(--muted); font-weight: 400; }
+.metric.green { background: rgba(0,212,170,.06); border-color: rgba(0,212,170,.12); }
+
+.verdict {
+  background: linear-gradient(135deg, rgba(0,168,232,.1), rgba(0,212,170,.1));
+  border: 1px solid rgba(0,212,170,.15);
+  border-radius: var(--radius); padding: 20px 24px;
+  display: flex; align-items: center; gap: 16px;
+}
+.verdict .icon { font-size: 32px; }
+.verdict .text { font-size: 14px; line-height: 1.7; }
+.verdict .text strong { color: var(--teal); }
+
+.insight-row { display: flex; gap: 12px; margin-top: 12px; }
+.insight-tag {
+  font-size: 11px; padding: 4px 10px; border-radius: 6px;
+  background: rgba(255,255,255,.04); color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+.chart-wrap { margin-top: 28px; height: 340px; position: relative; }
+
+.footer-note { text-align: center; color: var(--muted); font-size: 11px; margin-top: 40px; }
+
+/* ===== Nav ===== */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:rgba(10,22,40,.92);backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  padding:0 32px;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .3s
+}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-logo { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 800; color: #00a8e8; margin-right: 32px; }
+.nav-logo .logo-box {
+  width: 60px; height: 30px; display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.95); border: 2px solid #d0d8e0; border-radius: 6px;
+  flex-shrink: 0; overflow: hidden;
+}
+.nav-logo .logo-box img { height: 22px; width: auto; }
+.nav-logo .logo-text { display: flex; align-items: flex-end; gap: 4px; line-height: 1.2; }
+.nav-logo .logo-main { font-size: 22px; font-weight: 800; color: #00a8e8; }
+.nav-logo .logo-sub { font-size: 10.5px; font-weight: 400; color: rgba(255,255,255,.5); white-space: nowrap; letter-spacing: 0.3px; }
+
+.nav-name{color:#fff;font-size:15px;font-weight:600;letter-spacing:1px}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{
+  color:rgba(255,255,255,.65);font-size:13px;
+  transition:color .25s;letter-spacing:.5px
+}
+.nav-links a:hover{color:#00d4aa}
+.nav-halal{
+  background:linear-gradient(135deg,#00d4aa,#00a8e8);
+  color:#0a1628!important;padding:6px 14px;border-radius:20px;
+  font-weight:700;font-size:13px;transition:all .3s
+}
+.nav-halal:hover{
+  transform: translateY(-1px);
+  box-shadow:0 4px 16px rgba(0,212,170,.35);
+  color:#0a1628!important
+}
+.nav-tools{
+  background:linear-gradient(135deg,#f59e0b,#f97316);
+  color:#0a1628!important;padding:6px 14px;border-radius:20px;
+  font-weight:700;font-size:13px;transition:all .3s
+}
+.nav-tools:hover{
+  transform: translateY(-1px);
+  box-shadow:0 4px 16px rgba(245,158,11,.35);
+  color:#0a1628!important
+}
+
+.nav-cold { background: #00a8e8; color: #fff !important; padding: 5px 14px; border-radius: 20px; font-size: 12px; }
+.nav-cold:hover { background: #0088c8; color: #fff !important; }
+@media (max-width: 640px){
+  .nav-links{display:none}
+  .nav{padding:0 16px}
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="nav-brand">
+    <div class="nav-logo"><div class="logo-box"><img src="logo.png" alt=""></div><div class="logo-text"><span class="logo-main">以鲜国际</span><span class="logo-sub">恒兴集团旗下战略合作伙伴</span></div></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">🏠 主页</a></li>
+    <li><a href="index.html#about">关于我们</a></li>
+    <li><a href="index.html#services">核心业务</a></li>
+        <li><a href="tools.html" class="nav-tools">🧭 国际代采</a></li>
+    <li><a href="products.html" style="background:#00d4aa;color:#fff!important;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700">🤝 代销分销</a></li>
+    <li><a href="coldchain.html" class="nav-cold">❄️ 冷链服务</a></li>
+    <li><a href="exhibitions.html" style="background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff!important;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700">🎪 食品展会</a></li>
+    <li><a href="reports.html" class="nav-halal">📋 老庄报告</a></li>
+    <li><a href="index.html#contact">联系我们</a></li>
+  </ul>
+</nav>
+<div class="container" style="margin-top:60px">
+
+<div class="header">
+  <div class="badge">Halal Certification ROI Calculator</div>
+  <h1>中国出海 Halal 认证 · <em>投入产出测算</em></h1>
+  <p>选品类、选认证机构，自动核算总投资、月增毛利与回本周期（2026版）</p>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <div class="card-title">参数设置</div>
+
+    <div class="form-group">
+      <label>目标品类</label>
+      <select id="category">
+        <optgroup label="第一梯队 · 高增速">
+          <option value="snack">休闲零食（辣条/魔芋/坚果/方便面）</option>
+          <option value="beauty">美妆个护（护肤/洗护/防晒）</option>
+          <option value="seasoning">调味品 / 粮油</option>
+          <option value="dairy">乳制品 / 植物奶</option>
+        </optgroup>
+        <optgroup label="第二梯队 · 高利润">
+          <option value="health">清真保健品 / 草本制品</option>
+          <option value="disposable">一次性用品 / 食品包装 / 湿巾</option>
+          <option value="clothing">穆斯林服饰 / 宗教用品</option>
+        </optgroup>
+        <optgroup label="第三梯队 · 即将爆发">
+          <option value="baby">清真母婴（奶粉/辅食/洗护）</option>
+          <option value="appliance">厨房小家电（接触食品类）</option>
+        </optgroup>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>认证机构</label>
+      <select id="cert">
+        <option value="jakim">JAKIM（马来西亚）— 35,000~100,000 元</option>
+        <option value="mui">MUI/BPJPH（印尼）— 40,000~120,000 元</option>
+        <option value="gso">GSO（海湾六国）— 25,000~80,000 元</option>
+        <option value="ifanca">IFANCA（欧美通用）— 20,000~60,000 元</option>
+        <option value="zhongyixie">中伊协（国内）— 8,000~20,000 元</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>产线情况</label>
+      <div class="check-row" onclick="document.getElementById('needMod').click()">
+        <input type="checkbox" id="needMod">
+        <span>含油脂 / 添加剂 / 肉制品，需产线改造</span>
+        <span class="extra">+5,000~50,000 元</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">测算结果</div>
+    <div class="result-metrics" id="metrics">
+      <div class="metric"><div class="label">综合总投入</div><div class="value" id="totalCost">—</div><div class="unit">元</div></div>
+      <div class="metric green"><div class="label">月新增毛利</div><div class="value" id="monthlyProfit">—</div><div class="unit">元</div></div>
+      <div class="metric"><div class="label">回本周期</div><div class="value" id="payback">—</div><div class="unit">个月</div></div>
+    </div>
+    <div class="verdict" id="verdict">
+      <div class="icon">📊</div>
+      <div class="text" id="verdictText">选择品类和认证机构后自动测算</div>
+    </div>
+    <div class="insight-row" id="tags"></div>
+    <div class="chart-wrap">
+      <canvas id="roiChart" role="img" aria-label="Halal认证回本周期对比图"></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="footer-note">
+  汇率 1 USD ≈ 7.2 CNY &nbsp;|&nbsp; 成本为行业普遍区间 &nbsp;|&nbsp; 回本按中小工厂/贸易商出货量基准
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const CERT_DATA = {
+  jakim: { name: 'JAKIM（马来西亚）', costMin: 35000, costMax: 100000, period: '4-8周', valid: '2年', annual: true, markets: '马来西亚、东南亚、中东' },
+  mui:   { name: 'MUI/BPJPH（印尼）', costMin: 40000, costMax: 120000, period: '6-12周', valid: '4年', annual: false, markets: '印度尼西亚（强制入境）' },
+  gso:   { name: 'GSO（海湾六国）', costMin: 25000, costMax: 80000, period: '2-4周', valid: '2-3年', annual: true, markets: '沙特、阿联酋、卡塔尔等' },
+  ifanca:{ name: 'IFANCA（欧美通用）', costMin: 20000, costMax: 60000, period: '3-6周', valid: '1年', annual: true, markets: '欧美穆斯林、全球铺货' },
+  zhongyixie: { name: '中伊协（国内）', costMin: 8000, costMax: 20000, period: '2-3周', valid: '2年', annual: false, markets: '国内穆斯林、边境贸易' }
+};
+
+const CAT_DATA = {
+  snack:      { name:'休闲零食', tier:1, investMin:40000, investMax:110000, incr:0.70, prem:0.15, profitMin:15000, profitMax:40000, payMin:2.5, payMax:7, note:'改造成本极低，走量最快', best:['jakim','mui','gso'] },
+  beauty:     { name:'美妆个护', tier:1, investMin:38000, investMax:115000, incr:0.43, prem:0.28, profitMin:20000, profitMax:50000, payMin:2, payMax:6, note:'印尼2026强制，政策红利强', best:['jakim','gso','mui'] },
+  seasoning:  { name:'调味品/粮油', tier:1, investMin:42000, investMax:105000, incr:0.55, prem:0.13, profitMin:18000, profitMax:35000, payMin:3, payMax:8, note:'复购极强，长期稳定', best:['jakim','mui'] },
+  dairy:      { name:'乳制品/植物奶', tier:1, investMin:60000, investMax:130000, incr:0.53, prem:0.17, profitMin:22000, profitMax:42000, payMin:4, payMax:9, note:'印尼2026新规，长期刚需', best:['mui','jakim'] },
+  health:     { name:'保健品/草本', tier:2, investMin:45000, investMax:100000, incr:0.70, prem:0.40, profitMin:25000, profitMax:60000, payMin:1.8, payMax:5, note:'蓝海赛道，竞争小', best:['jakim','gso'] },
+  disposable: { name:'一次性用品', tier:2, investMin:30000, investMax:85000, incr:0.30, prem:0.20, profitMin:12000, profitMax:30000, payMin:3, payMax:10, note:'朝觐/斋月旺季暴涨200%+', best:['gso','jakim'] },
+  clothing:   { name:'穆斯林服饰', tier:2, investMin:22000, investMax:70000, incr:0.50, prem:0.24, profitMin:16000, profitMax:38000, payMin:2, payMax:6, note:'斋月涨幅100%+', best:['ifanca','jakim'] },
+  baby:       { name:'清真母婴', tier:3, investMin:55000, investMax:125000, incr:0.38, prem:0.33, profitMin:20000, profitMax:45000, payMin:4, payMax:10, note:'用户忠诚度极高', best:['mui','gso'] },
+  appliance:  { name:'厨房小家电', tier:3, investMin:32000, investMax:90000, incr:0.33, prem:0.22, profitMin:14000, profitMax:32000, payMin:3.5, payMax:9, note:'接触食品类需求增长', best:['gso','jakim'] }
+};
+
+const categorySelect = document.getElementById('category');
+const certSelect = document.getElementById('cert');
+const needMod = document.getElementById('needMod');
+
+function calc(){
+  const catKey = categorySelect.value;
+  const certKey = certSelect.value;
+  const cat = CAT_DATA[catKey];
+  const cert = CERT_DATA[certKey];
+  const modCost = needMod.checked ? 27500 : 0;
+
+  const totalMin = cat.investMin + modCost;
+  const totalMax = cat.investMax + modCost;
+  const totalAvg = Math.round((totalMin + totalMax) / 2);
+
+  const profitMin = cat.profitMin;
+  const profitMax = cat.profitMax;
+  const profitAvg = Math.round((profitMin + profitMax) / 2);
+
+  const payLow = Math.round((totalMin / profitMax) * 10) / 10;
+  const payHigh = Math.round((totalMax / profitMin) * 10) / 10;
+  const payAvg = Math.round((totalAvg / profitAvg) * 10) / 10;
+
+  document.getElementById('totalCost').textContent = totalAvg.toLocaleString();
+  document.getElementById('monthlyProfit').textContent = profitAvg.toLocaleString();
+  document.getElementById('payback').textContent = payAvg;
+
+  const isBest = cat.best.includes(certKey);
+  let verdict = '';
+  let verdictIcon = '';
+  if (payAvg <= 3) {
+    verdictIcon = '🚀'; verdict = '<strong>超快回本！</strong>' + payAvg + ' 个月内即可收回投入。' + cat.note + '。';
+  } else if (payAvg <= 6) {
+    verdictIcon = '✅'; verdict = '<strong>投入合理。</strong>预计 ' + payAvg + ' 个月回本。' + cat.note + '。';
+  } else {
+    verdictIcon = '📋'; verdict = '<strong>中期投入。</strong>预计 ' + payAvg + ' 个月回本。' + cat.note + '，值得长期布局。';
+  }
+  if (isBest) verdict += ' 该认证是此品类的<strong>推荐首选</strong>。';
+  if (cert.annual) verdict += ' 注意该认证<strong>需年审</strong>，每年有额外审核成本。';
+  if (!cert.annual && cert.valid === '4年') verdict += ' 4年有效期，<strong>长期性价比最高</strong>。';
+
+  document.getElementById('verdictText').innerHTML = verdict;
+  document.getElementById('verdict').querySelector('.icon').textContent = verdictIcon;
+
+  const tagsDiv = document.getElementById('tags');
+  tagsDiv.innerHTML = '';
+  const tagData = [
+    '销量增幅 ' + Math.round(cat.incr * 100) + '%',
+    '终端溢价 ' + Math.round(cat.prem * 100) + '%',
+    cert.name.split('（')[0],
+    cert.valid + '有效期',
+    cert.annual ? '需年审' : '无需年审',
+    cert.period
+  ];
+  tagData.forEach(t => {
+    const el = document.createElement('span');
+    el.className = 'insight-tag';
+    el.textContent = t;
+    tagsDiv.appendChild(el);
+  });
+
+  updateChart(catKey);
+}
+
+let chartInstance = null;
+function updateChart(activeCatKey){
+  const categories = ['snack','beauty','seasoning','dairy','health','disposable','clothing','baby','appliance'];
+  const labels = categories.map(k => CAT_DATA[k].name);
+  const payData = categories.map(k => {
+    const c = CAT_DATA[k];
+    return Math.round(((c.investMin + c.investMax) / 2) / ((c.profitMin + c.profitMax) / 2) * 10) / 10;
+  });
+  const profitData = categories.map(k => Math.round((CAT_DATA[k].profitMin + CAT_DATA[k].profitMax) / 2 / 1000));
+
+  const ctx = document.getElementById('roiChart').getContext('2d');
+  if (chartInstance) chartInstance.destroy();
+
+  chartInstance = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: '回本周期（月）',
+          data: payData,
+          backgroundColor: categories.map(k => k === activeCatKey ? 'rgba(0,212,170,.5)' : 'rgba(0,168,232,.25)'),
+          borderColor: categories.map(k => k === activeCatKey ? '#00d4aa' : 'rgba(0,168,232,.4)'),
+          borderWidth: 1.5,
+          borderRadius: 6,
+          yAxisID: 'y',
+          order: 2
+        },
+        {
+          label: '月净利润（千元）',
+          data: profitData,
+          type: 'line',
+          borderColor: '#f0a830',
+          backgroundColor: 'rgba(240,168,48,.08)',
+          borderWidth: 2,
+          pointRadius: 4,
+          pointBackgroundColor: '#f0a830',
+          tension: 0.3,
+          yAxisID: 'y1',
+          order: 1
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: {
+          position: 'top',
+          align: 'end',
+          labels: { color: 'rgba(255,255,255,.5)', usePointStyle: true, padding: 16, font: { size: 12 } }
+        },
+        tooltip: {
+          backgroundColor: '#111e35',
+          borderColor: 'rgba(255,255,255,.1)',
+          borderWidth: 1,
+          titleColor: '#fff',
+          bodyColor: 'rgba(255,255,255,.7)',
+          padding: 12,
+          cornerRadius: 8
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: 'rgba(255,255,255,.35)', font: { size: 11 }, maxRotation: 45 },
+          grid: { display: false }
+        },
+        y: {
+          type: 'linear',
+          position: 'left',
+          title: { display: true, text: '回本周期（月）', color: 'rgba(255,255,255,.35)', font: { size: 11 } },
+          ticks: { color: 'rgba(255,255,255,.35)', font: { size: 10 } },
+          grid: { color: 'rgba(255,255,255,.05)' }
+        },
+        y1: {
+          type: 'linear',
+          position: 'right',
+          title: { display: true, text: '月净利（千元）', color: 'rgba(255,255,255,.35)', font: { size: 11 } },
+          ticks: { color: 'rgba(255,255,255,.35)', font: { size: 10 }, callback: v => v + 'k' },
+          grid: { drawOnChartArea: false }
+        }
+      }
+    }
+  });
+}
+
+categorySelect.addEventListener('change', calc);
+certSelect.addEventListener('change', calc);
+needMod.addEventListener('change', calc);
+
+calc();
+</script>
+</body>
+</html>

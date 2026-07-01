@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>食品进出口展会 — 以鲜国际</title>
+<style>
+/* ===== Reset & Base ===== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",-apple-system,sans-serif;
+  color:#1a1a2e;line-height:1.75;background:#f8f9fb;overflow-x:hidden
+}
+
+/* ===== Nav ===== */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:rgba(10,22,40,.92);backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  padding:0 32px;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .3s
+}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-logo{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:800;color:#00a8e8;margin-right:32px}
+.nav-logo .logo-box{width:60px;height:30px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.95);border:2px solid #d0d8e0;border-radius:6px;overflow:hidden}
+.nav-logo .logo-box img{height:22px;width:auto}
+.nav-logo .logo-text { display: flex; align-items: flex-end; gap: 4px; line-height: 1.2; }
+.nav-logo .logo-main { font-size: 22px; font-weight: 800; color: #00a8e8; }
+.nav-logo .logo-sub { font-size: 10.5px; font-weight: 400; color: rgba(255,255,255,.5); white-space: nowrap; letter-spacing: 0.3px; }
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{color:rgba(255,255,255,.65);font-size:13px;transition:color .25s;letter-spacing:.5px}
+.nav-links a:hover{color:#00d4aa}
+.nav-halal{background:linear-gradient(135deg,#00d4aa,#00a8e8);color:#0a1628!important;padding:6px 14px;border-radius:20px;font-weight:700;font-size:13px;transition:all .3s}
+.nav-halal:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,212,170,.35);color:#0a1628!important}
+.nav-tools{background:linear-gradient(135deg,#f59e0b,#f97316);color:#0a1628!important;padding:6px 14px;border-radius:20px;font-weight:700;font-size:13px;transition:all .3s}
+.nav-tools:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(245,158,11,.35);color:#0a1628!important}
+.nav-cold{background:#00a8e8;color:#fff!important;padding:5px 14px;border-radius:20px;font-size:12px}
+.nav-cold:hover{background:#0088c8;color:#fff!important}
+.nav-expo{background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff!important;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-toggle span{width:22px;height:2px;background:#fff;border-radius:2px;transition:.3s}
+
+/* ===== Masthead ===== */
+.masthead{
+  margin-top:60px;padding:80px 24px 60px;
+  background:linear-gradient(175deg,#0a1628 0%,#16284a 60%,#1a3a5c 100%);
+  text-align:center;position:relative;overflow:hidden
+}
+.masthead::before{
+  content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+  background:radial-gradient(ellipse at 30% 20%,rgba(245,158,11,.08) 0%,transparent 60%),
+             radial-gradient(ellipse at 70% 80%,rgba(0,212,170,.06) 0%,transparent 60%);
+  pointer-events:none
+}
+.masthead h1{font-size:36px;font-weight:800;color:#fff;position:relative;margin-bottom:12px}
+.masthead p{font-size:14px;color:rgba(255,255,255,.6);position:relative;max-width:600px;margin:0 auto}
+
+/* ===== Admin Bar ===== */
+.admin-bar{
+  display:none;background:#1a3a5c;color:#fff;padding:8px 24px;
+  font-size:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;
+  position:sticky;top:0;z-index:100
+}
+.admin-bar.show{display:flex!important}
+.admin-bar .admin-btn{
+  cursor:pointer;padding:5px 14px;border-radius:6px;border:1px solid rgba(255,255,255,.3);
+  background:none;color:#fff;font-size:11px;font-family:inherit;transition:all .2s
+}
+.admin-bar .admin-btn:hover{background:rgba(255,255,255,.1)}
+.admin-bar .admin-btn.add{background:#f59e0b;border-color:#f59e0b;color:#0a1628;font-weight:700}
+.admin-bar .admin-btn.add:hover{background:#f97316}
+
+/* ===== Card Admin Actions ===== */
+.card-actions{position:absolute;top:8px;right:8px;display:none;gap:4px;z-index:5}
+.card-actions.show{display:flex}
+.card-actions button{width:28px;height:28px;border:none;border-radius:6px;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.card-actions .btn-edit{background:rgba(0,168,232,.85);color:#fff}
+.card-actions .btn-edit:hover{background:#00a8e8}
+.card-actions .btn-del{background:rgba(255,107,107,.85);color:#fff}
+.card-actions .btn-del:hover{background:#ff6b6b}
+.expo-card{position:relative}
+
+/* ===== Review Queue ===== */
+.review-section{display:none;max-width:1200px;margin:0 auto;padding:24px}
+.review-section.show{display:block}
+.review-section h3{font-size:16px;color:#0a1628;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.review-stats{display:flex;gap:16px;margin-bottom:20px}
+.review-stats span{padding:4px 14px;border-radius:8px;font-size:13px;font-weight:600}
+.rs-pending{background:#fff3e0;color:#f59e0b}
+.rs-approved{background:#e8f8f0;color:#00b894}
+.rs-rejected{background:#ffeaea;color:#ff6b6b}
+.review-item{
+  background:#fff;border:1px solid #eee;border-radius:10px;padding:14px 18px;
+  margin-bottom:10px;display:flex;align-items:center;gap:14px;flex-wrap:wrap
+}
+.review-item.decided{opacity:.6}
+.ri-badge{
+  padding:3px 10px;border-radius:6px;font-size:11px;font-weight:700;
+  white-space:nowrap;background:#e8f4fd;color:#00a8e8
+}
+.ri-badge.intl{background:#e8f4fd;color:#00a8e8}
+.ri-badge.domestic{background:#fff7ed;color:#f97316}
+.ri-text{flex:1;min-width:200px}
+.ri-title{font-size:14px;font-weight:700;color:#0a1628;margin-bottom:4px}
+.ri-meta{font-size:11px;color:#999}
+.ri-actions{display:flex;gap:6px;align-items:center}
+.ri-actions button{
+  width:32px;height:32px;border-radius:8px;border:1px solid #e0e4e8;
+  background:#fff;cursor:pointer;font-size:14px;transition:all .15s
+}
+.ri-actions button:hover{background:#f0f4f8}
+.ri-status{font-size:11px;padding:2px 8px;border-radius:4px;font-weight:600}
+.approved-status{background:#e8f8f0;color:#00b894}
+.rejected-status{background:#ffeaea;color:#ff6b6b}
+.ri-undo{font-size:10px;color:#999;cursor:pointer}
+.review-empty{text-align:center;padding:40px;color:#999}
+
+/* ===== Filter Tabs ===== */
+.filter-wrap{max-width:1200px;margin:0 auto;padding:24px 24px 0;display:flex;gap:10px;flex-wrap:wrap}
+.filter-btn{
+  padding:8px 20px;border-radius:20px;border:1px solid #e0e4e8;background:#fff;
+  font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit;color:#666
+}
+.filter-btn:hover{background:#f0f4f8}
+.filter-btn.active{background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;border-color:transparent}
+
+/* ===== Stats Bar ===== */
+.stats-bar{
+  max-width:1200px;margin:0 auto;padding:0 24px 20px;
+  display:flex;gap:16px;flex-wrap:wrap;justify-content:center
+}
+.stat-item{
+  background:#fff;border-radius:10px;padding:12px 22px;
+  box-shadow:0 2px 12px rgba(0,0,0,.03);text-align:center;min-width:90px
+}
+.stat-item .sv{font-size:20px;font-weight:800;color:#f59e0b}
+.stat-item .sl{font-size:11px;color:#999;margin-top:2px}
+
+/* ===== Exhibition Grid ===== */
+.expo-grid{
+  max-width:1200px;margin:0 auto;padding:0 24px 40px;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px
+}
+.expo-card{
+  background:#fff;border-radius:14px;overflow:hidden;
+  box-shadow:0 2px 16px rgba(0,0,0,.04);transition:transform .2s,box-shadow .2s;
+  display:flex;flex-direction:column
+}
+.expo-card:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.08)}
+.expo-header{padding:20px 20px 0;display:flex;align-items:flex-start;gap:12px}
+.expo-icon{font-size:36px;flex-shrink:0}
+.expo-info{flex:1;min-width:0}
+.expo-info h3{font-size:16px;font-weight:700;color:#0a1628;line-height:1.4;margin-bottom:6px}
+.expo-meta{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.expo-meta span{
+  font-size:11px;padding:3px 10px;border-radius:6px;background:#f0f4f8;color:#666;
+  display:flex;align-items:center;gap:4px
+}
+.expo-body{padding:0 20px;flex:1}
+.expo-body p{font-size:13px;color:#666;line-height:1.7;margin-bottom:12px}
+.expo-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.expo-tags span{
+  font-size:10px;padding:2px 8px;border-radius:4px;background:#e8f4fd;color:#00a8e8
+}
+.expo-footer{
+  padding:12px 20px 16px;display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid #f0f0f0;margin:0 12px
+}
+.status-badge{
+  font-size:11px;font-weight:700;padding:4px 12px;border-radius:12px
+}
+.status-upcoming{background:#fff3e0;color:#f59e0b}
+.status-ongoing{background:#e8f8f0;color:#00b894}
+.status-past{background:#f0f0f0;color:#999}
+.btn-inquiry-sm{
+  padding:6px 16px;border-radius:8px;border:2px solid #f59e0b;background:#fff;
+  color:#f59e0b;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit
+}
+.btn-inquiry-sm:hover{background:#f59e0b;color:#fff}
+
+/* ===== Inquiry Modal ===== */
+.modal-overlay{
+  display:none;position:fixed;inset:0;z-index:300;
+  background:rgba(10,22,40,.55);backdrop-filter:blur(4px);
+  align-items:center;justify-content:center;padding:20px
+}
+.modal-overlay.show{display:flex}
+.modal-box{
+  background:#fff;border-radius:18px;width:100%;max-width:460px;
+  padding:32px 28px;box-shadow:0 20px 60px rgba(0,0,0,.2);
+  position:relative;animation:slideUp .25s ease;max-height:90vh;overflow-y:auto
+}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.modal-box h3{font-size:20px;font-weight:800;color:#0a1628;margin-bottom:4px}
+.modal-box .modal-sub{font-size:12px;color:#999;margin-bottom:20px}
+.modal-close{position:absolute;top:16px;right:20px;font-size:22px;color:#ccc;cursor:pointer;background:none;border:none}
+.modal-close:hover{color:#333}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:12px;font-weight:600;color:#666;margin-bottom:5px}
+.form-group input,.form-group textarea,.form-group select{
+  width:100%;padding:10px 14px;border:1px solid #e0e4e8;border-radius:10px;
+  font-size:14px;color:#333;font-family:inherit;transition:border-color .2s;background:#fafbfc
+}
+.form-group input:focus,.form-group textarea:focus{outline:none;border-color:#f59e0b;background:#fff;box-shadow:0 0 0 3px rgba(245,158,11,.08)}
+.form-group textarea{resize:vertical;min-height:80px}
+.form-group .required{color:#ff6b6b;margin-left:2px}
+.form-row{display:flex;gap:12px}
+.form-row .form-group{flex:1}
+.btn-submit{
+  width:100%;padding:12px 0;border:none;border-radius:12px;
+  background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;
+  font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:4px
+}
+.btn-submit:hover{box-shadow:0 6px 20px rgba(245,158,11,.3)}
+.btn-submit:disabled{opacity:.5;cursor:not-allowed}
+
+/* ===== Edit Modal ===== */
+.edit-modal-overlay{
+  display:none;position:fixed;inset:0;z-index:400;
+  background:rgba(10,22,40,.55);backdrop-filter:blur(4px);
+  align-items:center;justify-content:center;padding:20px
+}
+.edit-modal-overlay.show{display:flex}
+.edit-modal-box{
+  background:#fff;border-radius:18px;width:100%;max-width:500px;
+  padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.2);
+  position:relative;animation:slideUp .25s ease;max-height:90vh;overflow-y:auto
+}
+.edit-modal-box h3{font-size:18px;font-weight:800;color:#0a1628;margin-bottom:20px}
+.edit-close{position:absolute;top:14px;right:18px;font-size:20px;color:#bbb;cursor:pointer;background:none;border:none}
+.edit-close:hover{color:#333}
+.edit-form-group{margin-bottom:14px}
+.edit-form-group label{display:block;font-size:12px;font-weight:600;color:#666;margin-bottom:5px}
+.edit-form-group input,.edit-form-group select,.edit-form-group textarea{
+  width:100%;padding:9px 12px;border:1px solid #e0e4e8;border-radius:8px;
+  font-size:13px;font-family:inherit;color:#333;background:#fafbfc;transition:border-color .2s
+}
+.edit-form-group input:focus,.edit-form-group select:focus,.edit-form-group textarea:focus{outline:none;border-color:#f59e0b;background:#fff;box-shadow:0 0 0 3px rgba(245,158,11,.08)}
+.edit-form-group textarea{resize:vertical;min-height:60px}
+.edit-form-row{display:flex;gap:12px}
+.edit-form-row .edit-form-group{flex:1}
+.edit-submit{
+  width:100%;padding:10px 0;border:none;border-radius:10px;
+  background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;
+  font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:4px
+}
+.edit-submit:hover{box-shadow:0 4px 16px rgba(245,158,11,.3)}
+.edit-submit.danger{background:#ff6b6b}
+.edit-submit.danger:hover{box-shadow:0 4px 16px rgba(255,107,107,.3)}
+
+/* ===== Floating button ===== */
+.fab{
+  position:fixed;bottom:28px;right:28px;z-index:200;
+  background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;
+  border:none;border-radius:56px;padding:14px 24px;font-size:15px;font-weight:700;
+  cursor:pointer;box-shadow:0 6px 24px rgba(245,158,11,.35);
+  transition:transform .25s,box-shadow .25s;font-family:inherit;display:flex;align-items:center;gap:8px
+}
+.fab:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(245,158,11,.45)}
+
+/* ===== Toast ===== */
+.toast{
+  position:fixed;bottom:100px;left:50%;transform:translateX(-50%);z-index:500;
+  background:#0a1628;color:#fff;padding:10px 24px;border-radius:10px;
+  font-size:13px;opacity:0;transition:opacity .3s;pointer-events:none
+}
+.toast.show{opacity:1}
+.empty-state{grid-column:1/-1;text-align:center;padding:60px 20px}
+.empty-icon{font-size:56px;margin-bottom:16px}
+.empty-state p{font-size:14px;color:#999}
+
+/* ===== Publish bar ===== */
+.pub-bar{
+  display:flex;gap:12px;align-items:center;margin-top:16px;padding:12px 16px;
+  background:#fff3e0;border-radius:10px
+}
+.pub-bar .pub-btn{
+  padding:8px 20px;border:none;border-radius:8px;
+  background:#f59e0b;color:#fff;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit
+}
+.pub-bar .pub-btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* ===== Footer ===== */
+footer{
+  text-align:center;padding:32px 24px;color:#999;font-size:12px;border-top:1px solid #eee
+}
+footer a{color:#00a8e8}
+
+@media(max-width:900px){
+  .nav-links{display:none}
+  .nav-toggle{display:flex}
+}
+@media(max-width:640px){
+  .masthead h1{font-size:24px}
+  .expo-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-brand">
+    <div class="nav-logo"><div class="logo-box"><img src="logo.png" alt=""></div><div class="logo-text"><span class="logo-main">以鲜国际</span><span class="logo-sub">恒兴集团旗下战略合作伙伴</span></div></div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">首页</a></li>
+    <li><a href="index.html#about">关于我们</a></li>
+    <li><a href="index.html#services">核心业务</a></li>
+        <li><a href="tools.html" class="nav-tools">🧭 国际代采</a></li>
+    <li><a href="products.html" style="background:#00d4aa;color:#fff!important;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700">🤝 代销分销</a></li>
+    <li><a href="coldchain.html" class="nav-cold">❄️ 冷链服务</a></li>
+    <li><a href="exhibitions.html" style="background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff!important;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700">🎪 食品展会</a></li>
+    <li><a href="reports.html" class="nav-halal">📋 老庄报告</a></li>
+    <li><a href="index.html#contact">联系我们</a></li>
+  </ul>
+  <div class="nav-toggle" onclick="this.classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Admin Bar -->
+<div class="admin-bar" id="adminBar">
+  <div><strong>🔒 管理模式</strong> <span style="opacity:.7;font-size:11px;margin-left:8px">可新增/编辑/删除展会，审核待审内容</span></div>
+  <div style="display:flex;gap:8px">
+    <button class="admin-btn" onclick="toggleReview()">📋 审核队列</button>
+    <button class="admin-btn add" onclick="openEditModal()">＋ 新增展会</button>
+    <button class="admin-btn" onclick="logoutAdmin()">🔓 退出</button>
+  </div>
+</div>
+
+<!-- Review Queue -->
+<div class="review-section" id="reviewSection">
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px">
+    <div>
+      <h3 style="margin:0">📋 审核队列 <span style="font-size:11px;font-weight:400;color:#999">— WorkBuddy 自动搜集 + 用户提交</span></h3>
+    </div>
+    <button class="admin-btn add" onclick="openEditModal()" style="padding:8px 18px;font-size:13px">＋ 手动新增展会</button>
+  </div>
+  <div class="review-stats" id="reviewStats"></div>
+  <div id="reviewQueue"></div>
+  <div class="pub-bar" id="pubBar" style="display:none">
+    <span style="font-size:12px;color:#666">已通过的内容已自动展示在页面中</span>
+  </div>
+</div>
+
+<!-- Masthead -->
+<div class="masthead">
+  <h1>🎪 食品进出口展会</h1>
+  <p>汇集国内外食品、肉类、水产、冷链行业展会信息，协助海外客户来华参展、国内客户出海参展</p>
+</div>
+
+<!-- Filter -->
+<div class="filter-wrap">
+  <button class="filter-btn active" data-cat="all">全部</button>
+  <button class="filter-btn" data-cat="domestic">🇨🇳 国内展会</button>
+  <button class="filter-btn" data-cat="intl">🌍 国际展会</button>
+</div>
+
+<!-- Stats -->
+<div class="stats-bar" id="statsBar"></div>
+
+<!-- Exhibition Grid -->
+<div class="expo-grid" id="expoGrid"></div>
+
+<!-- Inquiry Modal -->
+<div class="modal-overlay" id="inquiryModal">
+  <div class="modal-box" id="modalContent"></div>
+</div>
+
+<!-- Edit Modal -->
+<div class="edit-modal-overlay" id="editModal">
+  <div class="edit-modal-box" id="editModalContent"></div>
+</div>
+
+<!-- Floating Button -->
+<button class="fab" onclick="openInquiryModal()">💬 参展咨询</button>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<footer>
+  <p>&copy; 2026 以鲜国际供应链（广东）有限公司 · EverFresh Supply Chain</p>
+  <p style="margin-top:4px"><a href="index.html">返回首页</a></p>
+</footer>
+
+<script>
+// ===== Admin =====
+var ADMIN_PASSWORD = 'laozhuang2026';
+var ADMIN_KEY = 'ef_expo_admin';
+var REVIEW_KEY = 'ef_expo_review_queue';
+var DECISIONS_KEY = 'ef_expo_review_decisions';
+var PUBLISHED_KEY = 'ef_expo_published';
+var USER_KEY = 'ef_expo_user';
+var isAdmin = sessionStorage.getItem(ADMIN_KEY) === '1';
+
+// ===== Default Exhibition Data =====
+var DEFAULT_EXPO = [
+  { id: 'd1', name: '第19届郑州冷冻冷藏食品博览会', date: '2026-08-08', endDate: '2026-08-10', location: '郑州国际会展中心', organizer: '中国食品工业协会', category: 'domestic', emoji: '🧊', desc: '冷冻冷藏食品行业年度盛会，涵盖冷冻畜禽肉、水产、速冻面点、火锅食材等品类，同期举办冷冻食品产业高峰论坛。', tags: ['冷冻食品','肉类','水产'], url: '#' },
+  { id: 'd2', name: '第17届上海国际冷冻冷藏食品博览会', date: '2026-08-26', endDate: '2026-08-28', location: '上海新国际博览中心', organizer: '上海市冷冻食品行业协会', category: 'domestic', emoji: '🧊', desc: '聚焦冷冻畜禽肉、冷冻水产、冷冻果蔬、速冻调理食品，吸引海内外500+展商，预计专业观众超5万人。', tags: ['冷冻食品','肉类','进口'], url: '#' },
+  { id: 'd3', name: 'SIAL 西雅国际食品展（广州）', date: '2026-09-03', endDate: '2026-09-05', location: '广州保利世贸博览馆', organizer: '法国高美爱博展览集团', category: 'intl', emoji: '🌍', desc: '全球知名食品饮料展览品牌，广州站定位华南进出口贸易枢纽，1500+展商覆盖14大主题专区，预计吸引70+国家采购商。', tags: ['国际贸易','全品类','进口食品'], url: '#' },
+  { id: 'd4', name: '第12届广州国际渔业博览会', date: '2026-09-10', endDate: '2026-09-12', location: '广州广交会展馆', organizer: '中国水产流通与加工协会', category: 'domestic', emoji: '🐟', desc: '华南最大渔业博览会，同期举办水产养殖展、海洋牧场展，覆盖80+国家采购商，是水产进出口贸易的重要对接平台。', tags: ['水产','渔业','进出口'], url: '#' },
+  { id: 'd5', name: '中食展（广州）暨广州国际食品食材展', date: '2026-09-10', endDate: '2026-09-12', location: '广州广交会展馆B区', organizer: '中国食品土畜进出口商会', category: 'intl', emoji: '🍽️', desc: '近2000家企业参展，含Food2China、Wine to China等国际板块，专注食品食材进出口贸易对接。', tags: ['国际贸易','食品食材','进出口'], url: '#' },
+  { id: 'd6', name: '亚洲生鲜供应链博览会', date: '2026-06-24', endDate: '2026-06-26', location: '上海新国际博览中心', organizer: '慕尼黑展览（上海）有限公司', category: 'domestic', emoji: '🚛', desc: '亚洲领先的生鲜供应链专业展会，聚焦冷链物流、生鲜加工包装、智能零售，同期举办冷链高峰论坛。', tags: ['生鲜冷链','物流','供应链'], url: '#' },
+  { id: 'd7', name: '中国国际肉类产业周暨第二十四届中国国际肉类工业展览会', date: '2026-09-22', endDate: '2026-09-24', location: '青岛世界博览城', organizer: '中国肉类协会', category: 'domestic', emoji: '🥩', desc: '中国肉类行业规模最大、规格最高的年度盛会，汇聚国内外肉类生产、加工、贸易全产业链企业。', tags: ['肉类','加工','贸易'], url: '#' },
+  { id: 'd8', name: 'Anuga 2027 世界食品博览会', date: '2027-10-09', endDate: '2027-10-13', location: '德国科隆国际展览中心', organizer: '科隆国际展览有限公司', category: 'intl', emoji: '🌍', desc: '全球规模最大的食品饮料专业展会，每两年一届，汇聚100+国家7000+展商，是进入欧洲及全球市场的最佳平台。', tags: ['国际贸易','全品类','欧洲市场'], url: '#' },
+  { id: 'd9', name: 'Gulfood 2027 海湾食品展', date: '2027-02-22', endDate: '2027-02-26', location: '阿联酋迪拜世界贸易中心', organizer: '迪拜世界贸易中心', category: 'intl', emoji: '🌍', desc: '全球最大年度食品饮料采购展，8500+展商来自195个国家，是中东北非及南亚市场的核心贸易平台。', tags: ['国际贸易','Halal','中东北非'], url: '#' },
+  { id: 'd10', name: '第29届中国国际渔业博览会（青岛渔博会）', date: '2026-10-28', endDate: '2026-10-30', location: '青岛国际会展中心（红岛馆）', organizer: '中国国际贸易促进委员会农业行业分会', category: 'intl', emoji: '🐟', desc: '亚洲规模最大、全球三大渔展之一的顶级水产贸易盛会，展出面积11.5万平米，汇聚47个国家和地区1562家参展企业，吸引139国4.5万+专业买家，是全球水产业生产商与采购商的核心对接平台。', tags: ['水产','渔业','国际贸易'], url: 'https://www.seafood-expo.com/' },
+  { id: 'd11', name: '第29届FHC上海环球食品展', date: '2026-11-10', endDate: '2026-11-12', location: '上海新国际博览中心', organizer: '上海市餐饮烹饪行业协会、上海博华国际展览有限公司', category: 'domestic', emoji: '🍽️', desc: '国内首屈一指的综合性进口食品贸易平台，展览面积突破20万平米，汇聚50+国家及地区展团，预计吸引18万+专业观众。涵盖肉制品、海鲜、乳制品、烘焙、休闲食品、高端食材供应链等全产业链板块。', tags: ['进口食品','全品类','高端食材'], url: 'https://www.fhcchina.com/' },
+  { id: 'd12', name: '第九届中国国际进口博览会（CIIE 2026）— 食品及农产品展区', date: '2026-11-05', endDate: '2026-11-10', location: '上海国家会展中心', organizer: '中华人民共和国商务部、上海市人民政府', category: 'intl', emoji: '🌍', desc: '全球首个以进口为主题的国家级展会，食品及农产品展区是最受关注的板块之一。汇聚100+国家及地区的优质食品农产品企业，乳制品、肉制品、水海产品、蔬果、饮料及酒类等全产业链展示，是海外品牌进入中国市场的最高规格通道。', tags: ['国家级','进口博览会','全品类'], url: 'https://www.ciie.org/' },
+  { id: 'd13', name: '第28届全球高端食品展览会（深圳全食展 Allfood Expo）', date: '2027-02-23', endDate: '2027-02-25', location: '深圳国际会展中心（宝安新馆）9/10/12号馆', organizer: '龙品锡展览', category: 'domestic', emoji: '🍽️', desc: '食品行业开年风向标，预计展览面积15万平米，吸引2800+优质展商和18万+专业观众。覆盖进口食品、休闲食品、乳品饮料、冰淇淋、冷链食品、餐饮食材、预制菜与调味品、加工与包装等全品类，配套全国食品新渠道大会、冰淇淋与速冻食品营销论坛等高价值活动。', tags: ['全品类','预制菜','渠道对接'], url: 'https://www.foodszs.com/' },
+];
+
+function loadExpo() {
+  var list = JSON.parse(JSON.stringify(DEFAULT_EXPO));
+  // Load published items
+  try {
+    var pub = JSON.parse(localStorage.getItem(PUBLISHED_KEY) || '[]');
+    pub.forEach(function(item) { list.push(item); });
+  } catch(e) {}
+  // Load user-added items  
+  try {
+    var user = JSON.parse(localStorage.getItem(USER_KEY) || '[]');
+    user.forEach(function(item) { list.push(item); });
+  } catch(e) {}
+  // Dedup by id
+  var seen = {}; var dedup = [];
+  list.forEach(function(item) {
+    if (!seen[item.id]) { seen[item.id] = true; dedup.push(item); }
+  });
+  return dedup;
+}
+
+var exhibitions = loadExpo();
+
+function saveUserExpo() {
+  var userItems = exhibitions.filter(function(x) { return x.id && x.id.indexOf('u') === 0; });
+  localStorage.setItem(USER_KEY, JSON.stringify(userItems));
+}
+var nextUserId = (function() {
+  var max = 0;
+  exhibitions.forEach(function(x) {
+    if (x.id && x.id.indexOf('u') === 0) { var n = parseInt(x.id.slice(1)); if (n > max) max = n; }
+  });
+  return max + 1;
+})();
+
+// ===== Render =====
+function getStatus(item) {
+  var today = new Date().toISOString().slice(0,10);
+  var start = item.date;
+  var end = item.endDate || item.date;
+  if (today < start) return 'upcoming';
+  if (today > end) return 'past';
+  return 'ongoing';
+}
+
+function updateStats(cat) {
+  var filtered = cat === 'all' ? exhibitions : exhibitions.filter(function(x) { return x.category === cat; });
+  var upcoming = filtered.filter(function(x) { return getStatus(x) === 'upcoming'; }).length;
+  var ongoing = filtered.filter(function(x) { return getStatus(x) === 'ongoing'; }).length;
+  var past = filtered.filter(function(x) { return getStatus(x) === 'past'; }).length;
+  document.getElementById('statsBar').innerHTML =
+    '<div class="stat-item"><div class="sv">' + filtered.length + '</div><div class="sl">展会总数</div></div>' +
+    '<div class="stat-item"><div class="sv" style="color:#00b894">' + upcoming + '</div><div class="sl">即将举办</div></div>' +
+    '<div class="stat-item"><div class="sv" style="color:#f59e0b">' + ongoing + '</div><div class="sl">进行中</div></div>' +
+    '<div class="stat-item"><div class="sv" style="color:#999">' + past + '</div><div class="sl">已结束</div></div>';
+}
+
+function renderExpo(cat) {
+  var grid = document.getElementById('expoGrid');
+  var filtered = cat === 'all' ? exhibitions.slice() : exhibitions.filter(function(x) { return x.category === cat; });
+  filtered.sort(function(a,b) { return a.date.localeCompare(b.date); });
+
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="empty-state"><div class="empty-icon">📭</div><p>暂无此类展会信息</p></div>';
+    return;
+  }
+
+  var statusMap = { upcoming: '即将举办', ongoing: '🔥 进行中', past: '已结束' };
+  var statusClassMap = { upcoming: 'status-upcoming', ongoing: 'status-ongoing', past: 'status-past' };
+
+  grid.innerHTML = filtered.map(function(e) {
+    var st = getStatus(e);
+    return '<div class="expo-card">' +
+      '<div class="card-actions' + (isAdmin ? ' show' : '') + '">' +
+        '<button class="btn-edit" onclick="event.stopPropagation();openEditModal(\'' + e.id + '\')" title="编辑">✎</button>' +
+        '<button class="btn-del" onclick="event.stopPropagation();deleteExpo(\'' + e.id + '\')" title="删除">✕</button>' +
+      '</div>' +
+      '<div class="expo-header">' +
+        '<div class="expo-icon">' + (e.emoji || '🎪') + '</div>' +
+        '<div class="expo-info">' +
+          '<h3>' + esc(e.name) + '</h3>' +
+          '<div class="expo-meta">' +
+            '<span>📅 ' + e.date + (e.endDate && e.endDate !== e.date ? ' ~ ' + e.endDate : '') + '</span>' +
+            '<span>📍 ' + esc(e.location) + '</span>' +
+          '</div>' +
+          '<div class="expo-meta"><span>🏢 ' + esc(e.organizer) + '</span></div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="expo-body">' +
+        '<p>' + esc(e.desc) + '</p>' +
+        '<div class="expo-tags">' + (e.tags || []).map(function(t) { return '<span>' + esc(t) + '</span>'; }).join('') + '</div>' +
+      '</div>' +
+      '<div class="expo-footer">' +
+        '<span class="status-badge ' + statusClassMap[st] + '">' + statusMap[st] + '</span>' +
+        (st !== 'past' ? '<button class="btn-inquiry-sm" onclick="event.stopPropagation();openInquiryModal(\'' + esc(e.name) + '\')">💬 参展咨询</button>' : '') +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function refreshAll() {
+  exhibitions = loadExpo();
+  var activeBtn = document.querySelector('.filter-btn.active');
+  var cat = activeBtn ? activeBtn.getAttribute('data-cat') : 'all';
+  renderExpo(cat);
+  updateStats(cat);
+}
+
+// ===== Filter =====
+document.querySelector('.filter-wrap').addEventListener('click', function(e) {
+  if (e.target.classList.contains('filter-btn')) {
+    document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+    e.target.classList.add('active');
+    var cat = e.target.getAttribute('data-cat');
+    renderExpo(cat);
+    updateStats(cat);
+  }
+});
+
+// ===== Init Review Queue with auto-fetched exhibitions =====
+if (!localStorage.getItem(REVIEW_KEY)) {
+  var AUTO_REVIEW = [
+    {
+      id: 'rq1', name: '2026上海国际渔业博览会', date: '2026-08-28', endDate: '2026-08-30',
+      location: '上海新国际博览中心', organizer: '中国水产学会', category: 'domestic', emoji: '🐟',
+      desc: '华东地区规模最大的渔业博览会，涵盖水产养殖、捕捞、加工、冷链全产业链，预计展商600+，专业观众3万+。',
+      tags: ['水产','渔业','加工'], url: '#', addedDate: '2026-06-12'
+    },
+    {
+      id: 'rq2', name: '中国国际进口博览会 2026（食品及农产品展区）', date: '2026-11-05', endDate: '2026-11-10',
+      location: '上海国家会展中心', organizer: '商务部、上海市人民政府', category: 'intl', emoji: '🌍',
+      desc: '进博会是全球首个以进口为主题的国家级展会，食品及农产品展区是最受欢迎的展区之一，汇聚100+国家优质食品农产品。',
+      tags: ['进口博览会','国家级','全品类'], url: '#', addedDate: '2026-06-12'
+    },
+    {
+      id: 'rq3', name: '巴西国际食品展（FISPAL FOOD）2026', date: '2026-06-16', endDate: '2026-06-19',
+      location: '巴西圣保罗 Expo Center Norte', organizer: 'Informa Markets', category: 'intl', emoji: '🌍',
+      desc: '南美最大食品饮料展会，汇聚巴西及南美各国优质肉类、禽类、谷物供应商，是中国进口商的直采对接平台。',
+      tags: ['南美','牛肉','禽肉'], url: '#', addedDate: '2026-06-12'
+    },
+    {
+      id: 'rq4', name: 'Seafood Expo Asia 2026 亚洲海鲜展', date: '2026-09-08', endDate: '2026-09-10',
+      location: '新加坡滨海湾金沙会展中心', organizer: 'Diversified Communications', category: 'intl', emoji: '🐟',
+      desc: '亚洲最具国际影响力的海鲜专业展，汇聚全球水产供应商和东南亚买家，是拓展亚洲水产市场的重要平台。',
+      tags: ['水产','国际贸易','亚洲'], url: '#', addedDate: '2026-06-12'
+    },
+    {
+      id: 'rq5', name: '深圳国际冷冻冷藏食品博览会', date: '2026-07-15', endDate: '2026-07-17',
+      location: '深圳国际会展中心（宝安）', organizer: '深圳市冷冻食品行业协会', category: 'domestic', emoji: '🧊',
+      desc: '华南冷冻食品专业展，聚焦粤港澳大湾区市场，覆盖冷冻肉禽、冷冻水产、冷冻预制菜等品类。',
+      tags: ['冷冻食品','粤港澳','预制菜'], url: '#', addedDate: '2026-06-12'
+    }
+  ];
+  localStorage.setItem(REVIEW_KEY, JSON.stringify(AUTO_REVIEW));
+}
+
+// ===== Init =====
+updateAdminUI();
+refreshAll();
+
+// ===== Admin Functions =====
+function checkPassword() {
+  var pw = prompt('请输入管理密码：');
+  if (pw === ADMIN_PASSWORD) {
+    isAdmin = true;
+    sessionStorage.setItem(ADMIN_KEY, '1');
+    updateAdminUI();
+    refreshAll();
+    window.scrollTo({top:0,behavior:'smooth'});
+  } else if (pw !== null) {
+    alert('密码错误');
+  }
+}
+
+function logoutAdmin() {
+  isAdmin = false;
+  sessionStorage.removeItem(ADMIN_KEY);
+  updateAdminUI();
+  refreshAll();
+}
+
+function updateAdminUI() {
+  var bar = document.getElementById('adminBar');
+  if (isAdmin) {
+    bar.classList.add('show');
+    document.getElementById('reviewSection').classList.add('show');
+    renderReviewQueue();
+  } else {
+    bar.classList.remove('show');
+    document.getElementById('reviewSection').classList.remove('show');
+  }
+}
+
+// ===== Review Queue =====
+function loadReviewQueue() {
+  try { return JSON.parse(localStorage.getItem(REVIEW_KEY) || '[]'); } catch(e) { return []; }
+}
+function saveReviewQueue(q) {
+  localStorage.setItem(REVIEW_KEY, JSON.stringify(q));
+}
+function loadDecisions() {
+  try { return JSON.parse(localStorage.getItem(DECISIONS_KEY) || '{}'); } catch(e) { return {}; }
+}
+function saveDecisions(d) {
+  localStorage.setItem(DECISIONS_KEY, JSON.stringify(d));
+}
+function loadPublished() {
+  try { return JSON.parse(localStorage.getItem(PUBLISHED_KEY) || '[]'); } catch(e) { return []; }
+}
+function savePublished(p) {
+  localStorage.setItem(PUBLISHED_KEY, JSON.stringify(p));
+}
+
+function getReviewStats() {
+  var queue = loadReviewQueue();
+  var decisions = loadDecisions();
+  var p = 0, a = 0, r = 0;
+  queue.forEach(function(item) {
+    var d = decisions[item.id];
+    if (d === 'approved') a++;
+    else if (d === 'rejected') r++;
+    else p++;
+  });
+  return {pending:p, approved:a, rejected:r, total:queue.length};
+}
+
+function toggleReview() {
+  var sec = document.getElementById('reviewSection');
+  sec.classList.toggle('show');
+  if (sec.classList.contains('show')) renderReviewQueue();
+}
+
+function renderReviewQueue() {
+  var queue = loadReviewQueue();
+  var decisions = loadDecisions();
+  var stats = getReviewStats();
+
+  document.getElementById('reviewStats').innerHTML =
+    '<span class="rs-pending">⏳ 待审：' + stats.pending + '</span>' +
+    '<span class="rs-approved">✅ 已通过：' + stats.approved + '</span>' +
+    '<span class="rs-rejected">❌ 已拒绝：' + stats.rejected + '</span>';
+
+  var container = document.getElementById('reviewQueue');
+  if (!queue.length) {
+    container.innerHTML = '<div class="review-empty"><div class="empty-icon">📭</div><p>审核队列为空</p></div>';
+    return;
+  }
+
+  var sorted = queue.slice().sort(function(a,b) {
+    var da = decisions[a.id], db = decisions[b.id];
+    if (da === 'approved' || da === 'rejected') da = 'z' + da; else da = 'a';
+    if (db === 'approved' || db === 'rejected') db = 'z' + db; else db = 'a';
+    if (da !== db) return da < db ? -1 : 1;
+    return (b.addedDate || '').localeCompare(a.addedDate || '');
+  });
+
+  container.innerHTML = sorted.map(function(item) {
+    var dec = decisions[item.id];
+    var isIntl = item.category === 'intl';
+    var badgeText = isIntl ? '国际' : '国内';
+    var badgeClass = isIntl ? 'intl' : 'domestic';
+    var decided = (dec === 'approved' || dec === 'rejected');
+    var statusHtml = '';
+    if (dec === 'approved') statusHtml = '<span class="ri-status approved-status">✓ 通过</span><span class="ri-undo" onclick="undoDecision(\'' + item.id + '\')">↩ 撤销</span>';
+    else if (dec === 'rejected') statusHtml = '<span class="ri-status rejected-status">✕ 拒绝</span><span class="ri-undo" onclick="undoDecision(\'' + item.id + '\')">↩ 撤销</span>';
+    return '<div class="review-item' + (decided ? ' decided' : '') + '">' +
+      '<span class="ri-badge ' + badgeClass + '">' + badgeText + '</span>' +
+      '<div class="ri-text">' +
+        '<div class="ri-title">' + esc(item.name) + '</div>' +
+        '<div class="ri-meta">' + esc(item.location) + ' · ' + item.date + (item.addedDate ? ' · 添加于 ' + item.addedDate : '') + '</div>' +
+      '</div>' +
+      '<div class="ri-actions">' + statusHtml +
+        '<button onclick="approveItem(\'' + item.id + '\')" title="通过">✅</button>' +
+        '<button onclick="rejectItem(\'' + item.id + '\')" title="拒绝">❌</button>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function approveItem(id) {
+  var decisions = loadDecisions();
+  decisions[id] = 'approved';
+  saveDecisions(decisions);
+  var queue = loadReviewQueue();
+  var item = queue.find(function(x) { return x.id === id; });
+  if (item) {
+    var published = loadPublished();
+    published = published.filter(function(x) { return x.id !== id; });
+    published.push(item);
+    savePublished(published);
+  }
+  renderReviewQueue();
+  refreshAll();
+  showToast('✅ 已通过，展会已展示在页面中');
+}
+
+function rejectItem(id) {
+  var decisions = loadDecisions();
+  decisions[id] = 'rejected';
+  saveDecisions(decisions);
+  var published = loadPublished();
+  savePublished(published.filter(function(x) { return x.id !== id; }));
+  renderReviewQueue();
+  refreshAll();
+  showToast('❌ 已拒绝');
+}
+
+function undoDecision(id) {
+  var decisions = loadDecisions();
+  delete decisions[id];
+  saveDecisions(decisions);
+  var published = loadPublished();
+  savePublished(published.filter(function(x) { return x.id !== id; }));
+  renderReviewQueue();
+  refreshAll();
+  showToast('↩ 已撤销，恢复待审状态');
+}
+
+// ===== Edit/Add Exhibition =====
+var editingId = null;
+
+function openEditModal(id) {
+  if (!isAdmin) { checkPassword(); return; }
+  editingId = id || null;
+  var e = id ? exhibitions.find(function(x) { return x.id === id; }) : null;
+
+  var html =
+    '<button class="edit-close" onclick="closeEditModal()">✕</button>' +
+    '<h3>' + (e ? '✏️ 编辑展会' : '➕ 新增展会') + '</h3>' +
+    '<div class="edit-form-group"><label>展会名称 <span style="color:#ff6b6b">*</span></label>' +
+      '<input type="text" id="epName" value="' + (e ? e.name : '') + '" placeholder="如：SIAL西雅国际食品展（广州）"></div>' +
+    '<div class="edit-form-row">' +
+      '<div class="edit-form-group"><label>分类</label>' +
+        '<select id="epCat"><option value="domestic"' + (e && e.category === 'domestic' ? ' selected' : '') + '>🇨🇳 国内展会</option>' +
+        '<option value="intl"' + (e && e.category === 'intl' ? ' selected' : '') + '>🌍 国际展会</option></select></div>' +
+      '<div class="edit-form-group"><label>Emoji</label>' +
+        '<input type="text" id="epEmoji" value="' + (e ? e.emoji : '🎪') + '" placeholder="🎪" style="width:60px;text-align:center;font-size:18px"></div>' +
+    '</div>' +
+    '<div class="edit-form-row">' +
+      '<div class="edit-form-group"><label>开始日期 <span style="color:#ff6b6b">*</span></label>' +
+        '<input type="date" id="epDate" value="' + (e ? e.date : '') + '"></div>' +
+      '<div class="edit-form-group"><label>结束日期</label>' +
+        '<input type="date" id="epEndDate" value="' + (e ? (e.endDate || e.date) : '') + '"></div>' +
+    '</div>' +
+    '<div class="edit-form-group"><label>地点 <span style="color:#ff6b6b">*</span></label>' +
+      '<input type="text" id="epLocation" value="' + (e ? e.location : '') + '" placeholder="如：广州保利世贸博览馆"></div>' +
+    '<div class="edit-form-group"><label>主办方</label>' +
+      '<input type="text" id="epOrganizer" value="' + (e ? e.organizer : '') + '" placeholder="如：法国高美爱博展览集团"></div>' +
+    '<div class="edit-form-group"><label>展会描述</label>' +
+      '<textarea id="epDesc" placeholder="简要描述展会规模、特色和参展价值">' + (e ? e.desc : '') + '</textarea></div>' +
+    '<div class="edit-form-group"><label>标签（逗号分隔）</label>' +
+      '<input type="text" id="epTags" value="' + (e ? (e.tags || []).join(', ') : '') + '" placeholder="如：国际贸易,进口食品,冷链"></div>' +
+    '<div class="edit-form-group"><label>链接（选填）</label>' +
+      '<input type="text" id="epUrl" value="' + (e ? (e.url || '') : '') + '" placeholder="展会官网或详情链接"></div>' +
+    '<button class="edit-submit" onclick="saveEdit()">' + (e ? '💾 保存修改' : '➕ 添加展会') + '</button>' +
+    (e && e.id.indexOf('u') === 0 ? '<button class="edit-submit danger" style="margin-top:8px" onclick="deleteExpo(\'' + e.id + '\');closeEditModal()">🗑 删除此展会</button>' : '');
+
+  document.getElementById('editModalContent').innerHTML = html;
+  document.getElementById('editModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeEditModal() {
+  document.getElementById('editModal').classList.remove('show');
+  document.body.style.overflow = '';
+  editingId = null;
+}
+
+function saveEdit() {
+  var name = document.getElementById('epName').value.trim();
+  var date = document.getElementById('epDate').value;
+  var location = document.getElementById('epLocation').value.trim();
+  if (!name || !date || !location) { alert('请填写展会名称、日期和地点'); return; }
+
+  var tagsRaw = document.getElementById('epTags').value.trim();
+  var tags = tagsRaw ? tagsRaw.split(',').map(function(s) { return s.trim(); }).filter(function(s) { return s; }) : [];
+  var endDate = document.getElementById('epEndDate').value || date;
+
+  var data = {
+    id: editingId || ('u' + nextUserId),
+    name: name,
+    category: document.getElementById('epCat').value,
+    emoji: document.getElementById('epEmoji').value.trim() || '🎪',
+    date: date,
+    endDate: endDate,
+    location: location,
+    organizer: document.getElementById('epOrganizer').value.trim(),
+    desc: document.getElementById('epDesc').value.trim(),
+    tags: tags,
+    url: document.getElementById('epUrl').value.trim() || '#'
+  };
+
+  if (editingId) {
+    var idx = exhibitions.findIndex(function(x) { return x.id === editingId; });
+    if (idx >= 0) exhibitions[idx] = data;
+  } else {
+    exhibitions.push(data);
+    nextUserId++;
+  }
+  saveUserExpo();
+  closeEditModal();
+  refreshAll();
+  showToast(editingId ? '✅ 展会已更新' : '✅ 展会已添加');
+}
+
+function deleteExpo(id) {
+  if (!isAdmin) return;
+  var e = exhibitions.find(function(x) { return x.id === id; });
+  if (!confirm('确定删除「' + e.name + '」？')) return;
+  exhibitions = exhibitions.filter(function(x) { return x.id !== id; });
+  saveUserExpo();
+  refreshAll();
+  showToast('🗑 已删除');
+}
+
+// ===== Inquiry =====
+function openInquiryModal(expoName) {
+  var mc = document.getElementById('modalContent');
+  var currentName = expoName || '';
+  mc.innerHTML =
+    '<button class="modal-close" onclick="closeInquiryModal()">✕</button>' +
+    '<h3>💬 参展咨询</h3>' +
+    '<div class="modal-sub">填写信息后，我们将为您的参展需求提供专业协助</div>' +
+    '<form id="inqForm" onsubmit="submitInquiry(event)">' +
+      '<div class="form-group"><label>感兴趣的展会</label>' +
+        '<input type="text" id="inqExpo" value="' + esc(currentName) + '" placeholder="展会名称（选填）"></div>' +
+      '<div class="form-group"><label>参展意向</label>' +
+        '<select id="inqIntent">' +
+          '<option value="">请选择</option>' +
+          '<option value="海外客户来华参展">海外客户来华参展</option>' +
+          '<option value="国内客户出海参展">国内客户出海参展</option>' +
+          '<option value="展位预订">展位预订</option>' +
+          '<option value="观展考察">观展考察</option>' +
+          '<option value="其他咨询">其他咨询</option></select></div>' +
+      '<div class="form-row">' +
+        '<div class="form-group"><label>姓名 <span class="required">*</span></label>' +
+          '<input type="text" id="inqName" placeholder="您的称呼" required></div>' +
+        '<div class="form-group"><label>公司名称</label>' +
+          '<input type="text" id="inqCompany" placeholder="公司名称（选填）"></div>' +
+      '</div>' +
+      '<div class="form-group"><label>手机号码 <span class="required">*</span></label>' +
+        '<input type="tel" id="inqPhone" placeholder="方便我们联系您" required></div>' +
+      '<div class="form-group"><label>留言</label>' +
+        '<textarea id="inqMsg" placeholder="请描述您的需求，如目标市场、预算、期望展位规模等"></textarea></div>' +
+      '<button type="submit" class="btn-submit">📩 提交咨询</button></form>';
+  document.getElementById('inquiryModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeInquiryModal() {
+  document.getElementById('inquiryModal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+function submitInquiry(e) {
+  e.preventDefault();
+  var name = document.getElementById('inqName').value.trim();
+  var phone = document.getElementById('inqPhone').value.trim();
+  if (!name || !phone) { alert('请填写姓名和手机号码'); return; }
+  var inquiries = [];
+  try { inquiries = JSON.parse(localStorage.getItem('ef_expo_inquiries') || '[]'); } catch(e) {}
+  inquiries.push({
+    time: new Date().toLocaleString('zh-CN'),
+    expo: document.getElementById('inqExpo').value.trim(),
+    intent: document.getElementById('inqIntent').value,
+    name: name,
+    company: document.getElementById('inqCompany').value.trim(),
+    phone: phone,
+    message: document.getElementById('inqMsg').value.trim()
+  });
+  localStorage.setItem('ef_expo_inquiries', JSON.stringify(inquiries));
+  document.getElementById('modalContent').innerHTML =
+    '<button class="modal-close" onclick="closeInquiryModal()">✕</button>' +
+    '<div style="text-align:center;padding:20px 0">' +
+      '<div style="font-size:48px;margin-bottom:12px">✅</div>' +
+      '<h4 style="font-size:18px;color:#00b894;margin-bottom:8px">咨询已提交！</h4>' +
+      '<p style="font-size:13px;color:#888">我们将在24小时内与您联系，协助您规划参展方案。</p>' +
+      '<button class="btn-submit" style="margin-top:16px;background:#e0e4e8;color:#666" onclick="closeInquiryModal()">关闭</button></div>';
+}
+
+// Modal overlay clicks
+document.getElementById('inquiryModal').addEventListener('click', function(e) { if (e.target === this) closeInquiryModal(); });
+document.getElementById('editModal').addEventListener('click', function(e) { if (e.target === this) closeEditModal(); });
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    if (document.getElementById('editModal').classList.contains('show')) closeEditModal();
+    else if (document.getElementById('inquiryModal').classList.contains('show')) closeInquiryModal();
+  }
+  if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) { e.preventDefault(); if (!isAdmin) checkPassword(); }
+});
+
+// Masthead double-click admin
+document.querySelector('.masthead').addEventListener('dblclick', function() { if (!isAdmin) checkPassword(); });
+
+// ===== Utility =====
+function esc(s) { if (!s) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(function() { t.classList.remove('show'); }, 2500);
+}
+</script>
+<script>
+// Mobile nav toggle
+(function() {
+var toggle = document.querySelector('.nav-toggle');
+var navLinks = document.querySelector('.nav-links');
+if (toggle && navLinks) {
+  toggle.addEventListener('click', function() {
+    var isOpen = navLinks.style.display === 'flex';
+    navLinks.style.display = isOpen ? 'none' : 'flex';
+    navLinks.style.position = isOpen ? '' : 'absolute';
+    navLinks.style.top = isOpen ? '' : '60px';
+    navLinks.style.left = isOpen ? '' : '0';
+    navLinks.style.right = isOpen ? '' : '0';
+    navLinks.style.background = isOpen ? '' : 'rgba(10,22,40,.98)';
+    navLinks.style.flexDirection = isOpen ? '' : 'column';
+    navLinks.style.padding = isOpen ? '' : '20px 32px';
+    navLinks.style.gap = isOpen ? '' : '16px';
+    navLinks.style.borderBottom = isOpen ? '' : '1px solid rgba(255,255,255,.08)';
+  });
+}
+})();
+</script>
+</body>
+</html>
