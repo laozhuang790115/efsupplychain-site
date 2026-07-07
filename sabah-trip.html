@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>沙巴·仙本那·吉隆坡 7天6晚行程</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f5f5f0;
+    color: #2C2C2A;
+    line-height: 1.65;
+  }
+  .container { max-width: 680px; margin: 0 auto; padding: 20px 16px 48px; }
+
+  .header { text-align: center; margin-bottom: 22px; }
+  .header h1 { font-size: 22px; font-weight: 600; color: #2C2C2A; margin-bottom: 6px; }
+  .header .subtitle { font-size: 14px; color: #5F5E5A; }
+
+  .overview-bar { display: flex; gap: 6px; margin-bottom: 20px; }
+  .overview-segment { padding: 10px 8px; border-radius: 10px; text-align: center; }
+  .seg-kk { background: #E6F1FB; color: #0C447C; border: 1px solid #B5D4F4; }
+  .seg-bang { background: #E1F5EE; color: #085041; border: 1px solid #9FE1CB; flex: 2; }
+  .seg-kl { background: #EEEDFE; color: #3C3489; border: 1px solid #CECBF6; }
+  .seg-title { font-size: 13px; font-weight: 600; }
+  .seg-days { font-size: 11px; opacity: 0.85; margin-top: 2px; }
+
+  .section-title { font-size: 15px; font-weight: 600; margin: 22px 0 12px; color: #2C2C2A; }
+
+  .flights-box { background: white; border-radius: 12px; padding: 16px; border: 1px solid #e0e0d8; }
+  .flight-row { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f0f0e8; font-size: 13px; }
+  .flight-row:last-child { border-bottom: none; }
+  .flight-badge { background: #FAEEDA; color: #633806; padding: 3px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; white-space: nowrap; border: 1px solid #EF9F27; }
+  .flight-route { flex: 1; color: #2C2C2A; }
+  .flight-time { font-size: 12px; color: #5F5E5A; white-space: nowrap; }
+
+  .day-card { background: white; border-radius: 12px; margin-bottom: 14px; overflow: hidden; border: 1px solid #e0e0d8; }
+  .day-header { padding: 13px 16px; display: flex; align-items: center; gap: 10px; }
+  .day-num { font-size: 18px; font-weight: 700; }
+  .day-date { font-size: 13px; }
+  .day-tag { margin-left: auto; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 6px; text-align: right; }
+  .day-body { padding: 4px 16px 16px; }
+  .day-section { margin-bottom: 10px; }
+  .day-section:last-child { margin-bottom: 0; }
+  .sec-label { font-size: 12px; font-weight: 600; color: #888780; margin-bottom: 3px; }
+  .sec-content { font-size: 14px; color: #2C2C2A; }
+  .sec-content .hl { font-weight: 600; }
+  .stay-tag { display: inline-block; background: #f5f5f0; color: #5F5E5A; padding: 3px 10px; border-radius: 6px; font-size: 12px; margin-top: 6px; }
+
+  .kk .day-header { background: #E6F1FB; }
+  .kk .day-num, .kk .day-date { color: #0C447C; }
+  .kk .day-tag { background: #B5D4F4; color: #0C447C; }
+
+  .bang .day-header { background: #E1F5EE; }
+  .bang .day-num, .bang .day-date { color: #085041; }
+  .bang .day-tag { background: #9FE1CB; color: #085041; }
+
+  .kl .day-header { background: #EEEDFE; }
+  .kl .day-num, .kl .day-date { color: #3C3489; }
+  .kl .day-tag { background: #CECBF6; color: #3C3489; }
+
+  .tips-box { background: #FAEEDA; border: 1px solid #EF9F27; border-radius: 12px; padding: 16px; margin-top: 8px; }
+  .tips-box h2 { font-size: 15px; font-weight: 600; color: #633806; margin-bottom: 10px; }
+  .tip { font-size: 13px; color: #412402; margin-bottom: 9px; padding-left: 14px; position: relative; line-height: 1.6; }
+  .tip:last-child { margin-bottom: 0; }
+  .tip::before { content: ""; position: absolute; left: 0; top: 9px; width: 5px; height: 5px; border-radius: 50%; background: #BA7517; }
+  .tip strong { color: #633806; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>沙巴 · 仙本那 · 吉隆坡</h1>
+    <div class="subtitle">7天6晚 ｜ 6.12 – 6.18 ｜ 亚庇2晚 + 邦邦岛3晚 + 吉隆坡1晚</div>
+  </div>
+
+  <div class="overview-bar">
+    <div class="overview-segment seg-kk">
+      <div class="seg-title">亚庇</div>
+      <div class="seg-days">D1-D2 · 2晚</div>
+    </div>
+    <div class="overview-segment seg-bang">
+      <div class="seg-title">邦邦岛 / 仙本那</div>
+      <div class="seg-days">D3-D6上午 · 3晚</div>
+    </div>
+    <div class="overview-segment seg-kl">
+      <div class="seg-title">吉隆坡</div>
+      <div class="seg-days">D6晚-D7 · 1晚</div>
+    </div>
+  </div>
+
+  <div class="section-title">航班信息汇总</div>
+  <div class="flights-box">
+    <div class="flight-row">
+      <span class="flight-badge">D1 7/12</span>
+      <span class="flight-route">深圳 → 亚庇</span>
+      <span class="flight-time">15:00 落地</span>
+    </div>
+    <div class="flight-row">
+      <span class="flight-badge">D3 7/14</span>
+      <span class="flight-route">亚庇 → 斗湖（50min）</span>
+      <span class="flight-time">推荐 07:40 起飞</span>
+    </div>
+    <div class="flight-row">
+      <span class="flight-badge">D6 7/17</span>
+      <span class="flight-route">斗湖 → 吉隆坡（2h50min）</span>
+      <span class="flight-time">17:00 起飞 · 19:45 落地</span>
+    </div>
+    <div class="flight-row">
+      <span class="flight-badge">D7 7/18</span>
+      <span class="flight-route">吉隆坡 → 深圳</span>
+      <span class="flight-time">15:00 起飞</span>
+    </div>
+  </div>
+
+  <div class="section-title">每日详细行程</div>
+
+  <div class="day-card kk">
+    <div class="day-header">
+      <span class="day-num">D1</span>
+      <span class="day-date">7/12 周六</span>
+      <span class="day-tag">亚庇 · 抵达日</span>
+    </div>
+    <div class="day-body">
+      <div class="day-section">
+        <div class="sec-label">下午</div>
+        <div class="sec-content">15:00 落地亚庇机场 → 打车入住加雅街附近酒店</div>
+      </div>
+      <div class="day-section">
+        <div class="sec-label">打卡</div>
+        <div class="sec-content"><span class="hl">水上清真寺</span> · <span class="hl">沙巴大学粉色清真寺</span>（外景）→ 丹绒亚路海滩等候世界级火烧云日落</div>
+      </div>
+      <div class="day-section">
+        <div class="sec-label">晚餐 · 加雅街</div>
+        <div class="sec-content">佑记肉骨茶 · 沙巴烤翅 · 榴莲甜品</div>
+      </div>
+      <span class="stay-tag">住：亚庇市区</span>
+    </div>
+  </div>
+
+  <div class="day-card kk">
+    <div class="day-header">
+      <span class="day-num">D2</span>
+      <span class="day-date">7/13 周日</span>
+      <span class="day-tag">亚庇 · Klias红树林</span>
+    </div>
+    <div class="day-body">
+      <div class="day-section">
+        <div class="sec-label">全天</div>
+        <div class="sec-content">出发Klias红树林：游船观赏<span class="hl">野生长鼻猴</span> · 落日 · 夜间<span class="hl">萤火虫</span></div>
+      </div>
+      <div class="day-section">
+        <div class="sec-label">晚间</div>
+        <div class="sec-content">返回市区，收拾行李，预定次日早班机</div>
+      </div>
+      <span class="stay-tag">住：亚庇市区（推荐次日 07:40 亚庇飞斗湖，50min 航程）</span>
+    </div>
+  </div>
+
+  <div class="day-card bang">
+    <div class="day-header">
+      <span class="day-num">D3</span>
+      <span class="day-date">7/14 周一</span>
+      <span class="day-tag">邦邦岛 · 上岛日 · 仙本那 Day1</span>
+    </div>
+    <div class="day-body">
+      <div class="day-section">
+        <div class="sec-label">上午 · 转场</div>
+        <div class="sec-content">07:40 亚庇飞斗湖 → 度假村专车接送 1h 至仙本那码头</div>
+      </div>
+      <div class="day-section">
+        <div class="sec-label">中午 · 登岛</div>
+        <div class="sec-content">12:30 度假村专属快艇（45min）登邦邦岛，办理入住（沙屋/水屋）</div>
+      </div>
+      <div class="day-section">
+        <div class="sec-label">下午</div>
+        <div class="sec-content">白沙滩自由浮潜 · 岸边找<span class="hl">野生海龟</span> · 无边泳池 · 海龟保育园参观</div>
+      </div>
+      <div class="day-section">
+        <div class="sec-label">晚间</div>
+        <div class="sec-content">度假村自助晚餐 · 夜间海龟放生科普（小额捐赠可选）</div>
+      </div>
+      <span class="stay-tag">住：邦邦岛（沙屋/水屋）</span>
+    </div>
+  </div>
+
+  <div class="day-card bang">
+    <div class="day-header">
+      <span class="day-num">D4</span>
+      <span class="day-date">7/15 周二</span>
+      <span class="day-tag">邦邦岛 · 敦沙卡兰海洋公园 · 仙本那 Day2</span>
+    </div>
+    <div class="day-body">
+      <div class="day-section">
+        <div class="sec-label">08:00 出海 · 经典四岛路线</div>
+        <div class="sec-content">
+          1. <span class="hl">波德加亚岛</span>：远观巴瑶族海上木屋村落（备糖果赠孩童，不发现金）<br>
+          2. <span class="hl">珍珠岛（睡美人岛）</span>：攀爬 600 级台阶登顶，360° 俯瞰七色渐变玻璃海（必备运动鞋）<br>
+          3. <span class="hl">曼达布安岛</span>：白沙滩午餐、浅滩浮潜，密集珊瑚鱼群、偶遇海龟<br>
+          4. <span class="hl">军舰岛</span>：超长拖尾白沙滩、果冻海漫步、浅水找小丑鱼
+        </div>
+      </div>
+      <div class="day-section">
+        <div class="sec-label">16:30 返程</div>
+        <div class="sec-content">返回邦邦岛，沙滩落日 + 酒店晚餐</div>
+      </div>
+      <span class="stay-tag">住：邦邦岛</span>
+    </div>
+  </div>
+
+  <div class="day-card bang">
+    <div class="day-header">
+      <span class="day-num">D5</span>
+      <span class="day-date">7/16 周三</span>
+      <span class="day-tag">邦邦岛 · 马达京跳岛 · 仙本那 Day3</span>
+    </div>
+    <div class="day-body">
+      <div class="day-section">
+        <div class="sec-label">出海跳岛（度假村免费，前一日前台预约）</div>
+        <div class="sec-content">
+          <span class="hl">马达京</span>：大小岛海上断桥 · 网红拖尾沙滩 · 海底邮筒打卡 · 高频浮潜遇海龟<br>
+          <span class="hl">汀巴汀巴</span>：双面海秘境 · 退潮赤脚穿行玻璃浅滩
+        </div>
+      </div>
+      <div class="day-section">
+        <div class="sec-label">午后回岛</div>
+        <div class="sec-content">皮划艇环岛 · 沙滩躺平 · 自选海岛 SPA</div>
+      </div>
+      <span class="stay-tag">住：邦邦岛</span>
+    </div>
+  </div>
+
+  <div class="day-card kl">
+    <div class="day-header">
+      <span class="day-num">D6</span>
+      <span class="day-date">7/17 周四</span>
+      <span class="day-tag">离岛 → 吉隆坡 · 仙本那 Day4</span>
+    </div>
+    <div class="day-body">
+      <div class="day-section">
+        <div class="sec-label">上午 · 仙本那第4天休闲</div>
+        <div class="sec-content">岸边无限浮潜 · 沙滩休憩</div>
+      </div>
+      <div class="day-section">
+        <div class="sec-label">离岛转场</div>
+        <div class="sec-content">10:30 度假村快艇离岛 → 专车 1h 至斗湖机场 → 17:00 斗湖飞吉隆坡（19:45 落地）</div>
+      </div>
+      <div class="day-section">
+        <div class="sec-label">晚间 · 吉隆坡市区</div>
+        <div class="sec-content">入住双子塔周边酒店 → 独立广场 → 苏丹钟楼 → I&#10084;KL 城市画廊 → 茨厂街小吃</div>
+      </div>
+      <div class="day-section">
+        <div class="sec-label">阿罗街夜市</div>
+        <div class="sec-content"><span class="hl">黄亚华烤翅</span> · 沙爹 · <span class="hl">猫山王榴莲</span></div>
+      </div>
+      <span class="stay-tag">住：吉隆坡双子塔周边</span>
+    </div>
+  </div>
+
+  <div class="day-card kl">
+    <div class="day-header">
+      <span class="day-num">D7</span>
+      <span class="day-date">7/18 周五</span>
+      <span class="day-tag">吉隆坡 · 返程</span>
+    </div>
+    <div class="day-body">
+      <div class="day-section">
+        <div class="sec-label">上午</div>
+        <div class="sec-content">经典线：双子塔 → 购物线：中央市场 + 茨厂街采购白咖啡、肉骨茶香料伴手礼</div>
+      </div>
+      <div class="day-section">
+        <div class="sec-label">返程</div>
+        <div class="sec-content">11:00 退房出发机场（市区 → KL 机场约 1h）→ 12:30 值机候机 → 15:00 准时飞回深圳</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">行程提醒</div>
+  <div class="tips-box">
+    <h2>需注意的时间衔接</h2>
+    <div class="tip"><strong>D3 早班机衔接：</strong>07:40 起飞需 06:40 到机场，市区出发约 06:00。D2 红树林萤火虫游船通常 20:00-21:00 才返回市区，注意早点休息别误机。</div>
+    <div class="tip"><strong>D6 斗湖候机空档：</strong>10:30 离岛到约 12:15 到机场，17:00 航班前有近 5 小时等待。斗湖机场很小，建议带好充电宝和娱乐设备。</div>
+    <div class="tip"><strong>D6 晚间行程建议调整：</strong>19:45 落地吉隆坡，到酒店约 20:30-21:00。独立广场、苏丹钟楼等白天景点夜间可能已关门，建议当晚主攻阿罗街夜市 + 茨厂街觅食，白天景点留到 D7 上午。</div>
+    <div class="tip"><strong>D7 返程时间偏紧：</strong>15:00 国际航班需提前 2-3h 值机。11:00 退房出发、12:30 到机场，时间够但余量不大。双子塔观景台建议一早去（10:00 开门），购物控制好时间。</div>
+    <div class="tip"><strong>敦沙卡兰海洋公园（D4）：</strong>珍珠岛 600 级台阶体力消耗大，必备运动鞋。四岛路线全天 8:00-16:30，做好防晒和补水。</div>
+    <div class="tip"><strong>巴瑶族村落（D4）：</strong>备糖果赠孩童即可，切勿发现金，避免引发安全隐患。</div>
+    <div class="tip"><strong>浮潜装备：</strong>邦邦岛 3 晚建议自备面镜呼吸管 + 水母衣，度假村提供但自备更卫生舒适。</div>
+  </div>
+
+</div>
+</body>
+</html>
