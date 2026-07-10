@@ -154,8 +154,23 @@ body{
 .job-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
 .job-tags span{font-size:10px;padding:2px 8px;border-radius:4px;background:#e8f4fd;color:#00a8e8}
 .job-req{margin-bottom:12px}
+.job-req-title{font-size:12px;font-weight:700;color:#8b5cf6;margin-bottom:6px;display:flex;align-items:center;gap:4px}
 .job-req li{font-size:12px;color:#666;line-height:1.8;list-style:none;padding-left:16px;position:relative}
 .job-req li::before{content:'•';position:absolute;left:0;color:#8b5cf6;font-weight:700}
+.job-req li.plus::before{content:'+';color:#f59e0b;font-weight:700}
+.job-whyus{
+  background:linear-gradient(135deg,#f8f4ff,#ede9fe);border-radius:10px;padding:14px 16px;margin-bottom:12px
+}
+.job-whyus-title{font-size:12px;font-weight:700;color:#7c3aed;margin-bottom:8px;display:flex;align-items:center;gap:4px}
+.job-whyus li{font-size:12px;color:#5b21b6;line-height:1.8;list-style:none;padding-left:16px;position:relative}
+.job-whyus li::before{content:'✦';position:absolute;left:0;color:#8b5cf6;font-size:10px}
+.job-whowant{
+  background:#fefce8;border-radius:10px;padding:14px 16px;margin-bottom:12px
+}
+.job-whowant-title{font-size:12px;font-weight:700;color:#92400e;margin-bottom:8px;display:flex;align-items:center;gap:4px}
+.job-whowant li{font-size:12px;color:#78350f;line-height:1.8;list-style:none;padding-left:16px;position:relative}
+.job-whowant li::before{content:'→';position:absolute;left:0;color:#f59e0b;font-weight:700}
+.job-experience,.job-education{background:#f0f4f8;color:#555}
 .job-footer{
   padding:12px 20px 16px;display:flex;align-items:center;justify-content:space-between;
   border-top:1px solid #f0f0f0;margin:0 12px
@@ -341,14 +356,14 @@ footer a{color:#00a8e8}
 
 <!-- Hero -->
 <div class="hero">
-  <h1>加入<span class="accent">以鲜国际</span></h1>
-  <p>全球水产品进口供应链的赛道，连接厄瓜多尔、印尼、智利等9大产地，覆盖国内10+城市网络</p>
+  <h1>加入<span class="accent">以鲜国际</span> · 1688虾类蓝海赛道</h1>
+  <p>进口虾类1688蓝海市场，厄瓜多尔白虾仅30+供应商，蒙氏虾/牡丹虾几乎空白 —— 我们是源头，不是二道贩子</p>
   <div class="hero-tags">
-    <span>🌍 全球供应链</span>
-    <span>🐟 水产深耕</span>
-    <span>📈 快速成长</span>
-    <span>🤝 战略伙伴</span>
-    <span>🏙️ 深圳总部</span>
+    <span>🛒 1688蓝海</span>
+    <span>🐟 进口源头</span>
+    <span>📈 从零起步</span>
+    <span>🤝 扁平团队</span>
+    <span>💰 项目分红</span>
   </div>
 </div>
 
@@ -357,24 +372,24 @@ footer a{color:#00a8e8}
   <h2>为什么选择以鲜国际？</h2>
   <div class="why-grid">
     <div class="why-card c-purple">
-      <div class="w-icon">🌐</div>
-      <h4>全球直采网络</h4>
-      <p>9个海外产地直连（巴西、厄瓜多尔、智利、泰国、马来西亚、印尼、越南、阿曼、俄罗斯），源头资源一手掌握</p>
+      <div class="w-icon">🛒</div>
+      <h4>1688品类蓝海</h4>
+      <p>进口虾类1688仅30+供应商，蒙氏虾/牡丹虾几乎空白，抢先占位就是抢占市场红利</p>
     </div>
     <div class="why-card c-blue">
-      <div class="w-icon">🚀</div>
-      <h4>快速成长平台</h4>
-      <p>创业型团队，扁平化管理，个人成长空间大，核心岗位直接接触国际供应链全链路</p>
+      <div class="w-icon">🐟</div>
+      <h4>进口源头不是二道贩子</h4>
+      <p>9大海外产地直连，成本优势15-25%，品控自控，分销商愿意跟着源头走</p>
     </div>
     <div class="why-card c-green">
-      <div class="w-icon">🤝</div>
-      <h4>顶级战略伙伴</h4>
-      <p>恒兴集团、全联集采、温氏食品、中国水产等7大战略合作伙伴，行业资源丰富</p>
+      <div class="w-icon">🚀</div>
+      <h4>从零到一的机会</h4>
+      <p>店铺从零起步，你亲手搭建的全链路经验和成果，写在自己的履历上</p>
     </div>
     <div class="why-card c-gold">
-      <div class="w-icon">📍</div>
-      <h4>深圳核心位置</h4>
-      <p>总部位于深圳南山区神州数码国际东塔，立足粤港澳大湾区，辐射全国10+城市</p>
+      <div class="w-icon">💰</div>
+      <h4>扁平团队+项目分红</h4>
+      <p>老板直接定方向不层层汇报，核心岗位可谈项目分红或股权激励</p>
     </div>
   </div>
 </div>
@@ -385,9 +400,9 @@ footer a{color:#00a8e8}
 <!-- Filter -->
 <div class="filter-wrap">
   <button class="filter-btn active" data-cat="all">全部岗位</button>
-  <button class="filter-btn" data-cat="procurement">🛒 采购</button>
+  <button class="filter-btn" data-cat="operations">🛒 1688运营</button>
+  <button class="filter-btn" data-cat="procurement">🦐 采购</button>
   <button class="filter-btn" data-cat="sales">📈 销售</button>
-  <button class="filter-btn" data-cat="operations">⚙️ 运营</button>
   <button class="filter-btn" data-cat="function">🏢 职能</button>
 </div>
 
@@ -464,80 +479,104 @@ var isAdmin = sessionStorage.getItem(ADMIN_KEY) === '1';
 // ===== Default Job Data =====
 var DEFAULT_JOBS = [
   {
-    id: 'j1', title: '水产采购经理', category: 'procurement', emoji: '🛒',
-    location: '深圳', type: '全职', salary: '15-25K', urgent: true,
-    tags: ['南美白虾','进口采购','供应商管理'],
-    desc: '负责南美白虾、带鱼、鱿鱼等核心品类的海外供应商开发与采购执行，对接厄瓜多尔、印尼、智利等产地，确保采购成本竞争力和供应稳定性。',
+    id: 'j1', title: '1688运营专员', category: 'operations', emoji: '🖥️',
+    location: '深圳', type: '全职', salary: '6-10K', urgent: false,
+    experience: '1-2年', education: '大专及以上',
+    tags: ['1688运营','一件代发','数据分析','分销商管理'],
+    desc: '协助运营经理完成1688店铺日常维护与分销商服务，监控店铺数据，整理素材库，处理售后问题。',
+    duties: [
+      '协助运营经理完成1688店铺日常维护：商品上架、标题优化、主图更换、SKU管理',
+      '处理分销商日常咨询、订单跟进、物流状态跟踪',
+      '监控店铺数据（展现量、点击率、转化率），整理日报/周报',
+      '协助活动报名（大促/行业活动），准备活动素材',
+      '售后处理：生鲜客诉响应、退换货协调、差评跟进',
+      '产品素材库整理：详情页图片、短视频、朋友圈文案归档'
+    ],
     requirements: [
-      '3年以上水产品/冻品进口采购经验，熟悉南美白虾品类优先',
-      '具备英文商务沟通能力，能与海外供应商直接对接',
-      '熟悉进口报关、冷链物流流程',
-      '有供应商资源或产地直采经验者优先'
+      '1年以上1688/淘宝/天猫任一平台运营经验，熟悉后台操作',
+      '会用生意参谋或类似数据分析工具',
+      '沟通能力强，有耐心处理分销商/客户问题',
+      '加分项：接触过食品/生鲜类目，或自己开过网店',
+      '加分项：会简单PS或Canva做图'
+    ],
+    whyUs: [
+      '不是螺丝钉：小团队，你能看到自己做的每件事对结果的影响',
+      '品类壁垒高：进口虾不是谁都能做的，这段经历有含金量',
+      '成长空间大：店铺从零起步，你跟着一起长大，能力和职级都有空间'
     ],
     url: '#'
   },
   {
-    id: 'j2', title: '大客户销售经理', category: 'sales', emoji: '📈',
-    location: '深圳/广州', type: '全职', salary: '12-20K + 提成', urgent: true,
-    tags: ['B2B销售','餐饮渠道','经销商'],
-    desc: '负责公司进口水产冻品在国内市场的B2B销售，开拓餐饮连锁、商超、经销商渠道，维护客户关系并完成销售目标。',
+    id: 'j2', title: '1688运营经理 ⭐ 核心招聘', category: 'operations', emoji: '🚀',
+    location: '深圳', type: '全职', salary: '12-18K', urgent: true,
+    experience: '3-5年', education: '大专及以上',
+    tags: ['1688操盘','分销体系','网销宝','SKU策略','一件代发'],
+    desc: '独立操盘1688诚信通店铺，从零搭建一件代发分销体系，制定SKU策略和推广方案，数据驱动运营决策。',
+    duties: [
+      '独立操盘：从零搭建1688诚信通企业店铺，完成注册认证、店铺装修、商品上架、类目资质提交全流程',
+      'SKU策略：根据公司进口虾类产品线（厄瓜多尔白虾/北极甜虾/蒙氏虾/牡丹虾等），制定商品矩阵、定价策略、主推爆款路径',
+      '一件代发体系搭建：设置分销规则、制定分润方案、制作分销商素材包，招募和管理淘宝/拼多多/抖音小店分销商',
+      '推广获客：制定网销宝/标王投放策略，控制ROI和获客成本；策划1688直播和活动报名',
+      '数据驱动：通过生意参谋等工具监控核心指标（展现、点击率、转化率、客单价），每周输出运营分析报告',
+      '冷链履约管控：协同供应链团队，监控冷链发货时效和包装质量，降低生鲜客诉率',
+      '竞品监控：跟踪1688虾类竞品动态，及时调整运营策略'
+    ],
     requirements: [
-      '2年以上冻品/食品B2B销售经验',
-      '有餐饮连锁、商超、批发商客户资源者优先',
-      '熟悉华南市场，能适应出差',
-      '目标导向，具备较强的商务谈判能力'
+      '3年以上1688/Alibaba.com运营经验，独立操盘过月销50万以上店铺',
+      '有食品/生鲜类目经验优先（非必需但强烈加分），了解冷链物流和生鲜售后管理',
+      '精通生意参谋、网销宝、标王等1688核心工具',
+      '熟悉一件代发/分销模式，有招募和管理分销商的实际经验',
+      '数据敏感度高，能从数字里找出问题和机会',
+      '加分项：有从零搭建店铺的成功案例',
+      '加分项：懂基础视觉（能指导详情页设计方向，不必自己做图）'
+    ],
+    whoWeWant: [
+      '不是来打工的，是来一起做事的 —— 店铺是你的作品，不是任务清单',
+      '有供应链思维 —— 不只盯着前台数据，会倒推库存、成本、冷链交付',
+      '动手能力强 —— 初期没有助理，你得自己能上架、能盯数据、能聊客户',
+      '结果导向 —— 我们不看工时看产出，达成目标你自由安排'
+    ],
+    whyUs: [
+      '赛道好：进口虾类1688蓝海市场，厄瓜多尔白虾仅30+供应商，蒙氏虾/牡丹虾几乎空白',
+      '底子好：我们是进口源头，不是二道贩子，成本优势15-25%，品控自控',
+      '决策快：扁平团队，老板直接定方向，不需要层层汇报',
+      '成长绑定：店铺从零到一是你亲手做出来的，后续晋升运营总监或拿项目分红，都是写在自己履历上的东西'
     ],
     url: '#'
   },
   {
-    id: 'j3', title: '跨境电商运营专员', category: 'operations', emoji: '⚙️',
-    location: '深圳', type: '全职', salary: '8-14K', urgent: false,
-    tags: ['1688','抖店','电商运营'],
-    desc: '负责公司1688店铺和抖店的日常运营，包括产品上架、活动报名、数据分析、体验分维护，提升店铺流量和转化率。',
-    requirements: [
-      '1年以上1688或抖音电商运营经验',
-      '熟悉水产/食品类目优先',
-      '具备数据分析能力，能独立优化产品详情页',
-      '有责任心，执行力强'
+    id: 'j3', title: '1688运营总监', category: 'operations', emoji: '👑',
+    location: '深圳', type: '全职', salary: '20-28K', urgent: false,
+    experience: '5年以上', education: '大专及以上',
+    tags: ['品牌运营','分销规模化','团队建设','供应链协同','全渠道策略'],
+    desc: '统筹1688批发渠道战略规划，打造虾类品类标杆品牌，搭建千人级分销商网络，组建运营团队。',
+    duties: [
+      '全渠道策略制定：统筹1688批发渠道战略，制定年度运营目标和季度执行计划',
+      '品牌化运营：将以鲜国际打造为1688虾类品类标杆，建立"进口源头品质虾"的品牌认知',
+      '分销体系规模化：搭建千人级分销商网络，设计不同层级的分销商权益和激励政策',
+      '跨平台协同：联动抖音/淘宝/拼多多下游分销商生态，打造"源头供货+下游矩阵"的流量闭环',
+      '团队建设：组建运营团队（运营经理+专员），制定KPI考核和培训体系',
+      '供应链协同：与采购、冷库、物流团队对接，推动履约效率优化和成本控制',
+      '新品开发：根据下游数据和1688品类趋势，反向推动上游采购开发新SKU（如刺身级冷水虾礼盒）'
     ],
-    url: '#'
-  },
-  {
-    id: 'j4', title: '报关与单证专员', category: 'function', emoji: '📄',
-    location: '深圳', type: '全职', salary: '7-12K', urgent: false,
-    tags: ['报关报检','单证','进口清关'],
-    desc: '负责进口报关报检单证制作与提交，跟踪清关进度，协调海关、检验检疫及货代，确保货物顺利通关。',
     requirements: [
-      '2年以上进口报关报检经验',
-      '熟悉水产品进口相关法规和流程',
-      '持有报关员资格证优先',
-      '做事细致，责任心强'
+      '5年以上1688/阿里巴巴运营经验，3年以上管理经验',
+      '必须有食品/生鲜类目成功案例：操盘过月销百万级水产/食品1688店铺',
+      '深度理解B2B分销和一件代发模式，有规模化分销商管理经验',
+      '出色的数据分析和策略能力，能从生意参谋反推定价、投放、库存决策',
+      '有从零搭建或重大翻盘店铺的经历',
+      '加分项：同时有跨境/外贸经验',
+      '加分项：有1688直播/内容运营经验'
     ],
-    url: '#'
-  },
-  {
-    id: 'j5', title: '新媒体运营（抖音/视频号）', category: 'operations', emoji: '📹',
-    location: '深圳', type: '全职', salary: '8-13K', urgent: false,
-    tags: ['短视频','内容运营','水产知识'],
-    desc: '负责公司抖音号和视频号的内容策划与日常运营，结合水产进口行业特点，打造专业且有传播力的内容。',
-    requirements: [
-      '1年以上短视频运营经验，有从0到1起号经验优先',
-      '会基础拍摄和剪辑（剪映等）',
-      '对水产品/食品行业有兴趣',
-      '有网感，善于捕捉热点'
+    whoWeWant: [
+      '有野心也有耐心 —— 知道怎么从零把事做成，不是只会管成熟盘子',
+      '懂水产或愿意学 —— 虾类的季节性、冷链、关税政策不是电商常识，但你要快速消化',
+      '能带人也能下手 —— 早期团队小，战略你自己定，关键执行也得上手'
     ],
-    url: '#'
-  },
-  {
-    id: 'j6', title: '冷链物流专员', category: 'operations', emoji: '🚛',
-    location: '深圳', type: '全职', salary: '7-11K', urgent: false,
-    tags: ['冷链','仓储','物流调度'],
-    desc: '负责进口冻品的冷链物流协调与调度，对接冷库、冷链运输商，监控全程温控，确保货物品质和时效。',
-    requirements: [
-      '1年以上冷链物流或仓储管理经验',
-      '熟悉深圳及华南冷链物流市场',
-      '有冻品/水产操作经验者优先',
-      '沟通协调能力强'
+    whyUs: [
+      '决策权给到位：运营策略、预算分配、团队搭建，你有充分自主权，老板只看结果',
+      '天花板高：虾类进口供应链有天然壁垒，1688品类蓝海，做成品类第一就是你的行业名片',
+      '回报可期待：表现优异可谈项目分红或股权激励'
     ],
     url: '#'
   }
@@ -599,7 +638,7 @@ function renderJobs(cat) {
 
   var statusMap = { open: '开放投递', urgent: '🔥 急聘', closed: '已关闭' };
   var statusClassMap = { open: 'status-open', urgent: 'status-urgent', closed: 'status-closed' };
-  var catLabel = { procurement: '采购', sales: '销售', operations: '运营', function: '职能' };
+  var catLabel = { procurement: '采购', sales: '销售', operations: '1688运营', function: '职能' };
 
   grid.innerHTML = filtered.map(function(j) {
     var st = getStatus(j);
@@ -622,8 +661,15 @@ function renderJobs(cat) {
       '</div>' +
       '<div class="job-body">' +
         '<p>' + esc(j.desc) + '</p>' +
+        '<div class="job-meta" style="margin-bottom:10px">' +
+          (j.experience ? '<span class="job-experience">🕐 ' + esc(j.experience) + '</span>' : '') +
+          (j.education ? '<span class="job-education">🎓 ' + esc(j.education) + '</span>' : '') +
+        '</div>' +
         '<div class="job-tags">' + (j.tags || []).map(function(t) { return '<span>' + esc(t) + '</span>'; }).join('') + '</div>' +
-        (j.requirements && j.requirements.length ? '<ul class="job-req">' + j.requirements.map(function(r) { return '<li>' + esc(r) + '</li>'; }).join('') + '</ul>' : '') +
+        (j.duties && j.duties.length ? '<div class="job-req-title">📋 岗位职责</div><ul class="job-req">' + j.duties.map(function(r) { return '<li>' + esc(r) + '</li>'; }).join('') + '</ul>' : '') +
+        (j.requirements && j.requirements.length ? '<div class="job-req-title">📝 任职要求</div><ul class="job-req">' + j.requirements.map(function(r) { return '<li' + (r.indexOf('加分项') >= 0 ? ' class="plus"' : '') + '>' + esc(r) + '</li>'; }).join('') + '</ul>' : '') +
+        (j.whoWeWant && j.whoWeWant.length ? '<div class="job-whowant"><div class="job-whowant-title">💡 我们希望你是这样的人</div><ul>' + j.whoWeWant.map(function(r) { return '<li>' + esc(r) + '</li>'; }).join('') + '</ul></div>' : '') +
+        (j.whyUs && j.whyUs.length ? '<div class="job-whyus"><div class="job-whyus-title">✨ 为什么选我们</div><ul>' + j.whyUs.map(function(r) { return '<li>' + esc(r) + '</li>'; }).join('') + '</ul></div>' : '') +
       '</div>' +
       '<div class="job-footer">' +
         '<span class="status-badge ' + statusClassMap[st] + '">' + statusMap[st] + '</span>' +
