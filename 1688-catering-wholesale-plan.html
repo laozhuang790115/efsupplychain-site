@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1688餐饮批发店铺方案 · 以鲜国际</title>
+  <style>
+    :root {
+      --primary: #b91c1c;
+      --primary-light: #dc2626;
+      --accent: #ea580c;
+      --accent-light: #f97316;
+      --teal: #0d9488;
+      --green: #15803d;
+      --bg: #fafaf9;
+      --card: #ffffff;
+      --border: #e7e5e4;
+      --text: #1c1917;
+      --text-muted: #57534e;
+      --tag-blue: #dbeafe;
+      --tag-blue-text: #1e40af;
+      --tag-orange: #fef3c7;
+      --tag-orange-text: #92400e;
+      --tag-green: #d1fae5;
+      --tag-green-text: #065f46;
+      --tag-red: #fee2e2;
+      --tag-red-text: #991b1b;
+      --tag-purple: #ede9fe;
+      --tag-purple-text: #5b21b6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    /* ─── COVER ─── */
+    .cover {
+      background: linear-gradient(135deg, #450a0a 0%, #7f1d1d 40%, #991b1b 80%, #b45309 100%);
+      color: #fff;
+      padding: 80px 48px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover::before {
+      content: "";
+      position: absolute;
+      right: -80px; top: -80px;
+      width: 480px; height: 480px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+    }
+    .cover::after {
+      content: "";
+      position: absolute;
+      right: 60px; bottom: -120px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+    }
+    .cover-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 24px;
+      padding: 6px 16px;
+      font-size: 13px; font-weight: 500;
+      margin-bottom: 24px;
+    }
+    .cover-badge span { font-size: 18px; }
+    .cover h1 {
+      font-size: 38px; font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+    .cover h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, #fbbf24, #fcd34d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .cover-sub {
+      font-size: 17px;
+      opacity: 0.85;
+      max-width: 600px;
+    }
+    .cover-meta {
+      display: flex; gap: 32px; margin-top: 36px;
+      font-size: 13px; opacity: 0.7;
+    }
+    .cover-meta i { font-style: normal; margin-right: 4px; }
+
+    /* ─── NAV ─── */
+    .nav-wrap {
+      position: sticky; top: 0; z-index: 100;
+      background: #fff; border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; gap: 0; overflow-x: auto;
+      padding: 0 24px;
+    }
+    .nav a {
+      display: block; padding: 14px 18px;
+      font-size: 13px; font-weight: 600;
+      color: var(--text-muted); text-decoration: none;
+      white-space: nowrap;
+      border-bottom: 3px solid transparent;
+      transition: all .15s;
+    }
+    .nav a:hover { color: var(--text); border-bottom-color: var(--border); }
+    .nav a.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+    /* ─── CONTENT ─── */
+    .content {
+      max-width: 1100px; margin: 0 auto; padding: 48px 24px 80px;
+    }
+
+    /* ─── SECTION ─── */
+    .section {
+      margin-bottom: 64px;
+      scroll-margin-top: 80px;
+    }
+    .section-title {
+      font-size: 26px; font-weight: 800;
+      margin-bottom: 8px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-title .num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: var(--primary); color: #fff;
+      font-size: 16px; font-weight: 700;
+    }
+    .section-desc {
+      color: var(--text-muted); font-size: 15px;
+      margin-bottom: 28px; max-width: 720px;
+    }
+
+    /* ─── COMPARISON TABLE ─── */
+    .compare-table {
+      width: 100%; border-collapse: separate; border-spacing: 0;
+      border: 1px solid var(--border); border-radius: 12px;
+      overflow: hidden; font-size: 14px;
+    }
+    .compare-table thead th {
+      background: #fafaf9; padding: 12px 16px;
+      text-align: left; font-weight: 700; font-size: 13px;
+      color: var(--text-muted);
+      border-bottom: 2px solid var(--border);
+    }
+    .compare-table thead th:first-child { background: #fff; border-right: 1px solid var(--border); }
+    .compare-table thead th.highlight { background: #fef2f2; color: var(--primary); }
+    .compare-table tbody td {
+      padding: 12px 16px; border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .compare-table tbody td:first-child {
+      font-weight: 600; background: #fafaf9;
+      border-right: 1px solid var(--border);
+    }
+    .compare-table tbody tr:last-child td { border-bottom: none; }
+
+    /* ─── CARDS ─── */
+    .card-grid { display: grid; gap: 20px; }
+    .card-grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .card-grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .card-grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .card-grid-5 { grid-template-columns: repeat(5, 1fr); }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .card-icon {
+      font-size: 32px; margin-bottom: 12px;
+      display: block;
+    }
+    .card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+    .card-accent {
+      border-left: 4px solid var(--primary);
+    }
+    .card-green {
+      border-left: 4px solid var(--green);
+    }
+    .card-teal {
+      border-left: 4px solid var(--teal);
+    }
+
+    /* ─── CLIENT PROFILE ─── */
+    .client-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      position: relative;
+    }
+    .client-card .tier {
+      display: inline-block;
+      font-size: 11px; font-weight: 700;
+      padding: 3px 10px; border-radius: 10px;
+      margin-bottom: 12px;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .tier-a { background: #fef2f2; color: #b91c1c; }
+    .tier-b { background: #fffbeb; color: #92400e; }
+    .tier-c { background: #ecfdf5; color: #065f46; }
+    .client-card h3 { font-size: 18px; margin-bottom: 6px; }
+    .client-card .sub { font-size: 13px; color: var(--text-muted); margin-bottom: 14px; }
+    .client-card ul { list-style: none; padding: 0; }
+    .client-card ul li {
+      font-size: 14px; padding: 4px 0;
+      color: var(--text);
+    }
+    .client-card ul li::before {
+      content: "→ ";
+      color: var(--primary); font-weight: 700;
+    }
+
+    /* ─── SKU TABLE ─── */
+    .sku-table {
+      width: 100%; border-collapse: separate; border-spacing: 0;
+      border: 1px solid var(--border); border-radius: 12px;
+      overflow: hidden; font-size: 14px;
+    }
+    .sku-table thead th {
+      background: #fafaf9; padding: 10px 14px;
+      font-size: 12px; font-weight: 700; text-align: left;
+      color: var(--text-muted); border-bottom: 2px solid var(--border);
+    }
+    .sku-table tbody td {
+      padding: 10px 14px; border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .sku-table tbody tr:last-child td { border-bottom: none; }
+    .sku-cat { font-weight: 700; font-size: 13px; color: var(--primary); }
+
+    /* ─── PRICE TABLE ─── */
+    .price-table {
+      width: 100%; border-collapse: separate; border-spacing: 0;
+      border: 1px solid var(--border); border-radius: 12px;
+      overflow: hidden; font-size: 14px;
+    }
+    .price-table thead th {
+      background: #1c1917; color: #fff;
+      padding: 10px 14px; font-size: 12px; font-weight: 600;
+      text-align: center;
+    }
+    .price-table thead th:first-child { text-align: left; }
+    .price-table tbody td {
+      padding: 10px 14px; border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+    .price-table tbody td:first-child {
+      text-align: left; font-weight: 600;
+    }
+    .price-table tbody tr:last-child td { border-bottom: none; }
+    .price-table .price-bulk {
+      font-weight: 800; color: var(--primary);
+    }
+
+    /* ─── FLOW ─── */
+    .flow-row {
+      display: flex; gap: 16px; align-items: stretch;
+    }
+    .flow-step {
+      flex: 1; background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px;
+      text-align: center; position: relative;
+    }
+    .flow-step::after {
+      content: "→";
+      position: absolute; right: -14px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px; font-weight: 800;
+      color: var(--primary);
+    }
+    .flow-step:last-child::after { display: none; }
+    .flow-step .step-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 30px; height: 30px; border-radius: 50%;
+      background: var(--primary); color: #fff;
+      font-size: 14px; font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .flow-step h4 { font-size: 15px; margin-bottom: 6px; }
+    .flow-step p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+    /* ─── TIMELINE ─── */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+      content: "";
+      position: absolute; left: 11px; top: 8px; bottom: 8px;
+      width: 2px; background: var(--border);
+    }
+    .tl-item { margin-bottom: 32px; position: relative; }
+    .tl-item::before {
+      content: "";
+      position: absolute; left: -28px; top: 6px;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      border: 3px solid var(--primary);
+      background: var(--card);
+    }
+    .tl-phase {
+      font-size: 12px; font-weight: 700; color: var(--primary);
+      text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+    .tl-item h3 { font-size: 18px; margin-bottom: 8px; }
+    .tl-item .tl-meta {
+      font-size: 12px; color: var(--text-muted); font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .tl-item ul { list-style: none; padding: 0; }
+    .tl-item ul li {
+      font-size: 14px; padding: 3px 0;
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .tl-item ul li .tag {
+      display: inline-block;
+      font-size: 10px; font-weight: 800;
+      padding: 1px 6px; border-radius: 4px;
+      white-space: nowrap; margin-top: 3px;
+    }
+    .tag-p0 { background: #fee2e2; color: #991b1b; }
+    .tag-p1 { background: #fef3c7; color: #92400e; }
+    .tag-p2 { background: #dbeafe; color: #1e40af; }
+
+    /* ─── HIGHLIGHT BOX ─── */
+    .highlight-box {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-left: 4px solid var(--primary);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+    .highlight-box h4 {
+      font-size: 15px; font-weight: 700;
+      color: var(--primary); margin-bottom: 8px;
+    }
+    .highlight-box p { font-size: 14px; color: var(--text); }
+
+    .info-box {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+    .info-box h4 {
+      font-size: 15px; font-weight: 700;
+      color: #1e40af; margin-bottom: 8px;
+    }
+    .info-box p { font-size: 14px; color: var(--text); }
+
+    /* ─── TAGS ─── */
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+    .tag {
+      display: inline-flex; align-items: center;
+      padding: 4px 12px; border-radius: 20px;
+      font-size: 13px; font-weight: 600;
+    }
+    .tag-blue { background: var(--tag-blue); color: var(--tag-blue-text); }
+    .tag-orange { background: var(--tag-orange); color: var(--tag-orange-text); }
+    .tag-green { background: var(--tag-green); color: var(--tag-green-text); }
+    .tag-red { background: var(--tag-red); color: var(--tag-red-text); }
+
+    /* ─── MOAT ─── */
+    .moat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .moat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px;
+    }
+    .moat-card .moat-num {
+      font-size: 32px; font-weight: 800;
+      color: var(--primary); opacity: 0.3;
+      margin-bottom: 4px;
+    }
+    .moat-card h4 { font-size: 16px; margin-bottom: 8px; }
+    .moat-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      max-width: 1100px; margin: 0 auto;
+      padding: 32px 24px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 12px; color: var(--text-muted);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .card-grid-2, .card-grid-3, .card-grid-4, .card-grid-5 { grid-template-columns: 1fr; }
+      .moat-grid { grid-template-columns: 1fr; }
+      .flow-row { flex-direction: column; }
+      .flow-step::after { display: none; }
+      .cover { padding: 48px 24px 40px; }
+      .cover h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ COVER ═══════════════ -->
+<div class="cover">
+  <div class="cover-badge"><span>🦐🐟</span> 以鲜国际 · 1688战略方案 v2.0</div>
+  <h1>1688 进口水产<br/><em>餐饮批发</em>店铺方案</h1>
+  <p class="cover-sub">虾类 60%（南美白对虾为主）＋ 鱼类 40%（鱿鱼/带鱼为主）—— 双品类组合对冲价格风险，增加餐饮客户黏度，构建一站式水产供应链</p>
+  <div class="cover-meta">
+    <span><i>📅</i> 2026年7月</span>
+    <span><i>🏢</i> 以鲜国际供应链</span>
+    <span><i>📋</i> 内部方案</span>
+  </div>
+</div>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<div class="nav-wrap">
+  <div class="nav">
+    <a href="#s1">为什么转向</a>
+    <a href="#s2">目标客户</a>
+    <a href="#s3">SKU方案</a>
+    <a href="#s4">定价策略</a>
+    <a href="#s5">店铺策略</a>
+    <a href="#s6">1688角色</a>
+    <a href="#s7">获客路径</a>
+    <a href="#s8">实施路径</a>
+  </div>
+</div>
+
+<!-- ═══════════════ MAIN CONTENT ═══════════════ -->
+<div class="content">
+
+<!-- ─── S1: 为什么转向餐饮批发 ─── -->
+<div class="section" id="s1">
+  <div class="section-title"><span class="num">1</span> 为什么选择「餐饮批发」而不是「一件代发」</div>
+  <p class="section-desc">一件代发不是不好，但以鲜国际的能力长板在全球采购和供应链上游，不在电商运营下游。加上水产单品类风险集中，虾鱼双品类组合才是更稳的选择。</p>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th style="width:22%"></th>
+        <th style="width:39%" class="highlight">一件代发（原方案 v1.0）</th>
+        <th style="width:39%">餐饮批发（新方案 v2.0）</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>目标客户</td>
+        <td>淘宝 / 拼多多 / 抖音小店小商家</td>
+        <td><strong>餐饮企业</strong>（酒店、连锁、中央厨房、团餐、日料、火锅、自助）</td>
+      </tr>
+      <tr>
+        <td>单次采购量</td>
+        <td>1 ~ 5 kg</td>
+        <td><strong>几十 ~ 几百 kg</strong></td>
+      </tr>
+      <tr>
+        <td>客单价</td>
+        <td>¥100 ~ 300</td>
+        <td><strong>¥3,000 ~ 50,000+</strong></td>
+      </tr>
+      <tr>
+        <td>客户生命周期</td>
+        <td>短——小商家淘汰率高，随时流失</td>
+        <td><strong>长——餐饮持续消耗，合作后复购稳定</strong></td>
+      </tr>
+      <tr>
+        <td>冷链成本</td>
+        <td>高——每单单独打包发货，包材+快递吃掉利润</td>
+        <td><strong>低——批量配送，冷链成本摊薄</strong></td>
+      </tr>
+      <tr>
+        <td>售后复杂度</td>
+        <td>极高——化冻、死虾、时效，C端差评致命</td>
+        <td><strong>规范——B端按合同走，品质协商有空间</strong></td>
+      </tr>
+      <tr>
+        <td>所需核心能力</td>
+        <td>电商运营（详情页、自动推单、客服、素材包）</td>
+        <td><strong>供应链（全球采购、清关、品控、交期）</strong></td>
+      </tr>
+      <tr>
+        <td>能力匹配度</td>
+        <td><span class="tag tag-red">低——不在以鲜核心能力圈</span></td>
+        <td><span class="tag tag-green">高——正是以鲜的护城河</span></td>
+      </tr>
+      <tr>
+        <td>SKU数量</td>
+        <td>需要 12+ 个撑门面</td>
+        <td><strong>3 ~ 5 个核心规格足够</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="highlight-box">
+    <h4>一句话总结</h4>
+    <p>一件代发卖 200 单 = 餐饮批发卖 2 单。但前者需要你搞定详情页、自动推单系统、素材包、7×24客服；后者只需要你报好价、把好关、准时交货。更关键的是，<strong>纯做虾类风险太集中</strong>——虾价波动 20% 你就很难受。虾鱼双品类组合，东方不亮西方亮。</p>
+  </div>
+</div>
+
+<!-- ─── S2: 目标客户画像 ─── -->
+<div class="section" id="s2">
+  <div class="section-title"><span class="num">2</span> 目标客户画像 —— 餐饮企业分层</div>
+  <p class="section-desc">不是所有餐饮企业都是目标客户。按虾类用量、采购频率、价格敏感度分三层，聚焦前两层。</p>
+
+  <div class="card-grid card-grid-3" style="margin-top:24px;">
+    <!-- Tier A -->
+    <div class="client-card">
+      <span class="tier tier-a">Tier A · 核心客户</span>
+      <h3>连锁餐饮 / 中央厨房</h3>
+      <p class="sub">月采购量 500kg+，长期合同</p>
+      <ul>
+        <li>连锁火锅品牌（虾滑原料）</li>
+        <li>日料连锁（牡丹虾刺身、甜虾）</li>
+        <li>自助餐连锁（白虾无限量区）</li>
+        <li>酒店集团中央厨房</li>
+        <li>团餐公司（企业/学校食堂）</li>
+      </ul>
+      <div class="tag-row" style="margin-top:12px;">
+        <span class="tag tag-red">量最大</span>
+        <span class="tag tag-red">复购最稳</span>
+      </div>
+    </div>
+
+    <!-- Tier B -->
+    <div class="client-card">
+      <span class="tier tier-b">Tier B · 成长客户</span>
+      <h3>区域中型餐饮 / 批发商</h3>
+      <p class="sub">月采购量 50 ~ 500kg</p>
+      <ul>
+        <li>地方性中餐厅（虾仁菜式）</li>
+        <li>海鲜酒楼 / 大排档</li>
+        <li>日料单店（非连锁）</li>
+        <li>区域食材批发商（二批）</li>
+        <li>食品加工小厂（虾饺/虾丸）</li>
+      </ul>
+      <div class="tag-row" style="margin-top:12px;">
+        <span class="tag tag-orange">数量多</span>
+        <span class="tag tag-orange">成长快</span>
+      </div>
+    </div>
+
+    <!-- Tier C -->
+    <div class="client-card">
+      <span class="tier tier-c">Tier C · 机会客户</span>
+      <h3>小微餐饮 / 特殊渠道</h3>
+      <p class="sub">月采购量 10 ~ 50kg，非标需求</p>
+      <ul>
+        <li>私房菜 / 高端私厨</li>
+        <li>电商直播带货团队</li>
+        <li>社区团购团长</li>
+        <li>企业福利采购</li>
+        <li>礼品公司定制礼盒</li>
+      </ul>
+      <div class="tag-row" style="margin-top:12px;">
+        <span class="tag tag-green">利润高</span>
+        <span class="tag tag-green">非标化</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box" style="margin-top:24px;">
+    <h4>策略优先级</h4>
+    <p>前 6 个月主攻 Tier A + Tier B。Tier A（连锁/中央厨房）负责"养流水"，一单顶百单；Tier B（中型餐饮/二批）负责"养客户基数"，是未来基本盘。Tier C 有闲再做，不要分散精力。</p>
+  </div>
+</div>
+
+<!-- ─── S3: SKU方案 ─── -->
+<div class="section" id="s3">
+  <div class="section-title"><span class="num">3</span> SKU 方案 —— 虾六鱼四，双品类组合</div>
+  <p class="section-desc">虾类 60%（南美白对虾为主，黑虎虾为辅，北极虾补充）+ 鱼类 40%（鱿鱼/带鱼为主，巴沙鱼为辅，红三鱼/鲈鱼/墨鱼补充）。双品类对冲虾价波动风险，覆盖餐厅全场景需求——虾不行的时候鱼顶上，客户不丢。</p>
+
+  <table class="sku-table">
+    <thead>
+      <tr>
+        <th style="width:9%">编号</th>
+        <th style="width:18%">产品</th>
+        <th style="width:13%">规格</th>
+        <th style="width:22%">核心餐饮场景</th>
+        <th style="width:15%">品类角色</th>
+        <th style="width:23%">战略定位</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="sku-cat" colspan="6">🦐 虾类（占比 60%）— 南美白对虾为主，黑虎虾为辅，北极虾补充</td>
+      </tr>
+      <tr>
+        <td><strong>YX-S01</strong></td>
+        <td>南美白对虾（盐冻）</td>
+        <td>30/40，10kg/箱</td>
+        <td>自助餐白虾区、火锅涮虾、中餐热菜</td>
+        <td>主</td>
+        <td><span class="tag tag-red">流量大单品</span></td>
+      </tr>
+      <tr>
+        <td><strong>YX-S02</strong></td>
+        <td>南美白对虾（盐冻）</td>
+        <td>40/50，10kg/箱</td>
+        <td>虾仁加工原料、团餐、麻辣烫/麻辣香锅</td>
+        <td>主</td>
+        <td><span class="tag tag-red">走量补充</span></td>
+      </tr>
+      <tr>
+        <td><strong>YX-S03</strong></td>
+        <td>南美白对虾（去壳虾仁）</td>
+        <td>31/40，5kg/箱</td>
+        <td>中餐热菜（宫保虾球、虾仁炒蛋）、饺馅</td>
+        <td>主</td>
+        <td><span class="tag tag-red">加工原料</span></td>
+      </tr>
+      <tr>
+        <td><strong>YX-S04</strong></td>
+        <td>黑虎虾（盐冻）</td>
+        <td>16/20，10kg/箱</td>
+        <td>高端中餐、宴会主菜、铁板烧、烧烤</td>
+        <td>辅</td>
+        <td><span class="tag tag-orange">高端虾种</span></td>
+      </tr>
+      <tr>
+        <td><strong>YX-S05</strong></td>
+        <td>北极甜虾（熟冻）</td>
+        <td>大号 90/120，5kg/箱</td>
+        <td>日料刺身、自助冷盘、居酒屋小食</td>
+        <td>补充</td>
+        <td><span class="tag tag-green">利润单品</span></td>
+      </tr>
+      <tr>
+        <td><strong>YX-S06</strong></td>
+        <td>加拿大牡丹虾</td>
+        <td>刺身级，5kg/箱</td>
+        <td>高端日料刺身、酒店宴会冷盘</td>
+        <td>补充</td>
+        <td><span class="tag tag-blue">高端锚点</span></td>
+      </tr>
+      <tr>
+        <td class="sku-cat" colspan="6">🐟 鱼类（占比 40%）— 鱿鱼/带鱼为主，巴沙鱼为辅，红三鱼/鲈鱼/墨鱼补充</td>
+      </tr>
+      <tr>
+        <td><strong>YX-F01</strong></td>
+        <td>鱿鱼（冷冻）</td>
+        <td>鱿鱼筒/鱿鱼圈，10kg/箱</td>
+        <td>烧烤、铁板鱿鱼、中餐爆炒、火锅涮品</td>
+        <td>主</td>
+        <td><span class="tag tag-red">流量大单品</span></td>
+      </tr>
+      <tr>
+        <td><strong>YX-F02</strong></td>
+        <td>带鱼（冷冻）</td>
+        <td>带鱼段 300/500g，10kg/箱</td>
+        <td>中餐红烧/干煎带鱼、食堂团餐、家常菜</td>
+        <td>主</td>
+        <td><span class="tag tag-red">高频刚需</span></td>
+      </tr>
+      <tr>
+        <td><strong>YX-F03</strong></td>
+        <td>巴沙鱼柳</td>
+        <td>去皮去骨，5kg/箱</td>
+        <td>快餐鱼排、酸菜鱼、食堂大锅菜、轻食</td>
+        <td>辅</td>
+        <td><span class="tag tag-orange">成本优势</span></td>
+      </tr>
+      <tr>
+        <td><strong>YX-F04</strong></td>
+        <td>红三鱼（冷冻）</td>
+        <td>整条，10kg/箱</td>
+        <td>中餐清蒸/红烧、海鲜酒楼特色菜</td>
+        <td>补充</td>
+        <td><span class="tag tag-green">地域特色</span></td>
+      </tr>
+      <tr>
+        <td><strong>YX-F05</strong></td>
+        <td>海鲈鱼（冷冻）</td>
+        <td>整条，10kg/箱</td>
+        <td>中餐清蒸鲈鱼、宴会主菜</td>
+        <td>补充</td>
+        <td><span class="tag tag-green">宴席必备</span></td>
+      </tr>
+      <tr>
+        <td><strong>YX-F06</strong></td>
+        <td>墨鱼（冷冻）</td>
+        <td>墨鱼仔/墨鱼筒，5kg/箱</td>
+        <td>中餐爆炒墨鱼仔、凉拌、火锅涮品</td>
+        <td>补充</td>
+        <td><span class="tag tag-blue">差异化单品</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="highlight-box" style="margin-top:20px;">
+    <h4>SKU 设计原则</h4>
+    <p>① 每个 SKU 必须对应一个明确的餐饮使用场景，让采购经理一看就知道"这道菜用这个"。<br>
+    ② 虾 6 款 + 鱼 6 款 = 12 个 SKU，但核心主推虾 S01~S04 + 鱼 F01~F03 共 7 个。<br>
+    ③ 虾鱼双品类组合的核心意义：虾价波动时鱼能扛，反之亦然——<strong>东方不亮西方亮</strong>。<br>
+    ④ 统一以大包装（5kg / 10kg 箱）上架，过滤零售买家——这是故意的。</p>
+  </div>
+</div>
+
+<!-- ─── S4: 定价策略 ─── -->
+<div class="section" id="s4">
+  <div class="section-title"><span class="num">4</span> 定价策略 —— 阶梯批发价，明码不议价</div>
+  <p class="section-desc">餐饮采购最怕"看人下菜碟"。1688店铺公开阶梯价，越大量越便宜，建立信任、减少无效询价。</p>
+
+  <table class="price-table">
+    <thead>
+      <tr>
+        <th style="width:24%">产品</th>
+        <th style="width:19%">小批量<br/><small>1~3 箱</small></th>
+        <th style="width:19%">中批量<br/><small>5~10 箱</small></th>
+        <th style="width:19%">大批量<br/><small>20~50 箱</small></th>
+        <th style="width:19%">超大单<br/><small>100 箱+</small></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="sku-cat" colspan="5">🦐 虾类</td></tr>
+      <tr>
+        <td>南美白对虾 30/40（10kg/箱）</td>
+        <td>¥680/箱</td><td>¥650/箱</td><td class="price-bulk">¥620/箱</td><td>议价</td>
+      </tr>
+      <tr>
+        <td>南美白对虾 40/50（10kg/箱）</td>
+        <td>¥580/箱</td><td>¥555/箱</td><td class="price-bulk">¥530/箱</td><td>议价</td>
+      </tr>
+      <tr>
+        <td>南美白对虾仁 31/40（5kg/箱）</td>
+        <td>¥420/箱</td><td>¥400/箱</td><td class="price-bulk">¥380/箱</td><td>议价</td>
+      </tr>
+      <tr>
+        <td>黑虎虾 16/20（10kg/箱）</td>
+        <td>¥880/箱</td><td>¥845/箱</td><td class="price-bulk">¥810/箱</td><td>议价</td>
+      </tr>
+      <tr>
+        <td>北极甜虾 大号（5kg/箱）</td>
+        <td>¥520/箱</td><td>¥495/箱</td><td class="price-bulk">¥470/箱</td><td>议价</td>
+      </tr>
+      <tr>
+        <td>牡丹虾 刺身级（5kg/箱）</td>
+        <td>¥1,680/箱</td><td>¥1,600/箱</td><td class="price-bulk">¥1,520/箱</td><td>议价</td>
+      </tr>
+      <tr><td class="sku-cat" colspan="5">🐟 鱼类</td></tr>
+      <tr>
+        <td>鱿鱼 筒/圈（10kg/箱）</td>
+        <td>¥360/箱</td><td>¥340/箱</td><td class="price-bulk">¥320/箱</td><td>议价</td>
+      </tr>
+      <tr>
+        <td>带鱼段 300/500g（10kg/箱）</td>
+        <td>¥280/箱</td><td>¥265/箱</td><td class="price-bulk">¥250/箱</td><td>议价</td>
+      </tr>
+      <tr>
+        <td>巴沙鱼柳（5kg/箱）</td>
+        <td>¥220/箱</td><td>¥210/箱</td><td class="price-bulk">¥200/箱</td><td>议价</td>
+      </tr>
+      <tr>
+        <td>红三鱼 整条（10kg/箱）</td>
+        <td>¥320/箱</td><td>¥305/箱</td><td class="price-bulk">¥290/箱</td><td>议价</td>
+      </tr>
+      <tr>
+        <td>海鲈鱼 整条（10kg/箱）</td>
+        <td>¥380/箱</td><td>¥360/箱</td><td class="price-bulk">¥345/箱</td><td>议价</td>
+      </tr>
+      <tr>
+        <td>墨鱼 仔/筒（5kg/箱）</td>
+        <td>¥420/箱</td><td>¥400/箱</td><td class="price-bulk">¥380/箱</td><td>议价</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="info-box" style="margin-top:20px;">
+    <h4>定价说明</h4>
+    <p>① 以上价格为含税批发价，不含运费（冷链物流按实际结算）。<br>
+    ② 1688 店铺展示小批量和中批量两档，大批量及超大单引导线下沟通、签合同。<br>
+    ③ 虾类基于进口成本核算工具精算（含 FTA 优惠关税）；鱼类以国内/进口供应链结合。<br>
+    ④ 虾鱼组合采购可谈额外折扣——这是增加客户黏度的定价策略。<br>
+    ⑤ 鱼类单价低、走量大，单品毛利率虽不如虾，但能做大流水基数，摊薄固定成本。</p>
+  </div>
+</div>
+
+<!-- ─── S5: 店铺页面策略 ─── -->
+<div class="section" id="s5">
+  <div class="section-title"><span class="num">5</span> 店铺页面策略 —— B 端语言，一页说清楚</div>
+  <p class="section-desc">餐饮采购经理打开你的店铺，30 秒内要能判断"这家能不能合作"。不需要花哨的电商文案，需要的是专业感和信任感。</p>
+
+  <div class="card-grid card-grid-2" style="margin-top:24px;">
+    <div class="card card-accent">
+      <span class="card-icon">🏪</span>
+      <h3>店铺首页 = 企业资质展示</h3>
+      <p>营业执照、进口资质、冷库实拍、合作品牌 LOGO 墙。不做花哨 banner，直接亮底牌：<strong>"我们是进口商，不是二道贩子"</strong>。</p>
+    </div>
+    <div class="card card-accent">
+      <span class="card-icon">📦</span>
+      <h3>商品详情页 = 采购经理的决策清单</h3>
+      <p>不说"买家秀""适合家庭"，改写：产地、规格、出成率、解冻损耗率、储存条件、保质期、供货周期。附：报关单截图、检疫证明缩略图。</p>
+    </div>
+    <div class="card card-accent">
+      <span class="card-icon">💬</span>
+      <h3>旺旺自动回复 = 引导大单线下</h3>
+      <p>"您好，以鲜国际进口水产直供。虾类鱼类全品类覆盖。小批量可直接下单，大批量采购（20箱+）请联系 138xxxx 或加微信，安排寄样/报价。"</p>
+    </div>
+    <div class="card card-accent">
+      <span class="card-icon">📊</span>
+      <h3>店铺"公司档案"页 = 不用写文案，直接堆证据</h3>
+      <p>公司成立时间、进口国别、年度进口量、展会参展照片、合作品牌。越多真实信息，越容易打消采购经理的疑虑。</p>
+    </div>
+  </div>
+
+  <div class="highlight-box" style="margin-top:24px;">
+    <h4>关键原则：降维打击</h4>
+    <p>1688 水产卖家详情页普遍粗糙——产品图模糊、参数不全、没有应用场景。以鲜国际用官网级专业素材（高清产品图 + 应用场景图 + 报关单/检疫证明）碾压，这不是便宜 5 块钱能替代的信任感。</p>
+  </div>
+</div>
+
+<!-- ─── S6: 1688店铺的核心角色 ─── -->
+<div class="section" id="s6">
+  <div class="section-title"><span class="num">6</span> 1688 店铺的核心角色 —— 不是成交平台，是信任入口</div>
+  <p class="section-desc">餐饮大额采购不会在线上直接下单。1688 店铺的真正功能是：让采购经理搜到你→验证你的资质→引导线下沟通。</p>
+
+  <div class="flow-row" style="margin-top:28px;">
+    <div class="flow-step">
+      <div class="step-num">1</div>
+      <h4>搜索发现</h4>
+      <p>餐饮采购在1688搜"进口白虾批发""虾仁供应商"，你的店铺出现在搜索结果</p>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">2</div>
+      <h4>信任验证</h4>
+      <p>看公司档案、进口资质、客户案例、阶梯价格，确认"这家正规"</p>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">3</div>
+      <h4>旺旺询盘</h4>
+      <p>发消息询问大批量价格、寄样、交期，或直接要微信/电话</p>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">4</div>
+      <h4>线下成交</h4>
+      <p>寄样→报价→签合同→对公打款→批量发货。大单不走1688支付</p>
+    </div>
+  </div>
+
+  <div class="info-box" style="margin-top:24px;">
+    <h4>衡量 1688 店铺成功的 KPI</h4>
+    <p><strong>不是线上成交额，而是有效询盘数。</strong><br>
+    月有效询盘 ≥ 30 条 → 其中 10% 转化为寄样 → 其中 30% 转化为正式合作 → 第一个月签下 1~2 个 Tier A 客户就算成功。<br>
+    大额成交在 1688 店铺外面发生很正常，这是 B2B 的常态。</p>
+  </div>
+</div>
+
+<!-- ─── S7: 获客路径 ─── -->
+<div class="section" id="s7">
+  <div class="section-title"><span class="num">7</span> 获客路径 —— 1688 只是其中一条腿</div>
+  <p class="section-desc">不能等餐饮采购自己上门。多条获客路径并行，1688 店铺是落地的"终点站"——所有线索最终引导到这里验证信任。</p>
+
+  <div class="card-grid card-grid-3" style="margin-top:24px;">
+    <div class="card card-accent">
+      <span class="card-icon">🔍</span>
+      <h3>路径一：1688 自然搜索</h3>
+      <p>优化标题关键词（进口虾、白虾批发、虾仁、鱿鱼批发、带鱼段、巴沙鱼柳、水产供应商），诚信通会员有搜索加权。这是被动获客的基本盘。</p>
+    </div>
+    <div class="card card-accent">
+      <span class="card-icon">🎪</span>
+      <h3>路径二：线下展会引流</h3>
+      <p>上海渔博会、FHC、中食展、青岛渔博会收集的餐饮采购名片，展后统一发"1688店铺链接 + 寄样邀请"。展会获客→1688验证→线下成交。</p>
+    </div>
+    <div class="card card-accent">
+      <span class="card-icon">📱</span>
+      <h3>路径三：行业社群渗透</h3>
+      <p>加入餐饮采购微信群、厨师群，不做硬广，只做"问答式渗透"——有人问"哪里找进口水产供应商"，自然带入 1688 店铺链接。</p>
+    </div>
+    <div class="card card-accent">
+      <span class="card-icon">🌐</span>
+      <h3>路径四：官网 SEO 导流</h3>
+      <p>在 efsupplychain.com 增加"餐饮批发合作"页面，嵌入 1688 店铺入口。搜索"进口水产批发""虾类供应商"的长尾流量可以同时触达官网和 1688 店铺。</p>
+    </div>
+    <div class="card card-accent">
+      <span class="card-icon">📞</span>
+      <h3>路径五：老客户转介绍</h3>
+      <p>每成功合作一个 Tier A 客户，主动请对方介绍同行。B 端生意，口碑推荐转化率远高于广告。给介绍人适当的返点或折扣。</p>
+    </div>
+    <div class="card card-accent">
+      <span class="card-icon">🎥</span>
+      <h3>路径六：短视频内容引流</h3>
+      <p>抖音号「老庄鲜生」拍"进口水产怎么选""餐饮采购避坑指南"类内容，评论区留 1688 店铺名。C 端流量做信任，B 端在 1688 落地。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── S8: 实施路径 ─── -->
+<div class="section" id="s8">
+  <div class="section-title"><span class="num">8</span> 实施路径 —— 三步走</div>
+  <p class="section-desc">前 6 个月分三个阶段，每阶段 2 个月。先搭店铺、再跑客户、最后规模化。</p>
+
+  <div class="timeline" style="margin-top:32px;">
+
+    <!-- Phase 1 -->
+    <div class="tl-item">
+      <div class="tl-phase">第 1 ~ 2 个月</div>
+      <h3>店铺搭建 + 冷启动</h3>
+      <p class="tl-meta">目标：1688 店铺上线，完成 12 个 SKU 上架（虾 6 + 鱼 6），发出第一批样品</p>
+      <ul>
+        <li><span class="tag tag-p0">P0</span> 开通 1688 诚信通会员（AI版 ¥9,988/年），完成企业认证</li>
+        <li><span class="tag tag-p0">P0</span> 店铺首页设计 + 公司档案填充（营业执照、进口资质、冷库实拍）</li>
+        <li><span class="tag tag-p0">P0</span> 12 个 SKU 详情页制作（虾 6 + 鱼 6）：产品图 + 应用场景图 + 报关单/检疫证明</li>
+        <li><span class="tag tag-p0">P0</span> 设置阶梯价格、旺旺自动回复、运费模板</li>
+        <li><span class="tag tag-p1">P1</span> 关键词优化（标题+属性词+长尾词），确保可被搜索到</li>
+        <li><span class="tag tag-p1">P1</span> 准备寄样包材（保温箱+冰袋+产品手册），客户询盘 24h 内寄出</li>
+      </ul>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="tl-item">
+      <div class="tl-phase">第 3 ~ 4 个月</div>
+      <h3>客户开发 + 小跑验证</h3>
+      <p class="tl-meta">目标：月有效询盘 30+，寄样 15+，签下 2~3 个 Tier A/B 客户</p>
+      <ul>
+        <li><span class="tag tag-p0">P0</span> 整理展会（渔博会/FHC/中食展）餐饮采购名片，统一触达</li>
+        <li><span class="tag tag-p0">P0</span> 建立寄样→跟进→成交的标准流程（CRM 或 Excel 管理线索）</li>
+        <li><span class="tag tag-p1">P1</span> 加入 3~5 个餐饮采购/厨师行业微信群，做问答式渗透</li>
+        <li><span class="tag tag-p1">P1</span> 官网增加"餐饮批发合作"页面，嵌入 1688 入口</li>
+        <li><span class="tag tag-p1">P1</span> 完成首单 Tier A 客户合同+交付，积累案例</li>
+        <li><span class="tag tag-p2">P2</span> 根据前 2 个月数据优化：淘汰滞销 SKU，调整价格梯度</li>
+      </ul>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="tl-item">
+      <div class="tl-phase">第 5 ~ 6 个月</div>
+      <h3>规模化 + 品牌化</h3>
+      <p class="tl-meta">目标：月活跃客户 15+，月出货量稳定在 3 吨+，开始建立品牌认知</p>
+      <ul>
+        <li><span class="tag tag-p1">P1</span> 签约 1~2 个连锁餐饮客户（Tier A），建立长期供应关系</li>
+        <li><span class="tag tag-p1">P1</span> 制作"合作案例"页面（脱敏），增强新客信任</li>
+        <li><span class="tag tag-p1">P1</span> 产品手册 + 报价单标准化，可一键发给意向客户</li>
+        <li><span class="tag tag-p2">P2</span> 抖音号「老庄鲜生」开始产出 B 端内容（进口水产采购攻略、虾鱼品类选择指南）</li>
+        <li><span class="tag tag-p2">P2</span> 评估是否参加 2027 年上半年展会，设展位直接获客</li>
+        <li><span class="tag tag-p2">P2</span> 老客户转介绍机制启动（返点/折扣）</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ─── 竞争壁垒 ─── -->
+<div class="section" id="s9">
+  <div class="section-title"><span class="num">9</span> 竞争壁垒 —— 凭什么餐饮企业选你</div>
+  <p class="section-desc">1688 上不是没有虾类供应商。但以鲜国际有三道护城河，是大多数国产批发商不具备的。</p>
+
+  <div class="moat-grid" style="margin-top:24px;">
+    <div class="moat-card">
+      <div class="moat-num">01</div>
+      <h4>虾鱼全品类一站式供应</h4>
+      <p>1688 水产卖家大多只做一个品类（只卖虾、只卖鱼）。以鲜国际虾 6 款 + 鱼 6 款覆盖餐厅全场景，采购经理不用同时对接多家——找你就够了。这是最直接的客户黏度壁垒。</p>
+    </div>
+    <div class="moat-card">
+      <div class="moat-num">02</div>
+      <h4>进口成本精算能力</h4>
+      <p>已有独立开发的成本核算工具（含 FTA 优惠关税、25% 冷水虾附加税、冷链仓储），每个 SKU 的到岸成本算到分。定价不靠感觉，靠数据。大多数批发商连 CIF、FOB 都说不清。</p>
+    </div>
+    <div class="moat-card">
+      <div class="moat-num">03</div>
+      <h4>全球原产地直采</h4>
+      <p>不是从国内批发市场拿货转卖。厄瓜多尔白虾、东南亚鱿鱼/带鱼均可追溯到原产地。对餐饮企业来说，供应商能拿出报关单和原产地证书——这在 1688 水产类目里是稀缺品。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 风险与对策 ─── -->
+<div class="section" id="s10">
+  <div class="section-title"><span class="num">10</span> 风险与对策</div>
+
+  <div class="card-grid card-grid-2" style="margin-top:24px;">
+    <div class="card card-accent">
+      <h3>⚠️ 冷链断链</h3>
+      <p>批量配送不等于零风险。选用顺丰冷运/专业冷链物流，夏季加厚保温箱+足量干冰，宁可物流多花 50 元/箱也不能坏一批货。</p>
+    </div>
+    <div class="card card-accent">
+      <h3>⚠️ 加拿大 25% 额外关税</h3>
+      <p>冷水虾（北极甜虾、牡丹虾）面临加拿大 25% 额外关税，成本上升。对策：在报价中明确"关税政策变动可能导致价格调整"，同时储备替代产地（格陵兰/俄罗斯冷水虾）。鱼品类不受此影响，可适时加大鱼类推力度做对冲。</p>
+    </div>
+    <div class="card card-accent">
+      <h3>⚠️ 餐饮客户账期风险</h3>
+      <p>B 端客户可能要求月结 30~60 天。对策：新客户前 3 单必须现款现结，合作稳定后再谈账期。大单要求 30% 定金。</p>
+    </div>
+    <div class="card card-accent">
+      <h3>⚠️ 同质化竞争</h3>
+      <p>1688 做虾做鱼的不止你一家。对策：不打价格战，打"虾鱼全品类+专业度+信任感+供应链能力"。单一品类供应商拼不过你——你能满足餐厅一站式采购需求，他们只能卖虾或只能卖鱼。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 投入预算 ─── -->
+<div class="section" id="s11">
+  <div class="section-title">投入预算概览</div>
+  <p class="section-desc">前 6 个月的总投入，不含货物采购资金。</p>
+
+  <table class="compare-table" style="margin-top:24px;">
+    <thead>
+      <tr>
+        <th>项目</th>
+        <th>预算</th>
+        <th>说明</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>诚信通会员</td>
+        <td>¥9,988 / 年</td>
+        <td>AI 版，2026 年起唯一可选版本</td>
+      </tr>
+      <tr>
+        <td>店铺装修 + 详情页设计</td>
+        <td>¥3,000 ~ 5,000</td>
+        <td>复用官网素材，主要花在产品实拍和场景图上</td>
+      </tr>
+      <tr>
+        <td>样品 + 寄样费用</td>
+        <td>¥2,000 / 月</td>
+        <td>每月寄 15~20 份样品，含保温包材</td>
+      </tr>
+      <tr>
+        <td>展会展位（如有）</td>
+        <td>¥8,000 ~ 20,000</td>
+        <td>视 2027 年上半年展会计划而定</td>
+      </tr>
+      <tr>
+        <td><strong>前 6 个月合计</strong></td>
+        <td><strong>约 ¥30,000 ~ 40,000</strong></td>
+        <td>轻资产启动，核心成本在时间和精力</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</div><!-- .content -->
+
+<div class="footer">
+  以鲜国际供应链 · 1688 餐饮批发店铺方案 v2.0 · 2026 年 7 月 · 内部文件
+</div>
+
+</body>
+</html>
