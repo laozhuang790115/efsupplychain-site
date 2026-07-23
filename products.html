@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>代销分销 — 以鲜国际</title>
+<title>以鲜甄选 · 虾丰蟹盛 — 以鲜国际</title>
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -379,7 +379,7 @@ footer a { color: #00a8e8; }
       <a href="index.html#about">关于我们</a>
       <a href="index.html#services">核心业务</a>
       <a href="tools.html" class="nav-tools">🧭 国际代采</a>
-      <a href="products.html" class="nav-products">🤝 代销分销</a>
+      <a href="products.html" class="nav-products">🦐 以鲜甄选</a>
       <a href="coldchain.html" class="nav-cold">❄️ 冷链服务</a>
       <a href="exhibitions.html" style="background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff!important;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700">🎪 食品展会</a>
       <a href="reports.html" class="nav-halal">📋 老庄报告</a>
@@ -405,10 +405,10 @@ footer a { color: #00a8e8; }
 <!-- Masthead -->
 <div class="masthead">
   <div class="breadcrumb">
-    <a href="index.html">首页</a> › <a href="index.html#services">核心业务</a> › 代销分销
+    <a href="index.html">首页</a> › <a href="index.html#services">核心业务</a> › 以鲜甄选
   </div>
-  <h1>🤝 代销分销</h1>
-  <p>精选全球优质冻品，海外产地直供，一手货源，诚邀经销商合作代销</p>
+  <h1>🦐🦀 以鲜甄选 · 虾丰蟹盛</h1>
+  <p>供应链自营虾蟹进口批发品牌。10 款 SKU 覆盖餐饮全场景，源头直采、冷链直达。</p>
 </div>
 
 <!-- Stats bar -->
@@ -458,54 +458,46 @@ var isAdmin = sessionStorage.getItem(ADMIN_KEY) === '1';
 
 // ===== Product Data (from localStorage with defaults) =====
 var DEFAULT_PRODUCTS = [
-  { id: 1, name: '南美白虾 40/50', cat: '虾类', origin: '厄瓜多尔', emoji: '🦐',
+  { id: 1, name: '南美白虾 30/40', cat: '虾类 🦐', origin: '厄瓜多尔', emoji: '🦐',
+    specs: ['30/40 只/公斤', '1.8kg×6/箱', '盐冻'], hot: true,
+    desc: '大规格白虾，体型饱满，适合高端餐饮、酒店自助、礼盒渠道，虾丰蟹盛流量冠军。',
+    price: '¥450/箱起', stock: '充足' },
+  { id: 2, name: '南美白虾 40/50', cat: '虾类 🦐', origin: '厄瓜多尔', emoji: '🦐',
     specs: ['40/50 只/公斤', '1.8kg×6/箱', '盐冻'], hot: true,
-    desc: '厄瓜多尔顶级白虾，肉质鲜甜弹嫩，适合商超、餐饮、电商全渠道。中国进口量最大单品。',
-    price: '面议', stock: '充足' },
-  { id: 2, name: '南美白虾 30/40', cat: '虾类', origin: '厄瓜多尔', emoji: '🦐',
-    specs: ['30/40 只/公斤', '1.8kg×6/箱', '盐冻'],
-    desc: '大规格白虾，体型饱满，适合高端餐饮、酒店自助、礼盒渠道。',
-    price: '面议', stock: '充足' },
-  { id: 3, name: '南美白虾 50/60', cat: '虾类', origin: '印度', emoji: '🦐',
-    specs: ['50/60 只/公斤', '1.8kg×6/箱', '块冻'],
-    desc: '印度产区性价比之选，规格均匀，适合团餐、学校食堂、加工厂原料。',
-    price: '面议', stock: '有限' },
-  { id: 4, name: '印尼阿曼带鱼', cat: '鱼类', origin: '印尼', emoji: '🐟',
-    specs: ['200/300g', '10kg/箱', '船冻'], hot: true,
-    desc: '印尼远洋捕捞，船冻锁鲜，肉质细腻少刺，适合家庭消费和餐饮渠道。',
-    price: '面议', stock: '充足' },
-  { id: 5, name: '印尼鱿鱼', cat: '鱼类', origin: '印尼', emoji: '🦑',
-    specs: ['300/500g', '10kg/箱', '船冻'],
-    desc: '印尼深海鱿鱼，肉质厚实有嚼劲，适合烧烤、火锅、铁板烧等餐饮场景。',
-    price: '面议', stock: '充足' },
-  { id: 6, name: '牛腩', cat: '牛肉', origin: '巴西', emoji: '🥩',
-    specs: ['90VL', '25kg/箱', '冷冻'],
-    desc: '巴西草饲牛腩，肥瘦相间，适合红烧、炖煮，中餐渠道刚需品。',
-    price: '面议', stock: '充足' },
-  { id: 7, name: '牛腱', cat: '牛肉', origin: '阿根廷', emoji: '🥩',
-    specs: ['整腱', '25kg/箱', '冷冻'],
-    desc: '阿根廷谷饲牛腱，筋肉分明，酱卤出品率高，卤味连锁首选原料。',
-    price: '面议', stock: '有限' },
-  { id: 8, name: '西冷牛排', cat: '牛肉', origin: '巴西', emoji: '🥩',
-    specs: ['200g±', '25kg/箱', '冷冻'], hot: true,
-    desc: '巴西草饲西冷，性价比高，适合西餐厅、牛排馆、电商零售渠道。',
-    price: '面议', stock: '充足' },
-  { id: 9, name: '猪肋排', cat: '猪肉', origin: '西班牙', emoji: '🐷',
-    specs: ['整排', '10kg/箱', '冷冻'],
-    desc: '西班牙猪肋排，肉质细嫩，适合烧烤、红烧、糖醋，中餐热销品。',
-    price: '面议', stock: '充足' },
-  { id: 10, name: '五花肉', cat: '猪肉', origin: '西班牙', emoji: '🐷',
-    specs: ['去皮', '10kg/箱', '冷冻'],
-    desc: '西班牙精品五花肉，三线分明，适合红烧肉、扣肉等传统中餐。',
-    price: '面议', stock: '充足' },
-  { id: 11, name: '梅花肉', cat: '猪肉', origin: '巴西', emoji: '🐷',
-    specs: ['修整', '10kg/箱', '冷冻'],
-    desc: '巴西梅花肉，肉质嫩滑多汁，适合煎烤、火锅切片，出餐多样。',
-    price: '面议', stock: '充足' },
-  { id: 12, name: '鸡中翅', cat: '禽类', origin: '巴西', emoji: '🍗',
-    specs: ['30/40g', '15kg/箱', '冷冻'], hot: true,
-    desc: '巴西鸡中翅，规格均匀，适合炸鸡连锁、烧烤、商超零售，需求旺盛。',
-    price: '面议', stock: '有限' },
+    desc: '中规格白虾，性价比最高，适合连锁餐饮、团餐、超市，走量主力。',
+    price: '¥370/箱起', stock: '充足' },
+  { id: 3, name: '南美白虾仁 31/40', cat: '虾类 🦐', origin: '厄瓜多尔', emoji: '🦐',
+    specs: ['31/40 只/公斤', '10kg/箱', '去壳去肠线'],
+    desc: '去壳虾仁，出餐零损耗，适合中央厨房、预制菜工厂、虾滑加工。',
+    price: '¥550/箱起', stock: '充足' },
+  { id: 4, name: '黑虎虾 16/20', cat: '虾类 🦐', origin: '越南/印尼', emoji: '🦐',
+    specs: ['16/20 只/公斤', '10kg/箱', '冷冻'],
+    desc: '东南亚黑虎虾，体型硕大、肉质紧实，高端酒楼招牌菜首选，利润空间大。',
+    price: '¥880/箱起', stock: '充足' },
+  { id: 5, name: '北极甜虾 90/120', cat: '虾类 🦐', origin: '格陵兰', emoji: '🦐',
+    specs: ['90/120 只/公斤', '10kg/箱', '熟冻'], hot: true,
+    desc: '北极深海甜虾，熟冻即食，自带鲜甜，适合日料、自助餐、刺身拼盘。',
+    price: '¥700/箱起', stock: '有限' },
+  { id: 6, name: '牡丹虾 刺身级', cat: '虾类 🦐', origin: '加拿大', emoji: '🦐',
+    specs: ['刺身级', '10kg/箱', '船冻'],
+    desc: '加拿大牡丹虾，刺身顶级原料，日料店镇店之宝，溢价极高。',
+    price: '¥1,600/箱起', stock: '有限' },
+  { id: 7, name: '越南青蟹（肉蟹）', cat: '蟹类 🦀', origin: '越南', emoji: '🦀',
+    specs: ['冷冻肉蟹', '10kg/箱', '整只'], hot: true,
+    desc: '东南亚青蟹肉蟹，适合香辣蟹、避风塘炒蟹、海鲜煲、大排档，中端盈利主力。',
+    price: '¥460/箱起', stock: '充足' },
+  { id: 8, name: '越南青蟹（膏蟹）', cat: '蟹类 🦀', origin: '越南', emoji: '🦀',
+    specs: ['冷冻膏蟹', '10kg/箱', '整只'],
+    desc: '膏满黄肥，适合高端中餐、宴会蟹宴、蟹粉菜系，高毛利核心单品。',
+    price: '¥580/箱起', stock: '有限' },
+  { id: 9, name: '缅甸软壳蟹', cat: '蟹类 🦀', origin: '缅甸', emoji: '🦀',
+    specs: ['冷冻整只', '5kg/箱', '去壳可食'],
+    desc: '整只可食，适合日式天妇罗、西餐炸蟹、融合菜，特色差异化单品。',
+    price: '¥440/箱起', stock: '充足' },
+  { id: 10, name: '兰花蟹', cat: '蟹类 🦀', origin: '东南亚', emoji: '🦀',
+    specs: ['冷冻整只', '10kg/箱', '整只'], hot: true,
+    desc: '东南亚高性价比蟹类，适合姜葱炒蟹、香辣蟹、海鲜煲、大排档，量大实惠。',
+    price: '¥480/箱起', stock: '充足' }
 ];
 
 function loadProducts() {
