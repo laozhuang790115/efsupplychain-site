@@ -447,6 +447,163 @@ footer{text-align:center;padding:40px 24px;color:#bbb;font-size:12px;border-top:
   font-size:13px;z-index:3000;opacity:0;transition:opacity .3s;pointer-events:none
 }
 .toast.show{opacity:1}
+
+/* ===== Search & Filter Bar ===== */
+.search-bar-wrap{
+  max-width:1020px;margin:0 auto;padding:24px 24px 0;
+  position:relative;z-index:10
+}
+.search-bar{
+  background:#fff;border-radius:14px;padding:20px 24px;
+  box-shadow:0 2px 16px rgba(0,0,0,.06);
+  border:1px solid #eef0f3
+}
+.search-row{
+  display:flex;align-items:center;gap:12px
+}
+.search-input-wrap{
+  flex:1;display:flex;align-items:center;gap:10px;
+  background:#f7f9fc;border-radius:10px;padding:10px 16px;
+  border:2px solid transparent;transition:all .25s
+}
+.search-input-wrap:focus-within{
+  border-color:#00a8e8;background:#fff;box-shadow:0 0 0 4px rgba(0,168,232,.08)
+}
+.search-input-wrap .search-icon{
+  font-size:18px;color:#999;flex-shrink:0
+}
+.search-input-wrap input{
+  flex:1;border:none;background:none;font-size:14px;
+  color:#1a1a2e;outline:none;font-family:inherit
+}
+.search-input-wrap input::placeholder{color:#bbb}
+.search-clear{
+  width:28px;height:28px;border-radius:50%;border:none;
+  background:#e8ecf0;color:#7a8290;font-size:14px;cursor:pointer;
+  display:none;align-items:center;justify-content:center;transition:all .2s;
+  flex-shrink:0
+}
+.search-clear:hover{background:#d0d4d8;color:#1a1a2e}
+.search-clear.visible{display:flex}
+.search-count{
+  font-size:12px;color:#7a8290;white-space:nowrap;
+  background:#f0f9ff;padding:6px 14px;border-radius:8px;
+  font-weight:600;flex-shrink:0
+}
+.search-count strong{color:#00a8e8;font-size:16px}
+
+.filter-row{
+  margin-top:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap
+}
+.filter-label{
+  font-size:11px;color:#999;letter-spacing:1px;font-weight:600;
+  white-space:nowrap;margin-right:4px
+}
+.filter-chip{
+  padding:6px 14px;border-radius:20px;border:1px solid #e8ecf0;
+  background:#fff;font-size:12px;color:#5a6070;cursor:pointer;
+  transition:all .2s;white-space:nowrap;font-family:inherit
+}
+.filter-chip:hover{border-color:#00a8e8;color:#00a8e8}
+.filter-chip.active{
+  background:#00a8e8;border-color:#00a8e8;color:#fff;font-weight:600;
+  box-shadow:0 2px 8px rgba(0,168,232,.2)
+}
+.filter-chip.news-chip.active{background:#e74c3c;border-color:#e74c3c;box-shadow:0 2px 8px rgba(231,76,60,.2)}
+.filter-chip.events-chip.active{background:#ea580c;border-color:#ea580c;box-shadow:0 2px 8px rgba(234,88,12,.2)}
+.filter-chip.reports-chip.active{background:#2980b9;border-color:#2980b9;box-shadow:0 2px 8px rgba(41,128,185,.2)}
+.filter-chip.policies-chip.active{background:#7c3aed;border-color:#7c3aed;box-shadow:0 2px 8px rgba(124,58,237,.2)}
+
+.sort-toggle{
+  margin-left:auto;display:flex;align-items:center;gap:6px;
+  font-size:12px;color:#7a8290;cursor:pointer;padding:6px 12px;
+  border-radius:8px;border:1px solid #e8ecf0;background:#fff;
+  transition:all .2s;white-space:nowrap;font-family:inherit
+}
+.sort-toggle:hover{border-color:#00a8e8;color:#00a8e8}
+.sort-toggle .sort-arrow{font-size:10px;transition:transform .3s}
+.sort-toggle.desc .sort-arrow{transform:rotate(180deg)}
+
+.no-results{
+  text-align:center;padding:60px 20px;color:#bbb
+}
+.no-results .nr-icon{font-size:48px;margin-bottom:16px}
+.no-results h3{font-size:17px;color:#7a8290;margin-bottom:8px}
+.no-results p{font-size:13px}
+
+/* ===== Unified Search Results ===== */
+.results-section{margin-top:32px}
+.results-section .section-header{margin-bottom:20px}
+.results-section .section-header .active-filters{
+  display:flex;gap:6px;flex-wrap:wrap;margin-left:12px
+}
+.results-section .active-filter-tag{
+  padding:3px 10px;border-radius:12px;font-size:11px;
+  background:#f0f9ff;color:#00a8e8;font-weight:600;
+  display:flex;align-items:center;gap:4px
+}
+.results-section .active-filter-tag .remove-filter{
+  cursor:pointer;font-size:13px;line-height:1;opacity:.6;transition:opacity .2s
+}
+.results-section .active-filter-tag .remove-filter:hover{opacity:1}
+
+.search-results{display:flex;flex-direction:column;gap:14px}
+.search-result-card{
+  background:#fff;border-radius:12px;padding:20px 24px;
+  box-shadow:0 1px 4px rgba(0,0,0,.04);
+  border:1px solid #eef0f3;transition:all .25s;
+  cursor:pointer;display:flex;gap:16px;align-items:flex-start
+}
+.search-result-card:hover{
+  transform:translateX(4px);box-shadow:0 8px 28px rgba(0,0,0,.08);
+  border-color:#dde0e4
+}
+.search-result-card .sr-badge{
+  padding:4px 10px;border-radius:6px;font-size:10px;font-weight:700;
+  letter-spacing:1px;white-space:nowrap;flex-shrink:0;margin-top:2px
+}
+.sr-badge.news-badge{background:#fef0f0;color:#c0392b}
+.sr-badge.events-badge{background:#fff7ed;color:#c2410c}
+.sr-badge.reports-badge{background:#eef5fc;color:#2471a3}
+.sr-badge.policies-badge{background:#f5f0ff;color:#7c3aed}
+.search-result-card .sr-body{flex:1;min-width:0}
+.search-result-card .sr-title{
+  font-size:15px;font-weight:700;color:#1a1a2e;line-height:1.5;
+  margin-bottom:6px
+}
+.search-result-card .sr-title mark{
+  background:linear-gradient(180deg,transparent 60%,#fde68a 60%);
+  color:inherit;padding:0 2px;border-radius:2px
+}
+.search-result-card .sr-summary{
+  font-size:13px;color:#5a6070;line-height:1.7;margin-bottom:8px
+}
+.search-result-card .sr-summary mark{
+  background:linear-gradient(180deg,transparent 60%,#fde68a 60%);
+  color:inherit;padding:0 2px;border-radius:2px
+}
+.search-result-card .sr-meta{
+  display:flex;gap:14px;font-size:11px;color:#999;flex-wrap:wrap;align-items:center
+}
+.search-result-card .sr-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px}
+.search-result-card .sr-tag{
+  padding:2px 8px;border-radius:4px;background:#f5f6f8;
+  color:#7a8290;font-size:10px
+}
+.search-result-card .sr-arrow{
+  color:#ccc;font-size:16px;flex-shrink:0;margin-top:4px;
+  transition:transform .2s
+}
+.search-result-card:hover .sr-arrow{transform:translateX(3px);color:#00a8e8}
+
+/* Highlight keyword in text */
+mark.search-hl{
+  background:#fde68a;color:inherit;padding:0 2px;border-radius:2px
+}
+
+/* ===== Scroll to top when clicking result ===== */
+.scroll-to-section{display:block}
+
 </style>
 </head>
 <body>
@@ -479,6 +636,50 @@ footer{text-align:center;padding:40px 24px;color:#bbb;font-size:12px;border-top:
     <span id="issueDate">2026年6月</span> · <span>第 <span id="issueNum">1</span> 期</span>
     <span id="totalCount">共收录 0 条内容</span>
   </div>
+</div>
+
+
+<!-- ═══ Search & Filter Bar ═══ -->
+<div class="search-bar-wrap" id="searchBarWrap">
+  <div class="search-bar">
+    <div class="search-row">
+      <div class="search-input-wrap" id="searchInputWrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="搜索标题、摘要、正文、标签..." oninput="doSearch()" autocomplete="off">
+        <button class="search-clear" id="searchClear" onclick="clearSearch()" title="清除搜索">✕</button>
+      </div>
+      <div class="search-count" id="searchCount" style="display:none">共 <strong>0</strong> 条</div>
+    </div>
+    <div class="filter-row">
+      <span class="filter-label">分类</span>
+      <button class="filter-chip active" data-section="all" onclick="setFilter('all', this)">📋 全部分类</button>
+      <button class="filter-chip news-chip" data-section="news" onclick="setFilter('news', this)">🔥 热点新闻</button>
+      <button class="filter-chip events-chip" data-section="events" onclick="setFilter('events', this)">📰 焦点事件</button>
+      <button class="filter-chip reports-chip" data-section="reports" onclick="setFilter('reports', this)">📊 行业报告</button>
+      <button class="filter-chip policies-chip" data-section="policies" onclick="setFilter('policies', this)">⚖️ 政策法规</button>
+      <button class="sort-toggle desc" id="sortToggle" onclick="toggleSort()">
+        <span id="sortLabel">最新优先</span><span class="sort-arrow">▼</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ Search Results ═══ -->
+<div class="results-section" id="resultsSection" style="display:none">
+  <div class="section-header">
+    <div class="section-icon" style="background:#f0f9ff;color:#00a8e8">🔍</div>
+    <h2>搜索结果</h2>
+    <div class="active-filters" id="activeFilters"></div>
+    <div class="section-divider"></div>
+  </div>
+  <div class="search-results" id="searchResults"></div>
+</div>
+
+<!-- ═══ No Results ═══ -->
+<div class="no-results" id="noResults" style="display:none">
+  <div class="nr-icon">📭</div>
+  <h3>没有找到匹配的内容</h3>
+  <p>试试更换关键词或调整筛选条件</p>
 </div>
 
 <!-- ═══ Admin Panel (password required) ═══ -->
@@ -1665,6 +1866,252 @@ function showToast(msg) {
   t.textContent = msg; t.classList.add('show');
   clearTimeout(t._tid);
   t._tid = setTimeout(function() { t.classList.remove('show'); }, 3000);
+}
+
+
+// ═══════════════════════════════════════
+//  SEARCH & FILTER ENGINE
+// ═══════════════════════════════════════
+var searchState = {
+  keyword: '',
+  section: 'all',
+  sortDesc: true
+};
+
+var sectionLabels = { news: '热点新闻', events: '焦点事件', reports: '行业报告', policies: '政策法规' };
+var sectionBadges = { news: 'news-badge', events: 'events-badge', reports: 'reports-badge', policies: 'policies-badge' };
+var sectionIcons = { news: '🔥', events: '📰', reports: '📊', policies: '⚖️' };
+
+function doSearch() {
+  searchState.keyword = document.getElementById('searchInput').value.trim();
+  var clearBtn = document.getElementById('searchClear');
+  if (searchState.keyword) {
+    clearBtn.classList.add('visible');
+  } else {
+    clearBtn.classList.remove('visible');
+  }
+  performSearch();
+}
+
+function setFilter(section, btn) {
+  searchState.section = section;
+  // Update chip styles
+  document.querySelectorAll('.filter-chip[data-section]').forEach(function(c) { c.classList.remove('active'); });
+  btn.classList.add('active');
+  performSearch();
+}
+
+function toggleSort() {
+  searchState.sortDesc = !searchState.sortDesc;
+  var toggle = document.getElementById('sortToggle');
+  var label = document.getElementById('sortLabel');
+  if (searchState.sortDesc) {
+    toggle.classList.add('desc');
+    label.textContent = '最新优先';
+  } else {
+    toggle.classList.remove('desc');
+    label.textContent = '最早优先';
+  }
+  performSearch();
+}
+
+function clearSearch() {
+  document.getElementById('searchInput').value = '';
+  searchState.keyword = '';
+  searchState.section = 'all';
+  searchState.sortDesc = true;
+  document.getElementById('searchClear').classList.remove('visible');
+  document.querySelectorAll('.filter-chip[data-section]').forEach(function(c) { c.classList.remove('active'); });
+  document.querySelector('.filter-chip[data-section="all"]').classList.add('active');
+  document.getElementById('sortToggle').classList.add('desc');
+  document.getElementById('sortLabel').textContent = '最新优先';
+  resetView();
+}
+
+function performSearch() {
+  var data = loadAllData();
+  var results = [];
+
+  // Collect all items with section info
+  KEYS.forEach(function(key) {
+    if (searchState.section !== 'all' && searchState.section !== key) return;
+    data[key].forEach(function(item, idx) {
+      results.push({
+        section: key,
+        sectionLabel: sectionLabels[key],
+        idx: idx,
+        item: item
+      });
+    });
+  });
+
+  // Filter by keyword
+  var kw = searchState.keyword.toLowerCase();
+  if (kw) {
+    results = results.filter(function(r) {
+      var haystack = [
+        r.item.title || '',
+        r.item.summary || '',
+        r.item.content || '',
+        r.item.source || '',
+        (r.item.tags || []).join(' ')
+      ].join(' ').toLowerCase();
+      return haystack.indexOf(kw) !== -1;
+    });
+  }
+
+  // Sort by date
+  results.sort(function(a, b) {
+    var dateA = a.item.date || '';
+    var dateB = b.item.date || '';
+    return searchState.sortDesc ? dateB.localeCompare(dateA) : dateA.localeCompare(dateB);
+  });
+
+  // Render
+  var hasFilter = searchState.keyword || searchState.section !== 'all';
+
+  if (hasFilter) {
+    showSearchResults(results);
+  } else {
+    resetView();
+  }
+
+  // Update search count
+  var countEl = document.getElementById('searchCount');
+  if (hasFilter) {
+    countEl.style.display = '';
+    countEl.innerHTML = '共 <strong>' + results.length + '</strong> 条';
+  } else {
+    countEl.style.display = 'none';
+  }
+}
+
+function highlightText(text, keyword) {
+  if (!keyword || !text) return esc(text || '');
+  var escaped = esc(text);
+  var regex = new RegExp('(' + keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+  return escaped.replace(regex, '<mark class="search-hl">$1</mark>');
+}
+
+function showSearchResults(results) {
+  // Hide main sections
+  KEYS.forEach(function(k) {
+    var el = document.getElementById({news:'news-section',events:'events-section',reports:'reports-section',policies:'policies-section'}[k]);
+    if (el) el.style.display = 'none';
+  });
+
+  // Hide "read more" wraps
+  ['newsMoreWrap','eventsMoreWrap','reportsMoreWrap','policiesMoreWrap'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+
+  // Show results section
+  var rs = document.getElementById('resultsSection');
+  var ns = document.getElementById('noResults');
+  var grid = document.getElementById('searchResults');
+  var kw = searchState.keyword;
+
+  rs.style.display = '';
+
+  // Active filters display
+  var af = document.getElementById('activeFilters');
+  af.innerHTML = '';
+  if (searchState.section !== 'all') {
+    af.innerHTML += '<span class="active-filter-tag">' + sectionIcons[searchState.section] + ' ' + sectionLabels[searchState.section] + ' <span class="remove-filter" onclick="clearFilter()">✕</span></span>';
+  }
+
+  if (!results.length) {
+    ns.style.display = '';
+    grid.innerHTML = '';
+    return;
+  }
+
+  ns.style.display = 'none';
+  grid.innerHTML = results.map(function(r) {
+    var n = r.item;
+    var badgeClass = r.section + '-badge';
+    var icon = sectionIcons[r.section];
+    var titleHtml = highlightText(n.title || '', kw);
+    var summaryHtml = highlightText((n.summary || '').substring(0, 120), kw);
+    if (n.summary && n.summary.length > 120) summaryHtml += '...';
+    var tagsHtml = (n.tags || []).map(function(t) {
+      return '<span class="sr-tag">' + esc(t) + '</span>';
+    }).join('');
+    return '<div class="search-result-card" onclick="scrollToArticle(\'' + r.section + '\', ' + r.idx + ')">' +
+      '<span class="sr-badge ' + badgeClass + '">' + icon + ' ' + r.sectionLabel + '</span>' +
+      '<div class="sr-body">' +
+        '<div class="sr-title">' + titleHtml + '</div>' +
+        '<div class="sr-summary">' + summaryHtml + '</div>' +
+        '<div class="sr-meta">' +
+          '<span>📅 ' + esc(n.date || '') + '</span>' +
+          '<span>📰 ' + esc(n.source || '') + '</span>' +
+        '</div>' +
+        (tagsHtml ? '<div class="sr-tags">' + tagsHtml + '</div>' : '') +
+      '</div>' +
+      '<span class="sr-arrow">→</span>' +
+    '</div>';
+  }).join('');
+}
+
+function clearFilter() {
+  searchState.section = 'all';
+  document.querySelectorAll('.filter-chip[data-section]').forEach(function(c) { c.classList.remove('active'); });
+  document.querySelector('.filter-chip[data-section="all"]').classList.add('active');
+  performSearch();
+}
+
+function resetView() {
+  // Hide search results
+  document.getElementById('resultsSection').style.display = 'none';
+  document.getElementById('noResults').style.display = 'none';
+  document.getElementById('searchCount').style.display = 'none';
+
+  // Restore main sections
+  if (!sectionView) {
+    KEYS.forEach(function(k) {
+      var el = document.getElementById({news:'news-section',events:'events-section',reports:'reports-section',policies:'policies-section'}[k]);
+      if (el) el.style.display = '';
+    });
+    ['newsMoreWrap','eventsMoreWrap','reportsMoreWrap','policiesMoreWrap'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.style.display = '';
+    });
+  }
+}
+
+// Scroll to original article card and briefly highlight it
+function scrollToArticle(section, idx) {
+  var prefixMap = { news: 'news-', events: 'event-', reports: 'report-', policies: 'policy-' };
+  var cardId = 'card-' + prefixMap[section] + idx;
+  var card = document.getElementById(cardId);
+
+  if (card) {
+    // First reset view so original sections are visible
+    searchState.keyword = '';
+    searchState.section = 'all';
+    document.getElementById('searchInput').value = '';
+    document.getElementById('searchClear').classList.remove('visible');
+    document.querySelectorAll('.filter-chip[data-section]').forEach(function(c) { c.classList.remove('active'); });
+    document.querySelector('.filter-chip[data-section="all"]').classList.add('active');
+    resetView();
+    document.getElementById('searchCount').style.display = 'none';
+
+    // Scroll to card
+    setTimeout(function() {
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // Flash highlight
+      card.style.transition = 'all .3s';
+      card.style.boxShadow = '0 0 0 4px rgba(0,168,232,.3), 0 8px 28px rgba(0,0,0,.1)';
+      card.style.borderColor = '#00a8e8';
+      card.style.transform = 'scale(1.01)';
+      setTimeout(function() {
+        card.style.boxShadow = '';
+        card.style.borderColor = '';
+        card.style.transform = '';
+      }, 2000);
+    }, 100);
+  }
 }
 
 // ═══════════════════════════════════════
