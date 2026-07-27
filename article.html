@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>老庄报告 — 以鲜国际</title>
+<title>文章详情 — 以鲜国际</title>
 <style>
+
 /* ===== Reset & Base ===== */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -146,8 +147,7 @@ main{max-width:1020px;margin:0 auto;padding:0 24px 80px}
 .news-card:hover{transform: translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.08);border-color:#dde0e4}
 .news-card .card-top{padding:18px 20px 0;display:flex;align-items:flex-start;gap:8px}
 .news-card .tag-dot{width:8px;height:8px;border-radius:50%;background:#e74c3c;margin-top:7px;flex-shrink:0}
-.news-card .card-title{font-size:15px;font-weight:700;line-height:1.5;color:#1a1a2e;flex:1;text-decoration:none;transition:color .2s}
-.news-card .card-title:hover{color:#00a8e8}
+.news-card .card-title{font-size:15px;font-weight:700;line-height:1.5;color:#1a1a2e;flex:1}
 .news-card .card-body{padding:10px 20px 14px;font-size:13px;color:#5a6070;line-height:1.7;flex:1}
 .news-card .card-foot{padding:12px 20px;border-top:1px solid #f5f6f8;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#999}
 .news-card .card-source{font-weight:600;color:#7a8290}
@@ -166,8 +166,7 @@ main{max-width:1020px;margin:0 auto;padding:0 24px 80px}
 .event-card:hover{transform: translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.08);border-color:#ffedd5}
 .event-card .card-top{padding:18px 20px 0;display:flex;align-items:flex-start;gap:8px}
 .event-card .event-dot{width:8px;height:8px;border-radius:50%;background:#ea580c;margin-top:7px;flex-shrink:0}
-.event-card .card-title{font-size:15px;font-weight:700;line-height:1.5;color:#1a1a2e;flex:1;text-decoration:none;transition:color .2s}
-.event-card .card-title:hover{color:#ea580c}
+.event-card .card-title{font-size:15px;font-weight:700;line-height:1.5;color:#1a1a2e;flex:1}
 .event-card .card-body{padding:10px 20px 14px;font-size:13px;color:#5a6070;line-height:1.7;flex:1}
 .event-card .card-foot{padding:12px 20px;border-top:1px solid #f5f6f8;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#999}
 .event-card .card-source{font-weight:600;color:#7a8290}
@@ -187,8 +186,7 @@ main{max-width:1020px;margin:0 auto;padding:0 24px 80px}
 .report-card .report-icon{width:44px;height:44px;border-radius:10px;background:#eef5fc;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
 .report-card .report-content{flex:1;min-width:0}
 .report-card .report-type{font-size:10px;letter-spacing:2px;color:#2980b9;font-weight:700;text-transform:uppercase;margin-bottom:4px}
-.report-card .report-title{font-size:16px;font-weight:700;line-height:1.5;color:#1a1a2e;margin-bottom:6px;text-decoration:none;transition:color .2s;display:block}
-.report-card .report-title:hover{color:#2471a3}
+.report-card .report-title{font-size:16px;font-weight:700;line-height:1.5;color:#1a1a2e;margin-bottom:6px}
 .report-card .report-summary{font-size:13px;color:#5a6070;line-height:1.7;margin-bottom:10px}
 .report-card .report-meta{display:flex;gap:16px;font-size:11px;color:#999;flex-wrap:wrap}
 .report-card .report-meta span{display:flex;align-items:center;gap:4px}
@@ -206,8 +204,7 @@ main{max-width:1020px;margin:0 auto;padding:0 24px 80px}
 .policy-card:hover{transform: translateX(4px);box-shadow:0 8px 28px rgba(0,0,0,.08);border-color:#ede5fa}
 .policy-card .policy-icon{width:40px;height:40px;border-radius:10px;background:#f5f0ff;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
 .policy-card .policy-content{flex:1;min-width:0}
-.policy-card .policy-title{font-size:16px;font-weight:700;line-height:1.5;color:#1a1a2e;margin-bottom:6px;text-decoration:none;transition:color .2s;display:block}
-.policy-card .policy-title:hover{color:#7c3aed}
+.policy-card .policy-title{font-size:16px;font-weight:700;line-height:1.5;color:#1a1a2e;margin-bottom:6px}
 .policy-card .policy-summary{font-size:13px;color:#5a6070;line-height:1.7;margin-bottom:8px}
 .policy-card .policy-meta{display:flex;gap:16px;font-size:11px;color:#999;flex-wrap:wrap;align-items:center}
 .policy-card .policy-meta span{display:flex;align-items:center;gap:4px}
@@ -291,8 +288,7 @@ main{max-width:1020px;margin:0 auto;padding:0 24px 80px}
   display:inline-flex;align-items:center;gap:4px;
   margin-top:12px;padding:6px 14px;border-radius:6px;
   border:1px solid #dde0e4;background:#fafbfc;
-  font-size:12px;color:#5a6070;cursor:pointer;transition:all .2s;
-  text-decoration:none
+  font-size:12px;color:#5a6070;cursor:pointer;transition:all .2s
 }
 .read-more:hover{border-color:#00a8e8;color:#00a8e8;background:#f0f9ff}
 .read-more .arrow{transition:transform .3s}
@@ -609,11 +605,78 @@ mark.search-hl{
 /* ===== Scroll to top when clicking result ===== */
 .scroll-to-section{display:block}
 
+
+
+/* Article detail page extra styles */
+.article-wrapper{
+  max-width:860px;margin:100px auto 60px;padding:0 24px
+}
+.article-card{
+  background:#fff;border-radius:16px;padding:40px 48px;
+  box-shadow:0 2px 12px rgba(0,0,0,.05);
+  border:1px solid #eef0f3
+}
+.article-back{
+  display:inline-flex;align-items:center;gap:6px;
+  color:#00a8e8;font-size:14px;font-weight:600;
+  text-decoration:none;margin-bottom:28px;
+  transition:all .2s
+}
+.article-back:hover{color:#0088c0;transform:translateX(-4px)}
+.article-badge{
+  display:inline-block;padding:4px 12px;border-radius:6px;
+  font-size:11px;font-weight:700;letter-spacing:1px;margin-bottom:16px
+}
+.badge-news{background:#fef0f0;color:#c0392b}
+.badge-events{background:#fff7ed;color:#c2410c}
+.badge-reports{background:#eef5fc;color:#2471a3}
+.badge-policies{background:#f5f0ff;color:#7c3aed}
+.article-title{
+  font-size:28px;font-weight:800;color:#1a1a2e;
+  line-height:1.45;margin-bottom:20px
+}
+.article-meta{
+  display:flex;gap:16px;font-size:13px;color:#88909b;
+  padding-bottom:24px;border-bottom:1px solid #f0f1f3;
+  margin-bottom:28px;flex-wrap:wrap;align-items:center
+}
+.article-meta span{display:flex;align-items:center;gap:4px}
+.article-tags{
+  display:flex;gap:6px;flex-wrap:wrap;margin-bottom:28px
+}
+.article-tag{
+  padding:3px 10px;border-radius:12px;font-size:11px;
+  background:#f5f6f8;color:#7a8290
+}
+.article-content{
+  font-size:16px;line-height:2;color:#2d3436
+}
+.article-content p{
+  margin-bottom:16px;text-indent:2em
+}
+.article-content p:first-of-type{
+  text-indent:0
+}
+.article-ext-link{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:24px;padding:10px 20px;
+  background:#f0f9ff;color:#00a8e8;
+  border-radius:10px;text-decoration:none;
+  font-size:14px;font-weight:600;
+  transition:all .2s
+}
+.article-ext-link:hover{background:#e0f2fe;transform:translateY(-2px)}
+.article-not-found{
+  text-align:center;padding:80px 20px;color:#88909b
+}
+.article-footer{
+  margin-top:40px;padding-top:24px;border-top:1px solid #f0f1f3;
+  display:flex;justify-content:space-between;align-items:center
+}
 </style>
 </head>
 <body>
 
-<!-- ═══ Navigation ═══ -->
 <nav class="nav">
   <a href="index.html" class="nav-brand">
     <div class="nav-logo"><div class="logo-box"><img src="logo.png" alt=""></div><div class="logo-text"><span class="logo-main">以鲜国际</span><span class="logo-sub">恒兴集团旗下战略合作伙伴</span></div></div>
@@ -632,181 +695,11 @@ mark.search-hl{
   </ul>
 </nav>
 
-<!-- ═══ Masthead ═══ -->
-<div class="masthead">
-  <div class="masthead-badge">LAOZHUANG REPORT</div>
-  <h1>老庄<span>报告</span></h1>
-  <p class="subtitle">采购贸易，国际物流，金融结算，政策法规</p>
-  <div class="issue-meta">
-    <span id="issueDate">2026年6月</span> · <span>第 <span id="issueNum">1</span> 期</span>
-    <span id="totalCount">共收录 0 条内容</span>
-  </div>
+<div class="article-wrapper" id="articleWrapper">
+  <div id="articleContent"></div>
 </div>
-
-
-<!-- ═══ Search & Filter Bar ═══ -->
-<div class="search-bar-wrap" id="searchBarWrap">
-  <div class="search-bar">
-    <div class="search-row">
-      <div class="search-input-wrap" id="searchInputWrap">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" placeholder="搜索标题、摘要、正文、标签..." oninput="doSearch()" autocomplete="off">
-        <button class="search-clear" id="searchClear" onclick="clearSearch()" title="清除搜索">✕</button>
-      </div>
-      <div class="search-count" id="searchCount" style="display:none">共 <strong>0</strong> 条</div>
-    </div>
-    <div class="filter-row">
-      <span class="filter-label">分类</span>
-      <button class="filter-chip active" data-section="all" onclick="setFilter('all', this)">📋 全部分类</button>
-      <button class="filter-chip news-chip" data-section="news" onclick="setFilter('news', this)">🔥 热点新闻</button>
-      <button class="filter-chip events-chip" data-section="events" onclick="setFilter('events', this)">📰 焦点事件</button>
-      <button class="filter-chip reports-chip" data-section="reports" onclick="setFilter('reports', this)">📊 行业报告</button>
-      <button class="filter-chip policies-chip" data-section="policies" onclick="setFilter('policies', this)">⚖️ 政策法规</button>
-      <button class="sort-toggle desc" id="sortToggle" onclick="toggleSort()">
-        <span id="sortLabel">最新优先</span><span class="sort-arrow">▼</span>
-      </button>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ Search Results ═══ -->
-<div class="results-section" id="resultsSection" style="display:none">
-  <div class="section-header">
-    <div class="section-icon" style="background:#f0f9ff;color:#00a8e8">🔍</div>
-    <h2>搜索结果</h2>
-    <div class="active-filters" id="activeFilters"></div>
-    <div class="section-divider"></div>
-  </div>
-  <div class="search-results" id="searchResults"></div>
-</div>
-
-<!-- ═══ No Results ═══ -->
-<div class="no-results" id="noResults" style="display:none">
-  <div class="nr-icon">📭</div>
-  <h3>没有找到匹配的内容</h3>
-  <p>试试更换关键词或调整筛选条件</p>
-</div>
-
-<!-- ═══ Admin Panel (password required) ═══ -->
-<div class="admin-panel" id="adminPanel">
-  <div class="admin-bar">
-    <div class="admin-label"><span class="dot"></span> 内容管理</div>
-    <div class="stat-group">
-      <div class="stat pending"><strong id="aqPending">0</strong> 待审</div>
-      <div class="stat approved"><strong id="aqApproved">0</strong> 已通过</div>
-      <div class="stat rejected"><strong id="aqRejected">0</strong> 已拒绝</div>
-    </div>
-    <div class="admin-actions">
-      <button class="a-btn a-btn-add" onclick="openModal()">➕ 新增内容</button>
-      <button class="a-btn a-btn-pub" id="btnPublish" onclick="publishApproved()" disabled title="将已通过的内容发布到正式版">📤 发布</button>
-    </div>
-  </div>
-  <div class="review-queue" id="reviewQueue"></div>
-</div>
-
-<!-- ═══ Main Content ═══ -->
-<main>
-
-<!-- 🔥 热点新闻 -->
-<div class="section accent-news" id="news-section">
-  <div class="section-header">
-    <div class="section-icon">🔥</div>
-    <h2>热点新闻</h2>
-    <span class="count" id="newsCount"></span>
-    <div class="section-divider"></div>
-  </div>
-  <div class="news-grid" id="newsGrid"></div>
-  <div class="section-more-wrap" id="newsMoreWrap"><a class="section-more" href="?section=news">查看更多热点新闻 <span class="arrow">→</span></a></div>
-</div>
-
-<!-- 📰 焦点事件 -->
-<div class="section accent-events" id="events-section">
-  <div class="section-header">
-    <div class="section-icon">📰</div>
-    <h2>焦点事件</h2>
-    <span class="count" id="eventsCount"></span>
-    <div class="section-divider"></div>
-  </div>
-  <div class="events-grid" id="eventsGrid"></div>
-  <div class="section-more-wrap" id="eventsMoreWrap"><a class="section-more" href="?section=events">查看更多焦点事件 <span class="arrow">→</span></a></div>
-</div>
-
-<!-- 📊 行业报告 -->
-<div class="section accent-reports" id="reports-section">
-  <div class="section-header">
-    <div class="section-icon">📊</div>
-    <h2>行业报告</h2>
-    <span class="count" id="reportsCount"></span>
-    <div class="section-divider"></div>
-  </div>
-  <div class="reports-list" id="reportsList"></div>
-  <div class="section-more-wrap" id="reportsMoreWrap"><a class="section-more" href="?section=reports">查看更多行业报告 <span class="arrow">→</span></a></div>
-</div>
-
-<!-- ⚖️ 政策法规 -->
-<div class="section accent-policies" id="policies-section">
-  <div class="section-header">
-    <div class="section-icon">⚖️</div>
-    <h2>政策法规</h2>
-    <span class="count" id="policiesCount"></span>
-    <div class="section-divider"></div>
-  </div>
-  <div class="policies-list" id="policiesList"></div>
-  <div class="section-more-wrap" id="policiesMoreWrap"><a class="section-more" href="?section=policies">查看更多政策法规 <span class="arrow">→</span></a></div>
-</div>
-
-</main>
-
-<footer>&copy; 2026 以鲜国际 EverFresh Supply Chain. 老庄报告 · 行业洞察汇编 <span class="admin-trigger" onclick="openPwGate()" title="内容管理">🔒</span></footer>
-
-<!-- ═══ Password Gate ═══ -->
-<div class="pw-gate-overlay" id="pwGateOverlay" onclick="closePwGateOutside(event)">
-  <div class="pw-gate" onclick="event.stopPropagation()">
-    <h4>🔐 内容管理</h4>
-    <p class="pw-hint">输入管理密码以新增内容</p>
-    <input type="password" id="pwInput" placeholder="······" onkeydown="if(event.key==='Enter')checkPw()" autocomplete="off">
-    <div class="pw-error" id="pwError"></div>
-    <div class="pw-btns">
-      <button class="btn-cancel" onclick="closePwGate()">取消</button>
-      <button class="btn-confirm" onclick="checkPw()">确认</button>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ Modal ═══ -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
-  <div class="modal" onclick="event.stopPropagation()">
-    <div class="modal-head">
-      <h3 id="modalTitle">新增内容</h3>
-      <button class="modal-close" onclick="closeModal()">&times;</button>
-    </div>
-    <div class="modal-body" id="modalBody"></div>
-    <div class="modal-foot">
-      <button class="btn-cancel" onclick="closeModal()">取消</button>
-      <button class="btn-submit" onclick="submitForm()">保存</button>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ Toast ═══ -->
-<div class="toast" id="toast"></div>
 
 <script>
-// ═══════════════════════════════════════
-//  CONSTANTS
-// ═══════════════════════════════════════
-var ITEM_LIMIT = 4;          // 首页每板块最多显示条数
-var KEYS = ['news','events','reports','policies'];
-var sectionView = getUrlParam('section'); // null=首页, 'news'|'events'|'reports'|'policies'=子页面
-
-function getUrlParam(name) {
-  var m = location.search.match(new RegExp('[?&]' + name + '=([^&]*)'));
-  return m ? decodeURIComponent(m[1]) : null;
-}
-
-// ═══════════════════════════════════════
-//  DATA
-// ═══════════════════════════════════════
 var DEMO_DATA = {
   news: [
 
@@ -1314,859 +1207,48 @@ var DEMO_DATA = {
       content: '国务院关税税则委员会于2026年4月25日正式发布《2026年关税调整方案》，对9类进口水产品继续实施暂定税率（低于最惠国税率）。\n\n涉及以鲜国际主要经营品类的调整如下：\n1. 冻南美白虾（HS 0306.17）：暂定税率5%（最惠国税率12%），维持不变；\n2. 冻岩龙虾（HS 0306.32）：暂定税率7%（最惠国税率15%），维持不变；\n3. 冻北极甜虾（HS 0306.16）：暂定税率5%（最惠国税率10%），维持不变；\n4. 冻鱼片（HS 0304.90）：暂定税率6%（最惠国税率12%），维持不变。\n\n方案有效期至2026年12月31日。到期后需重新审议是否延续。\n\n以鲜国际供应链部门提醒：2026年底需密切关注关税政策动向，若暂定税率取消，冻虾进口成本将一次性上涨约7个百分点，对年末旺季利润影响显著。建议提前与供应商协商2027年定价策略，将关税变动风险纳入合约条款。'
     }
   ]
-};
+};;
+var sectionLabel = { news:'热点新闻', events:'焦点事件', reports:'行业报告', policies:'政策法规' };
+var badgeClass = { news:'badge-news', events:'badge-events', reports:'badge-reports', policies:'badge-policies' };
 
-// ═══════════════════════════════════════
-//  REVIEW QUEUE — WorkBuddy 搜集的待审内容
-//  ═══════════════════════════════════════
-//  我（WorkBuddy）会定期搜集行业内容加入这个队列；
-//  你登录后审核通过/拒绝，通过的自动展示在主页。
-//  下次部署时我把已通过的内容合并到 DEMO_DATA 中。
-var REVIEW_QUEUE = [
-  // 审核队列已清空 — 所有内容已合并到正式版 DEMO_DATA 中（2026-06-27）
-];
-
-// ═══════════════════════════════════════
-//  STATE
-// ═══════════════════════════════════════
-var currentType = 'news';
-var KEY = 'laozhuang_reports_user';
-var DECISIONS_KEY = 'laozhuang_review_decisions';  // 审核决定
-var PUBLISHED_KEY = 'laozhuang_review_published';   // 已通过待合并的内容
-
-function loadAllData() {
-  var merged = {};
-  KEYS.forEach(function(k) { merged[k] = []; });
-
-  // Load demo data
-  KEYS.forEach(function(k) {
-    if (DEMO_DATA[k]) merged[k] = merged[k].concat(DEMO_DATA[k]);
-  });
-
-  // Load user data from localStorage
-  try {
-    var stored = JSON.parse(localStorage.getItem(KEY) || '[]');
-    (stored || []).forEach(function(item) {
-      var t = item.type;
-      if (t === 'event') t = 'events';
-      if (t === 'policy') t = 'policies';
-      if (merged[t]) merged[t].push(item);
-    });
-  } catch(e) {}
-
-  // Load approved review items (已通过审核的内容)
-  try {
-    var published = JSON.parse(localStorage.getItem(PUBLISHED_KEY) || '[]');
-    (published || []).forEach(function(item) {
-      var t = item.type;
-      if (t === 'event') t = 'events';
-      if (t === 'policy') t = 'policies';
-      if (merged[t]) merged[t].push(item);
-    });
-  } catch(e) {}
-
-  // Sort by date desc
-  KEYS.forEach(function(k) {
-    merged[k].sort(function(a,b) { return b.date.localeCompare(a.date); });
-  });
-  return merged;
+function getUrlParam(name) {
+  var m = location.search.match(new RegExp('[?&]' + name + '=([^&]*)'));
+  return m ? decodeURIComponent(m[1]) : null;
 }
 
-function countTotal(data) {
-  var total = 0;
-  KEYS.forEach(function(k) { total += data[k].length; });
-  return total;
-}
+function renderArticle() {
+  var section = getUrlParam('section');
+  var idx = parseInt(getUrlParam('idx'), 10);
 
-// ═══════════════════════════════════════
-//  RENDER
-// ═══════════════════════════════════════
-function renderAll() {
-  var data = loadAllData();
-  var limit = sectionView ? 999 : ITEM_LIMIT; // 子页面显示全部
-
-  // 隐藏/显示各板块
-  var hideAll = !!sectionView;
-  showSection('news-section', !hideAll || sectionView === 'news');
-  showSection('events-section', !hideAll || sectionView === 'events');
-  showSection('reports-section', !hideAll || sectionView === 'reports');
-  showSection('policies-section', !hideAll || sectionView === 'policies');
-
-  // 查看更多的链接：子页面隐藏
-  showMoreWrap('newsMoreWrap', !sectionView && data.news.length > ITEM_LIMIT);
-  showMoreWrap('eventsMoreWrap', !sectionView && data.events.length > ITEM_LIMIT);
-  showMoreWrap('reportsMoreWrap', !sectionView && data.reports.length > ITEM_LIMIT);
-  showMoreWrap('policiesMoreWrap', !sectionView && data.policies.length > ITEM_LIMIT);
-
-  // 子页面顶部显示返回链接
-  if (sectionView) {
-    var masthead = document.querySelector('.masthead');
-    var existingBack = document.getElementById('sectionBack');
-    if (!existingBack) {
-      var back = document.createElement('a');
-      back.id = 'sectionBack';
-      back.className = 'section-back';
-      back.href = 'reports.html';
-      back.innerHTML = '← 返回老庄报告首页';
-      masthead.appendChild(back);
-    }
-  }
-
-  renderNews(data.news, limit);
-  renderEvents(data.events, limit);
-  renderReports(data.reports, limit);
-  renderPolicies(data.policies, limit);
-  document.getElementById('totalCount').textContent = '共收录 ' + countTotal(data) + ' 条内容';
-}
-
-function showSection(id, visible) {
-  var el = document.getElementById(id);
-  if (el) el.style.display = visible ? '' : 'none';
-}
-
-function showMoreWrap(id, visible) {
-  var el = document.getElementById(id);
-  if (el) el.style.display = visible ? '' : 'none';
-}
-
-// ══════════════════════════════════════
-//  TOGGLE FULL CONTENT
-// ══════════════════════════════════════
-function toggleContent(id) {
-  var fc = document.getElementById('fc-' + id);
-  var btn = document.getElementById('btn-' + id);
-  if (!fc) return;
-  var isOpen = fc.classList.contains('open');
-  fc.classList.toggle('open');
-  if (btn) btn.classList.toggle('expanded');
-}
-
-function renderNews(items, limit) {
-  limit = limit || items.length;
-  var displayItems = items.slice(0, limit);
-  var grid = document.getElementById('newsGrid');
-  var total = items.length;
-  var shown = displayItems.length;
-  document.getElementById('newsCount').textContent = (limit < total) ? shown + ' / ' + total + ' 条' : total + ' 条';
-  if (!displayItems.length) { grid.innerHTML = '<div class="empty-state"><div class="empty-icon">📭</div><p>暂无热点新闻</p></div>'; return; }
-  grid.innerHTML = displayItems.map(function(n, idx) {
-    var id = 'news-' + idx;
-    var hasContent = n.content && n.content.length > 0;
-    var tagsHtml = (n.tags || []).map(function(t) { return '<span class="card-tag">' + esc(t) + '</span>'; }).join('');
-    var readMoreBtn = hasContent ? '<a class="read-more" id="btn-' + id + '" href="article.html?section=news&idx=' + idx + '" target="_blank">📖 阅读全文 <span class="arrow">→</span></a>' : '';
-    var fullContent = hasContent ? '<div class="full-content" id="fc-' + id + '"><div class="fc-inner">' + (n.content||'').replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>') + '</div></div>' : '';
-    var extLink = (n.url && n.url !== '#') ? '<a href="' + esc(n.url) + '" target="_blank" class="ext-link" style="margin-top:10px;display:inline-flex">🔗 查看原文 →</a>' : '';
-    return '<div class="news-card" id="card-' + id + '">' +
-      '<div class="card-top"><div class="tag-dot"></div><a class="card-title" href="article.html?section=news&idx=' + idx + '" target="_blank">' + esc(n.title) + '</a></div>' +
-      '<div class="card-body">' + esc(n.summary || '') + '</div>' +
-      (hasContent || extLink ? '<div class="card-foot" style="flex-direction:column;align-items:flex-start;gap:8px">' : '<div class="card-foot">') +
-        '<div><span class="card-source">' + esc(n.source || '') + '</span> · <span class="card-date">' + esc(n.date) + '</span></div>' +
-        (tagsHtml ? '<div class="card-tags">' + tagsHtml + '</div>' : '') +
-      '</div>' +
-      (readMoreBtn ? '<div style="padding:0 20px 14px">' + readMoreBtn + '</div>' : '') +
-      (fullContent ? '<div style="padding:0 20px 14px">' + fullContent + '</div>' : '') +
-      (extLink && !hasContent ? '<div style="padding:0 20px 14px">' + extLink + '</div>' : '') +
-      (extLink && hasContent ? '<div style="padding:0 20px 0 20px">' + extLink + '</div>' : '') +
-    '</div>';
-  }).join('');
-}
-
-function renderEvents(items, limit) {
-  limit = limit || items.length;
-  var displayItems = items.slice(0, limit);
-  var grid = document.getElementById('eventsGrid');
-  var total = items.length;
-  var shown = displayItems.length;
-  document.getElementById('eventsCount').textContent = (limit < total) ? shown + ' / ' + total + ' 条' : total + ' 条';
-  if (!displayItems.length) { grid.innerHTML = '<div class="empty-state"><div class="empty-icon">📭</div><p>暂无焦点事件</p></div>'; return; }
-  grid.innerHTML = displayItems.map(function(n, idx) {
-    var id = 'event-' + idx;
-    var hasContent = n.content && n.content.length > 0;
-    var tagsHtml = (n.tags || []).map(function(t) { return '<span class="event-card-tag" style="padding:2px 8px;border-radius:4px;background:#fff7ed;color:#c2410c;font-size:10px">' + esc(t) + '</span>'; }).join('');
-    var readMoreBtn = hasContent ? '<a class="read-more" id="btn-' + id + '" href="article.html?section=events&idx=' + idx + '" target="_blank">📖 阅读全文 <span class="arrow">→</span></a>' : '';
-    var fullContent = hasContent ? '<div class="full-content" id="fc-' + id + '"><div class="fc-inner">' + (n.content||'').replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>') + '</div></div>' : '';
-    var extLink = (n.url && n.url !== '#') ? '<a href="' + esc(n.url) + '" target="_blank" class="ext-link" style="margin-top:10px;display:inline-flex">🔗 查看原文 →</a>' : '';
-    return '<div class="event-card" id="card-' + id + '">' +
-      '<div class="card-top"><div class="event-dot"></div><a class="card-title" href="article.html?section=events&idx=' + idx + '" target="_blank">' + esc(n.title) + '</a></div>' +
-      '<div class="card-body">' + esc(n.summary || '') + '</div>' +
-      (hasContent || extLink ? '<div class="card-foot" style="flex-direction:column;align-items:flex-start;gap:8px">' : '<div class="card-foot">') +
-        '<div><span class="card-source">' + esc(n.source || '') + '</span> · <span class="card-date">' + esc(n.date) + '</span></div>' +
-        (tagsHtml ? '<div class="card-tags">' + tagsHtml + '</div>' : '') +
-      '</div>' +
-      (readMoreBtn ? '<div style="padding:0 20px 14px">' + readMoreBtn + '</div>' : '') +
-      (fullContent ? '<div style="padding:0 20px 14px">' + fullContent + '</div>' : '') +
-      (extLink ? '<div style="padding:0 20px ' + (hasContent ? '0' : '14') + 'px">' + extLink + '</div>' : '') +
-    '</div>';
-  }).join('');
-}
-
-function renderReports(items, limit) {
-  limit = limit || items.length;
-  var displayItems = items.slice(0, limit);
-  var list = document.getElementById('reportsList');
-  var total = items.length;
-  var shown = displayItems.length;
-  document.getElementById('reportsCount').textContent = (limit < total) ? shown + ' / ' + total + ' 份' : total + ' 份';
-  if (!displayItems.length) { list.innerHTML = '<div class="empty-state"><div class="empty-icon">📂</div><p>暂无行业报告</p></div>'; return; }
-  list.innerHTML = displayItems.map(function(r, idx) {
-    var id = 'report-' + idx;
-    var hasContent = r.content && r.content.length > 0;
-    var readMoreBtn = hasContent ? '<br><a class="read-more" id="btn-' + id + '" href="article.html?section=reports&idx=' + idx + '" target="_blank">📖 阅读全文 <span class="arrow">→</span></a>' : '';
-    var fullContent = hasContent ? '<div class="full-content" id="fc-' + id + '"><div class="fc-inner">' + (r.content||'').replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>') + '</div></div>' : '';
-    return '<div class="report-card" id="card-' + id + '">' +
-      '<div class="report-icon">📄</div><div class="report-content">' +
-        '<div class="report-type">' + esc(r.type || '行业报告') + '</div>' +
-        '<a class="report-title" href="article.html?section=reports&idx=' + idx + '" target="_blank">' + esc(r.title) + '</a>' +
-        '<div class="report-summary">' + esc(r.summary || '') + '</div>' +
-        '<div class="report-meta"><span>🏢 ' + esc(r.source || '') + '</span><span>📅 ' + esc(r.date) + '</span></div>' +
-        (readMoreBtn ? '<div style="margin-top:8px">' + readMoreBtn + '</div>' : '') +
-        (fullContent ? '<div style="margin-top:8px">' + fullContent + '</div>' : '') +
-      '</div>' +
-      (r.url && r.url !== '#' ? '<a href="' + esc(r.url) + '" target="_blank" class="report-dl">📥 查看</a>' : '<span class="report-dl" style="opacity:.5">📥 待上传</span>') +
-    '</div>';
-  }).join('');
-}
-
-function renderPolicies(items, limit) {
-  limit = limit || items.length;
-  var displayItems = items.slice(0, limit);
-  var list = document.getElementById('policiesList');
-  var total = items.length;
-  var shown = displayItems.length;
-  document.getElementById('policiesCount').textContent = (limit < total) ? shown + ' / ' + total + ' 条' : total + ' 条';
-  if (!displayItems.length) { list.innerHTML = '<div class="empty-state"><div class="empty-icon">📜</div><p>暂无政策法规</p></div>'; return; }
-  list.innerHTML = displayItems.map(function(r, idx) {
-    var id = 'policy-' + idx;
-    var hasContent = r.content && r.content.length > 0;
-    var readMoreBtn = hasContent ? '<br><a class="read-more" id="btn-' + id + '" href="article.html?section=policies&idx=' + idx + '" target="_blank">📖 阅读全文 <span class="arrow">→</span></a>' : '';
-    var fullContent = hasContent ? '<div class="full-content" id="fc-' + id + '"><div class="fc-inner">' + (r.content||'').replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>') + '</div></div>' : '';
-    return '<div class="policy-card" id="card-' + id + '">' +
-      '<div class="policy-icon">📜</div><div class="policy-content">' +
-        '<a class="policy-title" href="article.html?section=policies&idx=' + idx + '" target="_blank">' + esc(r.title) + '</a>' +
-        '<div class="policy-summary">' + esc(r.summary || '') + '</div>' +
-        '<div class="policy-meta"><span>🏛 ' + esc(r.source || '') + '</span><span>📅 ' + esc(r.date) + '</span></div>' +
-        (readMoreBtn ? '<div style="margin-top:8px">' + readMoreBtn + '</div>' : '') +
-        (fullContent ? '<div style="margin-top:8px">' + fullContent + '</div>' : '') +
-      '</div>' +
-      (r.url && r.url !== '#' ? '<a href="' + esc(r.url) + '" target="_blank" class="policy-link">📥 查看原文</a>' : '<span class="policy-link" style="opacity:.5">📥 待上传</span>') +
-    '</div>';
-  }).join('');
-}
-
-// ═══════════════════════════════════════
-//  PASSWORD GATE
-// ═══════════════════════════════════════
-var AUTH_KEY = 'laozhuang_reports_auth';
-var PW_HASH = 'bGFvemh1YW5nMjAyNg==';
-
-function isAuth() { return sessionStorage.getItem(AUTH_KEY) === '1'; }
-
-function openPwGate() {
-  if (isAuth()) { onAuthSuccess(); return; }
-  document.getElementById('pwGateOverlay').classList.add('active');
-  document.getElementById('pwInput').value = '';
-  document.getElementById('pwError').textContent = '';
-  setTimeout(function(){ document.getElementById('pwInput').focus(); }, 100);
-}
-
-function closePwGate() {
-  document.getElementById('pwGateOverlay').classList.remove('active');
-}
-
-function closePwGateOutside(e) {
-  if (e.target === document.getElementById('pwGateOverlay')) closePwGate();
-}
-
-function onAuthSuccess() {
-  showAdminPanel();
-  // Auto-scroll to admin panel
-  var panel = document.getElementById('adminPanel');
-  if (panel) setTimeout(function() { panel.scrollIntoView({behavior:'smooth',block:'start'}); }, 150);
-}
-
-function checkPw() {
-  var input = document.getElementById('pwInput').value;
-  try {
-    var encoded = btoa(input);
-    if (encoded === PW_HASH) {
-      sessionStorage.setItem(AUTH_KEY, '1');
-      closePwGate();
-      onAuthSuccess();
-    } else {
-      document.getElementById('pwError').textContent = '密码错误，请重试';
-      document.getElementById('pwInput').value = '';
-      document.getElementById('pwInput').focus();
-    }
-  } catch(e) {
-    document.getElementById('pwError').textContent = '密码错误，请重试';
-  }
-}
-
-// ═══════════════════════════════════════
-//  ADMIN PANEL — 审核队列
-// ═══════════════════════════════════════
-function loadDecisions() {
-  try { return JSON.parse(localStorage.getItem(DECISIONS_KEY) || '{}'); } catch(e) { return {}; }
-}
-
-function saveDecisions(d) {
-  localStorage.setItem(DECISIONS_KEY, JSON.stringify(d));
-}
-
-function loadPublished() {
-  try { return JSON.parse(localStorage.getItem(PUBLISHED_KEY) || '[]'); } catch(e) { return []; }
-}
-
-function savePublished(p) {
-  localStorage.setItem(PUBLISHED_KEY, JSON.stringify(p));
-}
-
-function showAdminPanel() {
-  document.getElementById('adminPanel').classList.add('active');
-  renderAdmin();
-}
-
-function getReviewStats() {
-  var decisions = loadDecisions();
-  var pending = 0, approved = 0, rejected = 0;
-  REVIEW_QUEUE.forEach(function(item) {
-    var d = decisions[item.id];
-    if (d === 'approved') approved++;
-    else if (d === 'rejected') rejected++;
-    else pending++;
-  });
-  return { pending: pending, approved: approved, rejected: rejected, total: REVIEW_QUEUE.length };
-}
-
-function renderAdmin() {
-  var stats = getReviewStats();
-  document.getElementById('aqPending').textContent = stats.pending;
-  document.getElementById('aqApproved').textContent = stats.approved;
-  document.getElementById('aqRejected').textContent = stats.rejected;
-
-  // Publish button: enabled only if there are approved items
-  var pubBtn = document.getElementById('btnPublish');
-  if (pubBtn) pubBtn.disabled = stats.approved === 0;
-
-  renderReviewQueue();
-}
-
-function renderReviewQueue() {
-  var container = document.getElementById('reviewQueue');
-  var decisions = loadDecisions();
-
-  if (!REVIEW_QUEUE.length) {
-    container.innerHTML = '<div class="review-empty"><div class="re-icon">📭</div><p>审核队列为空 — WorkBuddy 暂未提交待审内容</p></div>';
+  if (!section || isNaN(idx) || !DEMO_DATA[section] || !DEMO_DATA[section][idx]) {
+    document.getElementById('articleContent').innerHTML =
+      '<div class="article-not-found"><p style="font-size:48px;margin-bottom:16px">📭</p><p style="font-size:18px;font-weight:600;margin-bottom:8px">文章未找到</p><p style="font-size:14px">请返回列表查看其他内容</p><a href="reports.html" class="article-back" style="justify-content:center;margin-top:20px">← 返回列表</a></div>';
     return;
   }
 
-  // Show decided items first, then pending
-  var sorted = REVIEW_QUEUE.slice().sort(function(a, b) {
-    var da = decisions[a.id];
-    var db = decisions[b.id];
-    if (da === 'approved' || da === 'rejected') da = 'z' + da;
-    else da = 'a';
-    if (db === 'approved' || db === 'rejected') db = 'z' + db;
-    else db = 'a';
-    if (da !== db) return da < db ? -1 : 1;
-    return b.addedDate.localeCompare(a.addedDate);
-  });
+  var a = DEMO_DATA[section][idx];
+  var tagsHtml = (a.tags || []).map(function(t) { return '<span class="article-tag">' + t.replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</span>'; }).join('');
+  var contentHtml = (a.content || '暂无正文内容').replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>');
+  var extLink = (a.url && a.url !== '#') ? '<a href="' + a.url.replace(/"/g,'&quot;') + '" target="_blank" class="article-ext-link">🔗 查看原文 →</a>' : '';
 
-  var html = '<div class="rq-title">📝 审核队列</div>';
-  sorted.forEach(function(item) {
-    var dec = decisions[item.id];
-    var badgeClass = item.type === 'event' ? 'event' : item.type;
-    var badgeMap = { news: '热点新闻', event: '焦点事件', report: '行业报告', policy: '政策法规' };
-    var badgeText = badgeMap[item.type] || item.type;
+  document.title = (a.title || '文章详情') + ' — 以鲜国际';
 
-    var decidedClass = (dec === 'approved' || dec === 'rejected') ? ' decided' : '';
-    var statusHtml = '';
-
-    if (dec === 'approved') {
-      statusHtml = '<span class="ri-status approved-status">✓ 已通过</span><span class="ri-undo" onclick="undoDecision(\'' + item.id + '\')">↩ 撤销</span>';
-    } else if (dec === 'rejected') {
-      statusHtml = '<span class="ri-status rejected-status">✕ 已拒绝</span><span class="ri-undo" onclick="undoDecision(\'' + item.id + '\')">↩ 撤销</span>';
-    }
-
-    html += '<div class="review-item' + decidedClass + '">' +
-      '<span class="ri-badge ' + badgeClass + '">' + badgeText + '</span>' +
-      '<div class="ri-text">' +
-        '<div class="ri-title">' + esc(item.title) + '</div>' +
-        '<div class="ri-meta">' + esc(item.source || '') + ' · ' + esc(item.date) + ' · WorkBuddy 搜集于 ' + esc(item.addedDate || '') + '</div>' +
+  document.getElementById('articleContent').innerHTML =
+    '<a href="reports.html" class="article-back">← 返回老庄报告列表</a>' +
+    '<div class="article-card">' +
+      '<div class="article-badge ' + (badgeClass[section] || '') + '">' + (sectionLabel[section] || section) + '</div>' +
+      '<h1 class="article-title">' + (a.title || '').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</h1>' +
+      '<div class="article-meta">' +
+        '<span>🏢 ' + (a.source || '').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</span>' +
+        '<span>📅 ' + (a.date || '') + '</span>' +
       '</div>' +
-      '<div class="ri-actions">' + statusHtml +
-        '<button class="ri-approve" onclick="approveItem(\'' + item.id + '\')" title="通过">✅</button>' +
-        '<button class="ri-reject" onclick="rejectItem(\'' + item.id + '\')" title="拒绝">❌</button>' +
-      '</div>' +
+      (tagsHtml ? '<div class="article-tags">' + tagsHtml + '</div>' : '') +
+      '<div class="article-content"><p>' + contentHtml + '</p></div>' +
+      (extLink || '') +
     '</div>';
-  });
-
-  container.innerHTML = html;
 }
 
-function approveItem(id) {
-  var decisions = loadDecisions();
-  decisions[id] = 'approved';
-  saveDecisions(decisions);
-
-  // Copy to published list
-  var published = loadPublished();
-  var item = REVIEW_QUEUE.find(function(x) { return x.id === id; });
-  if (item) {
-    // Remove any old version
-    published = published.filter(function(x) { return x.id !== id; });
-    published.push(item);
-    savePublished(published);
-  }
-
-  renderAdmin();
-  renderAll();
-  showToast('✅ 已通过，内容已展示在页面中');
-}
-
-function rejectItem(id) {
-  var decisions = loadDecisions();
-  decisions[id] = 'rejected';
-  saveDecisions(decisions);
-
-  // Remove from published
-  var published = loadPublished();
-  published = published.filter(function(x) { return x.id !== id; });
-  savePublished(published);
-
-  renderAdmin();
-  renderAll();
-  showToast('❌ 已拒绝');
-}
-
-function undoDecision(id) {
-  var decisions = loadDecisions();
-  delete decisions[id];
-  saveDecisions(decisions);
-
-  var published = loadPublished();
-  published = published.filter(function(x) { return x.id !== id; });
-  savePublished(published);
-
-  renderAdmin();
-  renderAll();
-  showToast('↩ 已撤销，恢复为待审状态');
-}
-
-function publishApproved() {
-  var decisions = loadDecisions();
-  var stats = getReviewStats();
-  if (stats.approved === 0) { showToast('没有待发布的内容'); return; }
-
-  showToast('✅ 已通过的内容已展示在页面中。下次告诉我「老庄报告有已发布内容」，我会将它们合并到正式版中。');
-
-  // Keep published items in localStorage (already showing in renderAll)
-  // Clear decisions for approved items, clearing the queue
-  var newDecisions = {};
-  Object.keys(decisions).forEach(function(id) {
-    if (decisions[id] === 'rejected') newDecisions[id] = 'rejected';
-  });
-  saveDecisions(newDecisions);
-
-  renderAdmin();
-  // Don't call renderAll() here - published items are already showing
-}
-
-// ═══════════════════════════════════════
-//  MODAL: Add Content
-// ═══════════════════════════════════════
-function openModal(type) {
-  currentType = type || 'news';
-  document.getElementById('modalOverlay').classList.add('active');
-  renderModalForm(currentType);
-}
-
-function closeModal() { document.getElementById('modalOverlay').classList.remove('active'); }
-function closeModalOutside(e) { if (e.target === document.getElementById('modalOverlay')) closeModal(); }
-
-var TITLE_MAP = { news: '新增热点新闻', event: '新增焦点事件', report: '新增行业报告', policy: '新增政策法规' };
-
-function renderModalForm(type) {
-  document.getElementById('modalTitle').textContent = TITLE_MAP[type] || '新增内容';
-  var body = document.getElementById('modalBody');
-  var html = '<div class="field"><label>类型 <span class="req">*</span></label>' +
-    '<select id="formType" onchange="switchFormType(this.value)">' +
-      '<option value="news"' + (type==='news'?' selected':'') + '>🔥 热点新闻</option>' +
-      '<option value="event"' + (type==='event'?' selected':'') + '>📰 焦点事件</option>' +
-      '<option value="report"' + (type==='report'?' selected':'') + '>📊 行业报告</option>' +
-      '<option value="policy"' + (type==='policy'?' selected':'') + '>⚖️ 政策法规</option>' +
-    '</select></div>';
-
-  if (type === 'news' || type === 'event') {
-    html += '<div class="field"><label>标题 <span class="req">*</span></label><input type="text" id="fTitle" placeholder="标题"></div>';
-    html += '<div class="field"><label>来源 <span class="req">*</span></label><input type="text" id="fSource" placeholder="如：海关总署"></div>';
-    html += '<div class="field"><label>日期</label><input type="date" id="fDate"></div>';
-    html += '<div class="field"><label>摘要</label><textarea id="fSummary" placeholder="简要描述（1-3句话）"></textarea></div>';
-    html += '<div class="field"><label>原文链接</label><input type="url" id="fUrl" placeholder="https://..."></div>';
-    html += '<div class="field"><label>标签（逗号分隔）</label><input type="text" id="fTags" placeholder="如：虾蟹行情, 白虾进口"></div>';
-  } else if (type === 'report') {
-    html += '<div class="field"><label>类型</label><select id="fReportType"><option value="行业研报">行业研报</option><option value="白皮书">白皮书</option><option value="政策文件">政策文件</option><option value="市场分析">市场分析</option></select></div>';
-    html += '<div class="field"><label>标题 <span class="req">*</span></label><input type="text" id="fTitle" placeholder="报告标题"></div>';
-    html += '<div class="field"><label>来源/机构 <span class="req">*</span></label><input type="text" id="fSource" placeholder="如：中国水产流通与加工协会"></div>';
-    html += '<div class="field"><label>发布日期</label><input type="date" id="fDate"></div>';
-    html += '<div class="field"><label>摘要</label><textarea id="fSummary" placeholder="报告核心结论（1-3句话）"></textarea></div>';
-    html += '<div class="field"><label>报告链接</label><input type="url" id="fUrl" placeholder="https://..."></div>';
-  } else if (type === 'policy') {
-    html += '<div class="field"><label>标题 <span class="req">*</span></label><input type="text" id="fTitle" placeholder="政策/法规名称"></div>';
-    html += '<div class="field"><label>发布机构 <span class="req">*</span></label><input type="text" id="fSource" placeholder="如：海关总署、商务部"></div>';
-    html += '<div class="field"><label>发布日期</label><input type="date" id="fDate"></div>';
-    html += '<div class="field"><label>摘要</label><textarea id="fSummary" placeholder="政策要点（1-3句话）"></textarea></div>';
-    html += '<div class="field"><label>原文链接</label><input type="url" id="fUrl" placeholder="https://..."></div>';
-  }
-
-  body.innerHTML = html;
-}
-
-function switchFormType(val) { currentType = val; renderModalForm(val); }
-
-function submitForm() {
-  var type = document.getElementById('formType').value;
-  if (['news','event','report','policy'].indexOf(type) >= 0) currentType = type;
-
-  var item = { type: currentType, id: 'u' + Date.now() };
-
-  item.title = (document.getElementById('fTitle')||{}).value || '';
-  item.source = (document.getElementById('fSource')||{}).value || '';
-  item.date = (document.getElementById('fDate')||{}).value || new Date().toISOString().slice(0,10);
-  item.summary = (document.getElementById('fSummary')||{}).value || '';
-  item.url = (document.getElementById('fUrl')||{}).value || '';
-
-  if (currentType === 'news' || currentType === 'event') {
-    var tagsStr = (document.getElementById('fTags')||{}).value || '';
-    item.tags = tagsStr.split(',').map(function(s){return s.trim();}).filter(Boolean);
-    if (!item.title || !item.source) { showToast('请填写标题和来源'); return; }
-  } else if (currentType === 'report') {
-    item.type = (document.getElementById('fReportType')||{}).value || '行业报告';
-    if (!item.title || !item.source) { showToast('请填写标题和来源'); return; }
-  } else if (currentType === 'policy') {
-    if (!item.title || !item.source) { showToast('请填写标题和发布机构'); return; }
-  }
-
-  var stored;
-  try { stored = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch(e) { stored = []; }
-  stored.push(item);
-  localStorage.setItem(KEY, JSON.stringify(stored));
-
-  closeModal();
-  renderAll();
-  showToast('✅ 已保存！我会定期将你的新增内容合并到正式版中。');
-
-  var sectionMap = { news: 'news-section', event: 'events-section', report: 'reports-section', policy: 'policies-section' };
-  var el = document.getElementById(sectionMap[currentType]);
-  if (el) setTimeout(function() { el.scrollIntoView({behavior:'smooth',block:'start'}); }, 200);
-}
-
-// ═══════════════════════════════════════
-//  UTIL
-// ═══════════════════════════════════════
-function esc(s) { if (!s) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-
-function showToast(msg) {
-  var t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  clearTimeout(t._tid);
-  t._tid = setTimeout(function() { t.classList.remove('show'); }, 3000);
-}
-
-
-// ═══════════════════════════════════════
-//  SEARCH & FILTER ENGINE
-// ═══════════════════════════════════════
-var searchState = {
-  keyword: '',
-  section: 'all',
-  sortDesc: true
-};
-
-var sectionLabels = { news: '热点新闻', events: '焦点事件', reports: '行业报告', policies: '政策法规' };
-var sectionBadges = { news: 'news-badge', events: 'events-badge', reports: 'reports-badge', policies: 'policies-badge' };
-var sectionIcons = { news: '🔥', events: '📰', reports: '📊', policies: '⚖️' };
-
-function doSearch() {
-  searchState.keyword = document.getElementById('searchInput').value.trim();
-  var clearBtn = document.getElementById('searchClear');
-  if (searchState.keyword) {
-    clearBtn.classList.add('visible');
-  } else {
-    clearBtn.classList.remove('visible');
-  }
-  performSearch();
-}
-
-function setFilter(section, btn) {
-  searchState.section = section;
-  // Update chip styles
-  document.querySelectorAll('.filter-chip[data-section]').forEach(function(c) { c.classList.remove('active'); });
-  btn.classList.add('active');
-  performSearch();
-}
-
-function toggleSort() {
-  searchState.sortDesc = !searchState.sortDesc;
-  var toggle = document.getElementById('sortToggle');
-  var label = document.getElementById('sortLabel');
-  if (searchState.sortDesc) {
-    toggle.classList.add('desc');
-    label.textContent = '最新优先';
-  } else {
-    toggle.classList.remove('desc');
-    label.textContent = '最早优先';
-  }
-  performSearch();
-}
-
-function clearSearch() {
-  document.getElementById('searchInput').value = '';
-  searchState.keyword = '';
-  searchState.section = 'all';
-  searchState.sortDesc = true;
-  document.getElementById('searchClear').classList.remove('visible');
-  document.querySelectorAll('.filter-chip[data-section]').forEach(function(c) { c.classList.remove('active'); });
-  document.querySelector('.filter-chip[data-section="all"]').classList.add('active');
-  document.getElementById('sortToggle').classList.add('desc');
-  document.getElementById('sortLabel').textContent = '最新优先';
-  resetView();
-}
-
-function performSearch() {
-  var data = loadAllData();
-  var results = [];
-
-  // Collect all items with section info
-  KEYS.forEach(function(key) {
-    if (searchState.section !== 'all' && searchState.section !== key) return;
-    data[key].forEach(function(item, idx) {
-      results.push({
-        section: key,
-        sectionLabel: sectionLabels[key],
-        idx: idx,
-        item: item
-      });
-    });
-  });
-
-  // Filter by keyword
-  var kw = searchState.keyword.toLowerCase();
-  if (kw) {
-    results = results.filter(function(r) {
-      var haystack = [
-        r.item.title || '',
-        r.item.summary || '',
-        r.item.content || '',
-        r.item.source || '',
-        (r.item.tags || []).join(' ')
-      ].join(' ').toLowerCase();
-      return haystack.indexOf(kw) !== -1;
-    });
-  }
-
-  // Sort by date
-  results.sort(function(a, b) {
-    var dateA = a.item.date || '';
-    var dateB = b.item.date || '';
-    return searchState.sortDesc ? dateB.localeCompare(dateA) : dateA.localeCompare(dateB);
-  });
-
-  // Render
-  var hasFilter = searchState.keyword || searchState.section !== 'all';
-
-  if (hasFilter) {
-    showSearchResults(results);
-  } else {
-    resetView();
-  }
-
-  // Update search count
-  var countEl = document.getElementById('searchCount');
-  if (hasFilter) {
-    countEl.style.display = '';
-    countEl.innerHTML = '共 <strong>' + results.length + '</strong> 条';
-  } else {
-    countEl.style.display = 'none';
-  }
-}
-
-function highlightText(text, keyword) {
-  if (!keyword || !text) return esc(text || '');
-  var escaped = esc(text);
-  var regex = new RegExp('(' + keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
-  return escaped.replace(regex, '<mark class="search-hl">$1</mark>');
-}
-
-function showSearchResults(results) {
-  // Hide main sections
-  KEYS.forEach(function(k) {
-    var el = document.getElementById({news:'news-section',events:'events-section',reports:'reports-section',policies:'policies-section'}[k]);
-    if (el) el.style.display = 'none';
-  });
-
-  // Hide "read more" wraps
-  ['newsMoreWrap','eventsMoreWrap','reportsMoreWrap','policiesMoreWrap'].forEach(function(id) {
-    var el = document.getElementById(id);
-    if (el) el.style.display = 'none';
-  });
-
-  // Show results section
-  var rs = document.getElementById('resultsSection');
-  var ns = document.getElementById('noResults');
-  var grid = document.getElementById('searchResults');
-  var kw = searchState.keyword;
-
-  rs.style.display = '';
-
-  // Active filters display
-  var af = document.getElementById('activeFilters');
-  af.innerHTML = '';
-  if (searchState.section !== 'all') {
-    af.innerHTML += '<span class="active-filter-tag">' + sectionIcons[searchState.section] + ' ' + sectionLabels[searchState.section] + ' <span class="remove-filter" onclick="clearFilter()">✕</span></span>';
-  }
-
-  if (!results.length) {
-    ns.style.display = '';
-    grid.innerHTML = '';
-    return;
-  }
-
-  ns.style.display = 'none';
-  grid.innerHTML = results.map(function(r) {
-    var n = r.item;
-    var badgeClass = r.section + '-badge';
-    var icon = sectionIcons[r.section];
-    var titleHtml = highlightText(n.title || '', kw);
-    var summaryHtml = highlightText((n.summary || '').substring(0, 120), kw);
-    if (n.summary && n.summary.length > 120) summaryHtml += '...';
-    var tagsHtml = (n.tags || []).map(function(t) {
-      return '<span class="sr-tag">' + esc(t) + '</span>';
-    }).join('');
-    return '<div class="search-result-card" onclick="window.open(\'article.html?section=' + r.section + '&idx=' + r.idx + '\', \'_blank\')">' +
-      '<span class="sr-badge ' + badgeClass + '">' + icon + ' ' + r.sectionLabel + '</span>' +
-      '<div class="sr-body">' +
-        '<div class="sr-title">' + titleHtml + '</div>' +
-        '<div class="sr-summary">' + summaryHtml + '</div>' +
-        '<div class="sr-meta">' +
-          '<span>📅 ' + esc(n.date || '') + '</span>' +
-          '<span>📰 ' + esc(n.source || '') + '</span>' +
-        '</div>' +
-        (tagsHtml ? '<div class="sr-tags">' + tagsHtml + '</div>' : '') +
-      '</div>' +
-      '<span class="sr-arrow">→</span>' +
-    '</div>';
-  }).join('');
-}
-
-function clearFilter() {
-  searchState.section = 'all';
-  document.querySelectorAll('.filter-chip[data-section]').forEach(function(c) { c.classList.remove('active'); });
-  document.querySelector('.filter-chip[data-section="all"]').classList.add('active');
-  performSearch();
-}
-
-function resetView() {
-  // Hide search results
-  document.getElementById('resultsSection').style.display = 'none';
-  document.getElementById('noResults').style.display = 'none';
-  document.getElementById('searchCount').style.display = 'none';
-
-  // Restore main sections
-  if (!sectionView) {
-    KEYS.forEach(function(k) {
-      var el = document.getElementById({news:'news-section',events:'events-section',reports:'reports-section',policies:'policies-section'}[k]);
-      if (el) el.style.display = '';
-    });
-    ['newsMoreWrap','eventsMoreWrap','reportsMoreWrap','policiesMoreWrap'].forEach(function(id) {
-      var el = document.getElementById(id);
-      if (el) el.style.display = '';
-    });
-  }
-}
-
-// Scroll to original article card and briefly highlight it
-function scrollToArticle(section, idx) {
-  var prefixMap = { news: 'news-', events: 'event-', reports: 'report-', policies: 'policy-' };
-  var cardId = 'card-' + prefixMap[section] + idx;
-
-  // If we are on a section sub-page and the target belongs to another section,
-  // or if on homepage the card is hidden by ITEM_LIMIT, redirect to the section sub-page.
-  if (sectionView) {
-    if (sectionView !== section) {
-      window.location.href = '?section=' + section + '&scrollTo=' + encodeURIComponent(cardId);
-      return;
-    }
-  } else {
-    if (idx >= ITEM_LIMIT) {
-      window.location.href = '?section=' + section + '&scrollTo=' + encodeURIComponent(cardId);
-      return;
-    }
-  }
-
-  // Target card should be present in current view
-  var card = document.getElementById(cardId);
-  if (!card) return;
-
-  // First reset view so original sections are visible
-  searchState.keyword = '';
-  searchState.section = 'all';
-  document.getElementById('searchInput').value = '';
-  document.getElementById('searchClear').classList.remove('visible');
-  document.querySelectorAll('.filter-chip[data-section]').forEach(function(c) { c.classList.remove('active'); });
-  document.querySelector('.filter-chip[data-section="all"]').classList.add('active');
-  resetView();
-  document.getElementById('searchCount').style.display = 'none';
-
-  // Scroll to card
-  setTimeout(function() {
-    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    // Flash highlight
-    card.style.transition = 'all .3s';
-    card.style.boxShadow = '0 0 0 4px rgba(0,168,232,.3), 0 8px 28px rgba(0,0,0,.1)';
-    card.style.borderColor = '#00a8e8';
-    card.style.transform = 'scale(1.01)';
-    setTimeout(function() {
-      card.style.boxShadow = '';
-      card.style.borderColor = '';
-      card.style.transform = '';
-    }, 2000);
-  }, 100);
-}
-
-// Highlight a card by id (used when landing from search redirect)
-function highlightCard(cardId) {
-  var card = document.getElementById(cardId);
-  if (!card) return;
-  card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  card.style.transition = 'all .3s';
-  card.style.boxShadow = '0 0 0 4px rgba(0,168,232,.3), 0 8px 28px rgba(0,0,0,.1)';
-  card.style.borderColor = '#00a8e8';
-  card.style.transform = 'scale(1.01)';
-  setTimeout(function() {
-    card.style.boxShadow = '';
-    card.style.borderColor = '';
-    card.style.transform = '';
-  }, 2000);
-}
-
-// ═══════════════════════════════════════
-//  INIT
-// ═══════════════════════════════════════
-document.addEventListener('DOMContentLoaded', function() {
-  renderAll();
-  document.getElementById('fDate') && (document.getElementById('fDate').value = new Date().toISOString().slice(0,10));
-  // If already authenticated (e.g. page refresh), show admin panel
-  if (isAuth()) showAdminPanel();
-
-  // Handle deep-link scroll from search result click
-  var scrollTo = getUrlParam('scrollTo');
-  if (scrollTo) {
-    setTimeout(function() {
-      highlightCard(scrollTo);
-    }, 400);
-  }
-});
+renderArticle();
 </script>
 
 </body>
