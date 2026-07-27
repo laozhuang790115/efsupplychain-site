@@ -2084,34 +2084,65 @@ function resetView() {
 function scrollToArticle(section, idx) {
   var prefixMap = { news: 'news-', events: 'event-', reports: 'report-', policies: 'policy-' };
   var cardId = 'card-' + prefixMap[section] + idx;
-  var card = document.getElementById(cardId);
 
-  if (card) {
-    // First reset view so original sections are visible
-    searchState.keyword = '';
-    searchState.section = 'all';
-    document.getElementById('searchInput').value = '';
-    document.getElementById('searchClear').classList.remove('visible');
-    document.querySelectorAll('.filter-chip[data-section]').forEach(function(c) { c.classList.remove('active'); });
-    document.querySelector('.filter-chip[data-section="all"]').classList.add('active');
-    resetView();
-    document.getElementById('searchCount').style.display = 'none';
-
-    // Scroll to card
-    setTimeout(function() {
-      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      // Flash highlight
-      card.style.transition = 'all .3s';
-      card.style.boxShadow = '0 0 0 4px rgba(0,168,232,.3), 0 8px 28px rgba(0,0,0,.1)';
-      card.style.borderColor = '#00a8e8';
-      card.style.transform = 'scale(1.01)';
-      setTimeout(function() {
-        card.style.boxShadow = '';
-        card.style.borderColor = '';
-        card.style.transform = '';
-      }, 2000);
-    }, 100);
+  // If we are on a section sub-page and the target belongs to another section,
+  // or if on homepage the card is hidden by ITEM_LIMIT, redirect to the section sub-page.
+  if (sectionView) {
+    if (sectionView !== section) {
+      window.location.href = '?section=' + section + '&scrollTo=' + encodeURIComponent(cardId);
+      return;
+    }
+  } else {
+    if (idx >= ITEM_LIMIT) {
+      window.location.href = '?section=' + section + '&scrollTo=' + encodeURIComponent(cardId);
+      return;
+    }
   }
+
+  // Target card should be present in current view
+  var card = document.getElementById(cardId);
+  if (!card) return;
+
+  // First reset view so original sections are visible
+  searchState.keyword = '';
+  searchState.section = 'all';
+  document.getElementById('searchInput').value = '';
+  document.getElementById('searchClear').classList.remove('visible');
+  document.querySelectorAll('.filter-chip[data-section]').forEach(function(c) { c.classList.remove('active'); });
+  document.querySelector('.filter-chip[data-section="all"]').classList.add('active');
+  resetView();
+  document.getElementById('searchCount').style.display = 'none';
+
+  // Scroll to card
+  setTimeout(function() {
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // Flash highlight
+    card.style.transition = 'all .3s';
+    card.style.boxShadow = '0 0 0 4px rgba(0,168,232,.3), 0 8px 28px rgba(0,0,0,.1)';
+    card.style.borderColor = '#00a8e8';
+    card.style.transform = 'scale(1.01)';
+    setTimeout(function() {
+      card.style.boxShadow = '';
+      card.style.borderColor = '';
+      card.style.transform = '';
+    }, 2000);
+  }, 100);
+}
+
+// Highlight a card by id (used when landing from search redirect)
+function highlightCard(cardId) {
+  var card = document.getElementById(cardId);
+  if (!card) return;
+  card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  card.style.transition = 'all .3s';
+  card.style.boxShadow = '0 0 0 4px rgba(0,168,232,.3), 0 8px 28px rgba(0,0,0,.1)';
+  card.style.borderColor = '#00a8e8';
+  card.style.transform = 'scale(1.01)';
+  setTimeout(function() {
+    card.style.boxShadow = '';
+    card.style.borderColor = '';
+    card.style.transform = '';
+  }, 2000);
 }
 
 // ═══════════════════════════════════════
@@ -2122,6 +2153,14 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('fDate') && (document.getElementById('fDate').value = new Date().toISOString().slice(0,10));
   // If already authenticated (e.g. page refresh), show admin panel
   if (isAuth()) showAdminPanel();
+
+  // Handle deep-link scroll from search result click
+  var scrollTo = getUrlParam('scrollTo');
+  if (scrollTo) {
+    setTimeout(function() {
+      highlightCard(scrollTo);
+    }, 400);
+  }
 });
 </script>
 
