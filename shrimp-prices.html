@@ -449,10 +449,10 @@ function renderCountryChart(){
   var datasets = [];
   var specs = SPEC_LABELS[currentCountry];
   var colors = currentCountry === "china"
-    ? ["#e74c3c","#c0392b","#e67e22","#f39c12","#e8a87c"]
+    ? ["#e74c3c","#e67e22","#f1c40f","#27ae60","#2980b9"]
     : currentCountry === "ecuador"
-    ? ["#00a8e8","#0077b6","#0284c7","#0369a1","#0c4a6e"]
-    : ["#f59e0b","#d97706","#b45309","#92400e","#78350f"];
+    ? ["#00a8e8","#e74c3c","#2ecc71","#f39c12","#9b59b6"]
+    : ["#f59e0b","#e74c3c","#8b5cf6","#10b981","#3b82f6"];
 
   for(var s=0; s<specs.length; s++){
     var data = [];
