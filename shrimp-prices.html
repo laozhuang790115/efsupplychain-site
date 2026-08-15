@@ -340,7 +340,16 @@ function renderSummary(){
       if(pct > 0.5){ wowClass = "wow-up"; wowText = "+" + pct.toFixed(1) + "%"; arrow = "↑"; }
       else if(pct < -0.5){ wowClass = "wow-down"; wowText = pct.toFixed(1) + "%"; arrow = "↓"; }
     }
-    var regionLabel = it.region ? REGION_NAMES[it.region] : "安得拉邦";
+    var regionLabel;
+    if(it.region){
+      regionLabel = REGION_NAMES[it.region] || it.country;
+    } else if(it.country === "ecuador"){
+      regionLabel = "全国";
+    } else if(it.country === "india"){
+      regionLabel = "安得拉邦";
+    } else {
+      regionLabel = "全国";
+    }
     var priceDisplay = price != null ? price.toFixed(1) : "—";
     html += '<div class="summary-card ' + it.country + '">' +
       '<div class="flag">' + it.flag + '</div>' +
@@ -532,7 +541,7 @@ function renderTable(){
       var sp = cnSpecs[si];
       var cur = latest.china[reg][sp];
       var old = prev ? prev.china[reg][sp] : null;
-      html += buildRow("中国", REGION_NAMES[reg], sp + "头/斤", cur, cur, old, "CNY/斤", fx);
+      html += buildRow("中国", REGION_NAMES[reg], sp + "头/斤", cur != null ? cur * 2 : null, cur, old, "CNY/斤", fx);
     }
   }
 
