@@ -120,6 +120,12 @@ tr:hover{background:#f8f9fc}
 .footer a:hover{text-decoration:underline}
 .footer .note{max-width:600px;margin:0 auto 16px;font-size:12px;line-height:1.6;color:#bbb}
 
+/* ===== Week Selector ===== */
+.table-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.week-selector{display:flex;flex-direction:column;gap:4px}
+.week-selector label{font-size:11px;color:#64748b;font-weight:500}
+.week-selector select{min-width:140px;padding:7px 28px 7px 10px;border:1px solid #d1d5db;border-radius:6px;background:#fff;font-size:13px;color:#1f2937;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+
 /* ===== Loading ===== */
 .loading{text-align:center;padding:60px;color:#aaa;font-size:14px}
 .loading .spinner{display:inline-block;width:32px;height:32px;border:3px solid #e8ecf0;border-top-color:#00a8e8;border-radius:50%;animation:spin 0.8s linear infinite;margin-bottom:12px}
@@ -209,10 +215,20 @@ tr:hover{background:#f8f9fc}
       <div class="chart-container"><canvas id="countryChart"></canvas></div>
     </div>
 
-    <!-- ===== Section 3: 最新周度数据表 ===== -->
+    <!-- ===== Section 3: 周度数据表（可查询历史周次） ===== -->
     <div class="card">
-      <div class="card-title"><span class="icon">📋</span> 最新周度数据</div>
-      <div class="card-subtitle" id="table-subtitle">最新一周三大产区塘头价明细及环比变化</div>
+      <div class="table-header">
+        <div>
+          <div class="card-title"><span class="icon">📋</span> 周度数据</div>
+          <div class="card-subtitle" id="table-subtitle">最新一周三大产区塘头价明细及环比变化</div>
+        </div>
+        <div class="week-selector">
+          <label for="week-select">查询周次</label>
+          <select id="week-select">
+            <option value="latest" selected>最新一周</option>
+          </select>
+        </div>
+      </div>
       <div class="table-wrap" id="table-wrap"></div>
     </div>
 
@@ -278,6 +294,7 @@ function init(){
       PRICE_DATA = data;
       document.getElementById("loading").style.display = "none";
       document.getElementById("content").classList.remove("content-hidden");
+      populateWeekSelector();
       renderSummary();
       renderCompareChart();
       renderCountryChart();
@@ -518,10 +535,31 @@ function renderCountryChart(){
 }
 
 // ===== Data Table =====
+var currentTableWeek = null; // null = latest
+
+function populateWeekSelector(){
+  var sel = document.getElementById("week-select");
+  // keep the first option
+  while(sel.children.length > 1) sel.removeChild(sel.lastChild);
+  var weeks = PRICE_DATA.weeks;
+  for(var i=0; i<weeks.length; i++){
+    var opt = document.createElement("option");
+    opt.value = String(i);
+    opt.textContent = weeks[i].label + " (" + weeks[i].dateRange + ")";
+    sel.appendChild(opt);
+  }
+  if(currentTableWeek == null || currentTableWeek >= weeks.length){
+    sel.value = "latest";
+  } else {
+    sel.value = String(currentTableWeek);
+  }
+}
+
 function renderTable(){
   var weeks = PRICE_DATA.weeks;
-  var latest = weeks[weeks.length-1];
-  var prev = weeks[weeks.length-2];
+  var idx = currentTableWeek == null ? weeks.length - 1 : currentTableWeek;
+  var latest = weeks[idx];
+  var prev = idx > 0 ? weeks[idx - 1] : null;
   var fx = latest.fx;
 
   document.getElementById("table-subtitle").textContent =
@@ -615,6 +653,12 @@ document.getElementById("country-tabs").addEventListener("click", function(e){
   btn.classList.add("active");
   currentCountry = btn.getAttribute("data-country");
   renderCountryChart();
+});
+
+document.getElementById("week-select").addEventListener("change", function(){
+  var val = this.value;
+  currentTableWeek = (val === "latest") ? null : parseInt(val, 10);
+  renderTable();
 });
 
 init();
