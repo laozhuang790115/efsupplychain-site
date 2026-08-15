@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>白对虾塘头价监测 — 以鲜国际</title>
+<meta name="description" content="全球白对虾塘头价周度监测：中国、厄瓜多尔、印度三大产区塘头价趋势追踪与对比分析">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",-apple-system,sans-serif;color:#1a1a2e;line-height:1.7;background:#f5f7fb;min-height:100vh}
+a{text-decoration:none;color:inherit}
+
+/* ===== Nav ===== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,22,40,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.06);padding:0 32px;height:60px;display:flex;align-items:center;justify-content:space-between;transition:all .3s}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-logo{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:800;color:#00a8e8;margin-right:32px;flex-shrink:0;white-space:nowrap}
+.nav-logo .logo-box{width:60px;height:30px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.95);border:2px solid #d0d8e0;border-radius:6px;flex-shrink:0;overflow:hidden}
+.nav-logo .logo-box img{height:22px;width:auto}
+.nav-logo .logo-text{display:flex;align-items:flex-end;gap:4px;line-height:1.2}
+.nav-logo .logo-main{font-size:22px;font-weight:800;color:#00a8e8}
+.nav-logo .logo-sub{font-size:10.5px;font-weight:400;color:rgba(255,255,255,.5);white-space:nowrap;letter-spacing:0.3px}
+.nav-name{color:#fff;font-size:15px;font-weight:600;letter-spacing:1px}
+.nav-links{display:flex;gap:22px;list-style:none}
+.nav-links a{color:rgba(255,255,255,.65);font-size:13px;transition:color .25s;letter-spacing:.5px;white-space:nowrap}
+.nav-links a:hover{color:#00d4aa}
+.nav-tools{background:linear-gradient(135deg,#f59e0b,#f97316);color:#0a1628!important;padding:6px 14px;border-radius:20px;font-weight:700;font-size:13px;transition:all .3s}
+.nav-tools:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(245,158,11,.35);color:#0a1628!important}
+.nav-shrimp{background:linear-gradient(135deg,#e74c3c,#c0392b);color:#fff!important;padding:6px 14px;border-radius:20px;font-weight:700;font-size:13px;transition:all .3s}
+.nav-shrimp:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(231,76,60,.35);color:#fff!important}
+.nav-cold{background:#00a8e8;color:#fff!important;padding:5px 14px;border-radius:20px;font-size:12px}
+.nav-cold:hover{background:#0088c8;color:#fff!important}
+.nav-halal{background:linear-gradient(135deg,#00d4aa,#00a8e8);color:#0a1628!important;padding:6px 14px;border-radius:20px;font-weight:700;font-size:13px;transition:all .3s}
+.nav-halal:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,212,170,.35);color:#0a1628!important}
+@media(max-width:640px){.nav-links{display:none}.nav{padding:0 16px}}
+
+/* ===== Header ===== */
+.header{background:linear-gradient(135deg,#0a1628,#0a2848);color:#fff;padding:56px 24px 40px;text-align:center;margin-top:60px}
+.header .tag{display:inline-block;font-size:11px;letter-spacing:4px;color:#e74c3c;text-transform:uppercase;margin-bottom:12px;font-weight:600}
+.header h1{font-size:28px;font-weight:800;margin-bottom:8px}
+.header .sub{font-size:14px;color:rgba(255,255,255,0.5)}
+.header .updated{font-size:12px;color:rgba(255,255,255,0.35);margin-top:12px}
+.header .back-link{display:inline-block;margin-top:16px;font-size:13px;color:rgba(255,255,255,0.45);transition:color .2s}
+.header .back-link:hover{color:#00d4aa}
+
+/* ===== Container ===== */
+.container{max-width:1100px;margin:0 auto;padding:32px 24px 60px}
+
+/* ===== Summary Cards ===== */
+.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px}
+.summary-card{background:#fff;border-radius:14px;padding:24px 20px;box-shadow:0 2px 12px rgba(0,0,0,0.04);border:1.5px solid transparent;transition:all .3s}
+.summary-card:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,0.08)}
+.summary-card .flag{font-size:28px;margin-bottom:8px}
+.summary-card .country{font-size:16px;font-weight:700;color:#0a1628;margin-bottom:4px}
+.summary-card .spec-label{font-size:11px;color:#aaa;margin-bottom:12px}
+.summary-card .price{font-size:28px;font-weight:800;margin-bottom:4px}
+.summary-card .price-unit{font-size:13px;color:#888;font-weight:400}
+.summary-card .wow{font-size:12px;margin-top:8px;display:inline-block;padding:3px 10px;border-radius:6px}
+.wow-up{color:#e74c3c;background:rgba(231,76,60,0.08)}
+.wow-down{color:#27ae60;background:rgba(39,174,96,0.08)}
+.wow-flat{color:#888;background:rgba(136,136,136,0.08)}
+.summary-card.china{border-top:4px solid #e74c3c}
+.summary-card.ecuador{border-top:4px solid #00a8e8}
+.summary-card.india{border-top:4px solid #f59e0b}
+
+@media(max-width:640px){.summary-grid{grid-template-columns:1fr}}
+
+/* ===== Chart Card ===== */
+.card{background:#fff;border-radius:14px;padding:28px 24px;box-shadow:0 2px 12px rgba(0,0,0,0.04);margin-bottom:24px}
+.card-title{font-size:17px;font-weight:700;color:#0a1628;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.card-title .icon{font-size:20px}
+.card-subtitle{font-size:13px;color:#888;margin-bottom:20px}
+
+.filters{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px;align-items:center}
+.filters label{font-size:13px;color:#666;font-weight:600}
+.filters select,.filters button{padding:7px 14px;border:1.5px solid #e0e5ec;border-radius:8px;font-size:13px;font-family:inherit;background:#fff;cursor:pointer;transition:border-color .2s}
+.filters select:hover,.filters select:focus{border-color:#00a8e8;outline:none}
+.btn-group{display:flex;gap:0;border:1.5px solid #e0e5ec;border-radius:8px;overflow:hidden}
+.btn-group button{border:none;border-right:1px solid #e0e5ec;padding:7px 14px;font-size:13px;font-family:inherit;background:#fff;cursor:pointer;transition:all .2s}
+.btn-group button:last-child{border-right:none}
+.btn-group button.active{background:#0a1628;color:#fff}
+.btn-group button:hover:not(.active){background:#f0f4f8}
+
+.chart-container{position:relative;height:380px;margin-top:8px}
+@media(max-width:640px){.chart-container{height:280px}}
+
+/* ===== Tabs ===== */
+.tabs{display:flex;gap:0;margin-bottom:20px;border-bottom:2px solid #e8ecf0}
+.tab{padding:10px 24px;font-size:14px;font-weight:600;color:#888;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit}
+.tab.active{color:#0a1628;border-bottom-color:#00a8e8}
+.tab:hover:not(.active){color:#555}
+.tab .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+.tab .dot.cn{background:#e74c3c}
+.tab .dot.ec{background:#00a8e8}
+.tab .dot.in{background:#f59e0b}
+
+/* ===== Data Table ===== */
+.table-wrap{overflow-x:auto;border-radius:10px;border:1px solid #e8ecf0}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead{background:#f8f9fc}
+th{padding:12px 14px;text-align:left;font-weight:600;color:#555;white-space:nowrap;border-bottom:2px solid #e8ecf0}
+td{padding:10px 14px;border-bottom:1px solid #f0f2f6;white-space:nowrap}
+tr:hover{background:#f8f9fc}
+.td-price{font-weight:600;color:#0a1628}
+.td-up{color:#e74c3c;font-weight:600}
+.td-down{color:#27ae60;font-weight:600}
+.td-flat{color:#888}
+.td-region{color:#666}
+.empty{text-align:center;padding:40px;color:#aaa}
+
+/* ===== Legend ===== */
+.legend{display:flex;gap:20px;flex-wrap:wrap;margin-top:12px;font-size:12px;color:#666}
+.legend-item{display:flex;align-items:center;gap:6px}
+.legend-dot{width:12px;height:3px;border-radius:2px}
+
+/* ===== Footer ===== */
+.footer{text-align:center;padding:32px 24px;font-size:13px;color:#aaa}
+.footer a{color:#00a8e8}
+.footer a:hover{text-decoration:underline}
+.footer .note{max-width:600px;margin:0 auto 16px;font-size:12px;line-height:1.6;color:#bbb}
+
+/* ===== Loading ===== */
+.loading{text-align:center;padding:60px;color:#aaa;font-size:14px}
+.loading .spinner{display:inline-block;width:32px;height:32px;border:3px solid #e8ecf0;border-top-color:#00a8e8;border-radius:50%;animation:spin 0.8s linear infinite;margin-bottom:12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.content-hidden{display:none}
+</style>
+</head>
+<body>
+
+<!-- ===== Nav ===== -->
+<nav class="nav">
+  <a href="index.html" class="nav-brand">
+    <div class="nav-logo"><div class="logo-box"><img src="logo.png" alt=""></div><div class="logo-text"><span class="logo-main">以鲜国际</span><span class="logo-sub">恒兴集团旗下战略合作伙伴</span></div></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">🏠 主页</a></li>
+    <li><a href="index.html#about">关于我们</a></li>
+    <li><a href="index.html#services">核心业务</a></li>
+    <li><a href="shrimp-prices.html" class="nav-shrimp">📈 白对虾价格监测</a></li>
+    <li><a href="tools.html" class="nav-tools">🧭 国际代采</a></li>
+    <li><a href="products.html" style="background:#00d4aa;color:#fff!important;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700">🦐 以鲜甄选</a></li>
+    <li><a href="coldchain.html" class="nav-cold">❄️ 冷链服务</a></li>
+    <li><a href="exhibitions.html" style="background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff!important;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700">🎪 食品展会</a></li>
+    <li><a href="reports.html" class="nav-halal">📋 老庄报告</a></li>
+    <li><a href="index.html#contact">联系我们</a></li>
+  </ul>
+</nav>
+
+<!-- ===== Header ===== -->
+<div class="header">
+  <div class="tag">Vannamei Pond Price Monitor</div>
+  <h1>📈 白对虾塘头价监测</h1>
+  <div class="sub">中国 · 厄瓜多尔 · 印度 — 三大产区周度塘头价追踪</div>
+  <div class="updated" id="updated-info">数据加载中...</div>
+  <a href="tools.html" class="back-link">← 返回国际代采工具</a>
+</div>
+
+<!-- ===== Main Content ===== -->
+<div class="container">
+
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <div>正在加载价格数据...</div>
+  </div>
+
+  <div id="content" class="content-hidden">
+
+    <!-- ===== Summary Cards ===== -->
+    <div class="summary-grid" id="summary-cards"></div>
+
+    <!-- ===== Section 1: 三国对比趋势图 ===== -->
+    <div class="card">
+      <div class="card-title"><span class="icon">🌍</span> 三国塘头价对比趋势</div>
+      <div class="card-subtitle">统一换算为 CNY/kg，按可比规格对比三大产区塘头价走势</div>
+      <div class="filters">
+        <label>对比规格:</label>
+        <div class="btn-group" id="spec-group">
+          <button class="active" data-spec="60">60只/kg (中国30头/斤)</button>
+          <button data-spec="40">40只/kg (中国20头/斤)</button>
+          <button data-spec="80">80只/kg (中国40头/斤)</button>
+        </div>
+        <label style="margin-left:auto">中国产区:</label>
+        <select id="region-select">
+          <option value="guangdong_zhuhai">广东珠海</option>
+          <option value="guangxi_beihai">广西北海</option>
+          <option value="jiangsu_yancheng">江苏盐城</option>
+        </select>
+      </div>
+      <div class="chart-container"><canvas id="compareChart"></canvas></div>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#e74c3c"></div>中国 (CNY/斤→kg)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#00a8e8"></div>厄瓜多尔 (USD→CNY)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div>印度 (INR→CNY)</div>
+      </div>
+    </div>
+
+    <!-- ===== Section 2: 分国分规格趋势 ===== -->
+    <div class="card">
+      <div class="card-title"><span class="icon">📊</span> 分国分规格趋势</div>
+      <div class="card-subtitle">查看各国产区不同规格虾的塘头价走势</div>
+      <div class="tabs" id="country-tabs">
+        <button class="tab active" data-country="china"><span class="dot cn"></span>中国</button>
+        <button class="tab" data-country="ecuador"><span class="dot ec"></span>厄瓜多尔</button>
+        <button class="tab" data-country="india"><span class="dot in"></span>印度</button>
+      </div>
+      <div class="chart-container"><canvas id="countryChart"></canvas></div>
+    </div>
+
+    <!-- ===== Section 3: 最新周度数据表 ===== -->
+    <div class="card">
+      <div class="card-title"><span class="icon">📋</span> 最新周度数据</div>
+      <div class="card-subtitle" id="table-subtitle">最新一周三大产区塘头价明细及环比变化</div>
+      <div class="table-wrap" id="table-wrap"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== Footer ===== -->
+<div class="footer">
+  <div class="note">
+    数据来源：水产前沿 (fishfirst.cn) 周度塘头价播报 · UCN (Undercurrent News) / CNA 周度ex-farm价格 · AquaExchange 安得拉邦周度ex-farm价格<br>
+    W1-W22部分数据基于行业报告趋势估算，W23-W33以实际报告数据为主。数据持续校准中，仅供参考。
+  </div>
+  <a href="index.html">← 返回以鲜国际主页</a>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+var PRICE_DATA = null;
+var compareChart = null;
+var countryChart = null;
+var currentSpec = "60";
+var currentRegion = "guangdong_zhuhai";
+var currentCountry = "china";
+
+// ===== Spec mapping for comparison chart =====
+var SPEC_MAP = {
+  "40": { china: "20", ecuador: "40-50", india: "40", label: "40只/kg (中国20头/斤)" },
+  "60": { china: "30", ecuador: "60-70", india: "60", label: "60只/kg (中国30头/斤)" },
+  "80": { china: "40", ecuador: "70-80", india: "80", label: "80只/kg (中国40头/斤)" }
+};
+
+var COUNTRY_COLORS = {
+  china: "#e74c3c",
+  ecuador: "#00a8e8",
+  india: "#f59e0b"
+};
+
+var COUNTRY_NAMES = {
+  china: "中国",
+  ecuador: "厄瓜多尔",
+  india: "印度"
+};
+
+var REGION_NAMES = {
+  guangdong_zhuhai: "广东珠海",
+  guangxi_beihai: "广西北海",
+  jiangsu_yancheng: "江苏盐城"
+};
+
+var SPEC_LABELS = {
+  china: ["20","25","30","40","60"],
+  ecuador: ["30-40","40-50","50-60","60-70","70-80"],
+  india: ["30","40","60","80","100"]
+};
+
+// ===== Init =====
+function init(){
+  fetch("data/shrimp-prices.json")
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      PRICE_DATA = data;
+      document.getElementById("loading").style.display = "none";
+      document.getElementById("content").classList.remove("content-hidden");
+      renderSummary();
+      renderCompareChart();
+      renderCountryChart();
+      renderTable();
+      updateMeta();
+    })
+    .catch(function(err){
+      document.getElementById("loading").innerHTML = '<div style="color:#e74c3c">数据加载失败: ' + err.message + "</div>";
+    });
+}
+
+function updateMeta(){
+  var meta = PRICE_DATA.meta;
+  document.getElementById("updated-info").textContent = "最近更新: " + meta.lastUpdatedDate + " (" + meta.lastUpdated + ")";
+}
+
+// ===== Get price in CNY/kg =====
+function getPriceCNY(week, country, spec, region){
+  if(!week) return null;
+  var fx = week.fx;
+  if(country === "china"){
+    var r = week.china[region || "guangdong_zhuhai"];
+    if(!r || r[spec] == null) return null;
+    return r[spec] * 2; // 斤→kg
+  } else if(country === "ecuador"){
+    if(!week.ecuador || week.ecuador[spec] == null) return null;
+    return week.ecuador[spec] * fx.USD_CNY;
+  } else if(country === "india"){
+    if(!week.india || week.india[spec] == null) return null;
+    return week.india[spec] * fx.INR_CNY;
+  }
+  return null;
+}
+
+// ===== Summary Cards =====
+function renderSummary(){
+  var weeks = PRICE_DATA.weeks;
+  var latest = weeks[weeks.length-1];
+  var prev = weeks[weeks.length-2];
+  var html = "";
+
+  var items = [
+    { country:"china", flag:"🇨🇳", specKey:"60", region:"guangdong_zhuhai" },
+    { country:"ecuador", flag:"🇪🇨", specKey:"60", region:null },
+    { country:"india", flag:"🇮🇳", specKey:"60", region:null }
+  ];
+
+  for(var i=0; i<items.length; i++){
+    var it = items[i];
+    var sm = SPEC_MAP[it.specKey];
+    var cSpec = sm[it.country];
+    var price = getPriceCNY(latest, it.country, cSpec, it.region);
+    var prevPrice = getPriceCNY(prev, it.country, cSpec, it.region);
+    var wowClass = "wow-flat";
+    var wowText = "持平";
+    var arrow = "→";
+    if(price != null && prevPrice != null){
+      var diff = price - prevPrice;
+      var pct = (diff / prevPrice * 100);
+      if(pct > 0.5){ wowClass = "wow-up"; wowText = "+" + pct.toFixed(1) + "%"; arrow = "↑"; }
+      else if(pct < -0.5){ wowClass = "wow-down"; wowText = pct.toFixed(1) + "%"; arrow = "↓"; }
+    }
+    var regionLabel = it.region ? REGION_NAMES[it.region] : "安得拉邦";
+    var priceDisplay = price != null ? price.toFixed(1) : "—";
+    html += '<div class="summary-card ' + it.country + '">' +
+      '<div class="flag">' + it.flag + '</div>' +
+      '<div class="country">' + COUNTRY_NAMES[it.country] + '</div>' +
+      '<div class="spec-label">' + regionLabel + ' · 60只/kg基准</div>' +
+      '<div class="price">' + priceDisplay + ' <span class="price-unit">CNY/kg</span></div>' +
+      '<div class="wow ' + wowClass + '">' + arrow + ' ' + wowText + ' 环比</div>' +
+    '</div>';
+  }
+  document.getElementById("summary-cards").innerHTML = html;
+}
+
+// ===== Comparison Chart =====
+function renderCompareChart(){
+  var weeks = PRICE_DATA.weeks;
+  var sm = SPEC_MAP[currentSpec];
+  var labels = [];
+  var cnData = [], ecData = [], inData = [];
+
+  for(var i=0; i<weeks.length; i++){
+    var w = weeks[i];
+    labels.push(w.label);
+    cnData.push(getPriceCNY(w, "china", sm.china, currentRegion));
+    ecData.push(getPriceCNY(w, "ecuador", sm.ecuador, null));
+    inData.push(getPriceCNY(w, "india", sm.india, null));
+  }
+
+  var ctx = document.getElementById("compareChart").getContext("2d");
+  if(compareChart) compareChart.destroy();
+
+  compareChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: "中国 " + REGION_NAMES[currentRegion] + " (" + sm.china + "头/斤→kg)",
+          data: cnData,
+          borderColor: COUNTRY_COLORS.china,
+          backgroundColor: "rgba(231,76,60,0.06)",
+          borderWidth: 2.5, tension: 0.3, fill: false,
+          pointRadius: 3, pointBackgroundColor: COUNTRY_COLORS.china,
+          spanGaps: true
+        },
+        {
+          label: "厄瓜多尔 (" + sm.ecuador + " 只/kg)",
+          data: ecData,
+          borderColor: COUNTRY_COLORS.ecuador,
+          backgroundColor: "rgba(0,168,232,0.06)",
+          borderWidth: 2.5, tension: 0.3, fill: false,
+          pointRadius: 3, pointBackgroundColor: COUNTRY_COLORS.ecuador,
+          spanGaps: true
+        },
+        {
+          label: "印度安得拉邦 (" + sm.india + " 只/kg)",
+          data: inData,
+          borderColor: COUNTRY_COLORS.india,
+          backgroundColor: "rgba(245,158,11,0.06)",
+          borderWidth: 2.5, tension: 0.3, fill: false,
+          pointRadius: 3, pointBackgroundColor: COUNTRY_COLORS.india,
+          spanGaps: true
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: "index", intersect: false },
+      plugins: {
+        legend: { position: "bottom", labels: { font: { size: 11 }, padding: 12 } },
+        tooltip: {
+          callbacks: {
+            label: function(ctx){
+              var v = ctx.parsed.y;
+              if(v == null) return ctx.dataset.label + ": 无数据";
+              return ctx.dataset.label + ": " + v.toFixed(1) + " CNY/kg";
+            }
+          }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { size: 10 }, maxRotation: 45 } },
+        y: {
+          beginAtZero: false,
+          title: { display: true, text: "CNY / kg", font: { size: 12 } },
+          grid: { color: "rgba(0,0,0,0.04)" },
+          ticks: { font: { size: 11 } }
+        }
+      }
+    }
+  });
+}
+
+// ===== Country Chart =====
+function renderCountryChart(){
+  var weeks = PRICE_DATA.weeks;
+  var labels = [];
+  var datasets = [];
+  var specs = SPEC_LABELS[currentCountry];
+  var colors = currentCountry === "china"
+    ? ["#e74c3c","#c0392b","#e67e22","#f39c12","#e8a87c"]
+    : currentCountry === "ecuador"
+    ? ["#00a8e8","#0077b6","#0284c7","#0369a1","#0c4a6e"]
+    : ["#f59e0b","#d97706","#b45309","#92400e","#78350f"];
+
+  for(var s=0; s<specs.length; s++){
+    var data = [];
+    for(var i=0; i<weeks.length; i++){
+      var w = weeks[i];
+      var price;
+      if(currentCountry === "china"){
+        price = getPriceCNY(w, "china", specs[s], currentRegion);
+      } else if(currentCountry === "ecuador"){
+        price = getPriceCNY(w, "ecuador", specs[s], null);
+      } else {
+        price = getPriceCNY(w, "india", specs[s], null);
+      }
+      data.push(price);
+    }
+    var unit = currentCountry === "china" ? "头/斤" : "只/kg";
+    datasets.push({
+      label: specs[s] + " " + unit,
+      data: data,
+      borderColor: colors[s],
+      backgroundColor: colors[s] + "10",
+      borderWidth: 2, tension: 0.3, fill: false,
+      pointRadius: 2.5, pointBackgroundColor: colors[s],
+      spanGaps: true
+    });
+  }
+
+  for(var i=0; i<weeks.length; i++) labels.push(weeks[i].label);
+
+  var ctx = document.getElementById("countryChart").getContext("2d");
+  if(countryChart) countryChart.destroy();
+
+  var regionNote = currentCountry === "china" ? " (" + REGION_NAMES[currentRegion] + ")" : "";
+  countryChart = new Chart(ctx, {
+    type: "line",
+    data: { labels: labels, datasets: datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: "index", intersect: false },
+      plugins: {
+        legend: { position: "bottom", labels: { font: { size: 11 }, padding: 10 } },
+        tooltip: {
+          callbacks: {
+            label: function(ctx){
+              var v = ctx.parsed.y;
+              if(v == null) return ctx.dataset.label + ": 无数据";
+              return ctx.dataset.label + ": " + v.toFixed(1) + " CNY/kg";
+            }
+          }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { size: 10 }, maxRotation: 45 } },
+        y: {
+          beginAtZero: false,
+          title: { display: true, text: "CNY / kg", font: { size: 12 } },
+          grid: { color: "rgba(0,0,0,0.04)" },
+          ticks: { font: { size: 11 } }
+        }
+      }
+    }
+  });
+}
+
+// ===== Data Table =====
+function renderTable(){
+  var weeks = PRICE_DATA.weeks;
+  var latest = weeks[weeks.length-1];
+  var prev = weeks[weeks.length-2];
+  var fx = latest.fx;
+
+  document.getElementById("table-subtitle").textContent =
+    latest.label + " (" + latest.dateRange + ") 三大产区塘头价明细及环比变化";
+
+  var html = "<table><thead><tr>" +
+    "<th>国家</th><th>产区</th><th>规格</th>" +
+    "<th>塘头价</th><th>原币</th><th>环比</th>" +
+    "</tr></thead><tbody>";
+
+  // China
+  var cnSpecs = SPEC_LABELS.china;
+  var regions = Object.keys(latest.china);
+  for(var ri=0; ri<regions.length; ri++){
+    var reg = regions[ri];
+    for(var si=0; si<cnSpecs.length; si++){
+      var sp = cnSpecs[si];
+      var cur = latest.china[reg][sp];
+      var old = prev ? prev.china[reg][sp] : null;
+      html += buildRow("中国", REGION_NAMES[reg], sp + "头/斤", cur, cur, old, "CNY/斤", fx);
+    }
+  }
+
+  // Ecuador
+  var ecSpecs = SPEC_LABELS.ecuador;
+  for(var ei=0; ei<ecSpecs.length; ei++){
+    var esp = ecSpecs[ei];
+    var ecur = latest.ecuador[esp];
+    var eold = prev ? prev.ecuador[esp] : null;
+    html += buildRow("厄瓜多尔", "全国", esp + "只/kg", ecur ? ecur * fx.USD_CNY : null, ecur, eold, "USD/kg", fx);
+  }
+
+  // India
+  var inSpecs = SPEC_LABELS.india;
+  for(var ii=0; ii<inSpecs.length; ii++){
+    var isp = inSpecs[ii];
+    var icur = latest.india[isp];
+    var iold = prev ? prev.india[isp] : null;
+    html += buildRow("印度", "安得拉邦", isp + "只/kg", icur ? icur * fx.INR_CNY : null, icur, iold, "INR/kg", fx);
+  }
+
+  html += "</tbody></table>";
+  document.getElementById("table-wrap").innerHTML = html;
+}
+
+function buildRow(country, region, spec, cnyVal, rawVal, oldRaw, unit, fx){
+  var cnyDisplay = cnyVal != null ? cnyVal.toFixed(1) : "—";
+  var rawDisplay = rawVal != null ? (country === "厄瓜多尔" ? "$" + rawVal.toFixed(2) : country === "印度" ? "₹" + rawVal : "¥" + rawVal) : "—";
+
+  var wowClass = "td-flat";
+  var wowText = "—";
+  if(rawVal != null && oldRaw != null){
+    var diff = rawVal - oldRaw;
+    var pct = (diff / oldRaw * 100);
+    if(pct > 0.5){ wowClass = "td-up"; wowText = "↑ " + pct.toFixed(1) + "%"; }
+    else if(pct < -0.5){ wowClass = "td-down"; wowText = "↓ " + Math.abs(pct).toFixed(1) + "%"; }
+    else { wowText = "→ 持平"; }
+  }
+
+  return "<tr>" +
+    '<td class="td-region">' + country + "</td>" +
+    '<td class="td-region">' + region + "</td>" +
+    "<td>" + spec + "</td>" +
+    '<td class="td-price">' + cnyDisplay + " CNY/kg</td>" +
+    '<td class="td-region">' + rawDisplay + " " + unit + "</td>" +
+    '<td class="' + wowClass + '">' + wowText + "</td>" +
+    "</tr>";
+}
+
+// ===== Event Handlers =====
+document.getElementById("spec-group").addEventListener("click", function(e){
+  if(e.target.tagName !== "BUTTON") return;
+  var btns = this.querySelectorAll("button");
+  for(var i=0; i<btns.length; i++) btns[i].classList.remove("active");
+  e.target.classList.add("active");
+  currentSpec = e.target.getAttribute("data-spec");
+  renderCompareChart();
+});
+
+document.getElementById("region-select").addEventListener("change", function(){
+  currentRegion = this.value;
+  renderCompareChart();
+  renderCountryChart();
+});
+
+document.getElementById("country-tabs").addEventListener("click", function(e){
+  if(e.target.tagName !== "BUTTON" && e.target.tagName !== "SPAN") return;
+  var btn = e.target.tagName === "BUTTON" ? e.target : e.target.parentElement;
+  var tabs = this.querySelectorAll("button");
+  for(var i=0; i<tabs.length; i++) tabs[i].classList.remove("active");
+  btn.classList.add("active");
+  currentCountry = btn.getAttribute("data-country");
+  renderCountryChart();
+});
+
+init();
+})();
+</script>
+</body>
+</html>
