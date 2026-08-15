@@ -178,9 +178,9 @@ tr:hover{background:#f8f9fc}
       <div class="filters">
         <label>对比规格:</label>
         <div class="btn-group" id="spec-group">
-          <button class="active" data-spec="60">60只/kg (中国30头/斤)</button>
-          <button data-spec="40">40只/kg (中国20头/斤)</button>
-          <button data-spec="80">80只/kg (中国40头/斤)</button>
+  <button data-spec="40" class="active">40只/kg (中国20头/斤，厄30/40)</button>
+          <button data-spec="60">60只/kg (中国30头/斤，厄60/70)</button>
+          <button data-spec="80">80只/kg (中国40头/斤，厄70/80)</button>
         </div>
         <label style="margin-left:auto">中国产区:</label>
         <select id="region-select">
@@ -235,15 +235,15 @@ tr:hover{background:#f8f9fc}
 var PRICE_DATA = null;
 var compareChart = null;
 var countryChart = null;
-var currentSpec = "60";
+var currentSpec = "40";
 var currentRegion = "guangdong_zhuhai";
 var currentCountry = "china";
 
 // ===== Spec mapping for comparison chart =====
 var SPEC_MAP = {
-  "40": { china: "20", ecuador: "40-50", india: "40", label: "40只/kg (中国20头/斤)" },
-  "60": { china: "30", ecuador: "60-70", india: "60", label: "60只/kg (中国30头/斤)" },
-  "80": { china: "40", ecuador: "70-80", india: "80", label: "80只/kg (中国40头/斤)" }
+  "40": { china: "20", ecuador: "30-40", india: "40", label: "40只/kg (中国20头/斤，厄30/40)" },
+  "60": { china: "30", ecuador: "60-70", india: "60", label: "60只/kg (中国30头/斤，厄60/70)" },
+  "80": { china: "40", ecuador: "70-80", india: "80", label: "80只/kg (中国40头/斤，厄70/80)" }
 };
 
 var COUNTRY_COLORS = {
@@ -320,9 +320,9 @@ function renderSummary(){
   var html = "";
 
   var items = [
-    { country:"china", flag:"🇨🇳", specKey:"60", region:"guangdong_zhuhai" },
-    { country:"ecuador", flag:"🇪🇨", specKey:"60", region:null },
-    { country:"india", flag:"🇮🇳", specKey:"60", region:null }
+    { country:"china", flag:"🇨🇳", specKey:"40", region:"guangdong_zhuhai" },
+    { country:"ecuador", flag:"🇪🇨", specKey:"40", region:null },
+    { country:"india", flag:"🇮🇳", specKey:"40", region:null }
   ];
 
   for(var i=0; i<items.length; i++){
@@ -354,7 +354,7 @@ function renderSummary(){
     html += '<div class="summary-card ' + it.country + '">' +
       '<div class="flag">' + it.flag + '</div>' +
       '<div class="country">' + COUNTRY_NAMES[it.country] + '</div>' +
-      '<div class="spec-label">' + regionLabel + ' · 60只/kg基准</div>' +
+      '<div class="spec-label">' + regionLabel + ' · ' + it.specKey + '只/kg基准</div>' +
       '<div class="price">' + priceDisplay + ' <span class="price-unit">CNY/kg</span></div>' +
       '<div class="wow ' + wowClass + '">' + arrow + ' ' + wowText + ' 环比</div>' +
     '</div>';
