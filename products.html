@@ -483,22 +483,6 @@ var DEFAULT_PRODUCTS = [
     specs: ['刺身级', '10kg/箱', '船冻'],
     desc: '加拿大牡丹虾，刺身顶级原料，日料店镇店之宝，溢价极高。',
     price: '¥1,600/箱起', stock: '有限' },
-  { id: 7, name: '越南青蟹（肉蟹）', cat: '蟹类 ', origin: '越南', emoji: '',
-    specs: ['冷冻肉蟹', '10kg/箱', '整只'], hot: true,
-    desc: '东南亚青蟹肉蟹，适合香辣蟹、避风塘炒蟹、海鲜煲、大排档，中端盈利主力。',
-    price: '¥460/箱起', stock: '充足' },
-  { id: 8, name: '越南青蟹（膏蟹）', cat: '蟹类 ', origin: '越南', emoji: '',
-    specs: ['冷冻膏蟹', '10kg/箱', '整只'],
-    desc: '膏满黄肥，适合高端中餐、宴会蟹宴、蟹粉菜系，高毛利核心单品。',
-    price: '¥580/箱起', stock: '有限' },
-  { id: 9, name: '缅甸软壳蟹', cat: '蟹类 ', origin: '缅甸', emoji: '',
-    specs: ['冷冻整只', '5kg/箱', '去壳可食'],
-    desc: '整只可食，适合日式天妇罗、西餐炸蟹、融合菜，特色差异化单品。',
-    price: '¥440/箱起', stock: '充足' },
-  { id: 10, name: '兰花蟹', cat: '蟹类 ', origin: '东南亚', emoji: '',
-    specs: ['冷冻整只', '10kg/箱', '整只'], hot: true,
-    desc: '东南亚高性价比蟹类，适合姜葱炒蟹、香辣蟹、海鲜煲、大排档，量大实惠。',
-    price: '¥480/箱起', stock: '充足' }
 ];
 
 function loadProducts() {
@@ -685,10 +669,6 @@ function openEditModal(id) {
         '<label>分类 <span style="color:#ff6b6b">*</span></label>' +
         '<select id="epCat">' +
           '<option value="虾类"' + (p && p.cat === '虾类' ? ' selected' : '') + '>虾类</option>' +
-          '<option value="鱼类"' + (p && p.cat === '鱼类' ? ' selected' : '') + '>鱼类</option>' +
-          '<option value="牛肉"' + (p && p.cat === '牛肉' ? ' selected' : '') + '>牛肉</option>' +
-          '<option value="猪肉"' + (p && p.cat === '猪肉' ? ' selected' : '') + '>猪肉</option>' +
-          '<option value="禽类"' + (p && p.cat === '禽类' ? ' selected' : '') + '>禽类</option>' +
           '<option value="其他"' + (p && p.cat === '其他' ? ' selected' : '') + '>其他</option>' +
         '</select>' +
       '</div>' +
