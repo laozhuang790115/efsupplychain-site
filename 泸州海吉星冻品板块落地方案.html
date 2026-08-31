@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>泸州海吉星冻品板块完整落地方案 — 以鲜国际</title>
+<style>
+  :root{
+    --brand:#0a7a5c; --brand2:#0e9f78; --deep:#0b3d2e; --ink:#1c2733; --muted:#5f7280;
+    --line:#e2eae7; --line2:#e2eae7; --bg:#f3f6f4; --card:#fff; --warn:#b45309; --warnbg:#fff7ed;
+    --red:#c0392b; --redbg:#fdf0ee; --blue:#1d4ed8; --bluebg:#eff4ff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px 70px;}
+  /* Hero */
+  .hero{background:linear-gradient(135deg,#0b3d2e 0%,#0a7a5c 55%,#0e9f78 100%);color:#fff;padding:52px 40px 44px;border-radius:0 0 22px 22px;}
+  .hero .tag{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);padding:3px 14px;border-radius:20px;font-size:13px;margin-bottom:16px;}
+  .hero h1{font-size:30px;line-height:1.4;font-weight:800;margin-bottom:12px;}
+  .hero .sub{font-size:15px;opacity:.92;max-width:820px;}
+  .hero .meta{margin-top:16px;font-size:13px;opacity:.78;}
+  /* Metrics */
+  .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin:26px 0 30px;}
+  .metric{background:var(--card);border:1px solid var(--line2);border-radius:14px;padding:18px 16px;text-align:center;box-shadow:0 2px 8px rgba(11,61,46,.05);}
+  .metric .num{font-size:28px;font-weight:800;color:var(--brand);}
+  .metric .lab{font-size:13px;color:var(--muted);margin-top:3px;}
+  /* TOC */
+  .toc{background:var(--card);border:1px solid var(--line2);border-radius:14px;padding:22px 26px;margin-bottom:30px;}
+  .toc b{display:block;margin-bottom:10px;font-size:15px;}
+  .toc a{display:inline-block;margin:3px 12px 3px 0;color:var(--brand);text-decoration:none;font-size:13.5px;}
+  .toc a:hover{text-decoration:underline;}
+  /* Sections */
+  .panel{background:var(--card);border:1px solid var(--line2);border-radius:14px;padding:30px 32px;margin-bottom:26px;box-shadow:0 2px 8px rgba(11,61,46,.04);}
+  .panel h2{font-size:21px;margin-bottom:6px;padding-left:14px;border-left:5px solid var(--brand);line-height:1.4;}
+  .panel .sub{font-size:13px;color:var(--muted);margin-bottom:18px;padding-left:14px;}
+  .panel h3{font-size:16px;margin:22px 0 10px;}
+  .panel p{margin-bottom:11px;}
+  .panel ul,.panel ol{padding-left:24px;margin-bottom:12px;}
+  .panel li{margin-bottom:7px;}
+  /* Info grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:14px 0;}
+  .card{background:#f7faf8;border:1px solid var(--line2);border-radius:12px;padding:16px 18px;}
+  .card .t{font-weight:700;font-size:14px;margin-bottom:6px;color:var(--deep);}
+  .card .t::before{content:"● ";color:var(--brand);}
+  .card p{font-size:13.5px;color:#33424e;margin:0;}
+  /* Tables */
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0;}
+  th,td{border:1px solid var(--line2);padding:9px 12px;text-align:left;vertical-align:top;}
+  th{background:#eaf3ee;font-weight:700;white-space:nowrap;color:var(--deep);}
+  tr:nth-child(even) td{background:#fafcfb;}
+  .stars{color:#d97706;font-weight:700;white-space:nowrap;}
+  /* Badges */
+  .badge{display:inline-block;padding:1px 10px;border-radius:12px;font-size:12px;font-weight:600;margin-right:6px;}
+  .b-green{background:#e3f6ec;color:#0a7a5c;}
+  .b-amber{background:#fef3c7;color:#92400e;}
+  .b-blue{background:#dbeafe;color:#1d4ed8;}
+  .b-red{background:#fde8e8;color:#b91c1c;}
+  /* Timeline */
+  .timeline{margin:14px 0;}
+  .step{display:flex;gap:16px;margin-bottom:14px;}
+  .step-marker{flex:0 0 34px;height:34px;border-radius:50%;background:var(--brand);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:15px;margin-top:2px;}
+  .step-body{flex:1;background:#f7faf8;border:1px solid var(--line2);border-radius:10px;padding:12px 16px;}
+  .step-body b{font-size:14px;color:var(--deep);}
+  .step-body p{font-size:13.5px;margin:4px 0 0;color:#33424e;}
+  /* Compare */
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0;}
+  .cmp{background:var(--card);border:1px solid var(--line2);border-radius:12px;padding:16px 18px;}
+  .cmp.a{background:#fdf6ec;border-color:#f0d9a8;}
+  .cmp.b{background:#eef7f3;border-color:#bfe3d5;}
+  .cmp .h{font-weight:800;font-size:15px;margin-bottom:10px;}
+  .cmp.a .h{color:#92400e;} .cmp.b .h{color:var(--brand);}
+  .cmp ul{padding-left:18px;margin:0;}
+  .cmp li{font-size:13.5px;margin-bottom:6px;}
+  /* Callout */
+  .callout{border-radius:12px;padding:16px 20px;margin:14px 0;font-size:14px;}
+  .co-green{background:#e8f6f0;border:1px solid #bfe3d5;}
+  .co-red{background:var(--redbg);border:1px solid #f2c9c3;}
+  .co-amber{background:var(--warnbg);border:1px solid #f2ddb8;}
+  .co-blue{background:var(--bluebg);border:1px solid #c7d9fb;}
+  .callout b{display:block;margin-bottom:4px;}
+  /* Risk cards */
+  .risk{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin:14px 0;}
+  .risk .rc{background:var(--card);border:1px solid var(--line2);border-left:4px solid var(--warn);border-radius:10px;padding:14px 16px;}
+  .risk .rc b{font-size:14px;color:var(--deep);}
+  .risk .rc p{font-size:13px;color:#46535f;margin:5px 0 0;}
+  /* Q list */
+  .qgroup{margin-bottom:18px;}
+  .qgroup .qh{font-weight:700;font-size:15px;color:var(--deep);margin-bottom:8px;padding:8px 14px;background:#eaf3ee;border-radius:8px;}
+  .qgroup ol{padding-left:22px;}
+  .qgroup li{font-size:14px;margin-bottom:6px;}
+  /* Summary box */
+  .summarybox{background:linear-gradient(135deg,#0b3d2e,#0a7a5c);color:#fff;border-radius:14px;padding:26px 30px;margin:14px 0;}
+  .summarybox p{font-size:14.5px;margin-bottom:10px;line-height:1.85;}
+  .summarybox p:last-child{margin-bottom:0;}
+  /* Footer */
+  .foot{text-align:center;color:var(--muted);font-size:12.5px;margin-top:34px;}
+  .nav-back{display:inline-block;margin-top:18px;color:var(--brand);text-decoration:none;font-size:13.5px;}
+  @media (max-width:760px){
+    .hero{padding:36px 22px 34px;}
+    .hero h1{font-size:23px;}
+    .panel{padding:22px 18px;}
+    .compare{grid-template-columns:1fr;}
+    .wrap{padding:0 12px 50px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="tag">会谈汇报完整版 · 内部方案书</span>
+  <h1>泸州海吉星冻品板块完整落地方案</h1>
+  <div class="sub">弱化保税，仅作为远期可选项，业务全部基于完税现货开展 —— 含区位底盘、错位成渝竞争、国内 + 进口双轨集采、头部商户代采-赎货制供应链金融、四条进口物流链路评估、风险边界、现场走访提问清单</div>
+  <div class="meta">以鲜国际供应链（广东）有限公司 · EverFresh · 2026-08-31</div>
+</div>
+
+<div class="wrap">
+
+  <div class="metrics">
+    <div class="metric"><div class="num">595亩</div><div class="lab">市场占地规模</div></div>
+    <div class="metric"><div class="num">4000万</div><div class="lab">辐射人口（38 区县）</div></div>
+    <div class="metric"><div class="num">75-80%</div><div class="lab">流通量为国内冻品</div></div>
+    <div class="metric"><div class="num">6km / 8km</div><div class="lab">距主城 / 泸州港</div></div>
+  </div>
+
+  <div class="toc">
+    <b>目录</b>
+    <a href="#s1">一、区位与市场底盘</a>
+    <a href="#s2">二、四条进口物流链路</a>
+    <a href="#s3">三、错位竞争</a>
+    <a href="#s4">四、双轨拼单集采</a>
+    <a href="#s5">五、供应链金融（代采·赎货）</a>
+    <a href="#s6">六、风险边界</a>
+    <a href="#s7">七、现场走访提问清单</a>
+    <a href="#s8">八、会谈口头摘要</a>
+  </div>
+
+  <!-- ============ 一、区位底盘 ============ -->
+  <div class="panel" id="s1">
+    <h2>一、项目基础区位与市场底盘</h2>
+    <div class="sub">位置、辐射、流通结构、自贸区背景与保税定位</div>
+
+    <h3>1. 地理位置</h3>
+    <div class="grid">
+      <div class="card"><div class="t">地址</div><p>泸州市龙马潭区川南临港片区（自贸区范围内）临港大道 101 号海吉新城</p></div>
+      <div class="card"><div class="t">交通条件</div><p>距主城区约 6km · 泸州港约 8km · 高速口约 3km · 云龙机场约 8km，公-铁-水-空多式联运条件齐备</p></div>
+      <div class="card"><div class="t">市场体量</div><p>占地 595 亩，一期已成熟运营；二期重点建设冻品冷库、肉类水产交易区，系川南重点规划的大型农产品批发市场</p></div>
+    </div>
+
+    <div class="callout co-amber">
+      <b>⚠️ 重要说明</b>
+      海吉星为市场化现货农批市场，不是海关监管场所；泸州港、综保区距离市场约 9 公里。本方案业务全部以完税现货作为基础，综保区保税仓储、分批完税仅作为远期技术可选项，现阶段业务不依赖、不落地保税模式。
+    </div>
+
+    <h3>2. 辐射范围与市场底盘</h3>
+    <div class="grid">
+      <div class="card"><div class="t">核心辐射</div><p>泸州全域</p></div>
+      <div class="card"><div class="t">强辐射</div><p>宜宾、自贡、内江、贵州赤水</p></div>
+      <div class="card"><div class="t">延伸辐射</div><p>黔北毕节、滇东北威信、镇雄 —— 合计约 4000 万人口，覆盖 38 个区县</p></div>
+    </div>
+    <div class="grid">
+      <div class="card"><div class="t">下游客户结构</div><p>场内商户、市县二级批发商、餐饮、宴席、学校食堂、乡镇农贸市场</p></div>
+      <div class="card"><div class="t">流通结构</div><p>75-80% 流通量为国内冻品（畜禽副产品、火锅调理食材、国产水产）；进口冻肉水产属于增量补充</p></div>
+      <div class="card"><div class="t">行业现状</div><p>场内冻品商户以二级分销为主，直达源头采购占比不高；下游普遍存在赊销，中小客户资金薄弱，回款风险突出</p></div>
+    </div>
+
+    <h3>3. 自贸区、泸州港定位（本方案仅做背景参考）</h3>
+    <p>泸州属于四川自贸区川南临港片区，泸州港为内河临时开放口岸，设有进境肉类 / 水产品指定监管场地。</p>
+    <p><b>本方案实操口径：</b>所有进口货物一律在口岸完成清关完税，以完税冻柜运抵海吉星商业冷库开展业务；综保区保税相关能力只作为远期备选，现阶段业务不使用。</p>
+  </div>
+
+  <!-- ============ 二、四条物流链路 ============ -->
+  <div class="panel" id="s2">
+    <h2>二、进口冻品四条物流链路对比（全部按完税模式测算）</h2>
+    <div class="sub">链路选择按货源、时效、成本与场景匹配</div>
+    <table>
+      <thead>
+        <tr><th>链路</th><th>适合货源</th><th>综合成本</th><th>整体时效</th><th>适配海吉星场景</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>① 上海港 → 长江内河驳船到泸州港，完税陆路进市场</b></td>
+          <td>东南亚大宗裸虾、巴沙鱼大货</td>
+          <td><span class="stars">★★★</span> 最低</td>
+          <td>7-10 天</td>
+          <td><span class="badge b-green">现阶段主力</span>大批量集采链路</td>
+        </tr>
+        <tr>
+          <td><b>② 上海清关完税，公路冷链直达泸州</b></td>
+          <td>急单、中小批量进口货</td>
+          <td><span class="stars">★★★★</span> 偏高</td>
+          <td>36-42h</td>
+          <td>中小急单</td>
+        </tr>
+        <tr>
+          <td><b>③ 东南亚 → 中老铁路冷链班列 → 昆明 → 公路转泸州</b></td>
+          <td>熟制调理水产、小批量特色货</td>
+          <td><span class="stars">★★★★</span> 高</td>
+          <td>4-6 天</td>
+          <td>增量补充，快反试单</td>
+        </tr>
+        <tr>
+          <td><b>④ 东南亚 → 钦州港 → 平陆运河 → 西江驳船到泸州</b></td>
+          <td>东南亚大宗货源</td>
+          <td><span class="stars">★★★</span> 中等</td>
+          <td>7-9 天</td>
+          <td>中长期备选，现阶段小规模测试观察</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>链路说明</h3>
+    <ul>
+      <li><b>上海-泸州水运转关：</b>40RH 冻柜对比公路冷链，单柜可节约 5500-6600 元，每吨节约 210-250 元；代价为周期拉长、冷箱江上运维风险，适合稳定大批量拼柜。</li>
+      <li><b>中老铁路：</b>时效快，但需要越南 / 泰国货源跨境公路转运至万象，舱位紧张、成本偏高，更适合小批量高附加值调理水产，不适合大宗原料。</li>
+      <li><b>平陆运河：</b>2026 年 9 月通航，中长期潜力大，但当前适配 40 尺冷冻柜的监管内河驳船资源尚在培育，以跟踪测试为主。</li>
+    </ul>
+  </div>
+
+  <!-- ============ 三、错位竞争 ============ -->
+  <div class="panel" id="s3">
+    <h2>三、错位竞争：避开成都、重庆一级市场正面价格战</h2>
+    <div class="sub">客观现状：成渝是西南超级一级冻品枢纽，整车货源充足、品类最全、整车底价优势明显。泸州海吉星不做西南一级现货大盘，不硬拼裸货价格战。</div>
+
+    <div class="compare">
+      <div class="cmp a">
+        <div class="h">成渝留给泸州的现实机会</div>
+        <ul>
+          <li>市县二批、云贵乡镇客户去成渝拿货，往返时间、人工、住宿成本高；小批量拿不到整车源头价</li>
+          <li>云贵山区返回零担冷链货损高、时效不稳定</li>
+          <li>成渝以商户个体自发贸易为主，缺少市场平台统一输出的标准化集采、代采赎货服务</li>
+        </ul>
+      </div>
+      <div class="cmp b">
+        <div class="h">海吉星差异化定位</div>
+        <p><b>川南-黔北-滇东北三省交界「区域冻品分拨服务枢纽」</b></p>
+        <p style="font-size:13px;color:#46535f;">放弃争夺超大整车客户（该类客户天然流向成渝），主攻市县二级批发商、乡镇餐饮宴席客户。</p>
+      </div>
+    </div>
+
+    <h3>四大差异化抓手</h3>
+    <div class="grid">
+      <div class="card"><div class="t">拼单拼柜集采平台</div><p>归集场内头部商户需求，统一对接国内工厂、海外源头，让商户本地拿到接近源头采购成本</p></div>
+      <div class="card"><div class="t">链主式供应链金融</div><p>代采 + 现金赎货，构建成渝市场难以复制的服务护城河</p></div>
+      <div class="card"><div class="t">下沉集拼分拨仓配</div><p>面向黔北、滇东北做多目的地拼车配送，降低下游综合经营成本</p></div>
+      <div class="card"><div class="t">多进口物流链路备选</div><p>上海江海联运、中老铁路、平陆运河多通道备选，分散供应链风险（保税仅为远期选项）</p></div>
+    </div>
+
+    <div class="callout co-green">
+      <b>对外价值主张</b>
+      不是单纯货价比成渝更低，而是降低客户综合成本：采购资金压力、往返人力、物流损耗成本。
+    </div>
+  </div>
+
+  <!-- ============ 四、双轨集采 ============ -->
+  <div class="panel" id="s4">
+    <h2>四、核心业务方案：国内 + 进口双轨拼单集采（全部完税现货）</h2>
+    <div class="sub">轨道 A 为业务基本盘，轨道 B 为增量业务</div>
+
+    <div class="grid">
+      <div class="card" style="border-top:4px solid var(--brand);">
+        <div class="t">轨道 A：国内冻品集采（业务基本盘）</div>
+        <p><b>货源：</b>国内屠宰厂、畜禽加工厂、火锅预制菜工厂、国内水产产地。</p>
+        <p><b>模式：</b>海吉星归集白名单头部商户采购需求，拼整车向源头锁单，货物直接入库海吉星商业监管冷库。</p>
+        <p><b>收益：</b>来自批量议价、干线物流成本摊薄。</p>
+        <p><b>溯源：</b>统一归档厂家资质、检疫报告，实现下游溯源。</p>
+      </div>
+      <div class="card" style="border-top:4px solid #1d4ed8;">
+        <div class="t">轨道 B：进口冻品集采（增量业务，全部完税）</div>
+        <p><b>大批量稳定货源：</b>上海清关完税 → 长江内河驳船运泸州港 → 陆路进入海吉星冷库</p>
+        <p><b>中小批量急单：</b>口岸清关完税之后公路冷链直达海吉星</p>
+        <p><b>小批量高价值调理水产试单：</b>可选用中老铁路冷链班列链路</p>
+        <p><b>持续跟踪：</b>平陆运河实操成熟度，未来作为东南亚大货第二条备选水路</p>
+        <p style="color:#92400e;font-size:13px;">综保区保税模式仅作为远期技术备选，本阶段不落地。</p>
+      </div>
+    </div>
+
+    <h3>集采通用规则</h3>
+    <ul>
+      <li>推行拼柜拼单团购模式，拉动商户平替集采；平台做需求归集、订单管理，<b>不盲目自营囤货</b></li>
+      <li>建立商品准入机制：国产检疫报告、进口报关单、检疫证明统一存档留底</li>
+    </ul>
+  </div>
+
+  <!-- ============ 五、供应链金融 ============ -->
+  <div class="panel" id="s5">
+    <h2>五、供应链金融：面向品类头部商户「源头代采 + 现金赎货制」</h2>
+    <div class="sub">业务主体：海吉星运营公司作为链主核心主体；服务对象仅限冻品各品类头部商户白名单，不普惠小微散户。风控铁律：掌控采购订单、锁定到仓完税现货货权；必须现金赎货才可出库，不做信用赊销。</div>
+
+    <h3>1. 头部商户白名单准入</h3>
+    <div class="grid">
+      <div class="card"><div class="t">筛选指标</div><p>年交易额、经营年限、冷库使用规模、市场口碑、历史履约记录</p></div>
+      <div class="card"><div class="t">准入条件</div><p>缴纳业务保证金（冻品行业参考 20-30%）</p></div>
+      <div class="card"><div class="t">四方协议</div><p>市场运营公司、商户、上游供应商、冷库监管方 —— 明确货权归属、赎货规则、跌价处置、违约责任</p></div>
+    </div>
+
+    <h3>2. 完整业务流程</h3>
+    <div class="timeline">
+      <div class="step"><div class="step-marker">1</div><div class="step-body"><b>拼单归集</b><p>汇总白名单商户需求，形成国内整车或者进口整柜订单</p></div></div>
+      <div class="step"><div class="step-marker">2</div><div class="step-body"><b>订单与资金闭环</b><p>海吉星直接和上游签订采购合同，向上游支付货款；商户缴纳保证金；完税货物入库海吉星监管冷库，货权归属海吉星运营公司；商户只有销售经营权，无货物处置权</p></div></div>
+      <div class="step"><div class="step-marker">3</div><div class="step-body"><b>赎货出库（硬性规则）</b><p>商户按需支付对应货款（含服务费、分摊物流、仓储费）；海吉星收到全款后系统释放对应库存；冷库只认可平台正式出库指令，禁止私自放货；<b>打多少款放多少货，剩余库存持续锁库监管</b></p></div></div>
+      <div class="step"><div class="step-marker">4</div><div class="step-body"><b>行情波动风控</b><p>设置冻品价格下跌预警阈值，触发后要求追加保证金；拒不执行，市场有权处置货物止损</p></div></div>
+    </div>
+    <p><b>平台统一模块：</b>订单管理、资金垫付、物流统筹、WMS 库存锁库管理、赎货出库台账完整留痕。</p>
+
+    <h3>3. 业务价值</h3>
+    <div class="grid">
+      <div class="card"><div class="t">对海吉星</div><p>聚合场内分散采购需求，减少商户大量奔赴成都重庆调货；以集采 + 代采金融绑定头部商户，提升市场交易量、冷库使用率；全部基于真实现货贸易，规避融资性贸易空转风险</p></div>
+      <div class="card"><div class="t">对头部商户</div><p>少量保证金撬动源头货源；按需赎货，避免一次性大额压库，降低资金占用；拼单拼柜拿到源头采购条件</p></div>
+    </div>
+
+    <div class="callout co-red">
+      <b>🚫 合规红线</b>
+      业务定位为代采贸易服务，不是放贷；收益来源于集采服务费、物流仓储分摊，不以单纯资金占用计息，规避融资性贸易风险。
+    </div>
+  </div>
+
+  <!-- ============ 六、风险边界 ============ -->
+  <div class="panel" id="s6">
+    <h2>六、风险边界（会谈坦诚表述）</h2>
+    <div class="sub">正视现实约束，小步试点，严控业务风险</div>
+    <div class="risk">
+      <div class="rc"><b>冷库货权执行风险</b><p>冷库必须严格执行凭指令出库，防范内部串通私自放货；WMS 需要支持分批次锁库、完整出入库留痕</p></div>
+      <div class="rc"><b>冻品行情波动风险</b><p>水产肉类价格波动大，跌价补保证金、货物处置机制必须落地</p></div>
+      <div class="rc"><b>进口链路不确定性</b><p>水运转关存在船期、江上冷箱运维风险；中老铁路舱位紧张；平陆运河尚处于培育期，各链路按业务场景区分使用</p></div>
+      <div class="rc"><b>商业监管仓局限性</b><p>海吉星为普通商业冷库，非标准金融监管仓单，库存质押类金融业务只能循序渐进试点，不急于大规模推开</p></div>
+      <div class="rc"><b>业务边界</b><p>本业务只服务场内白名单商户，不向下游市县二批、餐饮客户做赊销延伸，严格执行现金赎货</p></div>
+      <div class="rc"><b>保税定位</b><p>综保区保税仓储、分批完税，仅作为远期可选项，现阶段业务不依赖</p></div>
+    </div>
+  </div>
+
+  <!-- ============ 七、提问清单 ============ -->
+  <div class="panel" id="s7">
+    <h2>七、现场走访会谈提问清单</h2>
+    <div class="sub">六组问题，覆盖白名单、冷库货权、集采、进口链路、合规风控、系统仓配</div>
+
+    <div class="qgroup">
+      <div class="qh">一、商户白名单与市场现状</div>
+      <ol>
+        <li>冻品各品类头部商户大致数量；筛选头部商户核心指标（交易额、冷库使用、履约口碑）？</li>
+        <li>场内商户采购，多大比例仍然去往成都、重庆调货？制约因素是资金不足还是采购量达不到源头门槛？</li>
+        <li>商户对于缴纳保证金参与代采拼单的接受区间；是否已有自发拼柜行为，现存痛点是什么？</li>
+      </ol>
+    </div>
+    <div class="qgroup">
+      <div class="qh">二、冷库货权管控（赎货模式底座）</div>
+      <ol>
+        <li>现有 WMS 系统能否做到分批次锁库、区分货权归属、指令释放库存、出入库完整留痕？</li>
+        <li>冷库制度上是否可以做到：无海吉星运营公司正式出库指令，对应批次货物禁止提货；如何防范内部私自放货风险？</li>
+        <li>冷库是否可以配合执行代采货物货权归属市场主体；行情下跌场景下配合盘点、处置货物？</li>
+      </ol>
+    </div>
+    <div class="qgroup">
+      <div class="qh">三、国内冻品拼单集采</div>
+      <ol>
+        <li>国内屠宰厂、调理食材源头资源储备现状，哪些品类成熟、哪些存在短板？</li>
+        <li>拼单集采订单归集、各项成本分摊（干线、仓储、服务费）内部组织能力？</li>
+        <li>本地商户对代采服务费心理接受区间。</li>
+      </ol>
+    </div>
+    <div class="qgroup">
+      <div class="qh">四、进口冻品多链路集采</div>
+      <ol>
+        <li>上海-泸州内河冷链水运转关，本地货代实操成熟度；内河冷箱供电保障、历史货损情况，实际等船 + 航行周期？</li>
+        <li>中老铁路冻水产进口到昆明再转泸州，本地货代实操、舱位稳定性、输华工厂备案约束？</li>
+        <li>平陆运河通航后，钦州-泸州监管冷链驳船现有资源，冷冻箱供电、过闸成本、实际船期情况？</li>
+        <li>头部商户对于不同进口链路时效、成本、风险的接受程度。</li>
+      </ol>
+    </div>
+    <div class="qgroup">
+      <div class="qh">五、业务合规、风控与试点规划</div>
+      <ol>
+        <li>四方协议（市场、商户、上游、冷库）法律文本储备情况？</li>
+        <li>如何规避融资性贸易风险，内部合规评估是否具备条件？</li>
+        <li>现金赎货、跌价追加保证金、货物处置止损这套风控规则，内部各部门能否达成共识？</li>
+        <li>如果试点落地，优先选择哪 2-3 个冻品品类，初期计划多大试跑规模？</li>
+      </ol>
+    </div>
+    <div class="qgroup">
+      <div class="qh">六、系统与下沉仓配</div>
+      <ol>
+        <li>业务试点阶段，改造现有 WMS 还是先用轻量化台账跑通业务闭环？</li>
+        <li>面向黔北、滇东北市县，是否具备冻品集拼分拨的冷链运力资源？</li>
+        <li>判断业务落地最大阻力来自商户端、冷库端还是公司内部？</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ============ 八、口头摘要 ============ -->
+  <div class="panel" id="s8">
+    <h2>八、会谈简短口头摘要（汇报开场直接使用）</h2>
+    <div class="sub">开场 90 秒把定位、模式、链路、风控讲清楚</div>
+    <div class="summarybox">
+      <p>成都、重庆是西南一级冻品枢纽，整车现货是他们的优势，我们不做正面价格竞争。</p>
+      <p>海吉星定位川南黔北滇东北区域冻品分拨服务枢纽，聚焦下沉市县二批、乡镇宴席餐饮客户。方案采用国内 + 进口双轨拼单集采模式，由海吉星作为链主，面向各品类头部商户开展源头代采，统一管控采购订单与完税现货货权，严格执行现金赎货出库，不做信用赊销。</p>
+      <p>进口货源有多条物流链路可选：上海江海联运为主力，中老铁路服务小批量调理水产试单，平陆运河作为中长期备选；保税相关能力仅作为远期可选项，现阶段业务全部基于完税现货运行。同时搭建面向周边市县冻品集拼分拨配送能力。</p>
+      <p>整套模式以集采能力 + 货权可控的赎货制供应链金融形成差异化，正视冷库执行、行情波动、进口链路不确定性等现实约束，小步试点，严控业务风险。</p>
+    </div>
+  </div>
+
+  <div class="foot">
+    以鲜国际供应链（广东）有限公司 EverFresh International Supply Chain Co., Ltd. · 泸州海吉星冻品板块落地方案 · 2026-08-31
+    <br><a class="nav-back" href="index.html">← 返回以鲜国际官网首页</a>
+  </div>
+
+</div>
+</body>
+</html>
