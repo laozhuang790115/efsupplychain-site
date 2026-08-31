@@ -26,7 +26,7 @@ d = date(2026, 1, 1)
 # Find first Monday on or before Jan 1 2026 (Jan 1 is Thursday)
 while d.weekday() != 0:  # Monday
     d -= timedelta(days=1)
-for w in range(1, 34):
+for w in range(1, 36):
     week_start = d + timedelta(weeks=w-1)
     week_end = week_start + timedelta(days=6)
     week_dates[w] = {
@@ -80,6 +80,8 @@ ecuador_data = {
     31: {"30-40": 3.30, "40-50": 2.90, "50-60": 2.65, "60-70": 2.48, "70-80": 2.28},
     32: {"30-40": 3.30, "40-50": 2.70, "50-60": 2.60, "60-70": 2.35, "70-80": 2.25},
     33: {"30-40": 3.30, "40-50": 2.50, "50-60": 2.55, "60-70": 2.30, "70-80": 2.20},  # actual W33
+    34: {"30-40": 3.45, "40-50": 2.90, "50-60": 2.75, "60-70": 2.45, "70-80": 2.30},  # actual W34: rebound, 40/50 +0.40 on 8-factory reinstatement
+    35: {"30-40": 3.45, "40-50": 2.90, "50-60": 2.75, "60-70": 2.45, "70-80": 2.30},  # W35: ex-farm flat, no change expected before Sep
 }
 
 # ============================================================
@@ -197,6 +199,12 @@ china_data[32] = {"guangdong_zhuhai": {"20": 20, "25": 17.5, "30": 15.5, "40": 1
 china_data[33] = {"guangdong_zhuhai": {"20": 20, "25": 17, "30": 15.5, "40": 12, "60": 9},  # latest
                   "guangxi_beihai": {"20": 24, "25": 21, "30": 19, "40": 15, "60": 12},
                   "jiangsu_yancheng": {"20": 20, "25": 17, "30": 15, "40": 12, "60": 9}}
+china_data[34] = {"guangdong_zhuhai": {"20": 19.5, "25": 16.5, "30": 15, "40": 11.5, "60": 8.8},  # W34: Guangdong supply up, some quotes -2 CNY/kg
+                  "guangxi_beihai": {"20": 23.5, "25": 20.5, "30": 18.5, "40": 14.5, "60": 11.8},
+                  "jiangsu_yancheng": {"20": 20, "25": 17, "30": 15, "40": 12, "60": 9}}
+china_data[35] = {"guangdong_zhuhai": {"20": 20.5, "25": 17.5, "30": 16, "40": 12, "60": 9.8},  # W35: large-size up (disease+typhoon), 60ct +1 CNY
+                  "guangxi_beihai": {"20": 24.5, "25": 21.5, "30": 19.5, "40": 15, "60": 12.8},
+                  "jiangsu_yancheng": {"20": 21, "25": 18, "30": 15.8, "40": 12, "60": 9}}
 
 # ============================================================
 # INDIA Andhra Pradesh ex-farm prices (INR/kg) — 5 specs
@@ -244,13 +252,15 @@ india_data = {
     31: {"30": 415, "40": 320, "60": 245, "80": 200, "100": 180},
     32: {"30": 410, "40": 315, "60": 243, "80": 198, "100": 178},
     33: {"30": 405, "40": 310, "60": 240, "80": 195, "100": 175},
+    34: {"30": 405, "40": 310, "60": 240, "80": 195, "100": 175},  # W34: flat, AP stable, 30ct scarce
+    35: {"30": 410, "40": 313, "60": 242, "80": 196, "100": 176},  # W35: slight up on supply-reduction expectation
 }
 
 # ============================================================
 # Build JSON structure
 # ============================================================
 weeks_json = []
-for w in range(1, 34):
+for w in range(1, 36):
     wd = week_dates[w]
     week_entry = {
         "week": w,
@@ -267,8 +277,8 @@ for w in range(1, 34):
 output = {
     "meta": {
         "title": "全球白对虾塘头价监测",
-        "lastUpdated": "2026-W33",
-        "lastUpdatedDate": "2026-08-16",
+        "lastUpdated": "2026-W35",
+        "lastUpdatedDate": "2026-08-30",
         "frequency": "weekly",
         "sources": {
             "china": "水产前沿 (fishfirst.cn) 周度塘头价播报",
@@ -280,12 +290,12 @@ output = {
             "ecuador": "只/kg (shrimp per kg), USD",
             "india": "只/kg (shrimp per kg), INR, 安得拉邦"
         },
-        "note": "W1-W22部分数据基于行业报告趋势估算，W23-W33以实际报告数据为主。数据持续校准中。"
+        "note": "W1-W22部分数据基于行业报告趋势估算，W23-W35以实际报告数据为主（W34-W35为8月17-30日实际行情：8家厄工厂恢复输华后40/50塘头价反弹0.40美元，渔博会首日对华CFR上调0.20-0.30美元，国内大规格塘头价受虾病+台风影响上行）。数据持续校准中。"
     },
     "weeks": weeks_json
 }
 
-output_path = "/Users/johnzhuang/以鲜国际/data/shrimp-prices.json"
+output_path = "/Users/johnzhuang/.openclaw-autoclaw/agents/agent-u1cqcv/workspace/efsupplychain-site/data/shrimp-prices.json"
 with open(output_path, "w", encoding="utf-8") as f:
     json.dump(output, f, ensure_ascii=False, indent=2)
 
