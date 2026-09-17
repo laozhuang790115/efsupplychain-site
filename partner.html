@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>虾掌柜渠道中心 — 进口虾分销合作 | 以鲜国际</title>
+<meta name="description" content="虾掌柜是以鲜国际旗下的进口虾分销平台。为社群团长、电商店铺、直播、档口与餐饮渠道提供一手货源、成套素材、稳定履约与售后兜底。首批开放广州、深圳。">
+<style>
+/* ===== Reset & Base ===== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",-apple-system,sans-serif;
+  color:#1a1a2e;line-height:1.75;background:#f8f9fb;overflow-x:hidden
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+
+/* ===== Nav（沿用站内样式） ===== */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:rgba(10,22,40,.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,.08)
+}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;max-width:1360px}
+.nav-brand{display:flex;align-items:center}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.logo-box img{height:34px;width:auto;border-radius:6px}
+.logo-text{display:flex;flex-direction:column;line-height:1.15}
+.logo-main{color:#fff;font-weight:700;font-size:15px;letter-spacing:.5px}
+.logo-sub{color:rgba(255,255,255,.5);font-size:10px}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none}
+.nav-links a{color:rgba(255,255,255,.82);font-size:13.5px;padding:6px 10px;border-radius:8px;transition:.2s;white-space:nowrap}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.1)}
+.nav-links a.active{color:#00d4aa;background:rgba(0,212,170,.12)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;padding:8px;cursor:pointer}
+.nav-toggle span{width:22px;height:2px;background:#fff;border-radius:2px;transition:.25s}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ===== Hero ===== */
+.hero{
+  margin-top:66px;padding:74px 0 60px;position:relative;overflow:hidden;
+  background:linear-gradient(150deg,#0a1628 0%,#123049 55%,#0d3b3a 100%);color:#fff
+}
+.hero::after{
+  content:"";position:absolute;right:-160px;top:-120px;width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,212,170,.22),transparent 68%)
+}
+.hero .wrap{position:relative;z-index:1}
+.kicker{
+  display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.16em;color:#00d4aa;
+  border:1px solid rgba(0,212,170,.35);border-radius:20px;padding:5px 14px;margin-bottom:22px
+}
+.hero h1{font-size:clamp(27px,4.4vw,44px);line-height:1.22;font-weight:800;letter-spacing:-.5px;max-width:20ch}
+.hero h1 em{font-style:normal;color:#00d4aa}
+.hero p.lede{margin-top:18px;font-size:16px;line-height:1.85;color:rgba(255,255,255,.76);max-width:58ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px 30px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;
+  border:none;transition:.22s;font-family:inherit
+}
+.btn-primary{background:#00d4aa;color:#06231d}
+.btn-primary:hover{background:#00e8bb;transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,212,170,.3)}
+.btn-ghost{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.22)}
+.btn-ghost:hover{background:rgba(255,255,255,.16)}
+.hero-stats{display:flex;flex-wrap:wrap;gap:0 46px;margin-top:44px;padding-top:26px;border-top:1px solid rgba(255,255,255,.14)}
+.hero-stat b{display:block;font-size:24px;font-weight:800;color:#fff;line-height:1.2}
+.hero-stat s{display:block;text-decoration:none;font-size:12.5px;color:rgba(255,255,255,.55);margin-top:3px}
+
+/* ===== Section 基础 ===== */
+section{padding:66px 0}
+.sec-head{margin-bottom:34px;max-width:74ch}
+.sec-tag{font-size:12px;letter-spacing:.16em;color:#0d9488;font-weight:700;margin-bottom:10px}
+.sec-head h2{font-size:clamp(22px,3vw,31px);font-weight:800;letter-spacing:-.4px;line-height:1.28;color:#0f2438}
+.sec-head p{margin-top:12px;font-size:15px;color:#5a6673;line-height:1.8}
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.card{
+  background:#fff;border:1px solid #e7ebf0;border-radius:14px;padding:26px 24px;
+  transition:.22s;height:100%
+}
+.card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(15,36,56,.08);border-color:#cfe6e2}
+.card .ico{font-size:24px;margin-bottom:12px;line-height:1}
+.card h3{font-size:16.5px;font-weight:700;color:#0f2438;margin-bottom:8px}
+.card p{font-size:13.8px;color:#5a6673;line-height:1.78}
+.card ul{margin-top:10px;padding-left:0;list-style:none}
+.card li{font-size:13.5px;color:#5a6673;padding-left:18px;position:relative;margin-bottom:6px}
+.card li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:#00d4aa}
+.note{
+  background:#f0fbf8;border-left:3px solid #00d4aa;border-radius:0 10px 10px 0;
+  padding:16px 20px;font-size:13.8px;color:#28504a;margin-top:24px
+}
+
+/* ===== 价格层 ===== */
+.pricing{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.tier{background:#fff;border:1px solid #e7ebf0;border-radius:14px;padding:24px 22px;position:relative;display:flex;flex-direction:column;height:100%}
+.tier.hl{border-color:#00d4aa;box-shadow:0 10px 28px rgba(0,212,170,.14)}
+.tier .badge{
+  position:absolute;top:-11px;left:20px;background:#00d4aa;color:#06231d;font-size:11px;
+  font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.04em
+}
+.tier .who{font-size:12px;letter-spacing:.1em;color:#94a3b8;font-weight:700;text-transform:uppercase}
+.tier h3{font-size:18px;font-weight:800;color:#0f2438;margin:8px 0 10px}
+.tier p{font-size:13.5px;color:#5a6673;line-height:1.76;flex:1}
+.tier .rule{margin-top:14px;padding-top:12px;border-top:1px dashed #e2e8ee;font-size:12.5px;color:#0d9488;font-weight:600}
+
+/* ===== 流程 ===== */
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;counter-reset:s}
+.step{padding:0 18px;position:relative}
+.step::before{
+  content:"";position:absolute;left:0;top:15px;right:0;height:1px;background:#dfe6ee
+}
+.step:first-child::before{left:50%}
+.step:last-child::before{right:50%}
+.step .dot{
+  position:relative;width:32px;height:32px;border-radius:50%;background:#fff;border:2px solid #00d4aa;
+  color:#0d9488;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;
+  margin:0 auto 14px;z-index:1
+}
+.step h4{font-size:14.5px;font-weight:700;color:#0f2438;text-align:center;margin-bottom:6px}
+.step p{font-size:12.8px;color:#6b7783;text-align:center;line-height:1.68}
+
+/* ===== 表单 ===== */
+.form-shell{display:grid;grid-template-columns:1fr 1.15fr;gap:0;background:#fff;border:1px solid #e7ebf0;border-radius:16px;overflow:hidden}
+.form-side{
+  background:linear-gradient(160deg,#0a1628,#123049);color:#fff;padding:38px 34px;display:flex;flex-direction:column
+}
+.form-side h3{font-size:20px;font-weight:800;margin-bottom:14px;letter-spacing:-.2px}
+.form-side p{font-size:13.8px;color:rgba(255,255,255,.72);line-height:1.8}
+.form-side ul{list-style:none;margin-top:22px;display:flex;flex-direction:column;gap:12px}
+.form-side li{font-size:13.5px;color:rgba(255,255,255,.86);padding-left:22px;position:relative}
+.form-side li::before{content:"✓";position:absolute;left:0;color:#00d4aa;font-weight:800}
+.form-side .foot{margin-top:auto;padding-top:26px;font-size:12.5px;color:rgba(255,255,255,.5);line-height:1.7}
+.form-body{padding:36px 34px}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:13.2px;font-weight:600;color:#33414f;margin-bottom:7px}
+.field label i{color:#e74c3c;font-style:normal;margin-left:3px}
+.field input,.field select,.field textarea{
+  width:100%;padding:12px 14px;border:1px solid #d8e0e8;border-radius:10px;font-size:14px;
+  font-family:inherit;color:#1a1a2e;background:#fbfcfd;transition:.18s
+}
+.field textarea{min-height:88px;resize:vertical;line-height:1.7}
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:none;border-color:#00d4aa;background:#fff;box-shadow:0 0 0 3px rgba(0,212,170,.13)
+}
+.field input.err,.field select.err{border-color:#e74c3c;background:#fff6f5}
+.field .hint{font-size:12px;color:#b91c1c;margin-top:6px;display:none}
+.field .hint.show{display:block}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:24px}
+.form-actions .btn-primary{min-width:160px}
+.form-actions .btn-primary:disabled{opacity:.6;cursor:not-allowed;transform:none;box-shadow:none}
+.privacy{font-size:12px;color:#8b95a1;line-height:1.7;max-width:34ch}
+.result{display:none;border-radius:12px;padding:22px 24px;font-size:14px;line-height:1.8}
+.result.show{display:block}
+.result.ok{background:#eefbf7;border:1px solid #a7e6d7;color:#14544a}
+.result.dup{background:#fff8ec;border:1px solid #f3dcab;color:#7a5410}
+.result.warn{background:#fef4f3;border:1px solid #f5c6c2;color:#8c2f27}
+.result b{display:block;font-size:15.5px;margin-bottom:6px;font-weight:800}
+.result .code{font-weight:700}
+.result .alt{margin-top:14px;padding-top:12px;border-top:1px solid rgba(0,0,0,.08);font-size:13px}
+.result .alt a{color:#0d9488;font-weight:700;border-bottom:1px solid rgba(13,148,136,.4)}
+
+/* ===== FAQ ===== */
+.faq{border-top:1px solid #e3e9ef}
+.qa{padding:22px 0;border-bottom:1px solid #e3e9ef}
+.qa h4{font-size:15.5px;font-weight:700;color:#0f2438;margin-bottom:8px}
+.qa p{font-size:13.8px;color:#5a6673;line-height:1.8;max-width:88ch}
+
+/* ===== Footer ===== */
+footer{margin-top:20px;padding:44px 0;background:#0a1628;color:rgba(255,255,255,.6);font-size:13px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:10px 30px;justify-content:space-between}
+footer a{color:rgba(255,255,255,.78);border-bottom:1px solid rgba(255,255,255,.25)}
+footer a:hover{color:#00d4aa}
+
+/* ===== 响应式 ===== */
+@media(max-width:1024px){
+  .g4,.pricing,.steps{grid-template-columns:repeat(2,1fr)}
+  .steps .step{margin-bottom:26px}
+  .step::before{display:none}
+  .form-shell{grid-template-columns:1fr}
+  .nav-links a{font-size:12.5px;padding:6px 8px}
+}
+@media(max-width:860px){
+  .nav-links{
+    position:absolute;top:66px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;
+    background:rgba(8,18,33,.98);padding:0;max-height:0;overflow:hidden;transition:max-height .3s
+  }
+  .nav-links.open{max-height:520px;padding:10px 0}
+  .nav-links a{padding:12px 24px;border-radius:0}
+  .nav-toggle{display:flex}
+  .g2,.g3{grid-template-columns:1fr}
+  .hero{padding:52px 0 44px}
+  .hero-stats{gap:0 28px}
+  section{padding:48px 0}
+  .row2{grid-template-columns:1fr}
+  .form-side,.form-body{padding:28px 22px}
+}
+@media(max-width:560px){
+  .g4,.pricing,.steps{grid-template-columns:1fr}
+  .hero-stat b{font-size:21px}
+  .btn{width:100%}
+  .form-actions{flex-direction:column;align-items:stretch}
+  .privacy{max-width:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <div class="nav-brand">
+      <div class="nav-logo">
+        <div class="logo-box"><img src="logo.png" alt="以鲜国际"></div>
+        <div class="logo-text"><span class="logo-main">以鲜国际</span><span class="logo-sub">恒兴集团旗下战略合作伙伴</span></div>
+      </div>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">首页</a></li>
+      <li><a href="index.html#about">关于我们</a></li>
+      <li><a href="index.html#services">核心业务</a></li>
+      <li><a href="shrimp-prices.html" style="background:linear-gradient(135deg,#e74c3c,#c0392b);color:#fff!important;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700">📈 价格监测</a></li>
+      <li><a href="tools.html" class="nav-tools">🧭 国际代采</a></li>
+      <li><a href="products.html" style="background:#00d4aa;color:#fff!important;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700">🦐 以鲜甄选</a></li>
+      <li><a href="coldchain.html" class="nav-cold">❄️ 冷链服务</a></li>
+      <li><a href="exhibitions.html" style="background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff!important;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700">🎪 食品展会</a></li>
+      <li><a href="reports.html" class="nav-halal">📋 老庄报告</a></li>
+      <li><a href="partner.html" class="nav-partner" style="background:linear-gradient(135deg,#0d9488,#00d4aa);color:#06231d!important;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:800">🤝 渠道合作</a></li>
+      <li><a href="careers.html" class="nav-careers">💼 加入我们</a></li>
+    </ul>
+    <div class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open');this.classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker">虾掌柜 · 进口虾分销平台</span>
+    <h1>把进口虾，做成你手上<em>稳定出得去</em>的货</h1>
+    <p class="lede">虾掌柜是以鲜国际旗下的进口虾分销平台。我们不跟你比谁价低，我们给你四样更值钱的东西：<strong style="color:#00d4aa">一手货源、成套素材、稳定履约、兜得住售后</strong>。首批开放广州、深圳两个城市。</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#apply">申请入驻 →</a>
+      <a class="btn btn-ghost" href="#how">看合作方式</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><b>4 种</b><s>合作身份可选</s></div>
+      <div class="hero-stat"><b>20 个</b><s>核心活跃 SKU 上限</s></div>
+      <div class="hero-stat"><b>一件起发</b><s>第三方冷链云仓履约</s></div>
+      <div class="hero-stat"><b>1 个工作日</b><s>招商顾问响应</s></div>
+    </div>
+  </div>
+</header>
+
+<section id="why">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-tag">为什么是虾掌柜</p>
+      <h2>做分销，最怕的不是价格，是这三件事</h2>
+      <p>货到不了、图拍不出来、出了事没人兜——这三件事吃掉的分销利润，远比你想象的价差大。虾掌柜就是来解决这三个问题的。</p>
+    </div>
+    <div class="grid g4">
+      <div class="card">
+        <div class="ico">🦐</div>
+        <h3>一手货源</h3>
+        <p>深耕厄瓜多尔白虾、阿根廷红虾、越南黑虎虾、俄罗斯北极甜虾等主产区，海外产地直连、自营进口链路，货源稳定可追溯。</p>
+        <ul><li>产地与规格双清晰</li><li>冰衣口径明确标注</li></ul>
+      </div>
+      <div class="card">
+        <div class="ico">🎬</div>
+        <h3>成套素材</h3>
+        <p>商品图、开箱视频、卖点文案、检测报告、合规话术，一套配齐，你直接拿去发朋友圈、拍短视频、上架店铺。</p>
+        <ul><li>按规格打包，不用自己拍</li><li>版本更新持续推给你</li></ul>
+      </div>
+      <div class="card">
+        <div class="ico">📦</div>
+        <h3>稳定履约</h3>
+        <p>与第三方冷链云仓合作，一件起发、全国可达，订单当天推仓、冷链全程不断链，不用你囤货、不用你打包。</p>
+        <ul><li>一件代发 / 整箱批发双通道</li><li>物流轨迹可查</li></ul>
+      </div>
+      <div class="card">
+        <div class="ico">🛡️</div>
+        <h3>兜得住售后</h3>
+        <p>化冻、破损、错发、漏发，按统一标准受理，不用你自己贴钱摆平客户。合作商家的售后争议不留积压。</p>
+        <ul><li>标准受理流程与时效</li><li>举证简单，不用扯皮</li></ul>
+      </div>
+    </div>
+    <div class="note">
+      <strong>说清楚一件事：</strong>虾掌柜不承诺"全网最低价"。我们保证的是同一规格、同一冰衣口径下的货真价实，以及接到货之后的整套支持。低价没有护城河，稳定才有。
+    </div>
+  </div>
+</section>
+
+<section id="price" style="background:#fff;border-top:1px solid #eef2f6;border-bottom:1px solid #eef2f6">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-tag">价格怎么算</p>
+      <h2>四层价格，每一层都写清楚</h2>
+      <p>虾掌柜不搞"看人下菜"的暗价，价格按身份分四层，符合条件就能拿到对应价格。具体数字在开通账号后按规格逐一提供。</p>
+    </div>
+    <div class="pricing">
+      <div class="tier">
+        <span class="who">第一层</span>
+        <h3>整箱供货价</h3>
+        <p>面向档口、餐饮门店、二级批发与城市服务商，按整箱起订。适合有自有冷库或门店库存能力的合作方。</p>
+        <div class="rule">整箱起订 · 到仓自提或冷链配送</div>
+      </div>
+      <div class="tier hl">
+        <span class="badge">主推通道</span>
+        <span class="who">第二层</span>
+        <h3>代发结算价</h3>
+        <p>面向社群团长、电商店铺、直播等分销商，一件起发、无需囤货。你的下游客户下单，云仓直接发到客户手上。</p>
+        <div class="rule">半箱起发 · 一件代发</div>
+      </div>
+      <div class="tier">
+        <span class="who">第三层</span>
+        <h3>建议零售价</h3>
+        <p>我们给每个规格的建议零售价，只是参考。你在建议区间内自主定价，价差全部归你，我们不抽成、不干预。</p>
+        <div class="rule">自主定价 · 价差归你</div>
+      </div>
+      <div class="tier">
+        <span class="who">第四层</span>
+        <h3>最低销售价红线</h3>
+        <p>为保护所有合作商的共同利润，我们设定最低销售价红线。低于红线出货会伤害整个渠道，因此有明确的处理规则。</p>
+        <div class="rule">全渠道底线 · 逐规格设定</div>
+      </div>
+    </div>
+    <div class="note">
+      <strong>结算方式：</strong>前期统一先款后货，不设账期。稳定合作 6 个月以上、回款持续准时的合作商，可申请账期支持。收款、开票均由以鲜国际对公账户统一处理。
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-tag">合作身份</p>
+      <h2>你以什么身份合作？</h2>
+      <p>四种身份对应不同的价格层与服务内容。不确定选哪个也没关系，提交申请时说明你的渠道情况，招商顾问会帮你判断。</p>
+    </div>
+    <div class="grid g4">
+      <div class="card">
+        <div class="ico">👥</div>
+        <h3>分销商</h3>
+        <p>社群团长、电商店铺、直播、私域运营者。一件代发为主，自主定价赚价差。</p>
+        <ul><li>代发结算价</li><li>素材包 + 销售奖金</li></ul>
+      </div>
+      <div class="card">
+        <div class="ico">🏙️</div>
+        <h3>城市服务商</h3>
+        <p>在授权城市发展与管理分销网络，承担本地服务与秩序维护。首批仅广州、深圳。</p>
+        <ul><li>区域管理奖</li><li>区域授权与支持</li></ul>
+      </div>
+      <div class="card">
+        <div class="ico">🏬</div>
+        <h3>档口 / 批发商</h3>
+        <p>批发市场档口、二级批发。整箱走量，看重供货稳定性与规格齐全度。</p>
+        <ul><li>整箱供货价</li><li>整箱起订</li></ul>
+      </div>
+      <div class="card">
+        <div class="ico">🍽️</div>
+        <h3>餐饮渠道</h3>
+        <p>餐饮门店、连锁与团膳。需要规格匹配菜品、供货稳定、损耗可控。</p>
+        <ul><li>餐饮专供规格</li><li>定制冰衣口径</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="flow" style="background:#fff;border-top:1px solid #eef2f6;border-bottom:1px solid #eef2f6">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-tag">入驻流程</p>
+      <h2>从申请到第一单，五步</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="dot">1</div><h4>提交申请</h4><p>填一份简短表单，说明你的渠道与规模</p></div>
+      <div class="step"><div class="dot">2</div><h4>顾问联系</h4><p>1 个工作日内电话沟通，确认需求与区域</p></div>
+      <div class="step"><div class="dot">3</div><h4>资质与价目</h4><p>确认合作身份，开通账号查看对应价目</p></div>
+      <div class="step"><div class="dot">4</div><h4>领取素材</h4><p>拿到成套商品素材与合规话术，可直接上架</p></div>
+      <div class="step"><div class="dot">5</div><h4>跑通首单</h4><p>第一单全程陪跑，确认履约与售后链路顺畅</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="apply">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-tag">申请入驻</p>
+      <h2>留下联系方式，招商顾问联系你</h2>
+      <p>信息仅用于合作洽谈，不会用于其他用途，也不会提供给第三方。广州、深圳的合作申请优先处理。</p>
+    </div>
+
+    <div class="form-shell">
+      <aside class="form-side">
+        <h3>虾掌柜渠道合作</h3>
+        <p>无论你是刚开始做虾品分销，还是已经有成熟的社群、店铺或门店，都可以先聊聊。我们不收加盟费，也没有进货门槛之外的前置费用。</p>
+        <ul>
+          <li>不收加盟费、不收保证金</li>
+          <li>一件起发，不用囤货</li>
+          <li>成套素材直接可用</li>
+          <li>售后有统一标准，不用自己扛</li>
+        </ul>
+        <div class="foot">
+          以鲜国际供应链（广东）有限公司<br>
+          Easy Fresh International Supply Chain Co., Ltd.
+        </div>
+      </aside>
+
+      <div class="form-body">
+        <!-- 提交成功/失败提示区 -->
+        <div class="result" id="result" role="status" aria-live="polite"></div>
+
+        <form id="applyForm" novalidate>
+          <div class="row2">
+            <div class="field">
+              <label for="company">公司 / 店铺 / 团队名称<i>*</i></label>
+              <input type="text" id="company" name="company_name" placeholder="例：广州鲜达商贸" autocomplete="organization">
+              <p class="hint" id="h_company">请填写名称</p>
+            </div>
+            <div class="field">
+              <label for="contact">联系人<i>*</i></label>
+              <input type="text" id="contact" name="contact" placeholder="您的姓名" autocomplete="name">
+              <p class="hint" id="h_contact">请填写联系人姓名</p>
+            </div>
+          </div>
+
+          <div class="row2">
+            <div class="field">
+              <label for="phone">手机号<i>*</i></label>
+              <input type="tel" id="phone" name="phone" inputmode="numeric" maxlength="11" placeholder="11 位手机号" autocomplete="tel">
+              <p class="hint" id="h_phone">请填写正确的 11 位手机号</p>
+            </div>
+            <div class="field">
+              <label for="wechat">微信号（选填）</label>
+              <input type="text" id="wechat" name="wechat" placeholder="方便的话留一个微信号">
+            </div>
+          </div>
+
+          <div class="row2">
+            <div class="field">
+              <label for="channel">渠道类型<i>*</i></label>
+              <select id="channel" name="channel_type">
+                <option value="">请选择</option>
+                <option value="community">社群团购 / 团长</option>
+                <option value="stall">档口 / 批发市场</option>
+                <option value="catering">餐饮门店 / 连锁</option>
+                <option value="ecommerce">电商店铺（1688 / 拼多多 / 抖音小店等）</option>
+                <option value="live">直播带货</option>
+                <option value="supply">二级批发 / 供应链同行</option>
+                <option value="other">其他</option>
+              </select>
+              <p class="hint" id="h_channel">请选择渠道类型</p>
+            </div>
+            <div class="field">
+              <label for="region">所在城市<i>*</i></label>
+              <input type="text" id="region" name="region" placeholder="例：广州" list="cityList">
+              <datalist id="cityList">
+                <option value="广州"></option><option value="深圳"></option><option value="东莞"></option>
+                <option value="佛山"></option><option value="上海"></option><option value="北京"></option>
+                <option value="杭州"></option><option value="成都"></option><option value="长沙"></option>
+                <option value="武汉"></option><option value="西安"></option><option value="重庆"></option>
+              </datalist>
+              <p class="hint" id="h_region">请填写所在城市</p>
+            </div>
+          </div>
+
+          <div class="row2">
+            <div class="field">
+              <label for="volume">月销规模（选填）</label>
+              <select id="volume" name="monthly_volume">
+                <option value="">暂不确定</option>
+                <option value="试单起步">刚起步，先试单</option>
+                <option value="100kg 以内">100kg 以内 / 月</option>
+                <option value="100-500kg">100–500kg / 月</option>
+                <option value="500kg-2吨">500kg – 2 吨 / 月</option>
+                <option value="2吨以上">2 吨以上 / 月</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="remark">想了解什么（选填）</label>
+              <input type="text" id="remark" name="remark" placeholder="例：主要想要 40/50 规格，做社群团购">
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="submitBtn">提交合作申请</button>
+            <p class="privacy">提交即表示同意我们通过电话或微信与您联系洽谈合作。信息仅用于招商洽谈。</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-tag">常见问题</p>
+      <h2>合作前你可能想问的</h2>
+    </div>
+    <div class="faq">
+      <div class="qa">
+        <h4>需要囤货吗？起步要多少量？</h4>
+        <p>不需要囤货。分销商身份走一件代发，半箱起发；档口与餐饮身份走整箱，整箱起订。没有加盟费、保证金或进货门槛之外的前置费用。</p>
+      </div>
+      <div class="qa">
+        <h4>我可以自己定价吗？</h4>
+        <p>可以。我们在建议零售价区间内给你完全自主定价权，价差全部归你，我们既不抽成也不干预定价。唯一约束是最低销售价红线——低于红线出货会伤害整个渠道的共同利润，因此有明确的处理规则。</p>
+      </div>
+      <div class="qa">
+        <h4>为什么说最低销售价红线不是"管价格"？</h4>
+        <p>红线是为了保护渠道的整体利润空间，不是限制你的经营自由。红线按规格逐一设定、随行情更新，只在公开标价、社群价、直播价等对外成交价上生效。</p>
+      </div>
+      <div class="qa">
+        <h4>怎么结算？能赊账吗？</h4>
+        <p>前期统一先款后货，不设账期。稳定合作 6 个月以上、连续 3 个月回款准时且提货达标的合作商，可申请 7 天账期，后续视情况再放宽。收款与开票均由公司对公账户统一处理。</p>
+      </div>
+      <div class="qa">
+        <h4>售后怎么处理？</h4>
+        <p>化冻、破损、错发、漏发按统一标准受理，举证方式简单（拍张照即可），平台统一处理，不用你自己贴钱摆平客户。售后争议不留积压是我们的服务硬指标。</p>
+      </div>
+      <div class="qa">
+        <h4>我所在的城市现在能合作吗？</h4>
+        <p>首批仅开放广州、深圳。其他城市可以先提交申请，我们会进入候补名单，城市开放后优先联系。如果你在当地有成熟的渠道网络，也欢迎直接沟通城市服务商合作。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>&copy; 2026 以鲜国际供应链（广东）有限公司 · Easy Fresh International Supply Chain Co., Ltd.</p>
+    <p><a href="index.html">返回首页</a> · <a href="products.html">以鲜甄选</a> · <a href="reports.html">老庄报告</a></p>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   后端接口地址
+   ------------------------------------------------------------
+   '' *号即同源*：官网与分销系统部署在同一台服务器 / 同一域名时保持空字符串。
+   若官网托管在 GitHub Pages、系统部署在独立服务器，改成系统地址，例如：
+       const API_BASE = 'https://xzg.efsupplychain.com';
+   也可以临时用 URL 参数覆盖做联调：partner.html?api=http://127.0.0.1:8787
+   ============================================================ */
+const API_BASE = new URLSearchParams(location.search).get('api')
+              ?? '';   /* ← 上线切换点，只改这一行 */
+
+const form = document.getElementById('applyForm');
+const result = document.getElementById('result');
+const submitBtn = document.getElementById('submitBtn');
+
+const RULES = {
+  company:  { el: 'company', hint: 'h_company', test: v => v.trim().length >= 2 },
+  contact:  { el: 'contact', hint: 'h_contact', test: v => v.trim().length >= 2 },
+  phone:    { el: 'phone',   hint: 'h_phone',   test: v => /^1[3-9]\d{9}$/.test(v.replace(/\D/g, '')) },
+  channel:  { el: 'channel', hint: 'h_channel', test: v => !!v },
+  region:   { el: 'region',  hint: 'h_region',  test: v => v.trim().length >= 2 }
+};
+
+function validateField(key) {
+  const rule = RULES[key];
+  const input = document.getElementById(rule.el);
+  const hint = document.getElementById(rule.hint);
+  const ok = rule.test(input.value || '');
+  input.classList.toggle('err', !ok);
+  hint.classList.toggle('show', !ok);
+  return ok;
+}
+
+/* 实时校验：失焦校验一次，已出错的字段边输入边纠正 */
+Object.keys(RULES).forEach(key => {
+  const input = document.getElementById(RULES[key].el);
+  input.addEventListener('blur', () => validateField(key));
+  input.addEventListener('input', () => { if (input.classList.contains('err')) validateField(key); });
+});
+
+/* 手机号只允许数字 */
+const phoneEl = document.getElementById('phone');
+phoneEl.addEventListener('input', () => {
+  const digits = phoneEl.value.replace(/\D/g, '').slice(0, 11);
+  if (digits !== phoneEl.value) phoneEl.value = digits;
+});
+
+function showResult(kind, title, text, extraHtml) {
+  result.className = 'result show ' + kind;
+  result.innerHTML = '<b>' + title + '</b>' + text + (extraHtml || '');
+  result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const keys = Object.keys(RULES);
+  const bad = keys.filter(k => !validateField(k));
+  if (bad.length) {
+    document.getElementById(RULES[bad[0]].el).focus();
+    showResult('warn', '还有信息没填完整',
+      '请检查标红项后再提交。手机号需要是 11 位大陆手机号。');
+    return;
+  }
+
+  const payload = {
+    company_name: document.getElementById('company').value.trim(),
+    contact: document.getElementById('contact').value.trim(),
+    phone: document.getElementById('phone').value.trim(),
+    wechat: document.getElementById('wechat').value.trim(),
+    channel_type: document.getElementById('channel').value,
+    region: document.getElementById('region').value.trim(),
+    monthly_volume: document.getElementById('volume').value,
+    remark: document.getElementById('remark').value.trim(),
+    source: 'website'
+  };
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = '提交中…';
+
+  try {
+    const resp = await fetch(API_BASE + '/api/partners/apply', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await resp.json();
+
+    if (data.ok) {
+      const d = data.data;
+      const dupNote = d.region_open ? '' :
+        '<div class="alt">您的城市暂未开放首批合作，已进入候补名单，'
+        + '开放后会第一时间联系您。急事可直接致电以鲜国际总部。</div>';
+      showResult('ok', '申请已提交，受理号 ' + d.application_id,
+        '招商顾问将在 <strong>1 个工作日内</strong> 拨打电话与您联系，'
+        + '请留意陌生来电。' + dupNote);
+      form.reset();
+    } else if (data.code === 'DUPLICATE_APPLICATION') {
+      showResult('dup', '这份申请已经在处理中了',
+        '该手机号已有在审申请，我们会在 1 个工作日内联系您，无需重复提交。');
+    } else {
+      showResult('warn', '提交没有成功', (data.message || '请稍后重试') +
+        '<div class="alt">如果多次失败，可直接联系以鲜国际总部，我们会人工为您建档。</div>');
+    }
+  } catch (err) {
+    /* 网络失败：保留用户已填内容，给出可执行的替代方案 */
+    showResult('warn', '网络异常，暂未能提交',
+      '您填写的内容仍在页面上，可稍后重试。' +
+      '<div class="alt">也可以直接联系以鲜国际总部咨询合作，我们人工为您受理。</div>');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = '提交合作申请';
+  }
+});
+
+/* 移动端点击导航项后自动收起菜单 */
+document.querySelectorAll('#navLinks a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+    document.querySelector('.nav-toggle').classList.remove('open');
+  });
+});
+</script>
+</body>
+</html>
