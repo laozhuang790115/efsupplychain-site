@@ -408,8 +408,8 @@ footer a:hover{color:#00d4aa}
           <li>售后有统一标准，不用自己扛</li>
         </ul>
         <div class="foot">
-          以鲜国际供应链（广东）有限公司<br>
-          Easy Fresh International Supply Chain Co., Ltd.
+          深圳市以鲜食膳供应链有限公司（以鲜供应链）<br>
+          以鲜国际 · Easy Fresh
         </div>
       </aside>
 
@@ -448,7 +448,8 @@ footer a:hover{color:#00d4aa}
               <label for="channel">渠道类型<i>*</i></label>
               <select id="channel" name="channel_type">
                 <option value="">请选择</option>
-                <option value="community">社群团购 / 团长</option>
+                <option value="community">社群团购 / 团长
+        <option value="city_service">城市服务商 / 区域代理</option>
                 <option value="stall">档口 / 批发市场</option>
                 <option value="catering">餐饮门店 / 连锁</option>
                 <option value="ecommerce">电商店铺（1688 / 拼多多 / 抖音小店等）</option>
@@ -536,7 +537,9 @@ footer a:hover{color:#00d4aa}
 
 <footer>
   <div class="wrap">
-    <p>&copy; 2026 以鲜国际供应链（广东）有限公司 · Easy Fresh International Supply Chain Co., Ltd.</p>
+    <p>&copy; 2026 深圳市以鲜食膳供应链有限公司（以鲜供应链） · 以鲜国际 · Easy Fresh</p>
+    <p class="beian-line"><a class="beian" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener" data-beian="pending" hidden>粤ICP备号待填</a></p>
+    <p>招商对接 · <a href="mailto:Lazhuang@efsupplychain.com">Lazhuang@efsupplychain.com</a> · 135 0962 5162</p>
     <p><a href="index.html">返回首页</a> · <a href="products.html">以鲜甄选</a> · <a href="reports.html">老庄报告</a></p>
   </div>
 </footer>
@@ -633,7 +636,8 @@ form.addEventListener('submit', async (e) => {
       const d = data.data;
       const dupNote = d.region_open ? '' :
         '<div class="alt">您的城市暂未开放首批合作，已进入候补名单，'
-        + '开放后会第一时间联系您。急事可直接致电以鲜国际总部。</div>';
+        + '开放后会第一时间联系您。急事可直接联系：'
+        + '<a href="mailto:Lazhuang@efsupplychain.com">Lazhuang@efsupplychain.com</a> · 135 0962 5162</div>';
       showResult('ok', '申请已提交，受理号 ' + d.application_id,
         '招商顾问将在 <strong>1 个工作日内</strong> 拨打电话与您联系，'
         + '请留意陌生来电。' + dupNote);
@@ -643,13 +647,15 @@ form.addEventListener('submit', async (e) => {
         '该手机号已有在审申请，我们会在 1 个工作日内联系您，无需重复提交。');
     } else {
       showResult('warn', '提交没有成功', (data.message || '请稍后重试') +
-        '<div class="alt">如果多次失败，可直接联系以鲜国际总部，我们会人工为您建档。</div>');
+        '<div class="alt">如果多次失败，可直接联系以鲜国际总部：'
+        + '<a href="mailto:Lazhuang@efsupplychain.com">Lazhuang@efsupplychain.com</a> · 135 0962 5162，我们人工为您建档。</div>');
     }
   } catch (err) {
     /* 网络失败：保留用户已填内容，给出可执行的替代方案 */
     showResult('warn', '网络异常，暂未能提交',
       '您填写的内容仍在页面上，可稍后重试。' +
-      '<div class="alt">也可以直接联系以鲜国际总部咨询合作，我们人工为您受理。</div>');
+      '<div class="alt">也可以直接联系以鲜国际总部，我们人工为您受理：'
+      + '<a href="mailto:Lazhuang@efsupplychain.com">Lazhuang@efsupplychain.com</a> · 135 0962 5162</div>');
   } finally {
     submitBtn.disabled = false;
     submitBtn.textContent = '提交合作申请';
