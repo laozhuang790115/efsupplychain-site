@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金百味餐饮 · 财务分析报告 2024–2026.8</title>
+<style>
+  :root{
+    --paper:#faf9f7; --ink:#1a1a1a; --ink2:#4a4540; --mute:#8a837a;
+    --hair:#d8d2c8; --hair2:#e8e3da; --accent:#8f3b2c; --accent-bg:#f5ece9;
+    --pos:#3d6b4f; --neg:#8f3b2c;
+    --serif:"Songti SC","Noto Serif SC","STSong",serif;
+    --sans:-apple-system,"PingFang SC","Hiragino Sans GB",sans-serif;
+    --mono:"SF Mono",Menlo,Consolas,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);
+       font-size:15px;line-height:1.62;-webkit-font-smoothing:antialiased}
+  .canvas{max-width:1180px;margin:0 auto;padding:56px 48px 80px}
+
+  /* ---- 报头 ---- */
+  header{border-bottom:2px solid var(--ink);padding-bottom:28px;margin-bottom:36px}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--accent);
+          text-transform:uppercase;margin-bottom:14px}
+  h1{font-family:var(--serif);font-size:40px;font-weight:600;letter-spacing:-0.02em;line-height:1.15}
+  .subtitle{font-size:16px;color:var(--ink2);margin-top:10px}
+  .meta-row{display:flex;gap:36px;margin-top:22px;flex-wrap:wrap}
+  .meta-item{font-family:var(--mono);font-size:11.5px;color:var(--mute);letter-spacing:.04em}
+  .meta-item b{display:block;color:var(--ink2);font-weight:500;font-size:12.5px;margin-bottom:2px}
+
+  /* ---- 指标条 ---- */
+  .metrics{display:flex;border-top:1px solid var(--ink);border-bottom:1px solid var(--hair);
+           margin-bottom:48px}
+  .metric{flex:1;padding:18px 16px 16px;border-right:1px solid var(--hair2)}
+  .metric:last-child{border-right:none}
+  .metric .m-label{font-size:11.5px;color:var(--mute);letter-spacing:.05em;margin-bottom:6px}
+  .metric .m-value{font-family:var(--mono);font-size:26px;font-weight:600;letter-spacing:-0.02em}
+  .metric .m-sub{font-size:11px;color:var(--mute);margin-top:4px}
+  .neg{color:var(--neg)} .pos{color:var(--pos)}
+
+  /* ---- 章节 ---- */
+  section{margin-bottom:56px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--ink);
+            padding-bottom:10px;margin-bottom:24px}
+  .sec-no{font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:.08em}
+  h2{font-family:var(--serif);font-size:24px;font-weight:600;letter-spacing:.01em}
+  h3{font-family:var(--serif);font-size:17.5px;font-weight:600;margin:30px 0 12px}
+  p{color:var(--ink2);margin-bottom:12px;max-width:72em}
+  p b{color:var(--ink);font-weight:550}
+  .num{font-family:var(--mono);font-size:.94em}
+
+  /* ---- 表格 ---- */
+  table{width:100%;border-collapse:collapse;margin:18px 0 8px;font-size:13.5px}
+  th{font-family:var(--sans);font-weight:550;text-align:left;padding:9px 12px;
+     border-top:1.5px solid var(--ink);border-bottom:1px solid var(--ink);
+     font-size:12.5px;letter-spacing:.03em;color:var(--ink);white-space:nowrap}
+  td{padding:8.5px 12px;border-bottom:1px solid var(--hair2);color:var(--ink2);vertical-align:top}
+  td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+  tr.total td{border-top:1px solid var(--ink);border-bottom:1.5px solid var(--ink);
+              font-weight:550;color:var(--ink)}
+  tr.hl td{background:var(--accent-bg)}
+  .tbl-note{font-size:11.5px;color:var(--mute);margin-bottom:16px}
+
+  /* ---- 图 ---- */
+  figure{margin:26px 0 8px}
+  figcaption{font-size:11.5px;color:var(--mute);margin-top:8px}
+  svg{display:block;max-width:100%;height:auto}
+
+  /* ---- 结论块 ---- */
+  .findings{counter-reset:fk;border-top:1px solid var(--hair);margin-top:6px}
+  .finding{display:flex;gap:18px;padding:16px 4px;border-bottom:1px solid var(--hair2)}
+  .finding::before{counter-increment:fk;content:counter(fk,decimal-leading-zero);
+     font-family:var(--mono);font-size:13px;color:var(--accent);padding-top:2px;flex-shrink:0}
+  .finding .f-body{flex:1}
+  .finding .f-title{font-weight:550;color:var(--ink);margin-bottom:3px}
+  .finding .f-text{font-size:13.5px;color:var(--ink2)}
+
+  /* ---- 事业部卡 ---- */
+  .bu{border:1px solid var(--hair);padding:26px 28px;margin-bottom:22px}
+  .bu-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+  .bu-name{font-family:var(--serif);font-size:19px;font-weight:600}
+  .bu-tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:3px 10px;
+          border:1px solid currentColor}
+  .bu-tag.red{color:var(--neg)} .bu-tag.green{color:var(--pos)} .bu-tag.amber{color:#a06b1f}
+  .bu-grid{display:flex;gap:0;border-top:1px solid var(--hair2);margin-top:14px;padding-top:14px}
+  .bu-cell{flex:1;padding-right:16px}
+  .bu-cell+.bu-cell{border-left:1px solid var(--hair2);padding-left:16px}
+  .bu-k{font-size:11px;color:var(--mute);margin-bottom:3px}
+  .bu-v{font-family:var(--mono);font-size:19px;font-weight:600}
+  .bu-note{font-size:13px;color:var(--ink2);margin-top:14px;line-height:1.6}
+
+  /* ---- 风险清单 ---- */
+  .risk{display:flex;gap:14px;padding:14px 4px;border-bottom:1px solid var(--hair2);align-items:flex-start}
+  .risk-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:6px}
+  .r-high{background:var(--neg)} .r-mid{background:#c8912d} .r-ok{background:var(--pos)}
+  .risk .r-title{font-weight:550;font-size:14px}
+  .risk .r-text{font-size:13.5px;color:var(--ink2)}
+
+  /* ---- 建议 ---- */
+  .reco{display:flex;gap:0;margin:14px 0;border:1px solid var(--hair)}
+  .reco-no{font-family:var(--mono);font-size:14px;font-weight:600;color:var(--paper);
+           background:var(--ink);padding:16px 14px;display:flex;align-items:flex-start;flex-shrink:0}
+  .reco-body{padding:14px 18px}
+  .reco-title{font-weight:550;margin-bottom:4px}
+  .reco-text{font-size:13.5px;color:var(--ink2)}
+
+  /* ---- 附注 ---- */
+  .footnote{border-top:2px solid var(--ink);margin-top:60px;padding-top:18px;
+            font-size:12px;color:var(--mute);line-height:1.7}
+  .footnote b{color:var(--ink2)}
+
+  @media (max-width:820px){
+    .canvas{padding:32px 20px 60px}
+    h1{font-size:30px}
+    .metrics{flex-wrap:wrap} .metric{flex:1 1 33%;border-bottom:1px solid var(--hair2)}
+    .bu-grid{flex-wrap:wrap} .bu-cell{flex:1 1 40%}
+  }
+  @media print{ body{background:#fff} .canvas{max-width:100%;padding:24px} }
+</style>
+</head>
+<body>
+<div class="canvas">
+
+<header>
+  <div class="kicker">Financial Analysis · Confidential</div>
+  <h1>金百味餐饮财务分析报告</h1>
+  <div class="subtitle">集团合并口径 + 团餐 / 社餐 / 供应链 / 劳务四大事业部 · 2024年 — 2026年8月</div>
+  <div class="meta-row">
+    <div class="meta-item"><b>数据来源</b>财务基础数据调研表（集团合并及四事业部）</div>
+    <div class="meta-item"><b>期间覆盖</b>2024年度 · 2025年度 · 2026年1–8月</div>
+    <div class="meta-item"><b>报告日期</b>2026年10月16日</div>
+  </div>
+</header>
+
+<!-- ================= 指标条 ================= -->
+<div class="metrics">
+  <div class="metric">
+    <div class="m-label">2026年1–8月营业额</div>
+    <div class="m-value">2.00<span style="font-size:14px">亿</span></div>
+    <div class="m-sub">年化约 3.0 亿，同比 2025 −7.7%</div>
+  </div>
+  <div class="metric">
+    <div class="m-label">同期纯利</div>
+    <div class="m-value">317<span style="font-size:14px">万</span></div>
+    <div class="m-sub">纯利率 1.58%，仍处微利</div>
+  </div>
+  <div class="metric">
+    <div class="m-label">毛利率走势</div>
+    <div class="m-value">33.2<span style="font-size:14px">%</span></div>
+    <div class="m-sub">36.3% → 34.2% → 33.2% 三连降</div>
+  </div>
+  <div class="metric">
+    <div class="m-label">应收账款期末</div>
+    <div class="m-value neg">4,884<span style="font-size:14px">万</span></div>
+    <div class="m-sub">较年初 +20%，收入却在下滑</div>
+  </div>
+  <div class="metric">
+    <div class="m-label">2026 新增现金流</div>
+    <div class="m-value">+97<span style="font-size:14px">万</span></div>
+    <div class="m-sub">3 亿收入体量，现金创造接近于零</div>
+  </div>
+</div>
+
+<!-- ================= 核心结论 ================= -->
+<section>
+  <div class="sec-head"><span class="sec-no">00</span><h2>核心结论</h2></div>
+  <div class="findings">
+    <div class="finding"><div class="f-body">
+      <div class="f-title">集团利润两年缩水七成，已跌至盈亏线附近挣扎</div>
+      <div class="f-text">纯利从 2024 年 <span class="num">1,112万</span> 跌至 2025 年 <span class="num">318万</span>（−71%），2026 年前 8 个月 <span class="num">317万</span>。2025 年安全边际仅 <span class="num">2.9%</span>——营业额再低 3% 全集团就亏损。</div>
+    </div></div>
+    <div class="finding"><div class="f-body">
+      <div class="f-title">社餐事业部是最大拖累，主业团餐盈利空心化</div>
+      <div class="f-text">社餐收入两年年化口径缩水约 40%，连续两年亏损；团餐体量最大但纯利率仅 <span class="num">1.1%</span>，且表注口径不含折旧摊销——扣除后近乎零利润。2026 年 <span class="num">67%</span> 的利润来自供应链和劳务两个小板块。</div>
+    </div></div>
+    <div class="finding"><div class="f-body">
+      <div class="f-title">最刺眼的信号：收入下滑，应收却激增 20%</div>
+      <div class="f-text">应收从年初 <span class="num">4,061万</span> 升至 <span class="num">4,884万</span>，其中团餐占 81%；应付同时在降。利润是账面数字，现金没有回来——2026 年新增现金流仅 <span class="num">97万</span>。</div>
+    </div></div>
+    <div class="finding"><div class="f-body">
+      <div class="f-title">收缩止血已见效，但只完成了一半</div>
+      <div class="f-text">2026 年费用年化收缩 <span class="num">−12.3%</span> 快于收入 <span class="num">−7.7%</span>，纯利率从 0.98% 修复到 1.58%；供应链扭亏（+119万）、劳务超额完成计划且增长约 50%。但毛利率仍在下探，止住了费用没止住毛利率。</div>
+    </div></div>
+    <div class="finding"><div class="f-body">
+      <div class="f-title">与目标差距悬殊，2026 年利润目标基本落空</div>
+      <div class="f-text">表底利润目标线显示集团 2026 年目标 <span class="num">3,000万</span>，按前 8 个月年化仅约 <span class="num">476万</span>，完成率约 16%。收入端四个板块计划完成率 82%–103%，缺口主要在利润而非收入。</div>
+    </div></div>
+  </div>
+</section>
+
+<!-- ================= 一、集团总览 ================= -->
+<section>
+  <div class="sec-head"><span class="sec-no">01</span><h2>集团合并：三年经营总览</h2></div>
+  <p>以「营业金额（含美食商）」口径衡量，集团 2025 年收入基本持平（+0.3%），但利润大幅恶化；2026 年进入主动收缩。值得注意：不含美食商的实际业务收入连续两年下滑（<span class="num">21,723万 → 20,372万 → 年化约 17,770万</span>），核心业务在萎缩，流水规模靠美食商等口径维持。</p>
+
+  <table>
+    <tr><th style="width:26%">指标（万元）</th><th class="n">2024年</th><th class="n">2025年</th><th class="n">2026年1–8月</th><th class="n">2026年化E</th></tr>
+    <tr><td>计划目标（销售额）</td><td class="n">30,800</td><td class="n">36,960</td><td class="n">23,520</td><td class="n">35,280</td></tr>
+    <tr><td>营业额（含美食商）</td><td class="n">32,449</td><td class="n">32,539</td><td class="n">20,013</td><td class="n">≈30,020</td></tr>
+    <tr><td>实际业务收入（不含美食商）</td><td class="n">21,723</td><td class="n">20,372</td><td class="n">11,847</td><td class="n">≈17,770</td></tr>
+    <tr><td>变动成本</td><td class="n">20,685</td><td class="n">21,403</td><td class="n">13,371</td><td class="n">≈20,057</td></tr>
+    <tr class="hl"><td><b>毛利</b></td><td class="n"><b>11,765</b></td><td class="n"><b>11,137</b></td><td class="n"><b>6,642</b></td><td class="n"><b>≈9,963</b></td></tr>
+    <tr><td>毛利率</td><td class="n">36.3%</td><td class="n">34.2%</td><td class="n">33.2%</td><td class="n">≈33.2%</td></tr>
+    <tr><td>运营费用</td><td class="n">10,653</td><td class="n">10,819</td><td class="n">6,325</td><td class="n">≈9,488</td></tr>
+    <tr><td>其中：工资（含五险一金）</td><td class="n">6,632</td><td class="n">6,813</td><td class="n">4,067</td><td class="n">≈6,101</td></tr>
+    <tr><td>其中：房租</td><td class="n">1,815</td><td class="n">1,674</td><td class="n">795</td><td class="n">≈1,192</td></tr>
+    <tr><td>盈亏平衡点（BEP）</td><td class="n">29,382</td><td class="n">31,610</td><td class="n">19,059</td><td class="n">—</td></tr>
+    <tr><td>安全边际率（营业额−BEP）/营业额</td><td class="n">9.5%</td><td class="n"><b class="neg">2.9%</b></td><td class="n">4.8%</td><td class="n">—</td></tr>
+    <tr class="total"><td>纯利</td><td class="n">1,112</td><td class="n">318</td><td class="n">317</td><td class="n">≈476</td></tr>
+    <tr><td>纯利率</td><td class="n">3.43%</td><td class="n">0.98%</td><td class="n">1.58%</td><td class="n">≈1.6%</td></tr>
+    <tr><td>投资回报率（ROI）</td><td class="n">25.3%</td><td class="n">18.4%</td><td class="n">10.6%</td><td class="n">—</td></tr>
+    <tr><td>新增现金流</td><td class="n">−121</td><td class="n">+1</td><td class="n">+97</td><td class="n">—</td></tr>
+  </table>
+  <div class="tbl-note">注：金额单位已由"元"统一换算为万元（原表"单位：万元"标注与实际数字量级不符，按元处理）；2026 年化 = 1–8月实际 × 12/8，线性外推仅作趋势参考。</div>
+
+  <figure>
+    <svg viewBox="0 0 1080 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="营业额与纯利趋势图">
+      <!-- 柱: 营业额 -->
+      <g font-family="Menlo,monospace" font-size="12">
+        <!-- 网格 -->
+        <line x1="80" y1="40" x2="1040" y2="40" stroke="#e8e3da" stroke-width="1"/>
+        <line x1="80" y1="110" x2="1040" y2="110" stroke="#e8e3da" stroke-width="1"/>
+        <line x1="80" y1="180" x2="1040" y2="180" stroke="#e8e3da" stroke-width="1"/>
+        <line x1="80" y1="250" x2="1040" y2="250" stroke="#1a1a1a" stroke-width="1"/>
+        <text x="72" y="44" text-anchor="end" fill="#8a837a">40,000</text>
+        <text x="72" y="114" text-anchor="end" fill="#8a837a">26,667</text>
+        <text x="72" y="184" text-anchor="end" fill="#8a837a">13,333</text>
+        <text x="72" y="254" text-anchor="end" fill="#8a837a">0</text>
+        <!-- 柱 -->
+        <rect x="180" y="53.3" width="90" height="196.7" fill="#1a1a1a"/>
+        <rect x="460" y="53" width="90" height="197" fill="#1a1a1a"/>
+        <rect x="740" y="68.9" width="90" height="181.1" fill="#b9b2a8"/>
+        <rect x="740" y="68.9" width="90" height="181.1" fill="none" stroke="#8f887e" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="225" y="45" text-anchor="middle" fill="#1a1a1a" font-weight="bold">32,449</text>
+        <text x="505" y="45" text-anchor="middle" fill="#1a1a1a" font-weight="bold">32,539</text>
+        <text x="785" y="61" text-anchor="middle" fill="#6b655c" font-weight="bold">≈30,020</text>
+        <!-- 纯利折线 (右轴 0-1400) -->
+        <g>
+          <line x1="80" y1="250" x2="80" y2="40" stroke="#d8d2c8" stroke-width="1"/>
+          <!-- 纯利点: 1112->y=250-1112/1400*210=183.2 ; 318->y=202.3 ; 476->y=178.6 -->
+          <polyline points="225,183 505,202 785,179" fill="none" stroke="#8f3b2c" stroke-width="2.5"/>
+          <circle cx="225" cy="183" r="5" fill="#8f3b2c"/>
+          <circle cx="505" cy="202" r="5" fill="#8f3b2c"/>
+          <circle cx="785" cy="179" r="5" fill="#8f3b2c"/>
+          <text x="225" y="168" text-anchor="middle" fill="#8f3b2c" font-weight="bold">1,112</text>
+          <text x="505" y="224" text-anchor="middle" fill="#8f3b2c" font-weight="bold">318</text>
+          <text x="785" y="201" text-anchor="middle" fill="#8f3b2c" font-weight="bold">317(8mo)</text>
+        </g>
+        <text x="225" y="272" text-anchor="middle" fill="#4a4540">2024年</text>
+        <text x="505" y="272" text-anchor="middle" fill="#4a4540">2025年</text>
+        <text x="785" y="272" text-anchor="middle" fill="#4a4540">2026年1-8月</text>
+        <text x="980" y="46" text-anchor="end" fill="#8a837a" font-size="11">左轴：营业额(万元) · 折线：纯利(万元)</text>
+      </g>
+    </svg>
+    <figcaption>图1 · 集团营业额与纯利：收入平台期后转入收缩，利润中枢较 2024 年下移一个量级。</figcaption>
+  </figure>
+
+  <h3>2025 年利润为何蒸发 794 万？—— 归因完全落在毛利端</h3>
+  <p>2024→2025：纯利 <span class="num">1,112万 → 318万</span>，减少 <span class="num">794万</span>。拆开看：运营费用仅增加 <span class="num">166万</span>（+1.6%），大头是<b>毛利减少 628万</b>——营业额只多了 90万，变动成本却多了 718万。变动成本内部：材料成本 <span class="num">+532万</span>、<b>税金 +199万（236万 → 435万，翻倍）</b>。也就是说，2025 年的利润塌方 = 材料成本上涨 + 税负翻倍，而收入端没有能力把成本转嫁出去。</p>
+</section>
+
+<!-- ================= 二、利润结构 ================= -->
+<section>
+  <div class="sec-head"><span class="sec-no">02</span><h2>利润结构：谁在赚钱，谁在流血</h2></div>
+  <p>2026 年 1–8 月集团纯利 <span class="num">317万</span>，由四个板块构成：<b>团餐 +125万、社餐 −20万、供应链 +119万、劳务 +93万</b>。两个小板块（供应链+劳务）贡献了 67% 的利润，而占集团收入 55% 的团餐只贡献 39%，社餐为负。</p>
+
+  <figure>
+    <svg viewBox="0 0 1080 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="四事业部纯利贡献">
+      <g font-family="Menlo,monospace" font-size="12.5">
+        <!-- 零轴 x=430 -->
+        <line x1="430" y1="30" x2="430" y2="200" stroke="#1a1a1a" stroke-width="1.5"/>
+        <!-- 比例: 125万=62.5px, -20=10px, 119=59.5px, 93=46.5px -->
+        <!-- 团餐 -->
+        <text x="420" y="52" text-anchor="end" fill="#1a1a1a">团餐</text>
+        <rect x="430" y="38" width="125" height="22" fill="#1a1a1a"/>
+        <text x="563" y="54" fill="#1a1a1a" font-weight="bold">+125万 · 纯利率1.1%</text>
+        <!-- 社餐 -->
+        <text x="420" y="92" text-anchor="end" fill="#1a1a1a">社餐</text>
+        <rect x="410" y="78" width="20" height="22" fill="#8f3b2c"/>
+        <text x="446" y="94" fill="#8f3b2c" font-weight="bold">−20万 · 连续两年亏损</text>
+        <!-- 供应链 -->
+        <text x="420" y="132" text-anchor="end" fill="#1a1a1a">供应链</text>
+        <rect x="430" y="118" width="119" height="22" fill="#3d6b4f"/>
+        <text x="557" y="134" fill="#3d6b4f" font-weight="bold">+119万 · 扭亏(2025年-104万)</text>
+        <!-- 劳务 -->
+        <text x="420" y="172" text-anchor="end" fill="#1a1a1a">劳务</text>
+        <rect x="430" y="158" width="93" height="22" fill="#3d6b4f"/>
+        <text x="531" y="174" fill="#3d6b4f" font-weight="bold">+93万 · 纯利率9.4%</text>
+        <text x="430" y="222" text-anchor="middle" fill="#8a837a" font-size="11">0</text>
+        <text x="960" y="222" fill="#8a837a" font-size="11">2026年1-8月纯利贡献(万元)</text>
+      </g>
+    </svg>
+    <figcaption>图2 · 利润贡献结构：绿色为正贡献，砖红为亏损。小板块挑大梁，主业利润空心化。</figcaption>
+  </figure>
+
+  <table>
+    <tr><th style="width:15%">事业部</th><th class="n">2026营业额</th><th class="n">计划完成</th><th class="n">毛利率</th><th class="n">毛利率趋势</th><th class="n">纯利(万)</th><th class="n">纯利率</th><th>一句话判断</th></tr>
+    <tr><td>团餐</td><td class="n">11,031</td><td class="n">81.6%</td><td class="n">28.4%</td><td class="n">33.7→31.1→28.4 ↓</td><td class="n">+125</td><td class="n">1.1%</td><td>规模最大，利润最薄，应收最重</td></tr>
+    <tr><td>社餐</td><td class="n">4,670</td><td class="n">88.5%</td><td class="n">47.6%</td><td class="n">49.6→48.0→47.6 →</td><td class="n neg">−20</td><td class="n neg">−0.4%</td><td>毛利率不差，亏在规模撑不起固定成本</td></tr>
+    <tr><td>供应链</td><td class="n">3,325*</td><td class="n">88.4%</td><td class="n">15.0%</td><td class="n">12.0→12.6→15.0 ↑</td><td class="n">+119</td><td class="n">3.6%</td><td>2025年亏损后成功扭亏，毛利率改善</td></tr>
+    <tr><td>劳务</td><td class="n">987</td><td class="n pos">102.9%</td><td class="n">80.1%</td><td class="n">83.4→90.6→80.1 ↓</td><td class="n">+93</td><td class="n pos">9.4%</td><td>唯一超额完成计划的板块，年化增速约50%</td></tr>
+  </table>
+  <div class="tbl-note">* 供应链为 2026 年 1–9 月数据（其余板块为 1–8 月），与其他板块直接对比时请注意口径。</div>
+</section>
+
+<!-- ================= 三、分板块 ================= -->
+<section>
+  <div class="sec-head"><span class="sec-no">03</span><h2>分板块细看</h2></div>
+
+  <div class="bu">
+    <div class="bu-head">
+      <div class="bu-name">团餐事业部 —— 收入基本盘，利润薄如纸</div>
+      <span class="bu-tag amber">需要重构盈利模型</span>
+    </div>
+    <div class="bu-grid">
+      <div class="bu-cell"><div class="bu-k">营业额（1–8月）</div><div class="bu-v">1.10亿</div><div class="bu-k" style="margin-top:4px">年化 ≈1.65亿，同比 +2%</div></div>
+      <div class="bu-cell"><div class="bu-k">毛利率</div><div class="bu-v neg">28.4%</div><div class="bu-k" style="margin-top:4px">三年下滑 5.3 个百分点</div></div>
+      <div class="bu-cell"><div class="bu-k">纯利（1–8月）</div><div class="bu-v">125万</div><div class="bu-k" style="margin-top:4px">表注：不含折旧摊销/提成奖金/中标费/税金</div></div>
+      <div class="bu-cell"><div class="bu-k">应收账款</div><div class="bu-v neg">3,972万</div><div class="bu-k" style="margin-top:4px">较年初 +34%，≈2.9个月营业额</div></div>
+    </div>
+    <div class="bu-note">团餐是集团收入的 55%，但有三重问题叠加：① 毛利率从 33.7% 一路降到 28.4%，降无可降；② 表面纯利 125万，若按表注口径扣掉 1–8 月折旧 111万，<b>真实利润只剩十几万，接近零</b>；③ 应收账款一年增加 1,014万，政企客户回款越来越慢。收入还在微增，说明项目拿得住，问题在于<b>每个项目的盈利质量</b>——低价中标 + 成本上涨 + 长账期，是团餐行业的典型陷阱。</div>
+  </div>
+
+  <div class="bu">
+    <div class="bu-head">
+      <div class="bu-name">社餐事业部 —— 连续亏损，收缩进行中但未止血</div>
+      <span class="bu-tag red">亏损 · 待决断</span>
+    </div>
+    <div class="bu-grid">
+      <div class="bu-cell"><div class="bu-k">营业额（1–8月）</div><div class="bu-v">4,670万</div><div class="bu-k" style="margin-top:4px">年化 ≈7,005万，同比 −24%</div></div>
+      <div class="bu-cell"><div class="bu-k">毛利率</div><div class="bu-v pos">47.6%</div><div class="bu-k" style="margin-top:4px">三年基本稳定，单店模型不差</div></div>
+      <div class="bu-cell"><div class="bu-k">纯利</div><div class="bu-v neg">−20万</div><div class="bu-k" style="margin-top:4px">2024 +619万 → 2025 −33万 → 持续亏损</div></div>
+      <div class="bu-cell"><div class="bu-k">盈亏平衡点</div><div class="bu-v">4,713万</div><div class="bu-k" style="margin-top:4px">营业额距打平仅差 43万（8个月）</div></div>
+    </div>
+    <div class="bu-note">社餐的问题不是产品而是<b>规模塌了、成本没塌到位</b>：收入年化缩水 24%，房租年化已砍 36%（1,650万→约1,056万）、工资年化砍 25%，说明关店在推进，但营业额 4,670万 仍低于盈亏平衡点 4,713万——<b>距离打平只差约 5万/月的营业额</b>。47.6% 的毛利率是四个板块里最高的，保留价值在于：要么再收缩一轮固定成本直接止血，要么集中资源把剩余门店做回盈亏线以上，最怕的是不温不火地耗着，每年失血 30–50万 现金流。</div>
+  </div>
+
+  <div class="bu">
+    <div class="bu-head">
+      <div class="bu-name">供应链事业部 —— 2025 年亏损，2026 年干净利落地扭亏</div>
+      <span class="bu-tag green">改善中</span>
+    </div>
+    <div class="bu-grid">
+      <div class="bu-cell"><div class="bu-k">合同额（1–9月）</div><div class="bu-v">3,325万</div><div class="bu-k" style="margin-top:4px">完成年度计划 88.4%</div></div>
+      <div class="bu-cell"><div class="bu-k">毛利率</div><div class="bu-v pos">15.0%</div><div class="bu-k" style="margin-top:4px">12.0% → 12.6% → 15.0% 持续改善</div></div>
+      <div class="bu-cell"><div class="bu-k">纯利（经营利润）</div><div class="bu-v pos">+119万</div><div class="bu-k" style="margin-top:4px">2025 年为 −104万</div></div>
+      <div class="bu-cell"><div class="bu-k">库存周转</div><div class="bu-v pos">27.0次/年</div><div class="bu-k" style="margin-top:4px">应付742万＞应收579万，占用上游资金</div></div>
+    </div>
+    <div class="bu-note">2025 年亏损主因是费用失控（工资 +116万、其他费用 +43万）；2026 年工资砍半、毛利率提升 2.4 个百分点，扭亏动作干净。商业模式健康：<b>对上游占款、对下游收款、库存一年周转 27 次</b>，是集团现金流最自洽的板块。短板是毛利天花板低（15%），适合作为内部保供 + 稳定外部客户的定位，不宜追求规模冲动。</div>
+  </div>
+
+  <div class="bu">
+    <div class="bu-head">
+      <div class="bu-name">劳务事业部 —— 小体量、高净利、高增长</div>
+      <span class="bu-tag green">集团最优</span>
+    </div>
+    <div class="bu-grid">
+      <div class="bu-cell"><div class="bu-k">营业额（1–8月）</div><div class="bu-v">987万</div><div class="bu-k" style="margin-top:4px">年化 ≈1,481万，同比 +50%</div></div>
+      <div class="bu-cell"><div class="bu-k">毛利率</div><div class="bu-v pos">80.1%</div><div class="bu-k" style="margin-top:4px">劳务外包行业正常水平</div></div>
+      <div class="bu-cell"><div class="bu-k">纯利（1–8月）</div><div class="bu-v pos">93万</div><div class="bu-k" style="margin-top:4px">纯利率 9.4%，集团最高</div></div>
+      <div class="bu-cell"><div class="bu-k">计划完成</div><div class="bu-v pos">102.9%</div><div class="bu-k" style="margin-top:4px">唯一超额完成年度计划的板块</div></div>
+    </div>
+    <div class="bu-note">不到 1,000 万收入的板块，利润率却是团餐的 8 倍多，8 个月就干完全年任务。纯利率从 11.3% 缓降到 9.4%（人力成本上升所致），属于可控范围。战略含义很直接：<b>集团缺的是这种"小而利厚"的业务</b>，值得倾斜资源扩大承接规模，尤其可与团餐、社餐的人力需求内部协同。</div>
+  </div>
+</section>
+
+<!-- ================= 四、资金面 ================= -->
+<section>
+  <div class="sec-head"><span class="sec-no">04</span><h2>资金面：利润在报表上，现金没有回来</h2></div>
+  <table>
+    <tr><th style="width:28%">指标（万元）</th><th class="n">2024年末</th><th class="n">2025年末</th><th class="n">2026年8月末</th><th class="n">变化</th></tr>
+    <tr><td>应收账款</td><td class="n">4,077</td><td class="n">4,061</td><td class="n">4,884</td><td class="n neg">+20%</td></tr>
+    <tr><td>&nbsp;&nbsp;其中：团餐</td><td class="n">2,762</td><td class="n">2,958</td><td class="n">3,972</td><td class="n neg">+34%</td></tr>
+    <tr><td>应付账款</td><td class="n">2,316</td><td class="n">2,135</td><td class="n">1,988</td><td class="n">−7%</td></tr>
+    <tr class="hl"><td><b>净应收敞口（应收−应付）</b></td><td class="n"><b>1,761</b></td><td class="n"><b>1,926</b></td><td class="n"><b>2,896</b></td><td class="n neg"><b>+50%</b></td></tr>
+    <tr><td>成品库存</td><td class="n">223</td><td class="n">135</td><td class="n">78</td><td class="n pos">−65%</td></tr>
+    <tr><td>新增现金流（当期）</td><td class="n">−121</td><td class="n">+1</td><td class="n">+97</td><td class="n">—</td></tr>
+  </table>
+  <div class="tbl-note">注：期末数。应收增加发生在收入年化下滑 7.7% 的背景下，方向性背离值得警惕。</div>
+
+  <p style="margin-top:16px">三个事实拼在一起，构成集团当前最实质的风险：① <b>应收 4,884万 ≈ 2 个月的全部营业额</b>，其中团餐 3,972万占 81%，政企团餐客户账期越拖越长；② <b>应付同时在收缩</b>，说明公司在用现金按期清偿供应商，没有把压力传导出去；③ <b>三年新增现金流合计约 −23万</b>——一家年收入 3 亿的公司，基本没有产生自由现金。利润表的 317万 纯利目前只是账面权利，若团餐大客户年底回款不及预期，需警惕坏账计提直接击穿本已微薄的全集团利润。</p>
+  <p>相对积极的一面：库存三年压缩 65%（223万→78万），周转 27–30 次，运营资产很轻；只要把应收这个蓄水池放掉一部分，现金流弹性会立刻释放。</p>
+</section>
+
+<!-- ================= 五、风险 ================= -->
+<section>
+  <div class="sec-head"><span class="sec-no">05</span><h2>风险清单</h2></div>
+  <div class="risk"><span class="risk-dot r-high"></span><div><div class="r-title">应收激增与收入下滑背离（高）</div><div class="r-text">应收 +20% vs 收入 −7.7%，团餐账期 ≈2.9 个月。2026 新增现金流仅 97万，坏账风险与流动性风险同步累积。</div></div></div>
+  <div class="risk"><span class="risk-dot r-high"></span><div><div class="r-title">主业盈利空心化（高）</div><div class="r-text">团餐扣折旧后近零利润、社餐连亏，集团 67% 利润依赖供应链+劳务两个小板块，抗风险结构脆弱。</div></div></div>
+  <div class="risk"><span class="risk-dot r-mid"></span><div><div class="r-title">毛利率三连降（中）</div><div class="r-text">36.3% → 34.2% → 33.2%。材料成本上涨与税负翻倍无法向下游转嫁，2025 年因此蒸发 628万毛利。</div></div></div>
+  <div class="risk"><span class="risk-dot r-mid"></span><div><div class="r-title">安全边际过薄（中）</div><div class="r-text">2025 年安全边际率仅 2.9%，2026 年 4.8%。营业额波动 5% 以内就足以在盈亏线两侧来回穿越。</div></div></div>
+  <div class="risk"><span class="risk-dot r-mid"></span><div><div class="r-title">税负结构性上升（中）</div><div class="r-text">集团税金 236万 → 435万 → 年化约 537万。需查明是政策性还是核算口径变化，评估持续影响。</div></div></div>
+  <div class="risk"><span class="risk-dot r-ok"></span><div><div class="r-title">库存与运营资产（低风险·正面）</div><div class="r-text">库存三年 −65%、周转 27–30 次；供应链扭亏、劳务高增长。收缩止血已见效一半，基本盘没有失控。</div></div></div>
+</section>
+
+<!-- ================= 六、建议 ================= -->
+<section>
+  <div class="sec-head"><span class="sec-no">06</span><h2>建议：按优先级排序的六件事</h2></div>
+  <div class="reco"><div class="reco-no">P0</div><div class="reco-body"><div class="reco-title">回款攻坚 —— 把团餐 3,972万 应收当一号工程</div><div class="reco-text">做账龄分析，分客户定清欠责任人；新签/续签合同强制缩短账期、加逾期停供条款；对超期客户暂停垫资供货。应收每压降 1,000万，就是 1,000万 真金白银，比新做一年业务的利润都多。</div></div></div>
+  <div class="reco"><div class="reco-no">P0</div><div class="reco-body"><div class="reco-title">社餐决断 —— 二选一，不要耗着</div><div class="reco-text">距离打平只差 43万营业额/8个月：要么集中资源把存量门店推回盈亏线上（毛利率 47.6% 有这个底子），要么果断再关一批、把固定成本砍到位。维持现状 = 每年确定性失血。</div></div></div>
+  <div class="reco"><div class="reco-no">P1</div><div class="reco-body"><div class="reco-title">团餐项目级盈亏核算</div><div class="reco-text">按食堂逐个核算含折旧、中标服务费、税金的全成本利润，淘汰持续低于盈亏平衡的项目；28.4% 毛利率下，1–2 个坏项目就能吃掉整个事业部的利润。</div></div></div>
+  <div class="reco"><div class="reco-no">P1</div><div class="reco-body"><div class="reco-title">给供应链和劳务加资源</div><div class="reco-text">供应链扭亏且现金流自洽，劳务 9.4% 净利率、增速 50%——这是集团验证过的"利厚"模型。扩劳务承接规模、供应链稳住毛利率改善趋势，比在团餐红海里拼低价中标更划算。</div></div></div>
+  <div class="reco"><div class="reco-no">P2</div><div class="reco-body"><div class="reco-title">税负专项复盘</div><div class="reco-text">税金两年翻倍至年化 537万，核实征管方式变化影响，评估业务结构与计税方式的优化空间，并把税负预算纳入 2027 年各事业部考核。</div></div></div>
+  <div class="reco"><div class="reco-no">P2</div><div class="reco-body"><div class="reco-title">重定 2027 利润目标与月度跟踪</div><div class="reco-text">2026 年利润目标 3,000万 vs 实际年化约 476万，目标已失去牵引作用。基于年化 476万 的现实基数，重定有挑战但可执行的目标，按月盯「毛利率、应收账龄、板块纯利」三个硬指标。</div></div></div>
+</section>
+
+<div class="footnote">
+  <b>口径与附注</b><br>
+  ① 原表页眉标注"单位：万元"，但数字量级为元（如集团营业额 324,494,467），本报告统一按元换算为万元表述。② "2026年化" = 1–8月实际 × 12/8（供应链为 1–9月 × 12/9），线性外推未考虑季节性，仅供趋势参考。③ 团餐事业部纯利表注"不含折旧、摊销、提成和奖金、中标服务费、税金"，其真实盈利水平低于表列值；集团合并数已含全部费用科目。④ 集团合并数与四事业部简单加总完全勾稽（毛利、费用、纯利均已验证一致）。⑤ 合并表页标"2026年1–8月"，其中供应链为 1–9 月数据，合并口径实际混含两种期间。⑥ 表底另有未标注用途的数字行（集团 4,400/3,700/3,000万 等），本报告按"利润目标线"理解，供参考。
+</div>
+
+</div>
+</body>
+</html>
